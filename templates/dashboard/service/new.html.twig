@@ -1,0 +1,38 @@
+{% block body %}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            style="margin-left: 700px; margin-right: 200px; " data-target="modal-example"> Ajouter</button>
+
+
+<!-- Modal -->
+
+    <div class="modal fade" id="modal-example" data-ax="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un Service </h5>
+                </div>
+                <form action="{{ path('service_new')}}" method="post">
+
+                    {{form_start(formS)}}
+
+                    <div class="modal-body">
+                        <h6 style="font-weight: normal;">{{form_widget(formS)}}</h6>
+                    </div>
+                    <div class="modal-footer" >
+                        <button data-target="modal-example" class="ml-auto btn shadow-1 rounded-1 btn-small primary">Close</button>
+                        <button type="submit"  class="btn btn-small success" >Submit</button>
+                    </div>
+                    {{form_end(formS)}}
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

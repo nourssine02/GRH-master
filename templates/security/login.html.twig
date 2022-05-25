@@ -1,0 +1,77 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Software</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css')}}">
+    <!----===== Boxicons CSS ===== -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="register" method="post">
+                    <div class="title">S'identifier</div>
+
+                    <div class="creeCompte">
+                        Vous n'avez pas encore de compte ?
+                        <a href="{{ path('app_register')}}">
+
+							Créer un compte ici
+
+						</a>
+                    </div>
+                    <img class="welcoming" src="{{ asset ('images/welcome.svg')}}" alt="welcoming">
+
+                    <!-- {% if app.user %}
+				<div class="mb-3">
+					You are logged in as
+					{{ app.user.username }},
+				
+				</div>
+					{% endif %} -->
+
+                    <div class="login__field">
+                        <i class="login__icon  fas fa-regular fa-at" style="top: 46px; left: 3px;"></i>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email" class="login__input" autocomplete="email" required>
+
+                    </div>
+
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock" style="top: 43px; left: 2px;"></i>
+                        <input type="password" name="password" id="inputPassword" class="login__input" autocomplete="current-password" placeholder="Mot de passe" required>
+
+
+                    </div>
+                    <div class="remember">
+                        <input type="checkbox" name="rememberCheck" checked /><label>Remember me</label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="login_button">
+                        <button class="button login__submit" type="submit">
+							<span class="button__text">Connexion</span>
+						</button>
+
+
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+{% endblock %}

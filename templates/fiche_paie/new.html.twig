@@ -1,0 +1,671 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+	Ajouter Fiche de Paie
+</h4>
+
+<style>
+	.tabs {
+		width: 100%;
+		display: inline-block;
+	}
+
+	.tabs h4 {
+		color: #CB997E;
+		margin: 5px 0 15px;
+		display: inline-block;
+	}
+
+	.tab-links:after {
+		display: block;
+		clear: both;
+		content: '';
+	}
+
+	.tab-links {
+		padding: 0;
+		margin: 10px 0 0;
+		position: relative;
+		top: 2px;
+	}
+
+	.tab-links li {
+		margin: 0 5px 0 0;
+		float: left;
+		padding-top: 2px;
+		list-style: none;
+	}
+
+	.tab-links a {
+		padding: 9px 8px 6px;
+		display: inline-block;
+		background: #CB997E;
+		border: 2px solid #CB997E;
+		border-bottom: 3px solid #CB997E;
+		font-size: 10.5px;
+		font-weight: 600;
+		color: #fff;
+		transition: all linear 0.15s;
+	}
+
+	.tab-links button {
+		padding: 9px 8px 6px;
+		display: inline-block;
+		background: #CB997E;
+		border: 2px solid #CB997E;
+		border-bottom: 3px solid #CB997E;
+		font-size: 10.5px;
+		font-weight: 600;
+		color: #fff;
+		transition: all linear 0.15s;
+	}
+
+	.tab-links a:hover {
+		background: #CB997E;
+		text-decoration: none;
+		border: 2px solid #CB997E;
+		border-bottom: 3px solid #CB997E;
+		color: #fff;
+	}
+
+	li.active a,
+	li.active a:hover {
+		background: #CB997E;
+		height: 35px;
+		border-bottom: none;
+		color: #fff;
+	}
+
+	.tab-content,
+	.uploaded-documents-container {
+		padding: 15px;
+		border-radius: 3px;
+		border: 2px solid #CB997E;
+		background: #fff;
+		font-size: 0.95em;
+	}
+
+	.tab-content-scroll {
+		max-height: 375px;
+		min-height: 375px;
+		max-width: 1100px;
+		min-width: 450px;
+		overflow: auto;
+		clear: both;
+	}
+
+	.tab-content-scroll-home {
+		min-height: 135px;
+	}
+
+	.button-bar-scroll {
+		min-height: 235px;
+	}
+
+	.tab-content-scroll>p {
+		margin-top: 0;
+		padding-right: 12px;
+	}
+
+	.tab-content a {
+		margin-top: 10px;
+		color: #fff;
+	}
+
+	.tab {
+		display: none;
+	}
+
+	.tab.active {
+		display: block;
+	}
+
+	#cadre1 {
+		height: 500px;
+		width: 300px;
+		float: left;
+	}
+
+	#cadre2 {
+		height: 500px;
+		width: 300px;
+	}
+</style>
+
+<div class="tabs">
+	<ul class="tab-links" hidden>
+		<li class="active">
+			<a href="#tab1">Tab #1</a>
+		</li>
+		<li>
+			<a href="#tab2">Tab #2</a>
+		</li>
+		<li>
+			<a href="#tab3">Tab #3</a>
+		</li>
+		<li>
+			<a href="#tab4">Tab #4</a>
+		</li>
+	</ul>
+		<form action="{{ path('fiche_paie_new')}}" method="post">
+
+		{{form_start(formF)}}
+		{{form_row(formF.dateJour )}}
+		{{form_row(formF.datePaiement ) }}
+		{{form_row(formF.employe)}}
+
+		<br>
+		<button type="menu" class="btn btn-danger" style="margin-bottom: 20px;" name="search">Search</button>
+
+		<br>
+			{% if check == true %}
+				{% for item in info %}
+
+					<div class="tab-content">
+
+						<div id="tab1" class="tab active">
+							<div class="wrapper">
+
+
+								<div class="box1">
+									<span>Nom</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.nom}}
+
+
+									</div>
+
+								</div>
+
+								<div class="box2">
+									<span>Prenom</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.prenom}}
+
+
+									</div>
+
+								</div>
+
+								<div class="box3">
+									<span>Adresse</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.adresse}}
+
+
+									</div>
+
+								</div>
+								<div class="box4">
+									<span>Echelon</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.echelon}}
+
+
+									</div>
+
+								</div>
+								<div class="box5">
+									<span>Categorie</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.categorie}}
+
+
+									</div>
+
+								</div>
+								<div class="box6">
+									<span>Departement</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.departement}}
+
+
+									</div>
+
+								</div>
+								<div class="box7">
+									<span>Service</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.service}}
+
+
+									</div>
+
+								</div>
+
+
+								<div class="box8">
+									<span>CIN</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.cin}}
+
+
+									</div>
+
+								</div>
+
+								<div class="box9">
+									<span>Salaire de Base</span>
+
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{item.salaireBase}}
+
+
+									</div>
+
+								</div>
+
+
+								<div class="box10">
+									<span>Nb jours Absences</span>
+
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+										{{nbjAbs}}
+									</div>
+
+								</div>
+								<div class="box11">
+									<span>Nb jours Congés</span>
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+										{{nbjCong}}
+									</div>
+								</div>
+
+								<div class="box12">
+									<span>Nb jours travaillés</span>
+
+									<div
+											class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+										{{nbjTrav}}
+
+									</div>
+								</div>
+
+							</div>
+
+							<ul class="tab-links">
+								<li>
+									<a href="{{path('fiche_paie')}}" type="submit">Cancel</a>
+
+									<a href="#next_tab2" class="nextButton">Next</a>
+								</li>
+							</ul>
+						</div>
+
+
+						<div id="tab2" class="tab">
+							<div class="wrapper" style="padding-bottom : 100px;">
+
+								<div id="cadre1">
+
+
+									<div class="box1">
+
+
+										<span>Primes</span>
+										{% if item.prime != null %}
+
+
+											{% for p in item.prime %}
+
+
+												<div
+														class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+													{{p.nom}}-
+													{{p.montant}}DT
+
+
+												</div>
+											{% else %}
+												<div
+														class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+													0,000
+												</div>
+											{% endfor %}
+										{% endif %}
+
+
+									</div>
+								</div>
+
+
+								<div class="box2">
+									<label class="block text-sm">
+							<span class="text-gray-700 dark:text-gray-400">Heure Supplementaire
+							</span>
+
+
+										{% if item.HeurSupp != null %}
+
+											{% for supp in item.HeurSupp %}
+												<div
+														class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+
+													{{supp.nbreHeurSupp|date('H:i')}}H-
+													{{supp.montant}}DT
+												</div>
+
+
+											{% else %}
+												<div
+														class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+													0,000
+												</div>
+											{% endfor %}
+
+
+										{% endif %}
+
+
+									</label>
+
+								</div>
+
+								<div id="cadre2">
+
+									<div class="box3">
+							<span>Total Brut
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{totalBrut}}
+											DT
+
+										</div>
+
+									</div>
+
+
+									<div class="box4">
+							<span>
+								N° CNSS
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{item.cnss}}
+
+										</div>
+
+									</div>
+									<div class="box5">
+							<span>
+								Retenue CNSS
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+											{{cnss}}
+										</div>
+
+									</div>
+									<div class="box6">
+							<span style="color : red; font-weight: bold;">
+
+								Salaire imposable
+								</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+											{{ imposable }}
+
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+
+							<ul class="tab-links">
+								<li>
+									<a href="#back_tab1" class="prevButton">Prev</a>
+									<a href="#next_tab2" class="nextButton">Next</a>
+								</li>
+							</ul>
+						</div>
+
+						<div id="tab3" class="tab">
+							<div class="wrapper">
+
+								<div class="box1">
+									<label class="block text-sm">
+										<span class="text-gray-700 dark:text-gray-400">Situation Familial</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+
+
+											{{item.situationFamilial}}
+										</div>
+									</label>
+
+								</div>
+
+
+								<div class="box2">
+									<span>Enfants à charge</span>
+									{% if item.nbreEnfants != null %}
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{item.nbreEnfants}}
+
+
+										</div>
+
+									{% else %}
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											0
+
+										</div>
+
+									{% endif %}
+								</div>
+
+
+								<div class="box3">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								Déduction Familiale
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{DFamiliale}}
+
+										</div>
+									</div>
+
+								</div>
+								<div class="box4">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								Déduction Frais Professionnels
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{ DFraisProf }}
+
+
+										</div>
+									</div>
+
+								</div>
+
+
+								<div class="box5">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								Contribution Sociale Solidaire
+
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{contribSocialSolid|number_format(3)}}
+
+
+										</div>
+									</div>
+
+								</div>
+								<div class="box6">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								IRPP
+
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{IRPP|number_format(3)}}
+
+										</div>
+									</div>
+
+								</div>
+
+								<div class="box7">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								Salaire Net
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{salaireNet|number_format(3)}}
+										</div>
+									</div>
+
+								</div>
+								<div class="box8">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400">
+								Avance
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{sommeAv}}
+										</div>
+									</div>
+
+								</div>
+
+								<div class="box9">
+									<div class="block text-sm">
+
+							<span class="text-gray-700 dark:text-gray-400" style="color: red; font-weight: bold;">
+								Net A Payer
+
+							</span>
+										<div
+												class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input">
+											{{NetApayer|number_format(3)}}
+										</div>
+									</div>
+
+								</div>
+
+
+							</div>
+
+							<ul class="tab-links">
+								<li>
+									<a href="#back_tab1" class="prevButton">Prev</a>
+									{# <a href="{{ path('fiche_paie') }}">Submit</a> #}
+									<br>
+									<div style="margin-left: 50px; margin-top: -35px;">
+										{{form_row(formF.submit , { 'label' : 'Submit'})}}
+
+									</div>
+
+
+
+								</li>
+							</ul>
+							<br>
+
+
+						</div>
+
+					</div>
+
+				{% endfor %}
+
+			{% else %}
+					<h1>Mois de Paiement n'existe pas</h1
+			{% endif %}
+
+
+		{{form_end(formF)}}
+
+		</form>
+
+</div>
+
+
+<script>
+
+
+		jQuery(document).ready(function () {
+			jQuery('.tabs .tab-links a').on('click', function (e) {
+				var currentAttrValue = jQuery(this).attr('href');
+
+				// Show/Hide Tabs
+				jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+
+				// Change/remove current tab to active
+				jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+				e.preventDefault();
+			});
+
+
+			jQuery('.nextButton').on('click', function () {
+
+			var $activeTab = $('.tab-links li.active');
+
+			var $wrapper = jQuery(this).closest('.tabs');
+			var indexActive = $wrapper.find('li.active').index();
+			$wrapper.find('li').eq(indexActive + 1).find('a').click();
+		});
+
+			jQuery('.prevButton').on('click', function () {
+
+			var $activeTab = $('.tab-links li.active');
+
+			var $wrapper = jQuery(this).closest('.tabs');
+			var indexActive = $wrapper.find('li.active').index();
+			$wrapper.find('li').eq(indexActive - 1).find('a').click();
+		});
+
+		});
+
+
+
+</script>
+{% endblock %}

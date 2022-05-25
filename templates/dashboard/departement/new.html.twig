@@ -1,0 +1,75 @@
+{% block body %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+
+
+{#<button type="button" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"#}
+{#    style="margin-left: 700px; margin-right: 200px; "  data-bs-toggle="modal"#}
+{#    data-bs-target="#exampleModal" id="btn">#}
+
+{#    Ajouter#}
+{#</button>#}
+
+    <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+       style="margin-left: 700px; margin-right: 200px; " data-target="modal-example"> Ajouter</button>
+
+
+
+{#    <div class="modal fade" id="modal-example" data-ax="modal">#}
+{#        <div class="modal-dialog">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un departement </h5>#}
+
+{#                </div>#}
+{#                <form action="{{ path('departement_new')}}" method="post">#}
+
+{#                    {{form_start(formD)}}#}
+{#                        <div class="modal-content">#}
+
+{#                             <h6 style="font-weight: normal;">{{form_widget(formD)}}</h6>#}
+{#                        </div>#}
+
+{#                        <div class="modal-footer">#}
+{#                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                            <button type="submit"  class="btn btn-success" >Submit</button>#}
+{#                        </div>#}
+{#                    {{form_end(formD)}}#}
+
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
+<!-- Modal -->
+    <div class="modal fade" id="modal-example" data-ax="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un departement </h5>
+{#                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>#}
+            </div>
+                <form action="{{ path('departement_new')}}" method="post">
+
+                {{form_start(formD)}}
+
+                <div class="modal-body">
+                    <h6 style="font-weight: normal;">{{form_widget(formD)}}</h6>
+
+                </div>
+                <div class="modal-footer" >
+                    <button data-target="modal-example" class="ml-auto btn shadow-1 rounded-1 btn-small primary">Close</button>
+                    <button type="submit"  class="btn btn-small success" >Submit</button>
+                </div>
+                 {{form_end(formD)}}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

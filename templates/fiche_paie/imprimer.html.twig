@@ -1,0 +1,165 @@
+{% block title %} {% endblock %}
+{% block body %}
+    <style>
+        .title{
+            margin-left: 250px;
+            margin-top: 70px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 24px;
+        }
+        .date{
+            margin-left: 600px;
+            margin-top: -80px;
+        }
+        #gauche {
+            width: 50%;
+            float: left;
+
+        }
+        #droite {
+            width: 50%;
+            float: left;
+
+        }
+        span{
+            font-weight: bold;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+<h5>STE BUS SOFTWARE <br>RUE HEDI NUIRA <br>AKOUDA<br>4022</h5>
+    <h5 class="date">{{ dat_j|date("m-Y") }}</h5>
+
+    <h3 class="title">Fiche de Paie</h3>
+
+
+    <div id="gauche">
+        <p><span>Matricule:</span> {{ fiche.employe.matricule }}</p>
+        <p><span>Nom & Prénom :</span> {{ fiche.employe.nom }} {{ fiche.employe.prenom }}</p>
+        <p><span>Departement :</span> {{ fiche.employe.departement }}</p>
+        <p><span>Service : </span>{{ fiche.employe.service }}</p>
+        <p><span>Categorie :</span> {{ fiche.employe.categorie }}</p>
+        <p><span>Echelon :</span> {{ fiche.employe.echelon }}</p>
+
+    </div>
+    <div id="droite">
+
+        <p><span>N CNSS : </span>{{ fiche.employe.cnss }}</p>
+        <p><span>N CIN :</span> {{ fiche.employe.cin }}</p>
+        <p><span>Situation Familial :</span> {{ fiche.employe.situationFamilial }}</p>
+        <p><span> Enfants à charge:</span> {{ fiche.employe.nbreEnfants }}</p>
+    </div>
+
+    <table style="width:100%;margin-top: 300px;">
+        <thead>
+        <tr>
+            <th>Désignation</th>
+            <th>Nombre</th>
+            <th>Salaire/Primes</th>
+            <th>Retenues</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>
+                <br>
+                Nombre de jours de présence<br>
+                <br>
+                Salaire de base<br>
+                <br>
+            </td>
+            <td>
+                <br>
+                {{ fiche.nbjTrav }}<br>
+                <br>
+                <br>
+                <br>
+            </td>
+            <td>
+                <br>
+               <br>
+                <br>
+               {{ fiche.employe.salaireBase|number_format(3)}} <br>
+                <br>
+            </td>
+            <td></td>
+
+        </tr>
+        <tr>
+            <td>
+                <br>
+            Salaire brut<br>
+{#                <br>#}
+{#            Salaire brut cotisable<br>#}
+                <br>
+            Retenue cnss<br>
+                <br>
+            Salaire brut imposable<br>
+                <br>
+            Retenue à la source<br>
+                <br>
+            Contribution sociale de solidarité<br>
+                <br>
+                Salaire Net <br>
+                <br>
+                Avances <br>
+                <br>
+            </td>
+            <td></td>
+            <td>
+                <br>
+                {{ fiche.salaireBrut|number_format(3) }}<br>
+{#                <br>#}
+{#                2222  <br>#}
+                <br>
+                 <br>
+                <br>
+                {{ fiche.salaireImposable|number_format(3) }}<br>
+                <br>
+                  <br>
+                <br>
+                <br>
+                <br>
+                {{ fiche.salaireNet|number_format(3) }}<br>
+                <br>
+                {{ fiche.avances }}<br>
+                <br>
+            </td>
+            <td>
+                <br>
+               <br>
+                <br>
+{#               <br>#}
+{#                <br>#}
+                {{ fiche.retenueCnss|number_format(3) }}<br>
+                <br>
+                <br>
+                <br>
+                {{ fiche.salaireImposable|number_format(3) }}<br>
+                <br>
+                {{ fiche.contributionSocialeSolidaire|number_format(3) }}<br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Net à payer</td>
+            <td>{{ fiche.netAPayer|number_format(3) }}</td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+
+
+{% endblock %}

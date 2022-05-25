@@ -1,0 +1,141 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+	<style>
+.fc-license-message{
+	visibility: hidden;
+}
+		#calendrier {
+			width: 90%;
+			font-size: 14px;
+			height: 70%;
+			font-family: monospace;
+			margin: auto;
+		}
+		#calendarModal {
+			font-size: medium;
+			font-weight: normal;
+		}
+		#exampleModalLabel {
+			color: brown;
+			font-weight: bold;
+		}
+		h1{
+			font-size: medium;
+    		font-weight: normal;	
+		}
+	</style>
+
+	<div id="calendrier"></div>
+	<!-- Modal -->
+	<div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">congés Details
+
+					</h5>
+
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+
+				<div class="modal-body">
+
+					<h1 id="employe"></h1>
+					<h1 id="dateD"></h1>
+					<h1 id="raison"></h1>
+					<h1 id="dateS"></h1>
+					<h1 id="dateE"></h1>
+					<h1 id="nbreJours"></h1>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		window.onload = () => {
+let calendarElt = document.querySelector("#calendrier");
+
+let calendar = new FullCalendar.Calendar(calendarElt, {
+initialView: 'dayGridMonth',
+locale: 'fr',
+timeZone: 'Africa/Tunis',
+headerToolbar: {
+start: 'prev,next today',
+center: 'title',
+end: 'dayGridMonth,timeGridWeek,timeGridDay'
+},
+buttonText: {
+today: 'Aujourd\'hui ',
+month: 'Mois',
+week: 'Semaine',
+day: 'Jour'
+},
+events: {{ data| raw }},
+editable: true,
+eventResizableFromStart: true,
+
+eventClick: function (e, date, jsEvent, view) {
+var eventObj = e.event;
+let dateStart = eventObj.start;
+let start = new Date(dateStart).toISOString().slice(0, 10);
+
+let dateEnd = eventObj.end;
+let end = new Date(dateEnd).toISOString().slice(0, 10);
+
+
+$('#calendarModal').modal('show');
+$('#employe').html('Nom d\'employe  : ' + eventObj.extendedProps.employe);
+$('#dateD').html('Date de demande : ' + new Date(eventObj.extendedProps.dateDemande).toISOString().slice(0, 10));
+$('#raison').html('Raison :' + eventObj.title);
+$('#dateS').html('Date de depart : ' + start);
+$('#dateE').html('Date de retour : ' + end);
+$('#nbreJours').html('Nombre de jour : ' + eventObj.extendedProps.nbreJours);
+
+$('#myId').val(eventObj.id);
+
+
+}
+
+
+})
+
+
+calendar.on('eventChange', (e) => {
+
+let url = `/conges/calendar/update/${
+e.event.id
+}`
+let donnees = {
+"title": e.event.title,
+"start": e.event.start,
+"end": e.event.end,
+"backgroundColor": e.event.backgroundColor,
+"textColor": e.event.textColor,
+"allDay": e.event.allDay
+
+}
+console.log(donnees);
+
+let xhr = new XMLHttpRequest;
+xhr.open("PUT", url);
+xhr.send(JSON.stringify(donnees));
+calendar.render()
+
+})
+calendar.render()
+
+}
+	</script>
+
+
+{% endblock %}

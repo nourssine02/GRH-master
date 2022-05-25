@@ -1,0 +1,652 @@
+{% extends 'base.html.twig' %} {% block title %}{% endblock %} {% block body %}
+
+
+<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+    Modifier Employé
+</h4>
+
+
+<style>
+    .tabs {
+        width: 100%;
+        display: inline-block;
+    }
+    
+    .tabs h4 {
+        color: #CB997E;
+        margin: 5px 0 15px;
+        display: inline-block;
+    }
+    
+    .tab-links:after {
+        display: block;
+        clear: both;
+        content: '';
+    }
+    
+    .tab-links {
+        padding: 0;
+        margin: 10px 0 0;
+        position: relative;
+        top: 2px;
+    }
+    
+    .tab-links li {
+        margin: 0 5px 0 0;
+        float: left;
+        padding-top: 2px;
+        list-style: none;
+    }
+    
+    .tab-links a {
+        padding: 9px 8px 6px;
+        display: inline-block;
+        background: #CB997E;
+        border: 2px solid #CB997E;
+        border-bottom: 3px solid #CB997E;
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #fff;
+        transition: all linear 0.15s;
+    }
+    
+    .tab-links button {
+        padding: 9px 8px 6px;
+        display: inline-block;
+        background: #CB997E;
+        border: 2px solid #CB997E;
+        border-bottom: 3px solid #CB997E;
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #fff;
+        transition: all linear 0.15s;
+    }
+    
+    .tab-links a:hover {
+        background: #CB997E;
+        text-decoration: none;
+        border: 2px solid #CB997E;
+        border-bottom: 3px solid #CB997E;
+        color: #fff;
+    }
+    
+    li.active a,
+    li.active a:hover {
+        background: #CB997E;
+        height: 35px;
+        border-bottom: none;
+        color: #fff;
+    }
+    
+    .tab-content,
+    .uploaded-documents-container {
+        padding: 15px;
+        border-radius: 3px;
+        border: 2px solid #CB997E;
+        background: #fff;
+        font-size: 0.95em;
+    }
+    
+    .tab-content-scroll {
+        max-height: 375px;
+        min-height: 375px;
+        max-width: 1100px;
+        min-width: 450px;
+        overflow: auto;
+        clear: both;
+    }
+    
+    .tab-content-scroll-home {
+        min-height: 135px;
+    }
+    
+    .button-bar-scroll {
+        min-height: 235px;
+    }
+    
+    .tab-content-scroll>p {
+        margin-top: 0;
+        padding-right: 12px;
+    }
+    
+    .tab-content a {
+        margin-top: 10px;
+        color: #fff;
+    }
+    
+    .tab {
+        display: none;
+    }
+    
+    .tab.active {
+        display: block;
+    }
+</style>
+
+
+<div class="tabs">
+    <ul class="tab-links" hidden>
+        <li class="active">
+            <a href="#tab1">Tab #1</a>
+        </li>
+        <li>
+            <a href="#tab2">Tab #2</a>
+        </li>
+        <li>
+            <a href="#tab3">Tab #3</a>
+        </li>
+        <li>
+            <a href="#tab4">Tab #4</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <form action="{{ path('employe_update', {'id': employe.id})}}" method="POST">
+
+
+            {{form_start(formE)}}
+
+
+            <div id="tab1" class="tab active">
+                <div class="wrapper">
+
+
+                    <div class="box1">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Matricule</span>
+								{{form_row(formE.matricule , { 'label' : false})}}
+							</label>
+
+                    </div>
+                    <div class="box2">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Nom</span>
+								{{form_row(formE.nom , { 'label' : false})}}
+
+
+							</label>
+                    </div>
+
+                    <div class="box3">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Prenom</span>
+								{{form_row(formE.prenom , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+                    <div class="box4">
+                        <label class="block text-sm">
+
+
+								<span class="text-gray-700 dark:text-gray-400">
+									Sexe
+								</span>
+
+								{{form_row(formE.sexe , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+                    <div class="box5">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Adresse</span>
+								{{form_row(formE.adresse , { 'label' : false})}}
+
+
+							</label>
+                    </div>
+                    <div class="box6">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Telephone</span>
+								{{form_row(formE.telephone , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+                    <div class="box7">
+                        <label class="block text-sm">
+
+								<span class="text-gray-700 dark:text-gray-400">Date de naissance</span>
+								{{form_row(formE.dateNais , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+                    <div class="box8">
+
+                        <label class="block text-sm">
+
+
+								<span class="text-gray-700 dark:text-gray-400">
+									Situation Familial
+								</span>
+
+								{{form_row(formE.situationFamilial, { 'label' : false } )}}
+
+
+							</label>
+
+                            {% if employe.nbreEnfants > 0 %}
+                            
+                            
+                            <div id="ifYes" style="display: block;">
+
+                            <label class="block text-sm">
+									<span class="text-gray-700 dark:text-gray-400">Nombre d'enfants</span>
+
+									{{form_row(formE.nbreEnfants , { 'label' : false} , {'novalidate' : true} )}}
+
+								</label>
+                        </div>
+
+                        {% else %}
+                        <div id="ifYes" style="display: none;">
+                        
+                            <label class="block text-sm">
+                                <span class="text-gray-700 dark:text-gray-400">Nombre d'enfants</span>
+                            
+                                {{form_row(formE.nbreEnfants , { 'label' : false} , {'novalidate' : true} )}}
+                            
+                            </label>
+                            </div>
+                            {% endif %}
+                    </div>
+
+                    <div class="box9">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Email</span>
+								{{form_row(formE.email , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+
+               
+
+                </div>
+
+                <ul class="tab-links">
+                    <li>
+                        <a href="{{ path('employe_list')}}" type="submit">Cancel</a>
+                        <a href="#next_tab2" class="nextButton">Next</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tab2" class="tab">
+                <div class="wrapper">
+
+
+                    <div class="box1">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">N° CIN</span>
+								{{form_row(formE.cin , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box2">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Departement</span>
+								{{form_row(formE.departement , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+
+                    <div class="box3">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Service</span>
+								{{form_row(formE.service , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box4">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Titre</span>
+								{{form_row(formE.titre , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box5">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">N° CNSS</span>
+								{{form_row(formE.cnss , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+                    <div class="box6">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Date d'Embauche</span>
+								{{form_row(formE.dateEmbauche , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box7">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Echelon</span>
+
+								{{form_row(formE.echelon , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box8">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Categorie</span>
+								{{form_row(formE.categorie , { 'label' : false})}}
+
+							</label>
+
+
+                    </div>
+
+                    <div class="box9">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">
+									Type de Contrat
+								</span>
+
+								{{form_row(formE.typeContrat , { 'label' : false})}}
+
+
+							</label>
+
+                    </div>
+
+
+                </div>
+
+                <ul class="tab-links">
+                    <li>
+                        <a href="#back_tab1" class="prevButton">Prev</a>
+                        <a href="#next_tab2" class="nextButton">Next</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="tab3" class="tab">
+                <div class="wrapper">
+
+
+                    <div class="box1">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Salaire de Base</span>
+
+								{{form_row(formE.salaireBase , { 'label' : false})}}
+
+
+							</label>
+
+
+                    </div>
+                    <div class="box2">
+                        <label class="block text-sm">
+								<span class="text-gray-700 dark:text-gray-400">Primes</span>
+
+								<div class="col-sm-8 col-sm-offset-2" id="exp_list" data-prototype="{{ form_row(formE.prime.vars.prototype)|e('html_attr') }}">
+
+									{% for row in formE.prime %}
+										<div class="panel panel-warning">
+											{# <div class="panel-heading">
+												<strong>{{ row.vars.value.nom }}</strong>
+											</div> #}
+											<div class="panel-body">
+												{{ form_row(row) }}
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+
+							</label>
+
+
+                    </div>
+
+                    <div class="box3">
+                        <div class="block text-sm">
+
+                            <span class="text-gray-700 dark:text-gray-400">
+									Type de Paie
+								</span> {{form_row(formE.typePaie , { 'label' : false})}}
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="box4">
+                        <label class="block mt-4 text-sm">
+								<span class="text-gray-700 dark:text-gray-400">
+									Moyen de Paiement
+								</span>
+
+								{{form_row(formE.moyenPaiement , { 'label' : false})}}
+
+
+							</label>
+
+                        <br>
+
+                        <div id="ifOk" style="display: none;">
+
+                            <div class="box5">
+
+                                <label class="block text-sm">
+										<span class="text-gray-700 dark:text-gray-400">Nom du Banque
+										</span>
+										{{form_row(formE.nomBanque , { 'label' : false} ,{'novalidate' : true})}}
+
+
+									</label>
+
+
+                                <label class="block text-sm">
+										<span class="text-gray-700 dark:text-gray-400">Numero Compte
+										</span>
+										{{ form_row(formE.numCompteBanc , { 'label' : false} , {'novalidate' : true})}}
+
+
+									</label>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+              
+                <br><br> <br>  <br>  <br>     <br>
+           
+
+
+                <ul class="tab-links">
+                    <li>
+                        <a href="#back_tab1" class="prevButton">Prev</a>
+                        <button href="{{ path('employe_list')}}" type="submit">Update</button>
+
+                    </li>
+                </ul>
+
+
+                <br>
+
+
+            </div>
+
+
+            {{form_end(formE)}}
+        </form>
+    </div>
+
+
+</div>
+
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery('.tabs .tab-links a').on('click', function(e) {
+            var currentAttrValue = jQuery(this).attr('href');
+
+            // Show/Hide Tabs
+            jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+
+            // Change/remove current tab to active
+            jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+
+            e.preventDefault();
+        });
+
+
+        jQuery('.nextButton').on('click', function() {
+
+            var $activeTab = $('.tab-links li.active');
+
+            var $wrapper = jQuery(this).closest('.tabs');
+            var indexActive = $wrapper.find('li.active').index();
+            $wrapper.find('li').eq(indexActive + 1).find('a').click();
+        });
+
+        jQuery('.prevButton').on('click', function() {
+
+            var $activeTab = $('.tab-links li.active');
+
+            var $wrapper = jQuery(this).closest('.tabs');
+            var indexActive = $wrapper.find('li.active').index();
+            $wrapper.find('li').eq(indexActive - 1).find('a').click();
+        });
+
+    });
+
+
+    /****  show and hide block *****/
+
+    function yesnoCheck(that) {
+        if (that.value == "Marié" || that.value == "Divorcé" || that.value == "Veuf") { // alert("check");
+            document.getElementById("ifYes").style.display = "block";
+        } else {
+            document.getElementById("ifYes").style.display = "none";
+        }
+    }
+
+    function chooseOne(that) {
+        if (that.value == "Virement") { // alert("check");
+            document.getElementById("ifOk").style.display = "block";
+            document.getElementById("ifOk").style.marginTop = "2px";
+
+
+        } else {
+            document.getElementById("ifOk").style.display = "none";
+        }
+    }
+
+
+    /****************************************/
+
+
+    // this variable is the list in the dom, it's initiliazed when the document is ready
+    var $collectionHolder;
+    // the link which we click on to add new items
+    var $addNewItem = $('<a href="#" style="color: #633615" >Add new item</a>');
+    // when the page is loaded and ready
+    $(document).ready(function() { // get the collectionHolder, initilize the var by getting the list;
+        $collectionHolder = $('#exp_list');
+        // append the add new item link to the collectionHolder
+        $collectionHolder.append($addNewItem);
+        // add an index property to the collectionHolder which helps track the count of forms we have in the list
+        $collectionHolder.data('index', $collectionHolder.find('.panel').length)
+            // finds all the panels in the list and foreach one of them we add a remove button to it
+            // add remove button to existing items
+        $collectionHolder.find('.panel').each(function() {
+            // $(this) means the current panel that we are at
+            // which means we pass the panel to the addRemoveButton function
+            // inside the function we create a footer and remove link and append them to the panel
+            // more informations in the function inside
+            addRemoveButton($(this));
+        });
+        // handle the click event for addNewItem
+        $addNewItem.click(function(e) {
+            // preventDefault() is your  homework if you don't know what it is
+            // also look up preventPropagation both are usefull
+            e.preventDefault();
+            // create a new form and append it to the collectionHolder
+            // and by form we mean a new panel which contains the form
+            addNewForm();
+        })
+    });
+    /*
+     * creates a new form and appends it to the collectionHolder
+     */
+    function addNewForm() {
+        // getting the prototype
+        // the prototype is the form itself, plain html
+        var prototype = $collectionHolder.data('prototype');
+        // get the index
+        // this is the index we set when the document was ready, look above for more info
+        var index = $collectionHolder.data('index');
+        // create the form
+        var newForm = prototype;
+        // replace the __name__ string in the html using a regular expression with the index value
+        newForm = newForm.replace(/__name__/g, index);
+        // incrementing the index data and setting it again to the collectionHolder
+        $collectionHolder.data('index', index + 1);
+        // create the panel
+        // this is the panel that will be appending to the collectionHolder
+        var $panel = $('<div class="panel panel-warning"><div class="panel-heading"></div></div>');
+        // create the panel-body and append the form to it
+        var $panelBody = $('<div class="panel-body"></div>').append(newForm);
+        // append the body to the panel
+        $panel.append($panelBody);
+        // append the removebutton to the new panel
+        addRemoveButton($panel);
+        // append the panel to the addNewItem
+        // we are doing it this way to that the link is always at the bottom of the collectionHolder
+        $addNewItem.before($panel);
+    }
+
+    /**
+     * adds a remove button to the panel that is passed in the parameter
+     * @param $panel
+     */
+    function addRemoveButton($panel) { // create remove button
+        var $removeButton = $('<a href="#" style="color: #633615" >Remove</a>');
+        // appending the removebutton to the panel footer
+        var $panelFooter = $('<div class="panel-footer"></div>').append($removeButton);
+        // handle the click event of the remove button
+        $removeButton.click(function(e) {
+            e.preventDefault();
+            // gets the parent of the button that we clicked on "the panel" and animates it
+            // after the animation is done the element (the panel) is removed from the html
+            $(e.target).parents('.panel').slideUp(1000, function() {
+                $(this).remove();
+            })
+        });
+        // append the footer to the panel
+        $panel.append($panelFooter);
+    }
+</script>
+{% endblock %}

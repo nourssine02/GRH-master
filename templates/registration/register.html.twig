@@ -1,0 +1,41 @@
+{% block title %}{% endblock %} {% block body %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css')}}">
+<!----===== Boxicons CSS ===== -->
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+
+            <div class="register">
+
+                <div class="title">Créer un Compte</div>
+                <div class="dejaCompte">
+                    Vous avez déjà un compte ?
+                    <a href="{{path('app_login')}}">
+						Connectez-vous ici
+					</a>
+                </div>
+                <img class="welcoming" src="{{ asset ('images/welcome.svg')}}" alt="welcoming">
+
+                      {{ form_start(registrationForm, {'attr': {'novalidate' : 'novalidate'}})}}
+                      <i class="login__icon fas fa-user"></i>
+                      {{ form_row(registrationForm.name) }}
+                      <i class="login__icon  fas fa-regular fa-at"></i>
+                      <br>
+                      {{ form_row(registrationForm.email) }}
+                      <i class="login__icon fas fa-lock"></i>
+                      <br>
+                      {{ form_row(registrationForm.plainPassword) }}
+                      <button class="button login__submit" type="submit">
+                          <span class="button__text">S'inscrire</span>
+                      </button>
+                      {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

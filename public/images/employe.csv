@@ -1,0 +1,5 @@
+"id";"matricule";"nom";"prenom";"sexe";"adresse";"telephone";"cin";"date_nais";"situation_familial";"nbre_enfants";"cnss";"date_embauche";"categorie";"echelon";"type_contrat";"salaire_base";"type_paie";"departement_id";"service_id";"titre_id";"moyen_paiement";"nom_banque";"num_compte_banc";"email"
+"20";"0001";"Nourssine";"Neffetti";"femme";"Sousse";"50222444";"12847596";"2000-02-07";"Célibataire";NULL;"111 111 111 1";"2022-02-14";"1";"10";"CDD";"900";"mensuelle";"1";"1";"4";"Espece";NULL;NULL;"nourssine@gmail.com"
+"21";"0002";"Yosr";"yos";"femme";"Akouda";"20 555 666";"12362514";"1998-09-06";"Célibataire";NULL;"222 222 222 2";"2019-01-01";"2";"10";"CDI";"1000";"mensuelle";"1";"4";"1";"Chèque";NULL;NULL;"yosr@gmail.com"
+"22";"0003";"Helmi";"helm";"homme";"Akouda";"22 666 888";"12784599";"1997-04-08";"Marié";"0";"333 333 333 3";"2018-09-01";"3";"10";"CDI";"1500";"mensuelle";"1";"1";"2";"Virement";"Aman";"0351835984788";"helmi@gmail.com"
+"23";"0004";"Habiba";"Habi";"femme";"Akouda";"99 888 777";"05471425";"1996-03-22";"Marié";"2";"444 444 444 4";"2017-01-15";"1";"10";"CDI";"1500";"mensuelle";"1";"1";"1";"Espece";NULL;NULL;"habiba@gmail.com"

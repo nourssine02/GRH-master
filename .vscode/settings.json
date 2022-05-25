@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 8000,
+            "driver": "MySQL",
+            "database": "GRH",
+            "username": "mdw3.1",
+            "password": "mdw3.1",
+            "name": "mdw3.1"
+        }
+    ]
+}
