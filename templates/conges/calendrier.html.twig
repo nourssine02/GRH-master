@@ -27,43 +27,30 @@
 	</style>
 
 	<div id="calendrier"></div>
-	<!-- Modal -->
-	<div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--Modal -->
 
-
-		<div class="modal-dialog">
-
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">congés Details
-
-					</h5>
-
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-
-
-				<div class="modal-body">
-
-					<h1 id="employe"></h1>
-					<h1 id="dateD"></h1>
-					<h1 id="raison"></h1>
-					<h1 id="dateS"></h1>
-					<h1 id="dateE"></h1>
-					<h1 id="nbreJours"></h1>
-
-
-				</div>
-
-			</div>
+	<div  class="modal shadow-1 white rounded-3" id="calendarModal" style="width: 40%; height: 35%;">
+		<div class="modal-header" style="color: brown;">
+			congés Details
 		</div>
+
+		<div class="modal-content">
+
+			<h1 id="employe"></h1>
+			<h1 id="dateD"></h1>
+			<h1 id="raison"></h1>
+			<h1 id="dateS"></h1>
+			<h1 id="dateE"></h1>
+			<h1 id="nbreJours"></h1>
+
+		</div>
+
 	</div>
 
 
 	<script>
 		window.onload = () => {
-let calendarElt = document.querySelector("#calendrier");
+let calendarElt = document.getElementById("calendrier");
 
 let calendar = new FullCalendar.Calendar(calendarElt, {
 initialView: 'dayGridMonth',
@@ -84,16 +71,16 @@ events: {{ data| raw }},
 editable: true,
 eventResizableFromStart: true,
 
-eventClick: function (e, date, jsEvent, view) {
+eventClick: function (e) {
 var eventObj = e.event;
 let dateStart = eventObj.start;
 let start = new Date(dateStart).toISOString().slice(0, 10);
 
 let dateEnd = eventObj.end;
 let end = new Date(dateEnd).toISOString().slice(0, 10);
+	let modal = new Axentix.Modal('#calendarModal');
+	modal.open();
 
-
-$('#calendarModal').modal('show');
 $('#employe').html('Nom d\'employe  : ' + eventObj.extendedProps.employe);
 $('#dateD').html('Date de demande : ' + new Date(eventObj.extendedProps.dateDemande).toISOString().slice(0, 10));
 $('#raison').html('Raison :' + eventObj.title);
@@ -108,7 +95,6 @@ $('#myId').val(eventObj.id);
 
 
 })
-
 
 calendar.on('eventChange', (e) => {
 

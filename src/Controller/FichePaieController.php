@@ -58,6 +58,7 @@ class FichePaieController extends AbstractController
          $salaireNet = 0;
          $NetApayer = 0;
         $check = false;
+        $calculAbs= 0;
 
 
         if ( $formF->isSubmitted() && $formF->isValid()) {
@@ -98,22 +99,6 @@ class FichePaieController extends AbstractController
                 $outputHeurSupp[] = $h->getMontant();
             }
             $sommeH = array_sum($outputHeurSupp);
-            /************************ */
-            $salaireBase = $fiche->getEmploye()->getSalaireBase();
-
-            $totalBrut = $salaireBase + $sommeP + $sommeH;
-
-            $cnss = $totalBrut * 9.18 / 100;
-            $imposable = $totalBrut - $cnss;
-            /*********************** */
-
-            $DFraisProf = ($imposable * 12 * 10) / 100;
-
-            if ($DFraisProf > 2000) {
-                $DFraisProf = 2000;
-            } else {
-                $DFraisProf = ($imposable * 12 * 10) / 100;
-            }
             /********************** */
             $dateRecherche = $fiche->getDatePaiement()->format('Y-m');
             /************************ */
@@ -128,7 +113,7 @@ class FichePaieController extends AbstractController
                     $nbjCong = 0;
                 }
             }
-            /******************* */
+            /************************************************** */
 
             $nbjAbsences = $fiche->getEmploye()->getPointages();
             foreach ($nbjAbsences as $a) {
@@ -140,7 +125,6 @@ class FichePaieController extends AbstractController
                     $check = true;
                 }
                 else{
-                   // $nbjAbs = 0;
                     $check = false;
 
                 }
@@ -148,10 +132,35 @@ class FichePaieController extends AbstractController
 
             }
 
-            /****************** */
-            $nbjTrav = 26 - $nbjAbs - $nbjCong;
 
             /**************** */
+            $salaire = $fiche->getEmploye()->getSalaireBase();
+
+            $nbjTrav = 26 - $nbjAbs - $nbjCong;
+
+            $totalAbs = $nbjAbs - $nbjCong;
+            $tauxAbsences= ($totalAbs * 7 / 182) * 100;
+
+            $calculAbs = $tauxAbsences / 100 * $salaire;
+
+            $salaireBase = $salaire - $calculAbs ;
+            /******************************** */
+
+            $totalBrut = $salaireBase + $sommeP + $sommeH;
+            $cnss = $totalBrut * 9.18 / 100;
+            $imposable = $totalBrut - $cnss;
+            /*********************** */
+
+
+            $DFraisProf = ($imposable * 12 * 10) / 100;
+
+            if ($DFraisProf > 2000) {
+                $DFraisProf = 2000;
+            } else {
+                $DFraisProf = ($imposable * 12 * 10) / 100;
+            }
+
+            /************************************************** */
             $avances = $fiche->getEmploye()->getAvances();
             $outputAvances = array();
             foreach ($avances as $av) {
@@ -204,10 +213,9 @@ class FichePaieController extends AbstractController
             /*************************** */
             $contribSocialSolid = ($imposable * 0.9) / 100;
             /**************************** */
-            $salaireNet = $imposable - $IRPP - (($imposable * 0.9) / 100);
+            $salaireNet = $imposable - $IRPP - (($imposable * 0.9) / 100) ;
 
-            $NetApayer = $salaireNet - $sommeAv;
-
+            $NetApayer = $salaireNet - $sommeAv ;
             /***************************** */
             $fiche->setSalaireBrut($totalBrut);
             $fiche->setRetenueCnss($cnss);
@@ -248,6 +256,7 @@ class FichePaieController extends AbstractController
             'salaireNet' => $salaireNet,
             'NetApayer' => $NetApayer,
             'contribSocialSolid' => $contribSocialSolid,
+            'calculAbs' => $calculAbs,
             'check' => $check,
             'formF' => $formF->createView()
 

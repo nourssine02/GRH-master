@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+{% block title %}{% endblock %}
+{% block body %}
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        Liste des employés qui demandent un congé
+    </h4>
+
+    <div class="w-full rounded-lg shadow-xs" style="margin-top: 50px">
+    <div class="w-full overflow-hidden ">
+        <table class="w-full ">
+            <thead>
+            <tr
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                <th class="px-3 py-3">Employé</th>
+                <th class="px-3 py-3">Date Depart</th>
+                <th class="px-3 py-3">Date Retour</th>
+                <th class="px-3 py-3">Statut</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for conge in conges %}
+                {% if conge.statut == 'acceptée' %}
+
+                <tr class="text-gray-700 dark:text-gray-400">
+
+                    <td class="px-3 py-3 text-sm">
+                        {{conge.employe.nom}} {{conge.employe.prenom}}
+                    </td>
+
+                    <td class="px-3 py-3 text-sm">
+                        {{conge.start.format('d/m/Y')}}
+                    </td>
+                    <td class="px-3 py-3 text-sm">
+                        {{conge.end.format('d/m/Y')}}
+                    </td>
+                {% if conge.start <= dateJour and conge.end >= dateJour  %}
+                    <td class="px-3 py-3 text-sm" style="color: red; font-weight: bold;">
+                        <h5>En Cours</h5>
+                    </td>
+                {% elseif conge.end < dateJour %}
+                    <td class="px-3 py-3 text-sm"  style="color: green; font-weight: bold;">
+                        <h5>Terminée</h5>
+                    </td>
+                {% else %}
+                    <td class="px-3 py-3 text-sm" style="color: blue; font-weight: bold;">
+                        <h5>Bientôt</h5>
+                    </td>
+                {% endif %}
+
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}

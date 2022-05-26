@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <style>
+        .fc-license-message{
+            visibility: hidden;
+        }
+        #dateConges {
+            width: 90%;
+            font-size: 14px;
+            height: 70%;
+            font-family: monospace;
+            margin: auto;
+        }
+
+    </style>
+    <div id="dateConges"></div>
+
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#dateConges");
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                timeZone: 'Africa/Tunis',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                buttonText: {
+                    today: 'Aujourd\'hui ',
+                    month: 'Mois',
+                    week: 'Semaine',
+
+                },
+
+                editable: true,
+                eventResizableFromStart: true,
+                selectable: true,
+               events: {{ dataConges|raw }}
+            })
+
+
+            calendar.render()
+
+        }
+    </script>
+
+{% endblock %}

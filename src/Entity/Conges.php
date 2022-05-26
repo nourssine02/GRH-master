@@ -23,29 +23,39 @@ class Conges
     /**
      * @ORM\ManyToOne(targetEntity=Employe::class, inversedBy="conges")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="ce champ est  obligatoire ")
      */
     private $employe;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="ce champ est  obligatoire ")
      * 
      */
     private $dateDemande;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message="ce champ est  obligatoire ")
     *
      */
     private $start;
 
     /**
      * @ORM\Column(type="date")
-     * 
+     * @Assert\NotBlank(message="ce champ est  obligatoire ")
      */
     private $end;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="ce champ est  obligatoire ")
+     *   @Assert\Length(
+     *      min = 6,
+     *      max = 12,
+     *      minMessage = "votre titre  doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre  titre ne peut pas dépasser {{ limit }} caractères"
+     * )
      */
     private $title;
 

@@ -20,11 +20,15 @@ return [
         '/conges' => [[['_route' => 'conges_list', '_controller' => 'App\\Controller\\CongesController::index'], null, null, null, false, false, null]],
         '/conges/calendrier' => [[['_route' => 'conges_calendrier', '_controller' => 'App\\Controller\\CongesController::view'], null, null, null, false, false, null]],
         '/conges/new' => [[['_route' => 'conges_new', '_controller' => 'App\\Controller\\CongesController::add'], null, null, null, false, false, null]],
+        '/employes/conges' => [[['_route' => 'employes_conges', '_controller' => 'App\\Controller\\CongesController::congesEnCours'], null, null, null, false, false, null]],
+        '/dates/calendrier' => [[['_route' => 'dates_conges_calendrier', '_controller' => 'App\\Controller\\CongesController::calendar'], null, null, null, false, false, null]],
         '/dashboard' => [[['_route' => 'dashboard_page', '_controller' => 'App\\Controller\\DashboardController::index'], null, null, null, false, false, null]],
         '/departement' => [[['_route' => 'departements_list', '_controller' => 'App\\Controller\\DashboardController::showD'], null, null, null, false, false, null]],
         '/departement/new' => [[['_route' => 'departement_new', '_controller' => 'App\\Controller\\DashboardController::newD'], null, null, null, false, false, null]],
         '/service' => [[['_route' => 'services_list', '_controller' => 'App\\Controller\\DashboardController::showS'], null, null, null, false, false, null]],
         '/service/new' => [[['_route' => 'service_new', '_controller' => 'App\\Controller\\DashboardController::newS'], null, null, null, false, false, null]],
+        '/dates/conges' => [[['_route' => 'dates_conges_index', '_controller' => 'App\\Controller\\DatesCongesController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/dates/conges/new' => [[['_route' => 'dates_conges_new', '_controller' => 'App\\Controller\\DatesCongesController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/employes' => [[['_route' => 'employe_list', '_controller' => 'App\\Controller\\EmployeController::index'], null, null, null, false, false, null]],
         '/employe/new' => [[['_route' => 'employe_new', '_controller' => 'App\\Controller\\EmployeController::add'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/fichePaie' => [[['_route' => 'fiche_paie', '_controller' => 'App\\Controller\\FichePaieController::index'], null, null, null, false, false, null]],
@@ -74,34 +78,41 @@ return [
                     .'|accepter/([^/]++)(*:393)'
                     .'|refuser/([^/]++)(*:417)'
                 .')'
-                .'|/departement/(?'
-                    .'|update/([^/]++)(*:457)'
-                    .'|delete/([^/]++)(*:480)'
+                .'|/d(?'
+                    .'|epartement/(?'
+                        .'|update/([^/]++)(*:460)'
+                        .'|delete/([^/]++)(*:483)'
+                    .')'
+                    .'|ates/conges/([^/]++)(?'
+                        .'|(*:515)'
+                        .'|/edit(*:528)'
+                        .'|(*:536)'
+                    .')'
                 .')'
                 .'|/service/(?'
-                    .'|update/([^/]++)(*:516)'
-                    .'|delete/([^/]++)(*:539)'
+                    .'|update/([^/]++)(*:573)'
+                    .'|delete/([^/]++)(*:596)'
                 .')'
                 .'|/employe/(?'
-                    .'|update/([^/]++)(*:575)'
-                    .'|delete/([^/]++)(*:598)'
+                    .'|update/([^/]++)(*:632)'
+                    .'|delete/([^/]++)(*:655)'
                 .')'
                 .'|/fichePaie/(?'
-                    .'|delete/([^/]++)(*:636)'
-                    .'|imprimer/([^/]++)(*:661)'
+                    .'|delete/([^/]++)(*:693)'
+                    .'|imprimer/([^/]++)(*:718)'
                 .')'
                 .'|/gestionSupp/(?'
-                    .'|update/([^/]++)(*:701)'
-                    .'|delete/([^/]++)(*:724)'
+                    .'|update/([^/]++)(*:758)'
+                    .'|delete/([^/]++)(*:781)'
                 .')'
                 .'|/mission/(?'
-                    .'|update/([^/]++)(*:760)'
-                    .'|delete/([^/]++)(*:783)'
-                    .'|([^/]++)(*:799)'
+                    .'|update/([^/]++)(*:817)'
+                    .'|delete/([^/]++)(*:840)'
+                    .'|([^/]++)(*:856)'
                 .')'
                 .'|/p(?'
-                    .'|ointage/([^/]++)(*:829)'
-                    .'|rofil/update/([^/]++)(*:858)'
+                    .'|ointage/([^/]++)(*:886)'
+                    .'|rofil/update/([^/]++)(*:915)'
                 .')'
             .')/?$}sDu',
     ],
@@ -122,21 +133,24 @@ return [
         368 => [[['_route' => 'conges_delete', '_controller' => 'App\\Controller\\CongesController::delete'], ['id'], null, null, false, true, null]],
         393 => [[['_route' => 'conges_accepter', '_controller' => 'App\\Controller\\CongesController::ajax1'], ['id'], null, null, false, true, null]],
         417 => [[['_route' => 'conges_refuser', '_controller' => 'App\\Controller\\CongesController::ajax2'], ['id'], null, null, false, true, null]],
-        457 => [[['_route' => 'departement_update', '_controller' => 'App\\Controller\\DashboardController::updateD'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        480 => [[['_route' => 'departement_delete', '_controller' => 'App\\Controller\\DashboardController::deleteD'], ['id'], null, null, false, true, null]],
-        516 => [[['_route' => 'service_update', '_controller' => 'App\\Controller\\DashboardController::updateS'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        539 => [[['_route' => 'service_delete', '_controller' => 'App\\Controller\\DashboardController::deleteS'], ['id'], null, null, false, true, null]],
-        575 => [[['_route' => 'employe_update', '_controller' => 'App\\Controller\\EmployeController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        598 => [[['_route' => 'employe_delete', '_controller' => 'App\\Controller\\EmployeController::delete'], ['id'], null, null, false, true, null]],
-        636 => [[['_route' => 'fiche_delete', '_controller' => 'App\\Controller\\FichePaieController::delete'], ['id'], null, null, false, true, null]],
-        661 => [[['_route' => 'imprime', '_controller' => 'App\\Controller\\FichePaieController::print'], ['id'], null, null, false, true, null]],
-        701 => [[['_route' => 'gestionSupp_update', '_controller' => 'App\\Controller\\GestionSupplementaireController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        724 => [[['_route' => 'gestionSupp_delete', '_controller' => 'App\\Controller\\GestionSupplementaireController::delete'], ['id'], null, null, false, true, null]],
-        760 => [[['_route' => 'mission_update', '_controller' => 'App\\Controller\\MissionController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
-        783 => [[['_route' => 'mission_delete', '_controller' => 'App\\Controller\\MissionController::delete'], ['id'], null, null, false, true, null]],
-        799 => [[['_route' => 'mission', '_controller' => 'App\\Controller\\MissionController::ajax'], ['id'], null, null, false, true, null]],
-        829 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
-        858 => [
+        460 => [[['_route' => 'departement_update', '_controller' => 'App\\Controller\\DashboardController::updateD'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        483 => [[['_route' => 'departement_delete', '_controller' => 'App\\Controller\\DashboardController::deleteD'], ['id'], null, null, false, true, null]],
+        515 => [[['_route' => 'dates_conges_show', '_controller' => 'App\\Controller\\DatesCongesController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        528 => [[['_route' => 'dates_conges_edit', '_controller' => 'App\\Controller\\DatesCongesController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        536 => [[['_route' => 'dates_conges_delete', '_controller' => 'App\\Controller\\DatesCongesController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        573 => [[['_route' => 'service_update', '_controller' => 'App\\Controller\\DashboardController::updateS'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        596 => [[['_route' => 'service_delete', '_controller' => 'App\\Controller\\DashboardController::deleteS'], ['id'], null, null, false, true, null]],
+        632 => [[['_route' => 'employe_update', '_controller' => 'App\\Controller\\EmployeController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        655 => [[['_route' => 'employe_delete', '_controller' => 'App\\Controller\\EmployeController::delete'], ['id'], null, null, false, true, null]],
+        693 => [[['_route' => 'fiche_delete', '_controller' => 'App\\Controller\\FichePaieController::delete'], ['id'], null, null, false, true, null]],
+        718 => [[['_route' => 'imprime', '_controller' => 'App\\Controller\\FichePaieController::print'], ['id'], null, null, false, true, null]],
+        758 => [[['_route' => 'gestionSupp_update', '_controller' => 'App\\Controller\\GestionSupplementaireController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        781 => [[['_route' => 'gestionSupp_delete', '_controller' => 'App\\Controller\\GestionSupplementaireController::delete'], ['id'], null, null, false, true, null]],
+        817 => [[['_route' => 'mission_update', '_controller' => 'App\\Controller\\MissionController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
+        840 => [[['_route' => 'mission_delete', '_controller' => 'App\\Controller\\MissionController::delete'], ['id'], null, null, false, true, null]],
+        856 => [[['_route' => 'mission', '_controller' => 'App\\Controller\\MissionController::ajax'], ['id'], null, null, false, true, null]],
+        886 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
+        915 => [
             [['_route' => 'profil_update', '_controller' => 'App\\Controller\\ProfilController::updateProfil'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

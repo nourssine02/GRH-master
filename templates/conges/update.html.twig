@@ -135,7 +135,7 @@
 	<div class="tab-content">
 		<form action="{{ path('conges_updateList' ,{'id': calendar.id})}}" method="post">
 
-			{{form_start(formC)}}
+			{{form_start(formC  , {'attr': {'novalidate' : 'novalidate'}})}}
 
 
 			<div id="tab1" class="tab active">

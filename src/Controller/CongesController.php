@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Repository\DatesCongesRepository;
 use DateTime;
 use App\Entity\Conges;
 use App\Form\CongesType;
 use App\Repository\CongesRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -104,7 +106,7 @@ class CongesController extends AbstractController
              return new Response('Données incomplètes' , 404);
         }
 
-          return $this->render('conges/calendrier.html.twig', []);
+          return $this->render('conges/congesCalendar.html.twig', []);
     }
     
 
@@ -126,7 +128,7 @@ class CongesController extends AbstractController
 
             }
             else{
-                $conge->setNbreJours($diffDate -1);
+                $conge->setNbreJours($diffDate );
             }
             $em->persist($conge);
             $em->flush();
@@ -237,4 +239,43 @@ class CongesController extends AbstractController
             'conges' => $conges,
         ]);
     }
+
+
+    /**
+     * @Route("/employes/conges", name="employes_conges")
+     */
+    public function congesEnCours(ManagerRegistry $doctrine):Response{
+
+        $conges = $doctrine->getRepository(Conges::class)->findAll();
+
+        $dateJour = new DateTime('now');
+        return $this->render('conges/enCours.html.twig', [
+            'conges' => $conges,
+            'dateJour' => $dateJour,
+        ]);
+    }
+
+
+    /**
+     * @Route("dates/calendrier", name="dates_conges_calendrier")
+     */
+    public function calendar(DatesCongesRepository $congesCalendar){
+
+        $events = $congesCalendar->findAll();
+        $dates = [];
+        foreach ( $events  as  $event ) {
+            $dates [] = [
+                'id' => $event->getId(),
+                'title' => $event->getEmploye()->getNom(),
+                'start'=> $event->getStart()->format('Y-m-d'),
+                'end' => $event->getEnd()->format('Y-m-d' ),
+
+            ];
+
+        }
+        $dataConges = json_encode($dates);
+        return $this->render('conges/congesCalendar.html.twig',compact('dataConges'));
+    }
+
+
 }
