@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier </h1>
+
+    {{ include('dates_conges/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('dates_conges_index') }}">Retourne a la liste</a>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">Ajouter  </h1>
+    <br>
+
+    {{ include('dates_conges/_form.html.twig') }}
+
+    <a href="{{ path('dates_conges_index') }}">Retourne a la liste</a>
+{% endblock %}
