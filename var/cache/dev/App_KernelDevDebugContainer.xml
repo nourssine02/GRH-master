@@ -157,6 +157,7 @@
     <parameter key="twig.form.resources" type="collection">
       <parameter>@VichUploader/Form/fields.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>bootstrap_5_layout.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">/home/hp/Téléchargements/GRH-master/templates</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
@@ -432,6 +433,13 @@
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\DatesCongesController"/>
       </call>
     </service>
+    <service id="App\Controller\DocumentsController" class="App\Controller\DocumentsController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\DocumentsController"/>
+      </call>
+    </service>
     <service id="App\Controller\EmployeController" class="App\Controller\EmployeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -481,6 +489,7 @@
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\RegistrationController"/>
       </call>
     </service>
+    <service id="App\Extensions\Doctrine\MatchAgainst" class="App\Extensions\Doctrine\MatchAgainst" autowire="true" autoconfigure="true"/>
     <service id="App\Form\AnnonceType" class="App\Form\AnnonceType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -3921,10 +3930,10 @@
       <tag name="container.private" package="symfony/twig-bundle" version="5.2"/>
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
+        <argument key="debug">true</argument>
         <argument key="autoescape">name</argument>
         <argument key="cache">/home/hp/Téléchargements/GRH-master/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
-        <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
       </argument>
       <call method="addExtension">
@@ -5049,6 +5058,10 @@
       <call method="addCustomStringFunction">
         <argument>JSON_SEARCH</argument>
         <argument>Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonSearch</argument>
+      </call>
+      <call method="addCustomStringFunction">
+        <argument>MATCH_AGAINST</argument>
+        <argument>App\Extensions\Doctrine\MatchAgainst</argument>
       </call>
     </service>
     <service id="doctrine.orm.default_annotation_metadata_driver" class="Doctrine\ORM\Mapping\Driver\AnnotationDriver">
@@ -6404,6 +6417,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DatesCongesController" class="App\Controller\DatesCongesController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DatesCongesController" class="App\Controller\DatesCongesController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DatesCongesController" class="App\Controller\DatesCongesController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DocumentsController" class="App\Controller\DocumentsController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DocumentsController" class="App\Controller\DocumentsController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\DocumentsController" class="App\Controller\DocumentsController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\EmployeController" class="App\Controller\EmployeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\EmployeController" class="App\Controller\EmployeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\EmployeController" class="App\Controller\EmployeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6826,6 +6842,13 @@
         <argument key="congesCalendar" type="service_closure" id="App\Repository\DatesCongesRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.hI5OIOo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="datesCongesRepository" type="service_closure" id="App\Repository\DatesCongesRepository"/>
+        <argument key="doctrine" type="service_closure" id="doctrine"/>
+      </argument>
+    </service>
     <service id=".service_locator.md6dco." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6864,7 +6887,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.2ER4WAd" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.WheM8KM" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AnnonceController::add" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -6887,11 +6910,12 @@
         <argument key="App\Controller\CongesController::view" type="service_closure" id=".service_locator.xwyqe4g"/>
         <argument key="App\Controller\DashboardController::deleteD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::deleteS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.hI5OIOo"/>
         <argument key="App\Controller\DashboardController::newD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::newS" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::showD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::showS" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\DashboardController::statistiques" type="service_closure" id=".service_locator.md6dco."/>
         <argument key="App\Controller\DashboardController::updateD" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DashboardController::updateS" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DatesCongesController::delete" type="service_closure" id=".service_locator.56qQGH5"/>
@@ -6916,6 +6940,7 @@
         <argument key="App\Controller\MissionController::delete" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\MissionController::index" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\MissionController::update" type="service_closure" id=".service_locator.rDrmLqx"/>
+        <argument key="App\Controller\PointageController::add" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PointageController::list" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PointageController::update" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ProfilController::updateProfil" type="service_closure" id=".service_locator.rDrmLqx"/>
@@ -6947,11 +6972,12 @@
         <argument key="App\Controller\CongesController:view" type="service_closure" id=".service_locator.xwyqe4g"/>
         <argument key="App\Controller\DashboardController:deleteD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:deleteS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.hI5OIOo"/>
         <argument key="App\Controller\DashboardController:newD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:newS" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:showD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:showS" type="service_closure" id=".service_locator.T7xmfzk"/>
+        <argument key="App\Controller\DashboardController:statistiques" type="service_closure" id=".service_locator.md6dco."/>
         <argument key="App\Controller\DashboardController:updateD" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DashboardController:updateS" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DatesCongesController:delete" type="service_closure" id=".service_locator.56qQGH5"/>
@@ -6976,6 +7002,7 @@
         <argument key="App\Controller\MissionController:delete" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\MissionController:index" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\MissionController:update" type="service_closure" id=".service_locator.rDrmLqx"/>
+        <argument key="App\Controller\PointageController:add" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PointageController:list" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\PointageController:update" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\ProfilController:updateProfil" type="service_closure" id=".service_locator.rDrmLqx"/>
@@ -7376,6 +7403,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.GNc8e5B" method="withContext"/>
     </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\DocumentsController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\DocumentsController"/>
+      <argument>App\Controller\DocumentsController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
     <service id=".service_locator.GNc8e5B.App\Controller\EmployeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\EmployeController"/>
       <argument>App\Controller\EmployeController</argument>
@@ -7592,12 +7625,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.2ER4WAd"/>
+      <argument type="service" id=".service_locator.WheM8KM"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.2ER4WAd"/>
+      <argument type="service" id=".service_locator.WheM8KM"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection"/>
@@ -8504,7 +8537,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.2ER4WAd"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.WheM8KM"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8525,8 +8558,9 @@
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.zwmK7NU" alias=".service_locator.rDrmLqx"/>
+    <service id=".service_locator.z4kojI2" alias=".service_locator.hI5OIOo"/>
     <service id=".service_locator.Dby0_1s" alias=".service_locator.4u5os03"/>
-    <service id=".service_locator.Q2OoPiA" alias=".service_locator.2ER4WAd"/>
+    <service id=".service_locator.D61_mjr" alias=".service_locator.WheM8KM"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.KXUyqbr" alias=".service_locator.j8xyxtH"/>
     <service id=".service_locator.fwWJgj4" alias=".service_locator.OXlDuH9"/>
@@ -8559,6 +8593,7 @@
     <service id=".service_locator.MmYuCkR" alias=".service_locator.xwyqe4g"/>
     <service id=".service_locator..KNepph" alias=".service_locator.nPIWXp3"/>
     <service id=".service_locator.XV9Nda4" alias=".service_locator.V9SNWIg"/>
+    <service id=".service_locator.hc7WT_a" alias=".service_locator.hI5OIOo"/>
     <service id=".service_locator.3mDjbED" alias=".service_locator.md6dco."/>
     <service id=".service_locator.Er0_7SX" alias=".service_locator.l2QwsaZ"/>
     <service id=".service_locator.0x_SiYN" alias=".service_locator.XZjT7jH"/>

@@ -1,10 +1,149 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">Ajouter  </h1>
-    <br>
 
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        Ajouter un congé annuel
+    </h4>
+
+
+    <style>
+        .tabs {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .tabs h4 {
+            color: #CB997E;
+            margin: 5px 0 15px;
+            display: inline-block;
+        }
+
+        .tab-links:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .tab-links {
+            padding: 0;
+            margin: 10px 0 0;
+            position: relative;
+            top: 2px;
+        }
+
+        .tab-links li {
+            margin: 0 5px 0 0;
+            float: left;
+            padding-top: 2px;
+            list-style: none;
+        }
+
+        .tab-links a {
+            padding: 9px 8px 6px;
+            display: inline-block;
+            background: #CB997E;
+            border: 2px solid #CB997E;
+            border-bottom: 3px solid #CB997E;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #fff;
+            transition: all linear 0.15s;
+        }
+
+        .tab-links button {
+            padding: 9px 8px 6px;
+            display: inline-block;
+            background: #CB997E;
+            border: 2px solid #CB997E;
+            border-bottom: 3px solid #CB997E;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #fff;
+            transition: all linear 0.15s;
+        }
+
+        .tab-links a:hover {
+            background: #CB997E;
+            text-decoration: none;
+            border: 2px solid #CB997E;
+            border-bottom: 3px solid #CB997E;
+            color: #fff;
+        }
+
+        li.active a,
+        li.active a:hover {
+            background: #CB997E;
+            height: 35px;
+            border-bottom: none;
+            color: #fff;
+        }
+
+        .tab-content,
+        .uploaded-documents-container {
+            padding: 15px;
+            border-radius: 3px;
+            border: 2px solid #CB997E;
+            background: #fff;
+            font-size: 0.95em;
+        }
+
+        .tab-content-scroll {
+            max-height: 375px;
+            min-height: 375px;
+            max-width: 1100px;
+            min-width: 450px;
+            overflow: auto;
+            clear: both;
+        }
+
+        .tab-content-scroll-home {
+            min-height: 135px;
+        }
+
+        .button-bar-scroll {
+            min-height: 235px;
+        }
+
+        .tab-content-scroll>p {
+            margin-top: 0;
+            padding-right: 12px;
+        }
+
+        .tab-content a {
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+    </style>
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert"> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        </div>
+    {% endfor %}
+
+<div class="tabs">
+    <ul class="tab-links" hidden>
+        <li class="active">
+            <a href="#tab1">Tab #1</a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content">
     {{ include('dates_conges/_form.html.twig') }}
+        <ul class="tab-links">
 
-    <a href="{{ path('dates_conges_index') }}">Retourne a la liste</a>
+        <a href="{{ path('dates_conges_index') }}">Cancel</a>
+        </ul>
+    </div>
+</div>
 {% endblock %}

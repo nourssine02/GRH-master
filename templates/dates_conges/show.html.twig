@@ -2,7 +2,7 @@
 
 
 {% block body %}
-    <h1>Voir Details</h1>
+    <h1  class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">Voir Details</h1>
 
     <table class="table">
         <tbody>
@@ -21,7 +21,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('dates_conges_index') }}">Retourne a la liste</a>
+    <a href="{{ path('dates_conges_index') }}">Cancel</a>
 
     <a href="{{ path('dates_conges_edit', {'id': dates_conge.id}) }}">Modifier</a>
 

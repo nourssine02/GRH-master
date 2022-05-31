@@ -51,8 +51,8 @@ class Employe
      *  @Assert\Length(
      *      min = 3,
      *      max = 12,
-     *      minMessage = "votre nom  doit comporter au moins {{ limit }} caractères",
-     *      maxMessage = "Votre  nom ne peut pas dépasser {{ limit }} caractères"
+     *      minMessage = "votre nom  doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre  nom ne peut pas dépasser {{ limit }} caractères"
      * )
      */
     private $nom;
@@ -63,8 +63,8 @@ class Employe
      * @Assert\Length(
      *      min = 3,
      *      max = 12,
-     *      minMessage = "votre prenom doit comporter au moins {{ limit }} caractères",
-     *      maxMessage = "Votre prenom ne peut pas dépasser {{ limit }} caractères"
+     *      minMessage = "votre prenom doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre prenom ne peut pas dépasser {{ limit }} caractères"
      * )
      *
      */
@@ -87,8 +87,8 @@ class Employe
      *  * @Assert\Length(
      *      min = 8,
      *      max = 8,
-     *    minMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
-     *    maxMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
+     *    minMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
+     *    maxMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
      * )
      */
     private $telephone;
@@ -99,8 +99,8 @@ class Employe
     * @Assert\Length(
      *      min = 8,
      *      max = 8,
-     *       minMessage = "votre numero cin doit comporter exactement {{ limit }} caractères",
-     *       maxMessage = "votre numero cin doit comporter exactement {{ limit }} caractères",
+     *       minMessage = "votre numero cin doit comporter exactement {{ limit }} caractères",
+     *       maxMessage = "votre numero cin doit comporter exactement {{ limit }} caractères",
      * )
      */
     private $cin;
@@ -131,8 +131,8 @@ class Employe
      *     @Assert\Length(
      *      min = 10,
      *      max = 10,
-     *       minMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
-     *       maxMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
+     *       minMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
+     *       maxMessage = "votre numero cnss doit comporter exactement {{ limit }} caractères",
      * )
   
      */
@@ -255,6 +255,12 @@ class Employe
      */
     private $user;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity=DatesConges::class, mappedBy="employe")
+     */
+    private $datesConges;
+
     /**
      * @ORM\OneToMany(targetEntity=Pointage::class, mappedBy="employe")
      */
@@ -274,6 +280,7 @@ class Employe
         $this->avances = new ArrayCollection();
         $this->gestionSupplementaires = new ArrayCollection();
         $this->matricule = '000'. $this->matricule;
+        $this->datesConges = new ArrayCollection();
         $this->pointages = new ArrayCollection();
     }
 
@@ -772,6 +779,36 @@ class Employe
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DatesConges>
+     */
+    public function getDatesConges(): Collection
+    {
+        return $this->datesConges;
+    }
+
+    public function addDatesConge(DatesConges $datesConge): self
+    {
+        if (!$this->datesConges->contains($datesConge)) {
+            $this->datesConges[] = $datesConge;
+            $datesConge->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDatesConge(DatesConges $datesConge): self
+    {
+        if ($this->datesConges->removeElement($datesConge)) {
+            // set the owning side to null (unless already changed)
+            if ($datesConge->getEmploye() === $this) {
+                $datesConge->setEmploye(null);
+            }
+        }
 
         return $this;
     }

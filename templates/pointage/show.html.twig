@@ -1,71 +1,78 @@
 {% extends "base.html.twig" %} {% block title %}{% endblock %} {% block body %}
 
-<!-- With actions -->
-<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-	Liste de Pointage
-</h4>
-<div>
-	<br>
+	<!-- With actions -->
+	<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+		Liste de Pointage
+	</h4>
+	<div>
+<a href="{{ path('pointage_new') }}">Ajout</a>
+		<br>
 
-	<div class="w-full overflow-hidden rounded-lg shadow-xs" style="margin-top: 50px;" >
-		<div class="w-full overflow-x-auto">
-			<table class="w-full">
-				<thead>
+		<div class="w-full overflow-hidden rounded-lg shadow-xs" style="margin-top: 50px;" >
+			<div class="w-full overflow-x-auto">
+				<table class="w-full">
+					<thead>
 					<tr
-						class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+							class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 						<th class="px-4 py-3">Employe</th>
 						<th class="px-4 py-3">Total</th>
 						<th>
-							&nbsp;
 							{% for jour in sommeJour %}
-							<span style="margin-left: 6px;">{{jour}}</span>
+								<span style="margin-left: 6px;">{{jour}}</span>
 							{% endfor %}
 						</th>
 						<th class="px-4 py-3"></th>
 
 					</tr>
-				</thead>
-				{% for pointage in pointages %}
-
-				<form action="{{path( 'pointages_update' , { 'id' : pointage.employe.id})}} " method="post">
-
-				<tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-
-					<tr class="text-gray-700 dark:text-gray-400">
+					</thead>
+					{% for pointage in pointages %}
 
 
-						<td class="px-4 py-3 text-sm">
-							<span style="font-weight: bold;">{{pointage.employe.nom}} {{pointage.employe.nom}}</span>
-						</td>
 
-						<td class="px-4 py-3 text-sm">
-							{{pointage.total }}
-						</td>
+					<form action="{{path( 'pointages_update' , { 'id' : pointage.employe.id})}} " method="post">
+
+							<tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+							<tr class="text-gray-700 dark:text-gray-400">
+
+									<td class="px-4 py-3 text-sm">
+
+										<span style="font-weight: bold;">{{pointage.employe.nom}} {{pointage.employe.prenom}}</span>
+									</td>
 
 
-						<td>
-							{% for jour in sommeJour %}
-							<input style="margin-left: 6px;" type="checkbox" class="jour" value="{{jour}}" name="{{pointage.employe.id}}[]" {% if jour in
-								pointage.listeJours %} checked {% endif %}
-{#									{% if aujourdhui==jour %} checked {% endif %}#}
-							>
+								<td class="px-4 py-3 text-sm">
+									{{pointage.total }}
 
-							{% endfor %}
-						</td>
+								</td>
 
-						<td>
-							<input type="submit" name="submit" value="Valide"  class="btn btn-small info" style="margin-bottom: 15px;">
-						</td>
 
-					</tr>
-				</tbody>
-				</form>
-				{% endfor %}
+								<td>
+									{% for jour in sommeJour %}
+										<input style="margin-left: 6px;" type="checkbox" class="jour" value="{{jour}}" name="{{pointage.employe.id}}[]"
+												{% if jour in pointage.listeJours %} checked {% endif %}
+												{#									{% if aujourdhui==jour %} checked {% endif %}#}
+										>
 
-			</table>
+									{% endfor %}
+								</td>
+
+								<td>
+									<input type="submit" name="submit" value="Valide"  class="btn btn-small info" style="margin-bottom: 15px;">
+								</td>
+
+
+							</tr>
+
+
+							</tbody>
+					</form>
+					{% endfor %}
+
+				</table>
+			</div>
 		</div>
-	</div>
 
-</div>
+	</div>
 
 {% endblock %}

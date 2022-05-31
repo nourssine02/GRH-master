@@ -6,6 +6,8 @@ use App\Entity\Employe;
 use App\Entity\Mission;
 use App\Entity\Service;
 use App\Entity\Departement;
+use App\Repository\CongesRepository;
+use App\Repository\DatesCongesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use function PHPUnit\Framework\countOf;
 
 class DashboardController extends AbstractController
 {
@@ -20,11 +23,11 @@ class DashboardController extends AbstractController
     /**
      * @Route("/dashboard", name="dashboard_page")
      */
-    public function index(ManagerRegistry $doctrine): Response
-    {       
+    public function index(ManagerRegistry $doctrine ,DatesCongesRepository  $datesCongesRepository): Response
+    {
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $nbrEmp = count($employes);
-        
+
         $missions = $doctrine->getRepository(Mission::class)->findAll();
         $nbrMi = count($missions);
 
@@ -35,11 +38,36 @@ class DashboardController extends AbstractController
         $service = $doctrine->getRepository(Service::class)->findAll();
         $nbrServ = count($service);
 
+
+        /******************************************************/
+        // on cherche tous les dates qui imposent par les employes
+        $conges = $datesCongesRepository->findAll();
+        $employeCount =[];
+        $mois = [];
+        $employe = [];
+
+        foreach ($conges as $conge){
+            $emp = $conge->getEmploye()->getNom();
+            $employe [] = $emp;
+            $m= $conge->getStart()->format('F');
+            $employeCount[]= count(array($emp));
+            if (!in_array($m , $mois)){
+                $mois[] = $m;
+
+            }
+
+
+        }
+
         return $this->render('dashboard/index.html.twig', [
             'nbrEmp' => $nbrEmp,
             'nbrMi' => $nbrMi,
             'nbrDepart' => $nbrDepart,
-            'nbrServ' => $nbrServ
+            'nbrServ' => $nbrServ,
+            'employe' => json_encode($employe),
+            'employeCount' => json_encode($employeCount),
+            'mois' => json_encode($mois),
+
         ]);
 
 
@@ -55,8 +83,8 @@ class DashboardController extends AbstractController
      * @Route("/departement", name="departements_list")
      */
     public function showD(ManagerRegistry $doctrine): Response
-    {       
-      
+    {
+
         $departements = $doctrine->getRepository(Departement::class)->findAll();
 
         return $this->render('dashboard/departement/list.html.twig', [
@@ -67,7 +95,7 @@ class DashboardController extends AbstractController
      * @Route("/departement/new", name="departement_new")
      */
     public function newD(Request $request,ManagerRegistry $doctrine): Response
-    {       
+    {
 
         $departement = new Departement();
         $formD = $this->createFormBuilder($departement)
@@ -82,7 +110,7 @@ class DashboardController extends AbstractController
         $formD->handleRequest($request);
 
         if ($formD->isSubmitted() && $formD->isValid()) {
-            
+
             $em = $doctrine->getManager();
             $data = $formD->getData();
             $em->persist($departement);
@@ -111,7 +139,7 @@ class DashboardController extends AbstractController
                     'There are no departements with the following id: ' . $id
                 );
         }
-        $em = $doctrine->getManager();   
+        $em = $doctrine->getManager();
         $formD = $this->createFormBuilder($departement)
                     ->add('nom', TextType::class ,  [
                             'attr' => [
@@ -127,13 +155,13 @@ class DashboardController extends AbstractController
                 $em ->flush();
 
             $this->addFlash('info','Modifiée avec Succées ');
-             
+
             return $this->redirectToRoute('departements_list');
 
         }
         return $this->render('dashboard/departement/update.html.twig', [
            "departement" => $departement,
-            'formD' => $formD->createView() 
+            'formD' => $formD->createView()
         ]);
 
      }
@@ -142,7 +170,7 @@ class DashboardController extends AbstractController
      * @Route("/departement/delete/{id}", name="departement_delete"  )
      */
     public function deleteD($id ,ManagerRegistry $doctrine){
-        
+
         $departement = $doctrine->getRepository(Departement::class)->find($id);
         $em = $doctrine->getManager();
         $em->remove($departement);
@@ -155,8 +183,8 @@ class DashboardController extends AbstractController
 
 
     }
-    /********************************************************** */ 
-    
+    /********************************************************** */
+
     //Services
 
 
@@ -164,8 +192,8 @@ class DashboardController extends AbstractController
      * @Route("/service", name="services_list")
      */
     public function showS(ManagerRegistry $doctrine): Response
-    {       
-      
+    {
+
         $services = $doctrine->getRepository(Service::class)->findAll();
 
         return $this->render('dashboard/service/list.html.twig', [
@@ -177,7 +205,7 @@ class DashboardController extends AbstractController
      * @Route("/service/new", name="service_new")
      */
     public function newS(Request $request,ManagerRegistry $doctrine): Response
-    {       
+    {
 
         $service = new Service();
         $formS = $this->createFormBuilder($service)
@@ -192,7 +220,7 @@ class DashboardController extends AbstractController
         $formS->handleRequest($request);
 
         if ($formS->isSubmitted() && $formS->isValid()) {
-            
+
             $em = $doctrine->getManager();
             $data = $formS->getData();
             $em->persist($service);
@@ -221,7 +249,7 @@ class DashboardController extends AbstractController
                     'There are no services with the following id: ' . $id
                 );
         }
-        $em = $doctrine->getManager();   
+        $em = $doctrine->getManager();
         $formS = $this->createFormBuilder($service)
                     ->add('nom', TextType::class ,  [
                             'attr' => [
@@ -237,13 +265,13 @@ class DashboardController extends AbstractController
                 $em ->flush();
 
             $this->addFlash('info','Modifiée avec Succées ');
-             
+
             return $this->redirectToRoute('services_list');
 
         }
         return $this->render('dashboard/service/update.html.twig', [
            "service" => $service,
-            'formS' => $formS->createView() 
+            'formS' => $formS->createView()
         ]);
 
      }
@@ -252,7 +280,7 @@ class DashboardController extends AbstractController
      * @Route("/service/delete/{id}", name="service_delete"  )
      */
     public function deleteS($id ,ManagerRegistry $doctrine){
-        
+
         $service = $doctrine->getRepository(Service::class)->find($id);
         $em = $doctrine->getManager();
         $em->remove($service);
@@ -265,5 +293,27 @@ class DashboardController extends AbstractController
 
 
     }
+    /**********************************************/
 
-}
+    /**
+     * @Route("/stats", name="statistiques"  )
+     */
+    public function statistiques(DatesCongesRepository $datesCongesRepository){
+        // on cherche tous les dates qui imposent par les employes
+        $dates = $datesCongesRepository->findAll();
+        $employe =[];
+        $employeCount =[];
+        foreach ($dates as $date){
+            $employe[] = $date->getEmploye()->getNom();
+            $employeCount[] = count($date->getEmploye());
+
+        }
+        return $this->render('dashboard/index.html.twig',[
+            'employe' => json_encode($employe),
+            'employeCount' => json_encode($employeCount),
+
+        ]);
+    }
+
+
+    }

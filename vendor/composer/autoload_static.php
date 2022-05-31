@@ -690,7 +690,6 @@ class ComposerStaticInit20399fd816a2f4f42c3d69d80c67f604
         'App\\Form\\FichePaieType' => __DIR__ . '/../..' . '/src/Form/FichePaieType.php',
         'App\\Form\\GestionSuppType' => __DIR__ . '/../..' . '/src/Form/GestionSuppType.php',
         'App\\Form\\MissionType' => __DIR__ . '/../..' . '/src/Form/MissionType.php',
-        'App\\Form\\PointageType' => __DIR__ . '/../..' . '/src/Form/PointageType.php',
         'App\\Form\\PrimeType' => __DIR__ . '/../..' . '/src/Form/PrimeType.php',
         'App\\Form\\RegistrationFormType' => __DIR__ . '/../..' . '/src/Form/RegistrationFormType.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',

@@ -43,11 +43,17 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
         // line 1
         $this->displayBlock('title', $context, $blocks);
-        // line 2
+        // line 3
         echo "
-<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
 ";
         // line 5
+        echo "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js\" integrity=\"sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>
+
+";
+        // line 8
+        echo "<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
+";
+        // line 10
         echo "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\"
 \tintegrity=\"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3\" crossorigin=\"anonymous\">
 
@@ -72,7 +78,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \tintegrity=\"sha256-RoGeDStTbXClGRj4hllIdGBYrCgEmO7H8SmutsYdDLU=\" crossorigin=\"anonymous\">
 <!DOCTYPE html>
 
-<html :class=\"{ 'theme-dark': dark }\" x-data=\"data()\" lang=\"en\" style=\"overflow: hidden;\">
+<html :class=\"{ 'theme-dark': dark }\" x-data=\"data()\" lang=\"en\" >
 
 <head>
 \t<meta charset=\"UTF-8\" />
@@ -81,34 +87,34 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\tBus Software</title>
 
 \t<link rel=\"stylesheet\" href=\"";
-        // line 37
+        // line 42
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/css/tailwind.output.css"), "html", null, true);
         echo "\" />
 \t<link rel=\"stylesheet\" href=\"";
-        // line 38
+        // line 43
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/cssFile.css"), "html", null, true);
         echo "\" />
 \t<script src=\"";
-        // line 39
+        // line 44
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/jquery.min.js"), "html", null, true);
         echo "\"></script>
 
 \t<script src=\"";
-        // line 41
+        // line 46
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("assets/js/init-alpine.js"), "html", null, true);
         echo "\"></script>
 
 
 </head>
 
-<body>
+<body >
 
-\t<div class=\"flex h-screen bg-gray-50 dark:bg-gray-900\" :class=\"{ 'overflow-hidden': isSideMenuOpen}\">
+\t<div class=\"flex h-screen bg-gray-50 dark:bg-gray-900\" :class=\"{ 'overflow-hidden': isSideMenuOpen}\" style=\"overflow-x:hidden; \" >
 \t\t<!-- Desktop sidebar -->
 \t\t<aside class=\"z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0\">
-\t\t\t<div class=\"py-4 text-gray-500 dark:text-gray-400\">
+\t\t\t<div class=\"py-2 text-gray-500 dark:text-gray-400\">
 \t\t\t\t<a class=\"ml-6 text-lg font-bold text-gray-800 dark:text-gray-200\" href=\"";
-        // line 52
+        // line 57
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_page");
         echo "\">
 \t\t\t\t\tBus Software
@@ -119,7 +125,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 60
+        // line 65
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_page");
         echo "\"> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\"
 \t\t\t\t\t\t\t\theight=\"24\" viewbox=\"0 0 24 24\" style=\"fill: #707275 ;\">
@@ -133,13 +139,13 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t</ul>
 \t\t\t\t<ul>
 \t\t\t\t\t";
-        // line 71
+        // line 76
         if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 72
+            // line 77
             echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 \"
 \t\t\t\t\t\t\thref=\"";
-            // line 74
+            // line 79
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("employe_list");
             echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" width=\"24\" height=\"24\"
@@ -153,7 +159,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</li>
 \t\t\t\t\t";
         }
-        // line 85
+        // line 90
         echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<button
 \t\t\t\t\t\t\t\tclass=\"inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
@@ -188,36 +194,45 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 118
+        // line 123
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("conges_list");
         echo "\">Liste des Congés </a>
 \t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t";
+        // line 125
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+            // line 126
+            echo "
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 122
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("employes_conges");
-        echo "\">Employé en Congé</a>
+            // line 129
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("employes_conges");
+            echo "\">Employé en Congé</a>
 \t\t\t\t\t\t\t\t</li>
-\t\t\t\t\t\t\t\t<li
+\t\t\t\t\t\t\t\t";
+        }
+        // line 132
+        echo "\t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 126
+        // line 134
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dates_conges_index");
-        echo "\">Imposer des dates de Congé</a>
+        echo "\">Congé annuel</a>
 \t\t\t\t\t\t\t\t</li>
+
 \t\t\t\t\t\t\t</ul>
 \t\t\t\t\t\t</template>
 \t\t\t\t\t</li>
 
 \t\t\t\t\t";
-        // line 132
+        // line 141
         if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 133
+            // line 142
             echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-            // line 135
+            // line 144
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointages_list");
             echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" width=\"24\" height=\"24\"
@@ -231,11 +246,11 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</li>
 \t\t\t\t\t";
         }
-        // line 146
+        // line 155
         echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 148
+        // line 157
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mission_list");
         echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
@@ -250,7 +265,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 160
+        // line 169
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_paie");
         echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
@@ -298,14 +313,14 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 205
+        // line 214
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avance_list");
         echo "\">Avances</a>
 \t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 209
+        // line 218
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("gestionSupp_list");
         echo "\">Gestion supplémentaire</a>
 \t\t\t\t\t\t\t\t</li>
@@ -315,7 +330,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 216
+        // line 225
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("annonces_list");
         echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
@@ -329,7 +344,20 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t<span class=\"ml-4\">Annonces</span>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t</li>
-
+\t\t\t\t\t<li class=\"relative px-6 py-3\">
+\t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
+\t\t\t\t\t\t   href=\"";
+        // line 239
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("documents");
+        echo "\">
+\t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
+\t\t\t\t\t\t\t\t style=\"fill: #707275 ;\">
+\t\t\t\t\t\t\t\t<path d=\"M19 7h-1V2H6v5H5c-1.654 0-3 1.346-3 3v7c0 1.103.897 2 2 2h2v3h12v-3h2c1.103 0 2-.897 2-2v-7c0-1.654-1.346-3-3-3zM8 4h8v3H8V4zm8 16H8v-4h8v4zm4-3h-2v-3H6v3H4v-7c0-.551.449-1 1-1h14c.552 0 1 .449 1 1v7z\"></path>
+\t\t\t\t\t\t\t\t<path d=\"M14 10h4v2h-4z\"></path>
+\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t<span class=\"ml-4\">Attestation du Travail</span>
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</li>
 \t\t\t\t</ul>
 
 \t\t\t</div>
@@ -361,7 +389,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t<!-- text-gray-800 dark:text-gray-100 -->
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 259
+        // line 278
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_page");
         echo "\">
 \t\t\t\t\t\t\t<svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"none\" stroke-linecap=\"round\"
@@ -377,13 +405,13 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t</ul>
 \t\t\t\t<ul>
 \t\t\t\t\t";
-        // line 272
+        // line 291
         if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 273
+            // line 292
             echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 \"
 \t\t\t\t\t\t\thref=\"";
-            // line 275
+            // line 294
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("employe_list");
             echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" width=\"24\" height=\"24\"
@@ -397,7 +425,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</li>
 \t\t\t\t\t";
         }
-        // line 286
+        // line 305
         echo "
 \t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<button
@@ -433,14 +461,14 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 320
+        // line 339
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("conges_list");
         echo "\">Liste des Congés </a>
 \t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 324
+        // line 343
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("employes_conges");
         echo "\">Employé en Congé</a>
 \t\t\t\t\t\t\t\t</li>
@@ -450,13 +478,13 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
 
 \t\t\t\t\t";
-        // line 331
+        // line 350
         if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 332
+            // line 351
             echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-            // line 334
+            // line 353
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointages_list");
             echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" width=\"24\" height=\"24\"
@@ -470,11 +498,11 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</li>
 \t\t\t\t\t";
         }
-        // line 345
+        // line 364
         echo "\t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 347
+        // line 366
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_paie");
         echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
@@ -520,14 +548,14 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 390
+        // line 409
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("avance_list");
         echo "\">Avances</a>
 \t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"";
-        // line 394
+        // line 413
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("gestionSupp_list");
         echo "\">Gestion supplémentaire</a>
 \t\t\t\t\t\t\t\t</li>
@@ -538,7 +566,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t<li class=\"relative px-6 py-3\">
 \t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\thref=\"";
-        // line 402
+        // line 421
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("mission_list");
         echo "\">
 \t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
@@ -647,26 +675,26 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t@click=\"toggleProfileMenu\" @keydown.escape=\"closeProfileMenu\" aria-label=\"Account\"
 \t\t\t\t\t\t\t\taria-haspopup=\"true\">
 \t\t\t\t\t\t\t\t<img class=\"object-cover w-8 h-8 rounded-full\" src=\"";
-        // line 508
+        // line 527
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/user.png"), "html", null, true);
         echo "\"
 \t\t\t\t\t\t\t\t\talt=\"\" aria-hidden=\"true\" />
 \t\t\t\t\t\t\t</button>
 \t\t\t\t\t\t\t\t";
-        // line 511
+        // line 530
         if ( !$this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 512
+            // line 531
             echo "\t\t\t\t\t\t\t\t\t<span style=\"color: black;\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 512, $this->source); })()), "user", [], "any", false, false, false, 512), "name", [], "any", false, false, false, 512), "nom", [], "any", false, false, false, 512), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 531, $this->source); })()), "user", [], "any", false, false, false, 531), "name", [], "any", false, false, false, 531), "nom", [], "any", false, false, false, 531), "html", null, true);
             echo "</span>
 \t\t\t\t\t\t\t\t";
         } else {
-            // line 514
+            // line 533
             echo "\t\t\t\t\t\t\t\t\t<span style=\"color: black;\">admin</span>
 
 \t\t\t\t\t\t\t\t";
         }
-        // line 517
+        // line 536
         echo "
 \t\t\t\t\t\t\t<template x-if=\"isProfileMenuOpen\">
 \t\t\t\t\t\t\t\t<ul x-transition:leave=\"transition ease-in duration-150\"
@@ -676,14 +704,14 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t\taria-label=\"submenu\">
 
 \t\t\t\t\t\t\t\t\t";
-        // line 525
+        // line 544
         if ( !$this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-            // line 526
+            // line 545
             echo "
 \t\t\t\t\t\t\t\t\t<li class=\"flex\">
 \t\t\t\t\t\t\t\t\t\t<a class=\"inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\t\t\t\t\thref=\"";
-            // line 529
+            // line 548
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("profil");
             echo "\">
 \t\t\t\t\t\t\t\t\t\t\t<svg class=\"w-4 h-4 mr-3\" aria-hidden=\"true\" fill=\"none\"
@@ -698,7 +726,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t\t";
         }
-        // line 541
+        // line 560
         echo "\t\t\t\t\t\t\t\t\t<li class=\"flex\">
 \t\t\t\t\t\t\t\t\t\t<a class=\"inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\t\t\t\t\thref=\"#\">
@@ -716,7 +744,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t\t<li class=\"flex\">
 \t\t\t\t\t\t\t\t\t\t<a class=\"inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200\"
 \t\t\t\t\t\t\t\t\t\t\thref=\"";
-        // line 557
+        // line 576
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
         echo "\">
 \t\t\t\t\t\t\t\t\t\t\t<svg class=\"w-4 h-4 mr-3\" aria-hidden=\"true\" fill=\"none\"
@@ -735,13 +763,13 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</ul>
 \t\t\t\t</div>
 \t\t\t</header>
-\t\t\t<main class=\"h-full pb-16 overflow-y-auto\">
+\t\t\t<main class=\"h-full pb-16 \">
 \t\t\t\t<!-- Remove everything INSIDE this div to a really blank page -->
 \t\t\t\t<div class=\"container px-6 mx-auto grid\">
 \t\t\t\t\t<h2 class=\"my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200\"> ";
-        // line 577
+        // line 596
         $this->displayBlock('body', $context, $blocks);
-        // line 579
+        // line 598
         echo "\t\t\t\t\t</h2>
 \t\t\t\t</div>
 \t\t\t</main>
@@ -778,7 +806,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
     }
 
-    // line 577
+    // line 596
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -808,13 +836,18 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
     public function getDebugInfo()
     {
-        return array (  782 => 577,  764 => 1,  745 => 579,  743 => 577,  720 => 557,  702 => 541,  687 => 529,  682 => 526,  680 => 525,  670 => 517,  665 => 514,  659 => 512,  657 => 511,  651 => 508,  542 => 402,  531 => 394,  524 => 390,  478 => 347,  474 => 345,  460 => 334,  456 => 332,  454 => 331,  444 => 324,  437 => 320,  401 => 286,  387 => 275,  383 => 273,  381 => 272,  365 => 259,  319 => 216,  309 => 209,  302 => 205,  254 => 160,  239 => 148,  235 => 146,  221 => 135,  217 => 133,  215 => 132,  206 => 126,  199 => 122,  192 => 118,  157 => 85,  143 => 74,  139 => 72,  137 => 71,  123 => 60,  112 => 52,  98 => 41,  93 => 39,  89 => 38,  85 => 37,  51 => 5,  47 => 2,  45 => 1,);
+        return array (  810 => 596,  792 => 1,  773 => 598,  771 => 596,  748 => 576,  730 => 560,  715 => 548,  710 => 545,  708 => 544,  698 => 536,  693 => 533,  687 => 531,  685 => 530,  679 => 527,  570 => 421,  559 => 413,  552 => 409,  506 => 366,  502 => 364,  488 => 353,  484 => 351,  482 => 350,  472 => 343,  465 => 339,  429 => 305,  415 => 294,  411 => 292,  409 => 291,  393 => 278,  351 => 239,  334 => 225,  324 => 218,  317 => 214,  269 => 169,  254 => 157,  250 => 155,  236 => 144,  232 => 142,  230 => 141,  220 => 134,  216 => 132,  210 => 129,  205 => 126,  203 => 125,  198 => 123,  163 => 90,  149 => 79,  145 => 77,  143 => 76,  129 => 65,  118 => 57,  104 => 46,  99 => 44,  95 => 43,  91 => 42,  57 => 10,  54 => 8,  50 => 5,  47 => 3,  45 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% block title %}{% endblock %}
+{# *************************************************** #}
 
+{# *************************************************** #}
+<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js\" integrity=\"sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>
+
+{# ************************************** #}
 <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
 {# ********************************* #}
 <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css\"
@@ -841,7 +874,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \tintegrity=\"sha256-RoGeDStTbXClGRj4hllIdGBYrCgEmO7H8SmutsYdDLU=\" crossorigin=\"anonymous\">
 <!DOCTYPE html>
 
-<html :class=\"{ 'theme-dark': dark }\" x-data=\"data()\" lang=\"en\" style=\"overflow: hidden;\">
+<html :class=\"{ 'theme-dark': dark }\" x-data=\"data()\" lang=\"en\" >
 
 <head>
 \t<meta charset=\"UTF-8\" />
@@ -858,12 +891,12 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 
 </head>
 
-<body>
+<body >
 
-\t<div class=\"flex h-screen bg-gray-50 dark:bg-gray-900\" :class=\"{ 'overflow-hidden': isSideMenuOpen}\">
+\t<div class=\"flex h-screen bg-gray-50 dark:bg-gray-900\" :class=\"{ 'overflow-hidden': isSideMenuOpen}\" style=\"overflow-x:hidden; \" >
 \t\t<!-- Desktop sidebar -->
 \t\t<aside class=\"z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0\">
-\t\t\t<div class=\"py-4 text-gray-500 dark:text-gray-400\">
+\t\t\t<div class=\"py-2 text-gray-500 dark:text-gray-400\">
 \t\t\t\t<a class=\"ml-6 text-lg font-bold text-gray-800 dark:text-gray-200\" href=\"{{ path('dashboard_page')}}\">
 \t\t\t\t\tBus Software
 
@@ -932,14 +965,18 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"{{ path('conges_list')}}\">Liste des Congés </a>
 \t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t{% if is_granted('ROLE_ADMIN') %}
+
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
 \t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"{{ path('employes_conges') }}\">Employé en Congé</a>
 \t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t{% endif %}
 \t\t\t\t\t\t\t\t<li
 \t\t\t\t\t\t\t\t\t\tclass=\"px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\">
-\t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"{{ path('dates_conges_index') }}\">Imposer des dates de Congé</a>
+\t\t\t\t\t\t\t\t\t<a class=\"w-full\" href=\"{{ path('dates_conges_index') }}\">Congé annuel</a>
 \t\t\t\t\t\t\t\t</li>
+
 \t\t\t\t\t\t\t</ul>
 \t\t\t\t\t\t</template>
 \t\t\t\t\t</li>
@@ -1040,7 +1077,17 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t\t\t<span class=\"ml-4\">Annonces</span>
 \t\t\t\t\t\t</a>
 \t\t\t\t\t</li>
-
+\t\t\t\t\t<li class=\"relative px-6 py-3\">
+\t\t\t\t\t\t<a class=\"inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200\"
+\t\t\t\t\t\t   href=\"{{ path('documents') }}\">
+\t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\"
+\t\t\t\t\t\t\t\t style=\"fill: #707275 ;\">
+\t\t\t\t\t\t\t\t<path d=\"M19 7h-1V2H6v5H5c-1.654 0-3 1.346-3 3v7c0 1.103.897 2 2 2h2v3h12v-3h2c1.103 0 2-.897 2-2v-7c0-1.654-1.346-3-3-3zM8 4h8v3H8V4zm8 16H8v-4h8v4zm4-3h-2v-3H6v3H4v-7c0-.551.449-1 1-1h14c.552 0 1 .449 1 1v7z\"></path>
+\t\t\t\t\t\t\t\t<path d=\"M14 10h4v2h-4z\"></path>
+\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t<span class=\"ml-4\">Attestation du Travail</span>
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</li>
 \t\t\t\t</ul>
 
 \t\t\t</div>
@@ -1386,7 +1433,7 @@ class __TwigTemplate_b53c5d31449a1619c42addbd4ebea509e2b6658dd77c8f689e42cca9459
 \t\t\t\t\t</ul>
 \t\t\t\t</div>
 \t\t\t</header>
-\t\t\t<main class=\"h-full pb-16 overflow-y-auto\">
+\t\t\t<main class=\"h-full pb-16 \">
 \t\t\t\t<!-- Remove everything INSIDE this div to a really blank page -->
 \t\t\t\t<div class=\"container px-6 mx-auto grid\">
 \t\t\t\t\t<h2 class=\"my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200\"> {% block body %}{%

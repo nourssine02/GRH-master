@@ -87,7 +87,7 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         echo "
 ";
         // line 8
-        echo "    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js\" integrity=\"sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>
+        echo "
     <!-- Cards -->
 <div class=\"grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4\">
     <!-- Card -->
@@ -197,12 +197,10 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
     </div>
 </div>
 
-
     <div class=\"container\">
         <h1>Statistiques</h1>
         <br>
         <canvas id=\"myChart\" width=\"400\" height=\"100\"></canvas>
-
     </div>
     <script>
         let chart = document.getElementById('myChart');
@@ -210,16 +208,27 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         let graph = new Chart(chart ,{
             type:\"line\",
             data:{
-                labels: ['Février' ,'Mars','Avril', 'Mai' ,'Juin' ],
-                datasets: [{
-                    label: \"tâches effectuées \",
-                    data:[ 1,2,3,4,5,6,7,8,9,10],
-                    backgroundColor: 'rgb(75, 192, 192)',
-                    tension: 0.3,
-                    fill : false
-                }]
+                labels: ";
+        // line 106
+        echo (isset($context["mois"]) || array_key_exists("mois", $context) ? $context["mois"] : (function () { throw new RuntimeError('Variable "mois" does not exist.', 106, $this->source); })());
+        echo ",
+                datasets:[{
+                    label: \"Les Congés annuel des employés\",
+                    data:[1,2,3,4,5,6],
+                    ";
+        // line 111
+        echo "                    backgroundColor: 'rgb(75, 192, 192)',
 
-            }
+                }]
+            },
+            options: {
+                locale: 'fr',
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
         })
 
 
@@ -246,7 +255,7 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
 
     public function getDebugInfo()
     {
-        return array (  193 => 89,  160 => 63,  141 => 47,  128 => 41,  109 => 25,  90 => 8,  87 => 6,  77 => 4,  59 => 2,  36 => 1,);
+        return array (  220 => 111,  213 => 106,  193 => 89,  160 => 63,  141 => 47,  128 => 41,  109 => 25,  90 => 8,  87 => 6,  77 => 4,  59 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -258,7 +267,7 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
 {#    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css\" integrity=\"sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" />#}
 
 {#    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js\" integrity=\"sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>#}
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js\" integrity=\"sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>
+
     <!-- Cards -->
 <div class=\"grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4\">
     <!-- Card -->
@@ -345,12 +354,10 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
     </div>
 </div>
 
-
     <div class=\"container\">
         <h1>Statistiques</h1>
         <br>
         <canvas id=\"myChart\" width=\"400\" height=\"100\"></canvas>
-
     </div>
     <script>
         let chart = document.getElementById('myChart');
@@ -358,16 +365,23 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         let graph = new Chart(chart ,{
             type:\"line\",
             data:{
-                labels: ['Février' ,'Mars','Avril', 'Mai' ,'Juin' ],
-                datasets: [{
-                    label: \"tâches effectuées \",
-                    data:[ 1,2,3,4,5,6,7,8,9,10],
+                labels: {{ mois|raw }},
+                datasets:[{
+                    label: \"Les Congés annuel des employés\",
+                    data:[1,2,3,4,5,6],
+                    {# {{ employeCount|raw }}#}
                     backgroundColor: 'rgb(75, 192, 192)',
-                    tension: 0.3,
-                    fill : false
-                }]
 
-            }
+                }]
+            },
+            options: {
+                locale: 'fr',
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
         })
 
 

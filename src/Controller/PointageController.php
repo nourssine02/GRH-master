@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonce;
 use App\Entity\Employe;
 use App\Entity\Pointage;
+use App\Form\AnnonceType;
+use App\Form\PointageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Integer;
@@ -24,10 +27,13 @@ class PointageController extends AbstractController
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $pointages =$doctrine->getRepository(Pointage::class)->findAll();
 
+        $total=0;
         $dat_j=date("Y-m",time())."-01";
 
         $nbj_m=date("t",strtotime($dat_j));
         $aujourdhui=date("d",time());
+     //   $pointage = new Pointage();
+
 
         for ($i=1; $i < $nbj_m+1; $i++) {
             if (strlen($i) == 1) {
@@ -41,6 +47,8 @@ class PointageController extends AbstractController
             'pointages' => $pointages,
             'sommeJour' => $sommeJour,
             'aujourdhui' => $aujourdhui,
+            'total' => $total,
+
 
 
 
@@ -49,20 +57,21 @@ class PointageController extends AbstractController
     }
 
 
-     /**
+    /**
      * @Route("/pointage/{id}", name="pointages_update")
      */
     public function update(ManagerRegistry $doctrine,$id )
     {
+        $employes = $doctrine->getRepository(Employe::class)->findAll();
 
-       $employe = $doctrine->getRepository(Employe::class)->find($id);
+        $employe = $doctrine->getRepository(Employe::class)->find($id);
         $pointages = $doctrine->getRepository(Pointage::class)->findAll();
 
         $dat_j = date("Y-m", time()) . "-01";
 
         $nbj_m = date("t", strtotime($dat_j));
         $aujourdhui = date("d", time());
-      //  $total = 1;
+        //  $total = 1;
         $liste = [];
 
 
@@ -74,14 +83,13 @@ class PointageController extends AbstractController
         }
 
         $em = $doctrine->getManager();
-        //$pointage = new Pointage();
 
-        foreach ($employe->getPointages() as $pointage) {
-               $listeJ = $pointage->getListeJours();
+        foreach ($pointages as $pointage) {
+            $listeJ = $pointage->getListeJours();
             if (isset($_POST['submit'])) {
                 if (!empty($_POST[$id])) {
                     foreach ($_POST[$id] as $value) {
-                       // $liste[] = $value;
+                        // $liste[] = $value;
                         if (!(in_array($value, $liste))) {
                             $liste[] = $value;
                         }
@@ -96,9 +104,8 @@ class PointageController extends AbstractController
                 $pointage->setTotal($total);
                 $pointage->setMois($dat_j);
                 // dd($pointage);
-                    $em->persist($pointage);
-                    $em->flush();
-                    return $this->redirectToRoute('pointages_list');
+                $em->persist($pointage);
+                $em->flush();
 
 
 
@@ -108,10 +115,36 @@ class PointageController extends AbstractController
 
         }
 
+        return $this->redirectToRoute('pointages_list');
 
     }
 
 
+    /**
+     * @Route("/pointage/new", name="pointage_new")
+     */
+    public function add(Request $request,ManagerRegistry $doctrine)
+    {
+        $em = $doctrine->getManager();
+
+        $pointage = new Pointage();
+
+        $formP = $this->createForm(PointageType::class, $pointage);
+        $formP->handleRequest($request);
+
+        if ($formP->isSubmitted() && $formP->isValid()) {
+
+//            $em->persist($pointage);
+//            $em->flush();
+//            $this->addFlash('info', 'Ajoutée avec Succées ');
+//            return $this->redirectToRoute('pointages_list');
+        }
+
+        return $this->render('pointage/new.html.twig', [
+            "pointage" => $pointage,
+            'formP' => $formP->createView()
+        ]);
+    }
 }
 
 

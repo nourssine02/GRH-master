@@ -5,7 +5,7 @@
 {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />#}
 
 {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>#}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Cards -->
 <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
     <!-- Card -->
@@ -92,12 +92,10 @@
     </div>
 </div>
 
-
     <div class="container">
         <h1>Statistiques</h1>
         <br>
         <canvas id="myChart" width="400" height="100"></canvas>
-
     </div>
     <script>
         let chart = document.getElementById('myChart');
@@ -105,16 +103,23 @@
         let graph = new Chart(chart ,{
             type:"line",
             data:{
-                labels: ['Février' ,'Mars','Avril', 'Mai' ,'Juin' ],
-                datasets: [{
-                    label: "tâches effectuées ",
-                    data:[ 1,2,3,4,5,6,7,8,9,10],
+                labels: {{ mois|raw }},
+                datasets:[{
+                    label: "Les Congés annuel des employés",
+                    data:[1,2,3,4,5,6],
+                    {# {{ employeCount|raw }}#}
                     backgroundColor: 'rgb(75, 192, 192)',
-                    tension: 0.3,
-                    fill : false
-                }]
 
-            }
+                }]
+            },
+            options: {
+                locale: 'fr',
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
         })
 
 

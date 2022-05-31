@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DatesCongesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,11 +19,6 @@ class DatesConges
      */
     private $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Employe::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $employe;
 
     /**
      * @ORM\Column(type="date")
@@ -33,22 +30,19 @@ class DatesConges
      */
     private $end;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Employe::class, inversedBy="datesConges")
+     */
+    private $employe;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmploye(): ?Employe
-    {
-        return $this->employe;
-    }
 
-    public function setEmploye(Employe $employe): self
-    {
-        $this->employe = $employe;
-
-        return $this;
-    }
 
     public function getStart(): ?\DateTimeInterface
     {
@@ -73,4 +67,17 @@ class DatesConges
 
         return $this;
     }
+
+    public function getEmploye(): ?Employe
+    {
+        return $this->employe;
+    }
+
+    public function setEmploye(?Employe $employe): self
+    {
+        $this->employe = $employe;
+
+        return $this;
+    }
+
 }

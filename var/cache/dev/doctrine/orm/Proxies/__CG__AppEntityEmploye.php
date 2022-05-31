@@ -67,10 +67,10 @@ class Employe extends \App\Entity\Employe implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'matricule', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'sexe', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'telephone', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cin', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateNais', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'situationFamilial', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nbreEnfants', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cnss', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateEmbauche', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'categorie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'echelon', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typeContrat', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'salaireBase', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typePaie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'departement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'service', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'titre', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'moyenPaiement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nomBanque', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'numCompteBanc', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prime', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'conges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'missions', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'fichePaies', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'avances', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'gestionSupplementaires', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'pointages'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'matricule', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'sexe', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'telephone', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cin', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateNais', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'situationFamilial', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nbreEnfants', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cnss', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateEmbauche', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'categorie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'echelon', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typeContrat', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'salaireBase', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typePaie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'departement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'service', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'titre', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'moyenPaiement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nomBanque', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'numCompteBanc', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prime', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'conges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'missions', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'fichePaies', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'avances', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'gestionSupplementaires', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'datesConges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'pointages'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'matricule', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'sexe', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'telephone', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cin', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateNais', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'situationFamilial', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nbreEnfants', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cnss', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateEmbauche', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'categorie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'echelon', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typeContrat', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'salaireBase', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typePaie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'departement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'service', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'titre', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'moyenPaiement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nomBanque', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'numCompteBanc', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prime', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'conges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'missions', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'fichePaies', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'avances', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'gestionSupplementaires', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'pointages'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'matricule', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prenom', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'sexe', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'adresse', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'telephone', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cin', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateNais', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'situationFamilial', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nbreEnfants', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'cnss', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'dateEmbauche', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'categorie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'echelon', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typeContrat', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'salaireBase', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'typePaie', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'departement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'service', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'titre', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'moyenPaiement', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'nomBanque', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'numCompteBanc', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'prime', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'conges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'missions', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'fichePaies', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'avances', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'gestionSupplementaires', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'user', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'datesConges', '' . "\0" . 'App\\Entity\\Employe' . "\0" . 'pointages'];
     }
 
     /**
@@ -949,6 +949,39 @@ class Employe extends \App\Entity\Employe implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUser', [$user]);
 
         return parent::setUser($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDatesConges(): \Doctrine\Common\Collections\Collection
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDatesConges', []);
+
+        return parent::getDatesConges();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addDatesConge(\App\Entity\DatesConges $datesConge): \App\Entity\Employe
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addDatesConge', [$datesConge]);
+
+        return parent::addDatesConge($datesConge);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeDatesConge(\App\Entity\DatesConges $datesConge): \App\Entity\Employe
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeDatesConge', [$datesConge]);
+
+        return parent::removeDatesConge($datesConge);
     }
 
     /**

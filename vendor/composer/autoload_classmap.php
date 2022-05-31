@@ -39,7 +39,6 @@ return array(
     'App\\Form\\FichePaieType' => $baseDir . '/src/Form/FichePaieType.php',
     'App\\Form\\GestionSuppType' => $baseDir . '/src/Form/GestionSuppType.php',
     'App\\Form\\MissionType' => $baseDir . '/src/Form/MissionType.php',
-    'App\\Form\\PointageType' => $baseDir . '/src/Form/PointageType.php',
     'App\\Form\\PrimeType' => $baseDir . '/src/Form/PrimeType.php',
     'App\\Form\\RegistrationFormType' => $baseDir . '/src/Form/RegistrationFormType.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',

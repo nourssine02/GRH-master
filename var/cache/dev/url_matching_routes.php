@@ -27,8 +27,10 @@ return [
         '/departement/new' => [[['_route' => 'departement_new', '_controller' => 'App\\Controller\\DashboardController::newD'], null, null, null, false, false, null]],
         '/service' => [[['_route' => 'services_list', '_controller' => 'App\\Controller\\DashboardController::showS'], null, null, null, false, false, null]],
         '/service/new' => [[['_route' => 'service_new', '_controller' => 'App\\Controller\\DashboardController::newS'], null, null, null, false, false, null]],
+        '/stats' => [[['_route' => 'statistiques', '_controller' => 'App\\Controller\\DashboardController::statistiques'], null, null, null, false, false, null]],
         '/dates/conges' => [[['_route' => 'dates_conges_index', '_controller' => 'App\\Controller\\DatesCongesController::index'], null, ['GET' => 0], null, true, false, null]],
         '/dates/conges/new' => [[['_route' => 'dates_conges_new', '_controller' => 'App\\Controller\\DatesCongesController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/documents' => [[['_route' => 'documents', '_controller' => 'App\\Controller\\DocumentsController::index'], null, null, null, false, false, null]],
         '/employes' => [[['_route' => 'employe_list', '_controller' => 'App\\Controller\\EmployeController::index'], null, null, null, false, false, null]],
         '/employe/new' => [[['_route' => 'employe_new', '_controller' => 'App\\Controller\\EmployeController::add'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/fichePaie' => [[['_route' => 'fiche_paie', '_controller' => 'App\\Controller\\FichePaieController::index'], null, null, null, false, false, null]],
@@ -111,8 +113,11 @@ return [
                     .'|([^/]++)(*:856)'
                 .')'
                 .'|/p(?'
-                    .'|ointage/([^/]++)(*:886)'
-                    .'|rofil/update/([^/]++)(*:915)'
+                    .'|ointage/(?'
+                        .'|([^/]++)(*:889)'
+                        .'|new(*:900)'
+                    .')'
+                    .'|rofil/update/([^/]++)(*:930)'
                 .')'
             .')/?$}sDu',
     ],
@@ -149,8 +154,9 @@ return [
         817 => [[['_route' => 'mission_update', '_controller' => 'App\\Controller\\MissionController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
         840 => [[['_route' => 'mission_delete', '_controller' => 'App\\Controller\\MissionController::delete'], ['id'], null, null, false, true, null]],
         856 => [[['_route' => 'mission', '_controller' => 'App\\Controller\\MissionController::ajax'], ['id'], null, null, false, true, null]],
-        886 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
-        915 => [
+        889 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
+        900 => [[['_route' => 'pointage_new', '_controller' => 'App\\Controller\\PointageController::add'], [], null, null, false, false, null]],
+        930 => [
             [['_route' => 'profil_update', '_controller' => 'App\\Controller\\ProfilController::updateProfil'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -12,6 +12,7 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
+                type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
@@ -19,6 +20,7 @@ doctrine:
             string_functions:
                 JSON_EXTRACT: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonExtract
                 JSON_SEARCH: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonSearch
+                MATCH_AGAINST: App\Extensions\Doctrine\MatchAgainst
 
 when@test:
     doctrine:

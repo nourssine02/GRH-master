@@ -47,6 +47,7 @@ class Pointage
     private $employe;
 
 
+
     public function __construct()
     {
         $this->datePointage = new \DateTime('now');
@@ -113,7 +114,7 @@ class Pointage
         return $this->employe;
     }
 
-    public function setEmploye($employe): self
+    public function setEmploye(?Employe $employe): self
     {
         $this->employe = $employe;
 
@@ -125,5 +126,6 @@ class Pointage
 
 
 
-  
+
+
 }
