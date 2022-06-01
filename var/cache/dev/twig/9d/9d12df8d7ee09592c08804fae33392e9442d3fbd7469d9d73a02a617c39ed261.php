@@ -281,7 +281,6 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "id", [], "any", false, false, false, 149), "html", null, true);
             echo "\"  data-ax=\"modal\" style=\"min-height: 850px; zoom: 90%; min-width: 50%; margin-top: -60px; \" >
                             <div class=\"modal-dialog\">
-
                                 <div class=\"modal-content\" id='sectionAimprimer'>
                                     <div class=\"modal-header\">
                                         <h5 class=\"modal-title\">
@@ -294,8 +293,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
 
                                                 <span>";
-            // line 163
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "matricule", [], "any", false, false, false, 163), "html", null, true);
+            // line 162
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "matricule", [], "any", false, false, false, 162), "html", null, true);
             echo "</span>
                                             </p>
 
@@ -305,12 +304,12 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Nom Complet:</strong>
 
                                                 <span>";
-            // line 171
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nom", [], "any", false, false, false, 171), "html", null, true);
+            // line 170
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nom", [], "any", false, false, false, 170), "html", null, true);
             echo "
                                                     ";
-            // line 172
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "prenom", [], "any", false, false, false, 172), "html", null, true);
+            // line 171
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "prenom", [], "any", false, false, false, 171), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -324,8 +323,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
 
                                                 <span>";
-            // line 184
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "adresse", [], "any", false, false, false, 184), "html", null, true);
+            // line 183
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "adresse", [], "any", false, false, false, 183), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -339,8 +338,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
 
                                                 <span>";
-            // line 196
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "cin", [], "any", false, false, false, 196), "html", null, true);
+            // line 195
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "cin", [], "any", false, false, false, 195), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -352,8 +351,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                             <p>
                                                 <strong>date de naissance:</strong>
                                                 <span>";
-            // line 206
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["employe"], "dateNais", [], "any", false, false, false, 206), "format", [0 => "d/m/Y"], "method", false, false, false, 206), "html", null, true);
+            // line 205
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["employe"], "dateNais", [], "any", false, false, false, 205), "format", [0 => "d/m/Y"], "method", false, false, false, 205), "html", null, true);
             echo "</span>
 
 
@@ -367,25 +366,25 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Situation Familial:
                                                 </strong>
                                                 <span>";
-            // line 218
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "situationFamilial", [], "any", false, false, false, 218), "html", null, true);
+            // line 217
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "situationFamilial", [], "any", false, false, false, 217), "html", null, true);
             echo "
                                                 </span>
                                                 &nbsp;
                                                 ";
-            // line 221
-            if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["employe"], "nbreEnfants", [], "any", false, false, false, 221), null))) {
-                // line 222
+            // line 220
+            if ((0 !== twig_compare(twig_get_attribute($this->env, $this->source, $context["employe"], "nbreEnfants", [], "any", false, false, false, 220), null))) {
+                // line 221
                 echo "                                                <strong>Nombre des enfants:
                                                 </strong>
                                                 <span>";
-                // line 224
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nbreEnfants", [], "any", false, false, false, 224), "html", null, true);
+                // line 223
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nbreEnfants", [], "any", false, false, false, 223), "html", null, true);
                 echo "
                                                 </span>
                                                 ";
             }
-            // line 227
+            // line 226
             echo "
                                             </p>
 
@@ -397,8 +396,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Email:</strong>
 
                                                 <span>";
-            // line 237
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "email", [], "any", false, false, false, 237), "html", null, true);
+            // line 236
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "email", [], "any", false, false, false, 236), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -412,8 +411,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 249
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "telephone", [], "any", false, false, false, 249), "html", null, true);
+            // line 248
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "telephone", [], "any", false, false, false, 248), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -423,8 +422,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Departement:</strong>
 
                                                 <span>";
-            // line 257
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "departement", [], "any", false, false, false, 257), "html", null, true);
+            // line 256
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "departement", [], "any", false, false, false, 256), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -433,8 +432,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Service:</strong>
 
                                                 <span>";
-            // line 264
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "service", [], "any", false, false, false, 264), "html", null, true);
+            // line 263
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "service", [], "any", false, false, false, 263), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -443,8 +442,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                                 <strong>Titre:</strong>
 
                                                 <span>";
-            // line 271
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "titre", [], "any", false, false, false, 271), "html", null, true);
+            // line 270
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "titre", [], "any", false, false, false, 270), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -456,8 +455,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
 
                                                 <span>";
-            // line 281
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "cnss", [], "any", false, false, false, 281), "html", null, true);
+            // line 280
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "cnss", [], "any", false, false, false, 280), "html", null, true);
             echo "</span>
                                             </p>
 
@@ -471,8 +470,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 293
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["employe"], "dateEmbauche", [], "any", false, false, false, 293), "format", [0 => "d/m/Y"], "method", false, false, false, 293), "html", null, true);
+            // line 292
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["employe"], "dateEmbauche", [], "any", false, false, false, 292), "format", [0 => "d/m/Y"], "method", false, false, false, 292), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -483,8 +482,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 302
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "categorie", [], "any", false, false, false, 302), "html", null, true);
+            // line 301
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "categorie", [], "any", false, false, false, 301), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -495,8 +494,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 311
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "echelon", [], "any", false, false, false, 311), "html", null, true);
+            // line 310
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "echelon", [], "any", false, false, false, 310), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -509,8 +508,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 322
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "typeContrat", [], "any", false, false, false, 322), "html", null, true);
+            // line 321
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "typeContrat", [], "any", false, false, false, 321), "html", null, true);
             echo "</span>
 
 
@@ -522,8 +521,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 332
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "salaireBase", [], "any", false, false, false, 332), "html", null, true);
+            // line 331
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "salaireBase", [], "any", false, false, false, 331), "html", null, true);
             echo "</span>
                                             </p>
                                         </div>
@@ -533,8 +532,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
                                                 <span>
                                                     ";
-            // line 340
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "typePaie", [], "any", false, false, false, 340), "html", null, true);
+            // line 339
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "typePaie", [], "any", false, false, false, 339), "html", null, true);
             echo "</span>
                                             </p>
 
@@ -544,8 +543,8 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                             <p>
                                                 <strong>Moyen de Paiement:</strong>
                                                 <span>";
-            // line 348
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "moyenPaiement", [], "any", false, false, false, 348), "html", null, true);
+            // line 347
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "moyenPaiement", [], "any", false, false, false, 347), "html", null, true);
             echo "</span>
 
                                             </p>
@@ -553,31 +552,34 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                         <div class=\"NomEtCompteBancaire\">
                                             <p>
                                                 ";
-            // line 354
-            if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["employe"], "moyenPaiement", [], "any", false, false, false, 354), "Virement"))) {
-                // line 355
+            // line 353
+            if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, $context["employe"], "moyenPaiement", [], "any", false, false, false, 353), "Virement"))) {
+                // line 354
                 echo "                                                <strong>Nom du Banque :</strong>
                                                 <span>";
-                // line 356
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nomBanque", [], "any", false, false, false, 356), "html", null, true);
+                // line 355
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "nomBanque", [], "any", false, false, false, 355), "html", null, true);
                 echo "</span>
                                                 &nbsp;
                                                 <strong>Numero Compte :</strong>
 
                                                 <span>";
-                // line 360
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "numCompteBanc", [], "any", false, false, false, 360), "html", null, true);
+                // line 359
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "numCompteBanc", [], "any", false, false, false, 359), "html", null, true);
                 echo "</span>
 
                                                 ";
             }
-            // line 363
+            // line 362
             echo "                                            </p>
                                         </div>
                                     </div>
 
                                     <div class=\"modal-footer\" >
-                                        <button type=\"button\"  class=\"ml-auto btn shadow-1 rounded-1 btn-small primary\" data-dismiss=\"exampleModal5\"  >Close</button>
+                                        <button data-target=\"exampleModal5";
+            // line 367
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["employe"], "id", [], "any", false, false, false, 367), "html", null, true);
+            echo "\" class=\"ml-auto btn shadow-1 rounded-1 btn-small primary\">Close</button>
 
                                         <button type=\"button\" class=\"btn btn-small success\"
                                                 onclick=\"imprimer('sectionAimprimer')\">Imprimer</button>
@@ -594,7 +596,7 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['employe'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 381
+        // line 380
         echo "                    </tr>
                 </tbody>
                 </tbody>
@@ -656,7 +658,7 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
 
     public function getDebugInfo()
     {
-        return array (  598 => 381,  575 => 363,  569 => 360,  562 => 356,  559 => 355,  557 => 354,  548 => 348,  537 => 340,  526 => 332,  513 => 322,  499 => 311,  487 => 302,  475 => 293,  460 => 281,  447 => 271,  437 => 264,  427 => 257,  416 => 249,  401 => 237,  389 => 227,  383 => 224,  379 => 222,  377 => 221,  371 => 218,  356 => 206,  343 => 196,  328 => 184,  313 => 172,  309 => 171,  298 => 163,  281 => 149,  264 => 135,  252 => 126,  236 => 113,  223 => 103,  216 => 99,  210 => 96,  199 => 88,  195 => 87,  186 => 81,  182 => 79,  178 => 78,  154 => 57,  145 => 50,  133 => 45,  129 => 44,  91 => 8,  87 => 4,  77 => 3,  59 => 2,  36 => 1,);
+        return array (  600 => 380,  581 => 367,  574 => 362,  568 => 359,  561 => 355,  558 => 354,  556 => 353,  547 => 347,  536 => 339,  525 => 331,  512 => 321,  498 => 310,  486 => 301,  474 => 292,  459 => 280,  446 => 270,  436 => 263,  426 => 256,  415 => 248,  400 => 236,  388 => 226,  382 => 223,  378 => 221,  376 => 220,  370 => 217,  355 => 205,  342 => 195,  327 => 183,  312 => 171,  308 => 170,  297 => 162,  281 => 149,  264 => 135,  252 => 126,  236 => 113,  223 => 103,  216 => 99,  210 => 96,  199 => 88,  195 => 87,  186 => 81,  182 => 79,  178 => 78,  154 => 57,  145 => 50,  133 => 45,  129 => 44,  91 => 8,  87 => 4,  77 => 3,  59 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -811,7 +813,6 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                         <!-- Modal backdrop. This what you want to place close to the closing body tag -->
                         <div class=\"modal fade --ax-modal-max-height\"  id=\"exampleModal5{{employe.id}}\"  data-ax=\"modal\" style=\"min-height: 850px; zoom: 90%; min-width: 50%; margin-top: -60px; \" >
                             <div class=\"modal-dialog\">
-
                                 <div class=\"modal-content\" id='sectionAimprimer'>
                                     <div class=\"modal-header\">
                                         <h5 class=\"modal-title\">
@@ -1028,7 +1029,7 @@ class __TwigTemplate_9a45c5e6b344fee23cf116ff661e682a9652d819b776ad6b04cfb7f7722
                                     </div>
 
                                     <div class=\"modal-footer\" >
-                                        <button type=\"button\"  class=\"ml-auto btn shadow-1 rounded-1 btn-small primary\" data-dismiss=\"exampleModal5\"  >Close</button>
+                                        <button data-target=\"exampleModal5{{ employe.id }}\" class=\"ml-auto btn shadow-1 rounded-1 btn-small primary\">Close</button>
 
                                         <button type=\"button\" class=\"btn btn-small success\"
                                                 onclick=\"imprimer('sectionAimprimer')\">Imprimer</button>

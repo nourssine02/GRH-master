@@ -5,8 +5,9 @@
 		Liste de Pointage
 	</h4>
 	<div>
-<a href="{{ path('pointage_new') }}">Ajout</a>
 		<br>
+{#		<a href="{{ path('pointage_add') }}" style="margin-right: 890px;" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Ajouter</a>#}
+		{{ render(path('pointage_add')) }}
 
 		<div class="w-full overflow-hidden rounded-lg shadow-xs" style="margin-top: 50px;" >
 			<div class="w-full overflow-x-auto">
@@ -51,7 +52,7 @@
 									{% for jour in sommeJour %}
 										<input style="margin-left: 6px;" type="checkbox" class="jour" value="{{jour}}" name="{{pointage.employe.id}}[]"
 												{% if jour in pointage.listeJours %} checked {% endif %}
-												{#									{% if aujourdhui==jour %} checked {% endif %}#}
+{#												{% if aujourdhui==jour %} checked {% endif %}#}
 										>
 
 									{% endfor %}

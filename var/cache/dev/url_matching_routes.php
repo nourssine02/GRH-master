@@ -40,6 +40,7 @@ return [
         '/mission' => [[['_route' => 'mission_list', '_controller' => 'App\\Controller\\MissionController::index'], null, null, null, false, false, null]],
         '/mission/new' => [[['_route' => 'mission_new', '_controller' => 'App\\Controller\\MissionController::add'], null, null, null, false, false, null]],
         '/pointage' => [[['_route' => 'pointages_list', '_controller' => 'App\\Controller\\PointageController::list'], null, null, null, false, false, null]],
+        '/addPointage' => [[['_route' => 'pointage_add', '_controller' => 'App\\Controller\\PointageController::add'], null, null, null, false, false, null]],
         '/profil' => [[['_route' => 'profil', '_controller' => 'App\\Controller\\ProfilController::index'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\RegistrationController::login'], null, null, null, false, false, null]],
@@ -113,11 +114,8 @@ return [
                     .'|([^/]++)(*:856)'
                 .')'
                 .'|/p(?'
-                    .'|ointage/(?'
-                        .'|([^/]++)(*:889)'
-                        .'|new(*:900)'
-                    .')'
-                    .'|rofil/update/([^/]++)(*:930)'
+                    .'|ointage/([^/]++)(*:886)'
+                    .'|rofil/update/([^/]++)(*:915)'
                 .')'
             .')/?$}sDu',
     ],
@@ -154,9 +152,8 @@ return [
         817 => [[['_route' => 'mission_update', '_controller' => 'App\\Controller\\MissionController::update'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null]],
         840 => [[['_route' => 'mission_delete', '_controller' => 'App\\Controller\\MissionController::delete'], ['id'], null, null, false, true, null]],
         856 => [[['_route' => 'mission', '_controller' => 'App\\Controller\\MissionController::ajax'], ['id'], null, null, false, true, null]],
-        889 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
-        900 => [[['_route' => 'pointage_new', '_controller' => 'App\\Controller\\PointageController::add'], [], null, null, false, false, null]],
-        930 => [
+        886 => [[['_route' => 'pointages_update', '_controller' => 'App\\Controller\\PointageController::update'], ['id'], null, null, false, true, null]],
+        915 => [
             [['_route' => 'profil_update', '_controller' => 'App\\Controller\\ProfilController::updateProfil'], ['id'], ['POST' => 0, 'GET' => 1], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

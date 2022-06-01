@@ -148,7 +148,6 @@
                         <!-- Modal backdrop. This what you want to place close to the closing body tag -->
                         <div class="modal fade --ax-modal-max-height"  id="exampleModal5{{employe.id}}"  data-ax="modal" style="min-height: 850px; zoom: 90%; min-width: 50%; margin-top: -60px; " >
                             <div class="modal-dialog">
-
                                 <div class="modal-content" id='sectionAimprimer'>
                                     <div class="modal-header">
                                         <h5 class="modal-title">
@@ -365,7 +364,7 @@
                                     </div>
 
                                     <div class="modal-footer" >
-                                        <button type="button"  class="ml-auto btn shadow-1 rounded-1 btn-small primary" data-dismiss="exampleModal5"  >Close</button>
+                                        <button data-target="exampleModal5{{ employe.id }}" class="ml-auto btn shadow-1 rounded-1 btn-small primary">Close</button>
 
                                         <button type="button" class="btn btn-small success"
                                                 onclick="imprimer('sectionAimprimer')">Imprimer</button>

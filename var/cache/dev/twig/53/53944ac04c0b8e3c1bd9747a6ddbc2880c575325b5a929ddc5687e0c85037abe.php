@@ -88,11 +88,12 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\tListe de Pointage
 \t</h4>
 \t<div>
-<a href=\"";
-        // line 8
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointage_new");
-        echo "\">Ajout</a>
 \t\t<br>
+";
+        // line 10
+        echo "\t\t";
+        echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointage_add"));
+        echo "
 
 \t\t<div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 50px;\" >
 \t\t\t<div class=\"w-full overflow-x-auto\">
@@ -104,11 +105,11 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t\t\t<th class=\"px-4 py-3\">Total</th>
 \t\t\t\t\t\t<th>
 \t\t\t\t\t\t\t";
-        // line 20
+        // line 21
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["sommeJour"]) || array_key_exists("sommeJour", $context) ? $context["sommeJour"] : (function () { throw new RuntimeError('Variable "sommeJour" does not exist.', 20, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["sommeJour"]) || array_key_exists("sommeJour", $context) ? $context["sommeJour"] : (function () { throw new RuntimeError('Variable "sommeJour" does not exist.', 21, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["jour"]) {
-            // line 21
+            // line 22
             echo "\t\t\t\t\t\t\t\t<span style=\"margin-left: 6px;\">";
             echo twig_escape_filter($this->env, $context["jour"], "html", null, true);
             echo "</span>
@@ -117,24 +118,24 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['jour'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 23
+        // line 24
         echo "\t\t\t\t\t\t</th>
 \t\t\t\t\t\t<th class=\"px-4 py-3\"></th>
 
 \t\t\t\t\t</tr>
 \t\t\t\t\t</thead>
 \t\t\t\t\t";
-        // line 28
+        // line 29
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["pointages"]) || array_key_exists("pointages", $context) ? $context["pointages"] : (function () { throw new RuntimeError('Variable "pointages" does not exist.', 28, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["pointages"]) || array_key_exists("pointages", $context) ? $context["pointages"] : (function () { throw new RuntimeError('Variable "pointages" does not exist.', 29, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["pointage"]) {
-            // line 29
+            // line 30
             echo "
 
 
 \t\t\t\t\t<form action=\"";
-            // line 32
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointages_update", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 32), "id", [], "any", false, false, false, 32)]), "html", null, true);
+            // line 33
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("pointages_update", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 33), "id", [], "any", false, false, false, 33)]), "html", null, true);
             echo " \" method=\"post\">
 
 \t\t\t\t\t\t\t<tbody class=\"bg-white divide-y dark:divide-gray-700 dark:bg-gray-800\">
@@ -144,18 +145,18 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t\t\t\t\t\t<td class=\"px-4 py-3 text-sm\">
 
 \t\t\t\t\t\t\t\t\t\t<span style=\"font-weight: bold;\">";
-            // line 40
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 40), "nom", [], "any", false, false, false, 40), "html", null, true);
+            // line 41
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 41), "nom", [], "any", false, false, false, 41), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 40), "prenom", [], "any", false, false, false, 40), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 41), "prenom", [], "any", false, false, false, 41), "html", null, true);
             echo "</span>
 \t\t\t\t\t\t\t\t\t</td>
 
 
 \t\t\t\t\t\t\t\t<td class=\"px-4 py-3 text-sm\">
 \t\t\t\t\t\t\t\t\t";
-            // line 45
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pointage"], "total", [], "any", false, false, false, 45), "html", null, true);
+            // line 46
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["pointage"], "total", [], "any", false, false, false, 46), "html", null, true);
             echo "
 
 \t\t\t\t\t\t\t\t</td>
@@ -163,24 +164,27 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 
 \t\t\t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t\t\t";
-            // line 51
+            // line 52
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["sommeJour"]) || array_key_exists("sommeJour", $context) ? $context["sommeJour"] : (function () { throw new RuntimeError('Variable "sommeJour" does not exist.', 51, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["sommeJour"]) || array_key_exists("sommeJour", $context) ? $context["sommeJour"] : (function () { throw new RuntimeError('Variable "sommeJour" does not exist.', 52, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["jour"]) {
-                // line 52
+                // line 53
                 echo "\t\t\t\t\t\t\t\t\t\t<input style=\"margin-left: 6px;\" type=\"checkbox\" class=\"jour\" value=\"";
                 echo twig_escape_filter($this->env, $context["jour"], "html", null, true);
                 echo "\" name=\"";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 52), "id", [], "any", false, false, false, 52), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["pointage"], "employe", [], "any", false, false, false, 53), "id", [], "any", false, false, false, 53), "html", null, true);
                 echo "[]\"
 \t\t\t\t\t\t\t\t\t\t\t\t";
-                // line 53
-                if (twig_in_filter($context["jour"], twig_get_attribute($this->env, $this->source, $context["pointage"], "listeJours", [], "any", false, false, false, 53))) {
+                // line 54
+                if (twig_in_filter($context["jour"], twig_get_attribute($this->env, $this->source, $context["pointage"], "listeJours", [], "any", false, false, false, 54))) {
                     echo " checked ";
                 }
-                // line 54
-                echo "\t\t\t\t\t\t\t\t\t\t\t\t";
                 // line 55
+                echo "\t\t\t\t\t\t\t\t\t\t\t\t";
+                if ((0 === twig_compare((isset($context["aujourdhui"]) || array_key_exists("aujourdhui", $context) ? $context["aujourdhui"] : (function () { throw new RuntimeError('Variable "aujourdhui" does not exist.', 55, $this->source); })()), $context["jour"]))) {
+                    echo " checked ";
+                }
+                // line 56
                 echo "\t\t\t\t\t\t\t\t\t\t>
 
 \t\t\t\t\t\t\t\t\t";
@@ -188,7 +192,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['jour'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 58
+            // line 59
             echo "\t\t\t\t\t\t\t\t</td>
 
 \t\t\t\t\t\t\t\t<td>
@@ -206,7 +210,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pointage'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 71
+        // line 72
         echo "
 \t\t\t\t</table>
 \t\t\t</div>
@@ -235,7 +239,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 
     public function getDebugInfo()
     {
-        return array (  210 => 71,  192 => 58,  184 => 55,  182 => 54,  178 => 53,  171 => 52,  167 => 51,  158 => 45,  148 => 40,  137 => 32,  132 => 29,  128 => 28,  121 => 23,  112 => 21,  108 => 20,  93 => 8,  85 => 2,  36 => 1,);
+        return array (  214 => 72,  196 => 59,  188 => 56,  183 => 55,  179 => 54,  172 => 53,  168 => 52,  159 => 46,  149 => 41,  138 => 33,  133 => 30,  129 => 29,  122 => 24,  113 => 22,  109 => 21,  94 => 10,  85 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -247,8 +251,9 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\tListe de Pointage
 \t</h4>
 \t<div>
-<a href=\"{{ path('pointage_new') }}\">Ajout</a>
 \t\t<br>
+{#\t\t<a href=\"{{ path('pointage_add') }}\" style=\"margin-right: 890px;\" class=\"px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple\">Ajouter</a>#}
+\t\t{{ render(path('pointage_add')) }}
 
 \t\t<div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 50px;\" >
 \t\t\t<div class=\"w-full overflow-x-auto\">
@@ -293,7 +298,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t\t\t\t\t\t{% for jour in sommeJour %}
 \t\t\t\t\t\t\t\t\t\t<input style=\"margin-left: 6px;\" type=\"checkbox\" class=\"jour\" value=\"{{jour}}\" name=\"{{pointage.employe.id}}[]\"
 \t\t\t\t\t\t\t\t\t\t\t\t{% if jour in pointage.listeJours %} checked {% endif %}
-\t\t\t\t\t\t\t\t\t\t\t\t{#\t\t\t\t\t\t\t\t\t{% if aujourdhui==jour %} checked {% endif %}#}
+\t\t\t\t\t\t\t\t\t\t\t\t{% if aujourdhui==jour %} checked {% endif %}
 \t\t\t\t\t\t\t\t\t\t>
 
 \t\t\t\t\t\t\t\t\t{% endfor %}

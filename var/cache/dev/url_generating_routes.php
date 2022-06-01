@@ -67,7 +67,7 @@ return [
     'mission' => [['id'], ['_controller' => 'App\\Controller\\MissionController::ajax'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/mission']], [], [], []],
     'pointages_list' => [[], ['_controller' => 'App\\Controller\\PointageController::list'], [], [['text', '/pointage']], [], [], []],
     'pointages_update' => [['id'], ['_controller' => 'App\\Controller\\PointageController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/pointage']], [], [], []],
-    'pointage_new' => [[], ['_controller' => 'App\\Controller\\PointageController::add'], [], [['text', '/pointage/new']], [], [], []],
+    'pointage_add' => [[], ['_controller' => 'App\\Controller\\PointageController::add'], [], [['text', '/addPointage']], [], [], []],
     'profil' => [[], ['_controller' => 'App\\Controller\\ProfilController::index'], [], [['text', '/profil']], [], [], []],
     'profil_update' => [['id'], ['_controller' => 'App\\Controller\\ProfilController::updateProfil'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/profil/update']], [], [], []],
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],

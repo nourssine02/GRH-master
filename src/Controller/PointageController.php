@@ -26,13 +26,11 @@ class PointageController extends AbstractController
     {
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $pointages =$doctrine->getRepository(Pointage::class)->findAll();
-
         $total=0;
         $dat_j=date("Y-m",time())."-01";
 
         $nbj_m=date("t",strtotime($dat_j));
         $aujourdhui=date("d",time());
-     //   $pointage = new Pointage();
 
 
         for ($i=1; $i < $nbj_m+1; $i++) {
@@ -74,7 +72,6 @@ class PointageController extends AbstractController
         //  $total = 1;
         $liste = [];
 
-
         for ($i = 1; $i < $nbj_m + 1; $i++) {
             if (strlen($i) == 1) {
                 $i = '0' . $i;
@@ -84,7 +81,7 @@ class PointageController extends AbstractController
 
         $em = $doctrine->getManager();
 
-        foreach ($pointages as $pointage) {
+        foreach ($employe->getPointages() as $pointage) {
             $listeJ = $pointage->getListeJours();
             if (isset($_POST['submit'])) {
                 if (!empty($_POST[$id])) {
@@ -121,7 +118,7 @@ class PointageController extends AbstractController
 
 
     /**
-     * @Route("/pointage/new", name="pointage_new")
+     * @Route("/addPointage", name="pointage_add")
      */
     public function add(Request $request,ManagerRegistry $doctrine)
     {
@@ -134,10 +131,10 @@ class PointageController extends AbstractController
 
         if ($formP->isSubmitted() && $formP->isValid()) {
 
-//            $em->persist($pointage);
-//            $em->flush();
-//            $this->addFlash('info', 'Ajoutée avec Succées ');
-//            return $this->redirectToRoute('pointages_list');
+            $em->persist($pointage);
+            $em->flush();
+            $this->addFlash('info', 'Ajoutée avec Succées ');
+            return $this->redirectToRoute('pointages_list');
         }
 
         return $this->render('pointage/new.html.twig', [
