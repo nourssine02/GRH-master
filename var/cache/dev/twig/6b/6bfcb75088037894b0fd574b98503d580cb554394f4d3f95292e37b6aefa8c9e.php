@@ -30,77 +30,6 @@ class __TwigTemplate_435f678c2f156e30692ef7927e92d362adb2be527b7ab90cbd31279dfa6
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<div id=\"sidebar-search\" class=\"hidden\">
-    <form action=\"{{ path('_profiler_search') }}\" method=\"get\">
-        <div class=\"form-group\">
-            <label for=\"ip\">IP</label>
-            <input type=\"text\" name=\"ip\" id=\"ip\" value=\"{{ ip }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"method\">Method</label>
-            <select name=\"method\" id=\"method\">
-                <option value=\"\">Any</option>
-                {% for m in ['DELETE', 'GET', 'HEAD', 'PATCH', 'POST', 'PUT'] %}
-                    <option {{ m == method ? 'selected=\"selected\"' }}>{{ m }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"status_code\">Status</label>
-            <input type=\"number\" name=\"status_code\" id=\"status_code\" min=\"100\" max=\"599\" value=\"{{ status_code }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"url\">URL</label>
-            <input type=\"text\" name=\"url\" id=\"url\" value=\"{{ url }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"token\">Token</label>
-            <input type=\"text\" name=\"token\" id=\"token\" value=\"{{ token }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"start\">From</label>
-            <input type=\"date\" name=\"start\" id=\"start\" value=\"{{ start }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"end\">Until</label>
-            <input type=\"date\" name=\"end\" id=\"end\" value=\"{{ end }}\">
-        </div>
-
-        <div class=\"form-group\">
-            <label for=\"limit\">Results</label>
-            <select name=\"limit\" id=\"limit\">
-                {% for l in [10, 50, 100] %}
-                    <option {{ l == limit ? 'selected=\"selected\"' }}>{{ l }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class=\"form-group\">
-            <button type=\"submit\" class=\"btn btn-sm\">Search</button>
-        </div>
-    </form>
-</div>
-", "@WebProfiler/Profiler/search.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  140 => 49,  129 => 47,  125 => 46,  116 => 40,  108 => 35,  100 => 30,  92 => 25,  84 => 20,  77 => 15,  66 => 13,  62 => 12,  52 => 5,  46 => 2,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -217,10 +146,10 @@ class __TwigTemplate_435f678c2f156e30692ef7927e92d362adb2be527b7ab90cbd31279dfa6
     </form>
 </div>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -228,5 +157,76 @@ class __TwigTemplate_435f678c2f156e30692ef7927e92d362adb2be527b7ab90cbd31279dfa6
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/search.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  140 => 49,  129 => 47,  125 => 46,  116 => 40,  108 => 35,  100 => 30,  92 => 25,  84 => 20,  77 => 15,  66 => 13,  62 => 12,  52 => 5,  46 => 2,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<div id=\"sidebar-search\" class=\"hidden\">
+    <form action=\"{{ path('_profiler_search') }}\" method=\"get\">
+        <div class=\"form-group\">
+            <label for=\"ip\">IP</label>
+            <input type=\"text\" name=\"ip\" id=\"ip\" value=\"{{ ip }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"method\">Method</label>
+            <select name=\"method\" id=\"method\">
+                <option value=\"\">Any</option>
+                {% for m in ['DELETE', 'GET', 'HEAD', 'PATCH', 'POST', 'PUT'] %}
+                    <option {{ m == method ? 'selected=\"selected\"' }}>{{ m }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"status_code\">Status</label>
+            <input type=\"number\" name=\"status_code\" id=\"status_code\" min=\"100\" max=\"599\" value=\"{{ status_code }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"url\">URL</label>
+            <input type=\"text\" name=\"url\" id=\"url\" value=\"{{ url }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"token\">Token</label>
+            <input type=\"text\" name=\"token\" id=\"token\" value=\"{{ token }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"start\">From</label>
+            <input type=\"date\" name=\"start\" id=\"start\" value=\"{{ start }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"end\">Until</label>
+            <input type=\"date\" name=\"end\" id=\"end\" value=\"{{ end }}\">
+        </div>
+
+        <div class=\"form-group\">
+            <label for=\"limit\">Results</label>
+            <select name=\"limit\" id=\"limit\">
+                {% for l in [10, 50, 100] %}
+                    <option {{ l == limit ? 'selected=\"selected\"' }}>{{ l }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class=\"form-group\">
+            <button type=\"submit\" class=\"btn btn-sm\">Search</button>
+        </div>
+    </form>
+</div>
+", "@WebProfiler/Profiler/search.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
     }
 }

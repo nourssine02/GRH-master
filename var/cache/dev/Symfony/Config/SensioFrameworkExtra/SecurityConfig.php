@@ -15,24 +15,6 @@ class SecurityConfig
     private $annotations;
     private $expressionLanguage;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['annotations'])) {
-            $this->annotations = $value['annotations'];
-            unset($value['annotations']);
-        }
-
-        if (isset($value['expression_language'])) {
-            $this->expressionLanguage = $value['expression_language'];
-            unset($value['expression_language']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -41,7 +23,7 @@ class SecurityConfig
     public function annotations($value): self
     {
         $this->annotations = $value;
-
+    
         return $this;
     }
     
@@ -53,8 +35,26 @@ class SecurityConfig
     public function expressionLanguage($value): self
     {
         $this->expressionLanguage = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['annotations'])) {
+            $this->annotations = $value['annotations'];
+            unset($value['annotations']);
+        }
+    
+        if (isset($value['expression_language'])) {
+            $this->expressionLanguage = $value['expression_language'];
+            unset($value['expression_language']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

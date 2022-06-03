@@ -14,19 +14,6 @@ class HeaderConfig
 {
     private $value;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['value'])) {
-            $this->value = $value['value'];
-            unset($value['value']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -35,8 +22,21 @@ class HeaderConfig
     public function value($value): self
     {
         $this->value = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['value'])) {
+            $this->value = $value['value'];
+            unset($value['value']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

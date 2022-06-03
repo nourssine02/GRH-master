@@ -36,129 +36,6 @@ class FormLoginConfig
     private $failurePathParameter;
     private $csrfTokenGenerator;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['remember_me'])) {
-            $this->rememberMe = $value['remember_me'];
-            unset($value['remember_me']);
-        }
-
-        if (isset($value['success_handler'])) {
-            $this->successHandler = $value['success_handler'];
-            unset($value['success_handler']);
-        }
-
-        if (isset($value['failure_handler'])) {
-            $this->failureHandler = $value['failure_handler'];
-            unset($value['failure_handler']);
-        }
-
-        if (isset($value['check_path'])) {
-            $this->checkPath = $value['check_path'];
-            unset($value['check_path']);
-        }
-
-        if (isset($value['use_forward'])) {
-            $this->useForward = $value['use_forward'];
-            unset($value['use_forward']);
-        }
-
-        if (isset($value['require_previous_session'])) {
-            $this->requirePreviousSession = $value['require_previous_session'];
-            unset($value['require_previous_session']);
-        }
-
-        if (isset($value['login_path'])) {
-            $this->loginPath = $value['login_path'];
-            unset($value['login_path']);
-        }
-
-        if (isset($value['username_parameter'])) {
-            $this->usernameParameter = $value['username_parameter'];
-            unset($value['username_parameter']);
-        }
-
-        if (isset($value['password_parameter'])) {
-            $this->passwordParameter = $value['password_parameter'];
-            unset($value['password_parameter']);
-        }
-
-        if (isset($value['csrf_parameter'])) {
-            $this->csrfParameter = $value['csrf_parameter'];
-            unset($value['csrf_parameter']);
-        }
-
-        if (isset($value['csrf_token_id'])) {
-            $this->csrfTokenId = $value['csrf_token_id'];
-            unset($value['csrf_token_id']);
-        }
-
-        if (isset($value['enable_csrf'])) {
-            $this->enableCsrf = $value['enable_csrf'];
-            unset($value['enable_csrf']);
-        }
-
-        if (isset($value['post_only'])) {
-            $this->postOnly = $value['post_only'];
-            unset($value['post_only']);
-        }
-
-        if (isset($value['form_only'])) {
-            $this->formOnly = $value['form_only'];
-            unset($value['form_only']);
-        }
-
-        if (isset($value['always_use_default_target_path'])) {
-            $this->alwaysUseDefaultTargetPath = $value['always_use_default_target_path'];
-            unset($value['always_use_default_target_path']);
-        }
-
-        if (isset($value['default_target_path'])) {
-            $this->defaultTargetPath = $value['default_target_path'];
-            unset($value['default_target_path']);
-        }
-
-        if (isset($value['target_path_parameter'])) {
-            $this->targetPathParameter = $value['target_path_parameter'];
-            unset($value['target_path_parameter']);
-        }
-
-        if (isset($value['use_referer'])) {
-            $this->useReferer = $value['use_referer'];
-            unset($value['use_referer']);
-        }
-
-        if (isset($value['failure_path'])) {
-            $this->failurePath = $value['failure_path'];
-            unset($value['failure_path']);
-        }
-
-        if (isset($value['failure_forward'])) {
-            $this->failureForward = $value['failure_forward'];
-            unset($value['failure_forward']);
-        }
-
-        if (isset($value['failure_path_parameter'])) {
-            $this->failurePathParameter = $value['failure_path_parameter'];
-            unset($value['failure_path_parameter']);
-        }
-
-        if (isset($value['csrf_token_generator'])) {
-            $this->csrfTokenGenerator = $value['csrf_token_generator'];
-            unset($value['csrf_token_generator']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -167,7 +44,7 @@ class FormLoginConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -179,7 +56,7 @@ class FormLoginConfig
     public function rememberMe($value): self
     {
         $this->rememberMe = $value;
-
+    
         return $this;
     }
     
@@ -191,7 +68,7 @@ class FormLoginConfig
     public function successHandler($value): self
     {
         $this->successHandler = $value;
-
+    
         return $this;
     }
     
@@ -203,7 +80,7 @@ class FormLoginConfig
     public function failureHandler($value): self
     {
         $this->failureHandler = $value;
-
+    
         return $this;
     }
     
@@ -215,7 +92,7 @@ class FormLoginConfig
     public function checkPath($value): self
     {
         $this->checkPath = $value;
-
+    
         return $this;
     }
     
@@ -227,7 +104,7 @@ class FormLoginConfig
     public function useForward($value): self
     {
         $this->useForward = $value;
-
+    
         return $this;
     }
     
@@ -239,7 +116,7 @@ class FormLoginConfig
     public function requirePreviousSession($value): self
     {
         $this->requirePreviousSession = $value;
-
+    
         return $this;
     }
     
@@ -251,7 +128,7 @@ class FormLoginConfig
     public function loginPath($value): self
     {
         $this->loginPath = $value;
-
+    
         return $this;
     }
     
@@ -263,7 +140,7 @@ class FormLoginConfig
     public function usernameParameter($value): self
     {
         $this->usernameParameter = $value;
-
+    
         return $this;
     }
     
@@ -275,7 +152,7 @@ class FormLoginConfig
     public function passwordParameter($value): self
     {
         $this->passwordParameter = $value;
-
+    
         return $this;
     }
     
@@ -287,7 +164,7 @@ class FormLoginConfig
     public function csrfParameter($value): self
     {
         $this->csrfParameter = $value;
-
+    
         return $this;
     }
     
@@ -299,7 +176,7 @@ class FormLoginConfig
     public function csrfTokenId($value): self
     {
         $this->csrfTokenId = $value;
-
+    
         return $this;
     }
     
@@ -311,7 +188,7 @@ class FormLoginConfig
     public function enableCsrf($value): self
     {
         $this->enableCsrf = $value;
-
+    
         return $this;
     }
     
@@ -323,7 +200,7 @@ class FormLoginConfig
     public function postOnly($value): self
     {
         $this->postOnly = $value;
-
+    
         return $this;
     }
     
@@ -335,7 +212,7 @@ class FormLoginConfig
     public function formOnly($value): self
     {
         $this->formOnly = $value;
-
+    
         return $this;
     }
     
@@ -347,7 +224,7 @@ class FormLoginConfig
     public function alwaysUseDefaultTargetPath($value): self
     {
         $this->alwaysUseDefaultTargetPath = $value;
-
+    
         return $this;
     }
     
@@ -359,7 +236,7 @@ class FormLoginConfig
     public function defaultTargetPath($value): self
     {
         $this->defaultTargetPath = $value;
-
+    
         return $this;
     }
     
@@ -371,7 +248,7 @@ class FormLoginConfig
     public function targetPathParameter($value): self
     {
         $this->targetPathParameter = $value;
-
+    
         return $this;
     }
     
@@ -383,7 +260,7 @@ class FormLoginConfig
     public function useReferer($value): self
     {
         $this->useReferer = $value;
-
+    
         return $this;
     }
     
@@ -395,7 +272,7 @@ class FormLoginConfig
     public function failurePath($value): self
     {
         $this->failurePath = $value;
-
+    
         return $this;
     }
     
@@ -407,7 +284,7 @@ class FormLoginConfig
     public function failureForward($value): self
     {
         $this->failureForward = $value;
-
+    
         return $this;
     }
     
@@ -419,7 +296,7 @@ class FormLoginConfig
     public function failurePathParameter($value): self
     {
         $this->failurePathParameter = $value;
-
+    
         return $this;
     }
     
@@ -431,8 +308,131 @@ class FormLoginConfig
     public function csrfTokenGenerator($value): self
     {
         $this->csrfTokenGenerator = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['remember_me'])) {
+            $this->rememberMe = $value['remember_me'];
+            unset($value['remember_me']);
+        }
+    
+        if (isset($value['success_handler'])) {
+            $this->successHandler = $value['success_handler'];
+            unset($value['success_handler']);
+        }
+    
+        if (isset($value['failure_handler'])) {
+            $this->failureHandler = $value['failure_handler'];
+            unset($value['failure_handler']);
+        }
+    
+        if (isset($value['check_path'])) {
+            $this->checkPath = $value['check_path'];
+            unset($value['check_path']);
+        }
+    
+        if (isset($value['use_forward'])) {
+            $this->useForward = $value['use_forward'];
+            unset($value['use_forward']);
+        }
+    
+        if (isset($value['require_previous_session'])) {
+            $this->requirePreviousSession = $value['require_previous_session'];
+            unset($value['require_previous_session']);
+        }
+    
+        if (isset($value['login_path'])) {
+            $this->loginPath = $value['login_path'];
+            unset($value['login_path']);
+        }
+    
+        if (isset($value['username_parameter'])) {
+            $this->usernameParameter = $value['username_parameter'];
+            unset($value['username_parameter']);
+        }
+    
+        if (isset($value['password_parameter'])) {
+            $this->passwordParameter = $value['password_parameter'];
+            unset($value['password_parameter']);
+        }
+    
+        if (isset($value['csrf_parameter'])) {
+            $this->csrfParameter = $value['csrf_parameter'];
+            unset($value['csrf_parameter']);
+        }
+    
+        if (isset($value['csrf_token_id'])) {
+            $this->csrfTokenId = $value['csrf_token_id'];
+            unset($value['csrf_token_id']);
+        }
+    
+        if (isset($value['enable_csrf'])) {
+            $this->enableCsrf = $value['enable_csrf'];
+            unset($value['enable_csrf']);
+        }
+    
+        if (isset($value['post_only'])) {
+            $this->postOnly = $value['post_only'];
+            unset($value['post_only']);
+        }
+    
+        if (isset($value['form_only'])) {
+            $this->formOnly = $value['form_only'];
+            unset($value['form_only']);
+        }
+    
+        if (isset($value['always_use_default_target_path'])) {
+            $this->alwaysUseDefaultTargetPath = $value['always_use_default_target_path'];
+            unset($value['always_use_default_target_path']);
+        }
+    
+        if (isset($value['default_target_path'])) {
+            $this->defaultTargetPath = $value['default_target_path'];
+            unset($value['default_target_path']);
+        }
+    
+        if (isset($value['target_path_parameter'])) {
+            $this->targetPathParameter = $value['target_path_parameter'];
+            unset($value['target_path_parameter']);
+        }
+    
+        if (isset($value['use_referer'])) {
+            $this->useReferer = $value['use_referer'];
+            unset($value['use_referer']);
+        }
+    
+        if (isset($value['failure_path'])) {
+            $this->failurePath = $value['failure_path'];
+            unset($value['failure_path']);
+        }
+    
+        if (isset($value['failure_forward'])) {
+            $this->failureForward = $value['failure_forward'];
+            unset($value['failure_forward']);
+        }
+    
+        if (isset($value['failure_path_parameter'])) {
+            $this->failurePathParameter = $value['failure_path_parameter'];
+            unset($value['failure_path_parameter']);
+        }
+    
+        if (isset($value['csrf_token_generator'])) {
+            $this->csrfTokenGenerator = $value['csrf_token_generator'];
+            unset($value['csrf_token_generator']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

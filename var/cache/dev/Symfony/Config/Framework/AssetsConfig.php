@@ -23,59 +23,6 @@ class AssetsConfig
     private $baseUrls;
     private $packages;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['strict_mode'])) {
-            $this->strictMode = $value['strict_mode'];
-            unset($value['strict_mode']);
-        }
-
-        if (isset($value['version_strategy'])) {
-            $this->versionStrategy = $value['version_strategy'];
-            unset($value['version_strategy']);
-        }
-
-        if (isset($value['version'])) {
-            $this->version = $value['version'];
-            unset($value['version']);
-        }
-
-        if (isset($value['version_format'])) {
-            $this->versionFormat = $value['version_format'];
-            unset($value['version_format']);
-        }
-
-        if (isset($value['json_manifest_path'])) {
-            $this->jsonManifestPath = $value['json_manifest_path'];
-            unset($value['json_manifest_path']);
-        }
-
-        if (isset($value['base_path'])) {
-            $this->basePath = $value['base_path'];
-            unset($value['base_path']);
-        }
-
-        if (isset($value['base_urls'])) {
-            $this->baseUrls = $value['base_urls'];
-            unset($value['base_urls']);
-        }
-
-        if (isset($value['packages'])) {
-            $this->packages = array_map(function ($v) { return new \Symfony\Config\Framework\Assets\PackageConfig($v); }, $value['packages']);
-            unset($value['packages']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -84,7 +31,7 @@ class AssetsConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -97,7 +44,7 @@ class AssetsConfig
     public function strictMode($value): self
     {
         $this->strictMode = $value;
-
+    
         return $this;
     }
     
@@ -109,7 +56,7 @@ class AssetsConfig
     public function versionStrategy($value): self
     {
         $this->versionStrategy = $value;
-
+    
         return $this;
     }
     
@@ -121,7 +68,7 @@ class AssetsConfig
     public function version($value): self
     {
         $this->version = $value;
-
+    
         return $this;
     }
     
@@ -133,7 +80,7 @@ class AssetsConfig
     public function versionFormat($value): self
     {
         $this->versionFormat = $value;
-
+    
         return $this;
     }
     
@@ -145,7 +92,7 @@ class AssetsConfig
     public function jsonManifestPath($value): self
     {
         $this->jsonManifestPath = $value;
-
+    
         return $this;
     }
     
@@ -156,7 +103,7 @@ class AssetsConfig
     public function basePath($value): self
     {
         $this->basePath = $value;
-
+    
         return $this;
     }
     
@@ -167,7 +114,7 @@ class AssetsConfig
     public function baseUrls($value): self
     {
         $this->baseUrls = $value;
-
+    
         return $this;
     }
     
@@ -179,8 +126,61 @@ class AssetsConfig
         if ([] === $value) {
             return $this->packages[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "package()" has already been initialized. You cannot pass values the second time you call package().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['strict_mode'])) {
+            $this->strictMode = $value['strict_mode'];
+            unset($value['strict_mode']);
+        }
+    
+        if (isset($value['version_strategy'])) {
+            $this->versionStrategy = $value['version_strategy'];
+            unset($value['version_strategy']);
+        }
+    
+        if (isset($value['version'])) {
+            $this->version = $value['version'];
+            unset($value['version']);
+        }
+    
+        if (isset($value['version_format'])) {
+            $this->versionFormat = $value['version_format'];
+            unset($value['version_format']);
+        }
+    
+        if (isset($value['json_manifest_path'])) {
+            $this->jsonManifestPath = $value['json_manifest_path'];
+            unset($value['json_manifest_path']);
+        }
+    
+        if (isset($value['base_path'])) {
+            $this->basePath = $value['base_path'];
+            unset($value['base_path']);
+        }
+    
+        if (isset($value['base_urls'])) {
+            $this->baseUrls = $value['base_urls'];
+            unset($value['base_urls']);
+        }
+    
+        if (isset($value['packages'])) {
+            $this->packages = array_map(function ($v) { return new \Symfony\Config\Framework\Assets\PackageConfig($v); }, $value['packages']);
+            unset($value['packages']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

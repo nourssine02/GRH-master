@@ -24,54 +24,6 @@ class SecondLevelCacheConfig
     private $regions;
     private $loggers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['region_cache_driver'])) {
-            $this->regionCacheDriver = new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\RegionCacheDriverConfig($value['region_cache_driver']);
-            unset($value['region_cache_driver']);
-        }
-
-        if (isset($value['region_lock_lifetime'])) {
-            $this->regionLockLifetime = $value['region_lock_lifetime'];
-            unset($value['region_lock_lifetime']);
-        }
-
-        if (isset($value['log_enabled'])) {
-            $this->logEnabled = $value['log_enabled'];
-            unset($value['log_enabled']);
-        }
-
-        if (isset($value['region_lifetime'])) {
-            $this->regionLifetime = $value['region_lifetime'];
-            unset($value['region_lifetime']);
-        }
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['factory'])) {
-            $this->factory = $value['factory'];
-            unset($value['factory']);
-        }
-
-        if (isset($value['regions'])) {
-            $this->regions = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\RegionConfig($v); }, $value['regions']);
-            unset($value['regions']);
-        }
-
-        if (isset($value['loggers'])) {
-            $this->loggers = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\LoggerConfig($v); }, $value['loggers']);
-            unset($value['loggers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function regionCacheDriver(array $value = []): \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\RegionCacheDriverConfig
     {
         if (null === $this->regionCacheDriver) {
@@ -79,7 +31,7 @@ class SecondLevelCacheConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "regionCacheDriver()" has already been initialized. You cannot pass values the second time you call regionCacheDriver().');
         }
-
+    
         return $this->regionCacheDriver;
     }
     
@@ -91,7 +43,7 @@ class SecondLevelCacheConfig
     public function regionLockLifetime($value): self
     {
         $this->regionLockLifetime = $value;
-
+    
         return $this;
     }
     
@@ -103,7 +55,7 @@ class SecondLevelCacheConfig
     public function logEnabled($value): self
     {
         $this->logEnabled = $value;
-
+    
         return $this;
     }
     
@@ -115,7 +67,7 @@ class SecondLevelCacheConfig
     public function regionLifetime($value): self
     {
         $this->regionLifetime = $value;
-
+    
         return $this;
     }
     
@@ -127,7 +79,7 @@ class SecondLevelCacheConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -139,7 +91,7 @@ class SecondLevelCacheConfig
     public function factory($value): self
     {
         $this->factory = $value;
-
+    
         return $this;
     }
     
@@ -151,7 +103,7 @@ class SecondLevelCacheConfig
         if ([] === $value) {
             return $this->regions[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "region()" has already been initialized. You cannot pass values the second time you call region().');
     }
     
@@ -163,8 +115,56 @@ class SecondLevelCacheConfig
         if ([] === $value) {
             return $this->loggers[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "logger()" has already been initialized. You cannot pass values the second time you call logger().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['region_cache_driver'])) {
+            $this->regionCacheDriver = new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\RegionCacheDriverConfig($value['region_cache_driver']);
+            unset($value['region_cache_driver']);
+        }
+    
+        if (isset($value['region_lock_lifetime'])) {
+            $this->regionLockLifetime = $value['region_lock_lifetime'];
+            unset($value['region_lock_lifetime']);
+        }
+    
+        if (isset($value['log_enabled'])) {
+            $this->logEnabled = $value['log_enabled'];
+            unset($value['log_enabled']);
+        }
+    
+        if (isset($value['region_lifetime'])) {
+            $this->regionLifetime = $value['region_lifetime'];
+            unset($value['region_lifetime']);
+        }
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['factory'])) {
+            $this->factory = $value['factory'];
+            unset($value['factory']);
+        }
+    
+        if (isset($value['regions'])) {
+            $this->regions = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\RegionConfig($v); }, $value['regions']);
+            unset($value['regions']);
+        }
+    
+        if (isset($value['loggers'])) {
+            $this->loggers = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\LoggerConfig($v); }, $value['loggers']);
+            unset($value['loggers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

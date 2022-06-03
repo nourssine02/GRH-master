@@ -30,35 +30,6 @@ class __TwigTemplate_93e84515cb25bea9d6851eb40ee82c11fd1c7460020d957562a6a6b532e
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("body {
-    background: #f3f3f3;
-}
-
-.wrapper.secondary {
-    background: #f3f3f3;
-}
-
-.container.body_alert {
-    border-top: 8px solid #ec5840;
-}
-
-.container.body_warning {
-    border-top: 8px solid #ffae00;
-}
-
-.container.body_default {
-    border-top: 8px solid #aaaaaa;
-}
-", "@email/zurb_2/notification/local.css", "/home/hp/Symfony/GRH/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/notification/local.css");
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -89,10 +60,10 @@ class __TwigTemplate_93e84515cb25bea9d6851eb40ee82c11fd1c7460020d957562a6a6b532e
     border-top: 8px solid #aaaaaa;
 }
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -100,5 +71,34 @@ class __TwigTemplate_93e84515cb25bea9d6851eb40ee82c11fd1c7460020d957562a6a6b532e
     public function getTemplateName()
     {
         return "@email/zurb_2/notification/local.css";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("body {
+    background: #f3f3f3;
+}
+
+.wrapper.secondary {
+    background: #f3f3f3;
+}
+
+.container.body_alert {
+    border-top: 8px solid #ec5840;
+}
+
+.container.body_warning {
+    border-top: 8px solid #ffae00;
+}
+
+.container.body_default {
+    border-top: 8px solid #aaaaaa;
+}
+", "@email/zurb_2/notification/local.css", "/home/hp/Téléchargements/GRH-master/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/notification/local.css");
     }
 }

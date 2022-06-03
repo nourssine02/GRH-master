@@ -16,29 +16,6 @@ class X509Config
     private $user;
     private $credentials;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['user'])) {
-            $this->user = $value['user'];
-            unset($value['user']);
-        }
-
-        if (isset($value['credentials'])) {
-            $this->credentials = $value['credentials'];
-            unset($value['credentials']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class X509Config
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class X509Config
     public function user($value): self
     {
         $this->user = $value;
-
+    
         return $this;
     }
     
@@ -71,8 +48,31 @@ class X509Config
     public function credentials($value): self
     {
         $this->credentials = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['user'])) {
+            $this->user = $value['user'];
+            unset($value['user']);
+        }
+    
+        if (isset($value['credentials'])) {
+            $this->credentials = $value['credentials'];
+            unset($value['credentials']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

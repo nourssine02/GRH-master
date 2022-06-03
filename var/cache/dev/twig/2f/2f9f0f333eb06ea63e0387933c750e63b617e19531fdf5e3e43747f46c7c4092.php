@@ -31,281 +31,35 @@ class __TwigTemplate_eee14361313129148352d1f03854ad2786eae541538626d2d7afcca0ca9
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% import _self as helper %}
-
-{% block toolbar %}
-    {% if collector.counterrors or collector.countdeprecations or collector.countwarnings %}
-        {% set icon %}
-            {% set status_color = collector.counterrors ? 'red' : collector.countwarnings ? 'yellow' : 'none' %}
-            {{ include('@WebProfiler/Icon/logger.svg') }}
-            <span class=\"sf-toolbar-value\">{{ collector.counterrors ?: (collector.countdeprecations + collector.countwarnings) }}</span>
-        {% endset %}
-
-        {% set text %}
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Errors</b>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.counterrors ? 'red' }}\">{{ collector.counterrors|default(0) }}</span>
-            </div>
-
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Warnings</b>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.countwarnings ? 'yellow' }}\">{{ collector.countwarnings|default(0) }}</span>
-            </div>
-
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Deprecations</b>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.countdeprecations ? 'none' }}\">{{ collector.countdeprecations|default(0) }}</span>
-            </div>
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status_color }) }}
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label label-status-{{ collector.counterrors ? 'error' : collector.countwarnings ? 'warning' : 'none' }} {{ collector.logs is empty ? 'disabled' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/logger.svg') }}</span>
-        <strong>Logs</strong>
-        {% if collector.counterrors or collector.countdeprecations or collector.countwarnings %}
-            <span class=\"count\">
-                <span>{{ collector.counterrors ?: (collector.countdeprecations + collector.countwarnings) }}</span>
-            </span>
-        {% endif %}
-    </span>
-{% endblock %}
-
-{% block panel %}
-    <h2>Log Messages</h2>
-
-    {% if collector.processedLogs is empty %}
-        <div class=\"empty\">
-            <p>No log messages available.</p>
-        </div>
-    {% else %}
-        {% set has_error_logs = collector.processedLogs|column('type')|filter(type => 'error' == type)|length > 0 %}
-        {% set has_deprecation_logs = collector.processedLogs|column('type')|filter(type => 'deprecation' == type)|length > 0 %}
-
-        {% set filters = collector.filters %}
-        <div class=\"log-filters\">
-            <div id=\"log-filter-type\" class=\"log-filter\">
-                <ul class=\"tab-navigation\">
-                    <li class=\"{{ not has_error_logs and not has_deprecation_logs ? 'active' }}\">
-                        <input {{ not has_error_logs and not has_deprecation_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-all\" name=\"filter-log-type\" value=\"all\">
-                        <label for=\"filter-log-type-all\">All messages</label>
-                    </li>
-
-                    <li class=\"{{ has_error_logs ? 'active' }}\">
-                        <input {{ has_error_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-error\" name=\"filter-log-type\" value=\"error\">
-                        <label for=\"filter-log-type-error\">
-                            Errors
-                            <span class=\"badge status-{{ collector.counterrors ? 'error' }}\">{{ collector.counterrors|default(0) }}</span>
-                        </label>
-                    </li>
-
-                    <li class=\"{{ not has_error_logs and has_deprecation_logs ? 'active' }}\">
-                        <input {{ not has_error_logs and has_deprecation_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-deprecation\" name=\"filter-log-type\" value=\"deprecation\">
-                        <label for=\"filter-log-type-deprecation\">
-                            Deprecations
-                            <span class=\"badge status-{{ collector.countdeprecations ? 'warning' }}\">{{ collector.countdeprecations|default(0) }}</span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-
-            <details id=\"log-filter-priority\" class=\"log-filter\">
-                <summary>
-                    <span class=\"icon\">{{ include('@WebProfiler/Icon/filter.svg') }}</span>
-                    Level (<span class=\"filter-active-num\">{{ filters.priority|length - 1 }}</span>)
-                </summary>
-
-                <div class=\"log-filter-content\">
-                    <div class=\"filter-select-all-or-none\">
-                        <a href=\"#\" class=\"select-all\">Select All</a>
-                        <a href=\"#\" class=\"select-none\">Select None</a>
-                    </div>
-
-                    {% for label, value in filters.priority %}
-                        <div class=\"log-filter-option\">
-                            <input {{ 'debug' != value ? 'checked' }} type=\"checkbox\" id=\"filter-log-level-{{ value }}\" name=\"filter-log-level-{{ value }}\" value=\"{{ value }}\">
-                            <label for=\"filter-log-level-{{ value }}\">{{ label }}</label>
-                        </div>
-                    {% endfor %}
-                </div>
-            </details>
-
-            <details id=\"log-filter-channel\" class=\"log-filter\">
-                <summary>
-                    <span class=\"icon\">{{ include('@WebProfiler/Icon/filter.svg') }}</span>
-                    Channel (<span class=\"filter-active-num\">{{ filters.channel|length - 1 }}</span>)
-                </summary>
-
-                <div class=\"log-filter-content\">
-                    <div class=\"filter-select-all-or-none\">
-                        <a href=\"#\" class=\"select-all\">Select All</a>
-                        <a href=\"#\" class=\"select-none\">Select None</a>
-                    </div>
-
-                    {% for value in filters.channel %}
-                        <div class=\"log-filter-option\">
-                            <input {{ 'event' != value ? 'checked' }} type=\"checkbox\" id=\"filter-log-channel-{{ value }}\" name=\"filter-log-channel-{{ value }}\" value=\"{{ value }}\">
-                            <label for=\"filter-log-channel-{{ value }}\">{{ value|title }}</label>
-                        </div>
-                    {% endfor %}
-                </div>
-            </details>
-        </div>
-
-        <table class=\"logs\">
-            <colgroup>
-                <col width=\"140px\">
-                <col>
-            </colgroup>
-
-            <thead>
-                <th>Time</th>
-                <th>Message</th>
-            </thead>
-
-            <tbody>
-                {% for log in collector.processedLogs %}
-                    {% set css_class = 'error' == log.type ? 'error'
-                        : (log.priorityName == 'WARNING' or 'deprecation' == log.type) ? 'warning'
-                        : 'silenced' == log.type ? 'silenced'
-                    %}
-                    <tr class=\"log-status-{{ css_class }}\" data-type=\"{{ log.type }}\" data-priority=\"{{ log.priority }}\" data-channel=\"{{ log.channel }}\" style=\"{{ 'event' == log.channel or 'DEBUG' == log.priorityName ? 'display: none' }}\">
-                        <td class=\"log-timestamp\">
-                            <time title=\"{{ log.timestamp|date('r') }}\" datetime=\"{{ log.timestamp|date('c') }}\">
-                                {{ log.timestamp|date('H:i:s.v') }}
-                            </time>
-
-                            {% if log.type in ['error', 'deprecation', 'silenced'] or 'WARNING' == log.priorityName %}
-                                <span class=\"log-type-badge badge badge-{{ css_class }}\">
-                                    {% if 'error' == log.type or 'WARNING' == log.priorityName %}
-                                        {{ log.priorityName|lower }}
-                                    {% else %}
-                                        {{ log.type|lower }}
-                                    {% endif %}
-                                </span>
-                            {% endif %}
-                        </td>
-
-                        <td class=\"font-normal\">
-                            {{ helper.render_log_message('debug', loop.index, log) }}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class=\"no-logs-message empty\">
-            <p>There are no log messages.</p>
-        </div>
-
-        <script>Sfjs.initializeLogsTable();</script>
-    {% endif %}
-
-    {% set compilerLogTotal = 0 %}
-    {% for logs in collector.compilerLogs %}
-        {% set compilerLogTotal = compilerLogTotal + logs|length %}
-    {% endfor %}
-
-    <details class=\"container-compilation-logs\">
-        <summary>
-            <h4>Container Compilation Logs <span class=\"text-muted\">({{ compilerLogTotal }})</span></h4>
-            <p class=\"text-muted\">Log messages generated during the compilation of the service container.</p>
-        </summary>
-
-        {% if collector.compilerLogs is empty %}
-            <div class=\"empty\">
-                <p>There are no compiler log messages.</p>
-            </div>
-        {% else %}
-            <table class=\"container-logs\">
-                <thead>
-                <tr>
-                    <th>Messages</th>
-                    <th class=\"full-width\">Class</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for class, logs in collector.compilerLogs %}
-                    <tr>
-                        <td class=\"font-normal text-right\">{{ logs|length }}</td>
-                        <td class=\"font-normal\">
-                            {% set context_id = 'context-compiler-' ~ loop.index %}
-
-                            <a class=\"btn btn-link sf-toggle\" data-toggle-selector=\"#{{ context_id }}\" data-toggle-alt-content=\"{{ class }}\">{{ class }}</a>
-
-                            <div id=\"{{ context_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
-                                <ul class=\"break-long-words\">
-                                    {% for log in logs %}
-                                        <li>{{ profiler_dump_log(log.message) }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    </details>
-{% endblock %}
-
-{% macro render_log_message(category, log_index, log) %}
-    {% set has_context = log.context is defined and log.context is not empty %}
-    {% set has_trace = log.context.exception.trace is defined %}
-
-    {% if not has_context %}
-        {{ profiler_dump_log(log.message) }}
-    {% else %}
-        {{ profiler_dump_log(log.message, log.context) }}
-    {% endif %}
-
-    <div class=\"log-metadata\">
-        {% if log.channel %}
-            <span class=\"badge\">{{ log.channel }}</span>
-        {% endif %}
-
-        {% if log.errorCount is defined and log.errorCount > 1 %}
-            <span class=\"log-num-occurrences\">{{ log.errorCount }} times</span>
-        {% endif %}
-
-        {% if has_context %}
-            {% set context_id = 'context-' ~ category ~ '-' ~ log_index %}
-            <span><a class=\"btn btn-link text-small sf-toggle\" data-toggle-selector=\"#{{ context_id }}\" data-toggle-alt-content=\"Hide context\">Show context</a></span>
-        {% endif %}
-
-        {% if has_trace %}
-            {% set trace_id = 'trace-' ~ category ~ '-' ~ log_index %}
-            <span><a class=\"btn btn-link text-small sf-toggle\" data-toggle-selector=\"#{{ trace_id }}\" data-toggle-alt-content=\"Hide trace\">Show trace</a></span>
-
-            <div id=\"{{ trace_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
-                {{ profiler_dump(log.context.exception.trace, maxDepth=1) }}
-            </div>
-        {% endif %}
-
-        {% if has_context %}
-            <div id=\"{{ context_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
-                {{ profiler_dump(log.context, maxDepth=1) }}
-            </div>
-        {% endif %}
-
-        {% if has_trace %}
-            <div id=\"{{ trace_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
-                {{ profiler_dump(log.context.exception.trace, maxDepth=1) }}
-            </div>
-        {% endif %}
-    </div>
-{% endmacro %}
-", "@WebProfiler/Collector/logger.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/logger.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/logger.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/logger.html.twig"));
+
+        // line 3
+        $macros["helper"] = $this->macros["helper"] = $this;
+        // line 1
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/logger.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 5
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -379,23 +133,15 @@ class __TwigTemplate_eee14361313129148352d1f03854ad2786eae541538626d2d7afcca0ca9
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 5
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/logger.html.twig";
-    }
-
     // line 34
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -431,16 +177,15 @@ class __TwigTemplate_eee14361313129148352d1f03854ad2786eae541538626d2d7afcca0ca9
         // line 43
         echo "    </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 46
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -884,16 +629,15 @@ $context["log"], "type", [], "any", false, false, false, 142)))) ? ("silenced") 
         // line 222
         echo "    </details>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 225
-
     public function macro_render_log_message($__category__ = null, $__log_index__ = null, $__log__ = null, ...$__varargs__)
     {
         $macros = $this->macros;
@@ -1033,10 +777,10 @@ $context["log"], "type", [], "any", false, false, false, 142)))) ? ("silenced") 
             // line 269
             echo "    </div>
 ";
-
+            
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+            
             $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
 
@@ -1044,6 +788,11 @@ $context["log"], "type", [], "any", false, false, false, 142)))) ? ("silenced") 
         } finally {
             ob_end_clean();
         }
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/logger.html.twig";
     }
 
     public function isTraitable()
@@ -1056,31 +805,278 @@ $context["log"], "type", [], "any", false, false, false, 142)))) ? ("silenced") 
         return array (  778 => 269,  772 => 266,  767 => 265,  765 => 264,  762 => 263,  756 => 260,  751 => 259,  749 => 258,  746 => 257,  740 => 254,  736 => 253,  730 => 251,  727 => 250,  725 => 249,  722 => 248,  716 => 246,  713 => 245,  711 => 244,  708 => 243,  702 => 241,  700 => 240,  697 => 239,  691 => 237,  689 => 236,  685 => 234,  679 => 232,  673 => 230,  671 => 229,  668 => 228,  665 => 227,  662 => 226,  641 => 225,  630 => 222,  625 => 219,  607 => 214,  598 => 212,  594 => 211,  589 => 209,  580 => 207,  577 => 206,  575 => 205,  570 => 203,  567 => 202,  550 => 201,  539 => 192,  533 => 188,  531 => 187,  524 => 183,  519 => 180,  513 => 179,  510 => 178,  505 => 177,  503 => 176,  500 => 175,  489 => 166,  471 => 162,  466 => 159,  462 => 157,  456 => 155,  450 => 153,  448 => 152,  443 => 151,  441 => 150,  435 => 147,  429 => 146,  415 => 144,  413 => 142,  412 => 141,  410 => 140,  393 => 139,  375 => 123,  364 => 120,  354 => 119,  351 => 118,  347 => 117,  335 => 108,  331 => 107,  324 => 102,  313 => 99,  303 => 98,  300 => 97,  296 => 96,  284 => 87,  280 => 86,  267 => 78,  261 => 75,  257 => 74,  248 => 70,  242 => 67,  238 => 66,  231 => 62,  227 => 61,  222 => 58,  220 => 57,  217 => 56,  214 => 55,  211 => 54,  205 => 50,  203 => 49,  199 => 47,  189 => 46,  178 => 43,  172 => 40,  169 => 39,  167 => 38,  162 => 36,  155 => 35,  145 => 34,  132 => 30,  129 => 29,  121 => 26,  111 => 21,  101 => 16,  97 => 14,  95 => 13,  92 => 12,  87 => 10,  82 => 9,  79 => 8,  76 => 7,  73 => 6,  63 => 5,  52 => 1,  50 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/logger.html.twig"));
+{% import _self as helper %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/logger.html.twig"));
+{% block toolbar %}
+    {% if collector.counterrors or collector.countdeprecations or collector.countwarnings %}
+        {% set icon %}
+            {% set status_color = collector.counterrors ? 'red' : collector.countwarnings ? 'yellow' : 'none' %}
+            {{ include('@WebProfiler/Icon/logger.svg') }}
+            <span class=\"sf-toolbar-value\">{{ collector.counterrors ?: (collector.countdeprecations + collector.countwarnings) }}</span>
+        {% endset %}
 
-        // line 3
-        $macros["helper"] = $this->macros["helper"] = $this;
-        // line 1
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/logger.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        {% set text %}
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Errors</b>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.counterrors ? 'red' }}\">{{ collector.counterrors|default(0) }}</span>
+            </div>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Warnings</b>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.countwarnings ? 'yellow' }}\">{{ collector.countwarnings|default(0) }}</span>
+            </div>
 
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Deprecations</b>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.countdeprecations ? 'none' }}\">{{ collector.countdeprecations|default(0) }}</span>
+            </div>
+        {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status_color }) }}
+    {% endif %}
+{% endblock %}
 
+{% block menu %}
+    <span class=\"label label-status-{{ collector.counterrors ? 'error' : collector.countwarnings ? 'warning' : 'none' }} {{ collector.logs is empty ? 'disabled' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/logger.svg') }}</span>
+        <strong>Logs</strong>
+        {% if collector.counterrors or collector.countdeprecations or collector.countwarnings %}
+            <span class=\"count\">
+                <span>{{ collector.counterrors ?: (collector.countdeprecations + collector.countwarnings) }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Log Messages</h2>
+
+    {% if collector.processedLogs is empty %}
+        <div class=\"empty\">
+            <p>No log messages available.</p>
+        </div>
+    {% else %}
+        {% set has_error_logs = collector.processedLogs|column('type')|filter(type => 'error' == type)|length > 0 %}
+        {% set has_deprecation_logs = collector.processedLogs|column('type')|filter(type => 'deprecation' == type)|length > 0 %}
+
+        {% set filters = collector.filters %}
+        <div class=\"log-filters\">
+            <div id=\"log-filter-type\" class=\"log-filter\">
+                <ul class=\"tab-navigation\">
+                    <li class=\"{{ not has_error_logs and not has_deprecation_logs ? 'active' }}\">
+                        <input {{ not has_error_logs and not has_deprecation_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-all\" name=\"filter-log-type\" value=\"all\">
+                        <label for=\"filter-log-type-all\">All messages</label>
+                    </li>
+
+                    <li class=\"{{ has_error_logs ? 'active' }}\">
+                        <input {{ has_error_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-error\" name=\"filter-log-type\" value=\"error\">
+                        <label for=\"filter-log-type-error\">
+                            Errors
+                            <span class=\"badge status-{{ collector.counterrors ? 'error' }}\">{{ collector.counterrors|default(0) }}</span>
+                        </label>
+                    </li>
+
+                    <li class=\"{{ not has_error_logs and has_deprecation_logs ? 'active' }}\">
+                        <input {{ not has_error_logs and has_deprecation_logs ? 'checked' }} type=\"radio\" id=\"filter-log-type-deprecation\" name=\"filter-log-type\" value=\"deprecation\">
+                        <label for=\"filter-log-type-deprecation\">
+                            Deprecations
+                            <span class=\"badge status-{{ collector.countdeprecations ? 'warning' }}\">{{ collector.countdeprecations|default(0) }}</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <details id=\"log-filter-priority\" class=\"log-filter\">
+                <summary>
+                    <span class=\"icon\">{{ include('@WebProfiler/Icon/filter.svg') }}</span>
+                    Level (<span class=\"filter-active-num\">{{ filters.priority|length - 1 }}</span>)
+                </summary>
+
+                <div class=\"log-filter-content\">
+                    <div class=\"filter-select-all-or-none\">
+                        <a href=\"#\" class=\"select-all\">Select All</a>
+                        <a href=\"#\" class=\"select-none\">Select None</a>
+                    </div>
+
+                    {% for label, value in filters.priority %}
+                        <div class=\"log-filter-option\">
+                            <input {{ 'debug' != value ? 'checked' }} type=\"checkbox\" id=\"filter-log-level-{{ value }}\" name=\"filter-log-level-{{ value }}\" value=\"{{ value }}\">
+                            <label for=\"filter-log-level-{{ value }}\">{{ label }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+
+            <details id=\"log-filter-channel\" class=\"log-filter\">
+                <summary>
+                    <span class=\"icon\">{{ include('@WebProfiler/Icon/filter.svg') }}</span>
+                    Channel (<span class=\"filter-active-num\">{{ filters.channel|length - 1 }}</span>)
+                </summary>
+
+                <div class=\"log-filter-content\">
+                    <div class=\"filter-select-all-or-none\">
+                        <a href=\"#\" class=\"select-all\">Select All</a>
+                        <a href=\"#\" class=\"select-none\">Select None</a>
+                    </div>
+
+                    {% for value in filters.channel %}
+                        <div class=\"log-filter-option\">
+                            <input {{ 'event' != value ? 'checked' }} type=\"checkbox\" id=\"filter-log-channel-{{ value }}\" name=\"filter-log-channel-{{ value }}\" value=\"{{ value }}\">
+                            <label for=\"filter-log-channel-{{ value }}\">{{ value|title }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+        </div>
+
+        <table class=\"logs\">
+            <colgroup>
+                <col width=\"140px\">
+                <col>
+            </colgroup>
+
+            <thead>
+                <th>Time</th>
+                <th>Message</th>
+            </thead>
+
+            <tbody>
+                {% for log in collector.processedLogs %}
+                    {% set css_class = 'error' == log.type ? 'error'
+                        : (log.priorityName == 'WARNING' or 'deprecation' == log.type) ? 'warning'
+                        : 'silenced' == log.type ? 'silenced'
+                    %}
+                    <tr class=\"log-status-{{ css_class }}\" data-type=\"{{ log.type }}\" data-priority=\"{{ log.priority }}\" data-channel=\"{{ log.channel }}\" style=\"{{ 'event' == log.channel or 'DEBUG' == log.priorityName ? 'display: none' }}\">
+                        <td class=\"log-timestamp\">
+                            <time title=\"{{ log.timestamp|date('r') }}\" datetime=\"{{ log.timestamp|date('c') }}\">
+                                {{ log.timestamp|date('H:i:s.v') }}
+                            </time>
+
+                            {% if log.type in ['error', 'deprecation', 'silenced'] or 'WARNING' == log.priorityName %}
+                                <span class=\"log-type-badge badge badge-{{ css_class }}\">
+                                    {% if 'error' == log.type or 'WARNING' == log.priorityName %}
+                                        {{ log.priorityName|lower }}
+                                    {% else %}
+                                        {{ log.type|lower }}
+                                    {% endif %}
+                                </span>
+                            {% endif %}
+                        </td>
+
+                        <td class=\"font-normal\">
+                            {{ helper.render_log_message('debug', loop.index, log) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class=\"no-logs-message empty\">
+            <p>There are no log messages.</p>
+        </div>
+
+        <script>Sfjs.initializeLogsTable();</script>
+    {% endif %}
+
+    {% set compilerLogTotal = 0 %}
+    {% for logs in collector.compilerLogs %}
+        {% set compilerLogTotal = compilerLogTotal + logs|length %}
+    {% endfor %}
+
+    <details class=\"container-compilation-logs\">
+        <summary>
+            <h4>Container Compilation Logs <span class=\"text-muted\">({{ compilerLogTotal }})</span></h4>
+            <p class=\"text-muted\">Log messages generated during the compilation of the service container.</p>
+        </summary>
+
+        {% if collector.compilerLogs is empty %}
+            <div class=\"empty\">
+                <p>There are no compiler log messages.</p>
+            </div>
+        {% else %}
+            <table class=\"container-logs\">
+                <thead>
+                <tr>
+                    <th>Messages</th>
+                    <th class=\"full-width\">Class</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for class, logs in collector.compilerLogs %}
+                    <tr>
+                        <td class=\"font-normal text-right\">{{ logs|length }}</td>
+                        <td class=\"font-normal\">
+                            {% set context_id = 'context-compiler-' ~ loop.index %}
+
+                            <a class=\"btn btn-link sf-toggle\" data-toggle-selector=\"#{{ context_id }}\" data-toggle-alt-content=\"{{ class }}\">{{ class }}</a>
+
+                            <div id=\"{{ context_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
+                                <ul class=\"break-long-words\">
+                                    {% for log in logs %}
+                                        <li>{{ profiler_dump_log(log.message) }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </details>
+{% endblock %}
+
+{% macro render_log_message(category, log_index, log) %}
+    {% set has_context = log.context is defined and log.context is not empty %}
+    {% set has_trace = log.context.exception.trace is defined %}
+
+    {% if not has_context %}
+        {{ profiler_dump_log(log.message) }}
+    {% else %}
+        {{ profiler_dump_log(log.message, log.context) }}
+    {% endif %}
+
+    <div class=\"log-metadata\">
+        {% if log.channel %}
+            <span class=\"badge\">{{ log.channel }}</span>
+        {% endif %}
+
+        {% if log.errorCount is defined and log.errorCount > 1 %}
+            <span class=\"log-num-occurrences\">{{ log.errorCount }} times</span>
+        {% endif %}
+
+        {% if has_context %}
+            {% set context_id = 'context-' ~ category ~ '-' ~ log_index %}
+            <span><a class=\"btn btn-link text-small sf-toggle\" data-toggle-selector=\"#{{ context_id }}\" data-toggle-alt-content=\"Hide context\">Show context</a></span>
+        {% endif %}
+
+        {% if has_trace %}
+            {% set trace_id = 'trace-' ~ category ~ '-' ~ log_index %}
+            <span><a class=\"btn btn-link text-small sf-toggle\" data-toggle-selector=\"#{{ trace_id }}\" data-toggle-alt-content=\"Hide trace\">Show trace</a></span>
+
+            <div id=\"{{ trace_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
+                {{ profiler_dump(log.context.exception.trace, maxDepth=1) }}
+            </div>
+        {% endif %}
+
+        {% if has_context %}
+            <div id=\"{{ context_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
+                {{ profiler_dump(log.context, maxDepth=1) }}
+            </div>
+        {% endif %}
+
+        {% if has_trace %}
+            <div id=\"{{ trace_id }}\" class=\"context sf-toggle-content sf-toggle-hidden\">
+                {{ profiler_dump(log.context.exception.trace, maxDepth=1) }}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+", "@WebProfiler/Collector/logger.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/logger.html.twig");
     }
 }

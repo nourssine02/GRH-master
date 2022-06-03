@@ -17,34 +17,6 @@ class LoginThrottlingConfig
     private $interval;
     private $lockFactory;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['limiter'])) {
-            $this->limiter = $value['limiter'];
-            unset($value['limiter']);
-        }
-
-        if (isset($value['max_attempts'])) {
-            $this->maxAttempts = $value['max_attempts'];
-            unset($value['max_attempts']);
-        }
-
-        if (isset($value['interval'])) {
-            $this->interval = $value['interval'];
-            unset($value['interval']);
-        }
-
-        if (isset($value['lock_factory'])) {
-            $this->lockFactory = $value['lock_factory'];
-            unset($value['lock_factory']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * A service id implementing "Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface".
      * @default null
@@ -54,7 +26,7 @@ class LoginThrottlingConfig
     public function limiter($value): self
     {
         $this->limiter = $value;
-
+    
         return $this;
     }
     
@@ -66,7 +38,7 @@ class LoginThrottlingConfig
     public function maxAttempts($value): self
     {
         $this->maxAttempts = $value;
-
+    
         return $this;
     }
     
@@ -78,7 +50,7 @@ class LoginThrottlingConfig
     public function interval($value): self
     {
         $this->interval = $value;
-
+    
         return $this;
     }
     
@@ -91,8 +63,36 @@ class LoginThrottlingConfig
     public function lockFactory($value): self
     {
         $this->lockFactory = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['limiter'])) {
+            $this->limiter = $value['limiter'];
+            unset($value['limiter']);
+        }
+    
+        if (isset($value['max_attempts'])) {
+            $this->maxAttempts = $value['max_attempts'];
+            unset($value['max_attempts']);
+        }
+    
+        if (isset($value['interval'])) {
+            $this->interval = $value['interval'];
+            unset($value['interval']);
+        }
+    
+        if (isset($value['lock_factory'])) {
+            $this->lockFactory = $value['lock_factory'];
+            unset($value['lock_factory']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

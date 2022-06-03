@@ -20,49 +20,6 @@ class PackageConfig
     private $basePath;
     private $baseUrls;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['strict_mode'])) {
-            $this->strictMode = $value['strict_mode'];
-            unset($value['strict_mode']);
-        }
-
-        if (isset($value['version_strategy'])) {
-            $this->versionStrategy = $value['version_strategy'];
-            unset($value['version_strategy']);
-        }
-
-        if (isset($value['version'])) {
-            $this->version = $value['version'];
-            unset($value['version']);
-        }
-
-        if (isset($value['version_format'])) {
-            $this->versionFormat = $value['version_format'];
-            unset($value['version_format']);
-        }
-
-        if (isset($value['json_manifest_path'])) {
-            $this->jsonManifestPath = $value['json_manifest_path'];
-            unset($value['json_manifest_path']);
-        }
-
-        if (isset($value['base_path'])) {
-            $this->basePath = $value['base_path'];
-            unset($value['base_path']);
-        }
-
-        if (isset($value['base_urls'])) {
-            $this->baseUrls = $value['base_urls'];
-            unset($value['base_urls']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * Throw an exception if an entry is missing from the manifest.json
      * @default false
@@ -72,7 +29,7 @@ class PackageConfig
     public function strictMode($value): self
     {
         $this->strictMode = $value;
-
+    
         return $this;
     }
     
@@ -84,7 +41,7 @@ class PackageConfig
     public function versionStrategy($value): self
     {
         $this->versionStrategy = $value;
-
+    
         return $this;
     }
     
@@ -96,7 +53,7 @@ class PackageConfig
     public function version($value): self
     {
         $this->version = $value;
-
+    
         return $this;
     }
     
@@ -108,7 +65,7 @@ class PackageConfig
     public function versionFormat($value): self
     {
         $this->versionFormat = $value;
-
+    
         return $this;
     }
     
@@ -120,7 +77,7 @@ class PackageConfig
     public function jsonManifestPath($value): self
     {
         $this->jsonManifestPath = $value;
-
+    
         return $this;
     }
     
@@ -131,7 +88,7 @@ class PackageConfig
     public function basePath($value): self
     {
         $this->basePath = $value;
-
+    
         return $this;
     }
     
@@ -142,8 +99,51 @@ class PackageConfig
     public function baseUrls($value): self
     {
         $this->baseUrls = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['strict_mode'])) {
+            $this->strictMode = $value['strict_mode'];
+            unset($value['strict_mode']);
+        }
+    
+        if (isset($value['version_strategy'])) {
+            $this->versionStrategy = $value['version_strategy'];
+            unset($value['version_strategy']);
+        }
+    
+        if (isset($value['version'])) {
+            $this->version = $value['version'];
+            unset($value['version']);
+        }
+    
+        if (isset($value['version_format'])) {
+            $this->versionFormat = $value['version_format'];
+            unset($value['version_format']);
+        }
+    
+        if (isset($value['json_manifest_path'])) {
+            $this->jsonManifestPath = $value['json_manifest_path'];
+            unset($value['json_manifest_path']);
+        }
+    
+        if (isset($value['base_path'])) {
+            $this->basePath = $value['base_path'];
+            unset($value['base_path']);
+        }
+    
+        if (isset($value['base_urls'])) {
+            $this->baseUrls = $value['base_urls'];
+            unset($value['base_urls']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

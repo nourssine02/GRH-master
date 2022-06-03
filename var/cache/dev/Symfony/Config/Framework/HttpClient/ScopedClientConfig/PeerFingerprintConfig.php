@@ -16,29 +16,6 @@ class PeerFingerprintConfig
     private $pinsha256;
     private $md5;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['sha1'])) {
-            $this->sha1 = $value['sha1'];
-            unset($value['sha1']);
-        }
-
-        if (isset($value['pin-sha256'])) {
-            $this->pinsha256 = $value['pin-sha256'];
-            unset($value['pin-sha256']);
-        }
-
-        if (isset($value['md5'])) {
-            $this->md5 = $value['md5'];
-            unset($value['md5']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class PeerFingerprintConfig
     public function sha1($value): self
     {
         $this->sha1 = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class PeerFingerprintConfig
     public function pinsha256($value): self
     {
         $this->pinsha256 = $value;
-
+    
         return $this;
     }
     
@@ -71,8 +48,31 @@ class PeerFingerprintConfig
     public function md5($value): self
     {
         $this->md5 = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['sha1'])) {
+            $this->sha1 = $value['sha1'];
+            unset($value['sha1']);
+        }
+    
+        if (isset($value['pin-sha256'])) {
+            $this->pinsha256 = $value['pin-sha256'];
+            unset($value['pin-sha256']);
+        }
+    
+        if (isset($value['md5'])) {
+            $this->md5 = $value['md5'];
+            unset($value['md5']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

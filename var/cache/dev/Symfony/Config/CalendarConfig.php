@@ -12,17 +12,17 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 class CalendarConfig implements \Symfony\Component\Config\Builder\ConfigBuilderInterface
 {
     
-    public function __construct(array $value = [])
-    {
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function getExtensionAlias(): string
     {
         return 'calendar';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -15,24 +15,6 @@ class UserConfig
     private $password;
     private $roles;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['password'])) {
-            $this->password = $value['password'];
-            unset($value['password']);
-        }
-
-        if (isset($value['roles'])) {
-            $this->roles = $value['roles'];
-            unset($value['roles']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class UserConfig
     public function password($value): self
     {
         $this->password = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class UserConfig
     public function roles($value): self
     {
         $this->roles = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['password'])) {
+            $this->password = $value['password'];
+            unset($value['password']);
+        }
+    
+        if (isset($value['roles'])) {
+            $this->roles = $value['roles'];
+            unset($value['roles']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

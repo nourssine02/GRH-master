@@ -15,24 +15,6 @@ class DoctrineConfig
     private $enabled;
     private $connection;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['connection'])) {
-            $this->connection = $value['connection'];
-            unset($value['connection']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -41,7 +23,7 @@ class DoctrineConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -53,8 +35,26 @@ class DoctrineConfig
     public function connection($value): self
     {
         $this->connection = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['connection'])) {
+            $this->connection = $value['connection'];
+            unset($value['connection']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

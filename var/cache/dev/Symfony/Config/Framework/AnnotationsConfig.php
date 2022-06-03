@@ -17,34 +17,6 @@ class AnnotationsConfig
     private $fileCacheDir;
     private $debug;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['cache'])) {
-            $this->cache = $value['cache'];
-            unset($value['cache']);
-        }
-
-        if (isset($value['file_cache_dir'])) {
-            $this->fileCacheDir = $value['file_cache_dir'];
-            unset($value['file_cache_dir']);
-        }
-
-        if (isset($value['debug'])) {
-            $this->debug = $value['debug'];
-            unset($value['debug']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -53,7 +25,7 @@ class AnnotationsConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -65,7 +37,7 @@ class AnnotationsConfig
     public function cache($value): self
     {
         $this->cache = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +49,7 @@ class AnnotationsConfig
     public function fileCacheDir($value): self
     {
         $this->fileCacheDir = $value;
-
+    
         return $this;
     }
     
@@ -89,8 +61,36 @@ class AnnotationsConfig
     public function debug($value): self
     {
         $this->debug = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['cache'])) {
+            $this->cache = $value['cache'];
+            unset($value['cache']);
+        }
+    
+        if (isset($value['file_cache_dir'])) {
+            $this->fileCacheDir = $value['file_cache_dir'];
+            unset($value['file_cache_dir']);
+        }
+    
+        if (isset($value['debug'])) {
+            $this->debug = $value['debug'];
+            unset($value['debug']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

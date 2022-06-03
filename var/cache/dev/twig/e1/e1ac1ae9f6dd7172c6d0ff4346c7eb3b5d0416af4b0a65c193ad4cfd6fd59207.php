@@ -31,86 +31,32 @@ class __TwigTemplate_b1c59a510023ad4cad3d7a194e44bdbb16200eba8a16f410344a4f2e29e
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% if collector.dumpsCount %}
-        {% set icon %}
-            {{ include('@Debug/Profiler/icon.svg') }}
-            <span class=\"sf-toolbar-value\">{{ collector.dumpsCount }}</span>
-        {% endset %}
-
-        {% set text %}
-            {% for dump in collector.getDumps('html') %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <span>
-                    {% if dump.file %}
-                        {% set link = dump.file|file_link(dump.line) %}
-                        {% if link %}
-                            <a href=\"{{ link }}\" title=\"{{ dump.file }}\">{{ dump.name }}</a>
-                        {% else %}
-                            <abbr title=\"{{ dump.file }}\">{{ dump.name }}</abbr>
-                        {% endif %}
-                    {% else %}
-                        {{ dump.name }}
-                    {% endif %}
-                    </span>
-                    <span class=\"sf-toolbar-file-line\">line {{ dump.line }}</span>
-
-                    {{ dump.data|raw }}
-                </div>
-            {% endfor %}
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label {{ collector.dumpsCount == 0 ? 'disabled' }}\">
-        <span class=\"icon\">{{ include('@Debug/Profiler/icon.svg') }}</span>
-        <strong>Debug</strong>
-    </span>
-{% endblock %}
-
-{% block panel %}
-    <h2>Dumped Contents</h2>
-
-    {% for dump in collector.getDumps('html') %}
-        <div class=\"sf-dump sf-reset\">
-            <span class=\"metadata\">In
-                {% if dump.line %}
-                    {% set link = dump.file|file_link(dump.line) %}
-                    {% if link %}
-                        <a href=\"{{ link }}\" title=\"{{ dump.file }}\">{{ dump.name }}</a>
-                    {% else %}
-                        <abbr title=\"{{ dump.file }}\">{{ dump.name }}</abbr>
-                    {% endif %}
-                {% else %}
-                    {{ dump.name }}
-                {% endif %}
-                line <a class=\"text-small sf-toggle\" data-toggle-selector=\"#sf-trace-{{ loop.index0 }}\">{{ dump.line }}</a>:
-            </span>
-
-            <div class=\"sf-dump-compact hidden\" id=\"sf-trace-{{ loop.index0 }}\">
-                <div class=\"trace\">
-                    {{ dump.fileExcerpt ? dump.fileExcerpt|raw : dump.file|file_excerpt(dump.line) }}
-                </div>
-            </div>
-
-            {{ dump.data|raw }}
-        </div>
-    {% else %}
-        <div class=\"empty\">
-            <p>No content was dumped.</p>
-        </div>
-    {% endfor %}
-{% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Debug/Profiler/dump.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Debug/Profiler/dump.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@Debug/Profiler/dump.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -213,23 +159,15 @@ class __TwigTemplate_b1c59a510023ad4cad3d7a194e44bdbb16200eba8a16f410344a4f2e29e
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@Debug/Profiler/dump.html.twig";
-    }
-
     // line 36
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -250,16 +188,15 @@ class __TwigTemplate_b1c59a510023ad4cad3d7a194e44bdbb16200eba8a16f410344a4f2e29e
         <strong>Debug</strong>
     </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 43
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -376,12 +313,17 @@ class __TwigTemplate_b1c59a510023ad4cad3d7a194e44bdbb16200eba8a16f410344a4f2e29e
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['dump'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@Debug/Profiler/dump.html.twig";
     }
 
     public function isTraitable()
@@ -394,28 +336,83 @@ class __TwigTemplate_b1c59a510023ad4cad3d7a194e44bdbb16200eba8a16f410344a4f2e29e
         return array (  308 => 71,  292 => 68,  285 => 64,  280 => 62,  271 => 59,  265 => 57,  262 => 56,  254 => 54,  244 => 52,  241 => 51,  238 => 50,  236 => 49,  232 => 47,  214 => 46,  210 => 44,  200 => 43,  186 => 38,  181 => 37,  171 => 36,  158 => 32,  155 => 31,  152 => 30,  143 => 27,  138 => 25,  135 => 24,  129 => 22,  126 => 21,  118 => 19,  108 => 17,  105 => 16,  102 => 15,  100 => 14,  96 => 12,  91 => 11,  89 => 10,  86 => 9,  81 => 7,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Debug/Profiler/dump.html.twig"));
+{% block toolbar %}
+    {% if collector.dumpsCount %}
+        {% set icon %}
+            {{ include('@Debug/Profiler/icon.svg') }}
+            <span class=\"sf-toolbar-value\">{{ collector.dumpsCount }}</span>
+        {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Debug/Profiler/dump.html.twig"));
+        {% set text %}
+            {% for dump in collector.getDumps('html') %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <span>
+                    {% if dump.file %}
+                        {% set link = dump.file|file_link(dump.line) %}
+                        {% if link %}
+                            <a href=\"{{ link }}\" title=\"{{ dump.file }}\">{{ dump.name }}</a>
+                        {% else %}
+                            <abbr title=\"{{ dump.file }}\">{{ dump.name }}</abbr>
+                        {% endif %}
+                    {% else %}
+                        {{ dump.name }}
+                    {% endif %}
+                    </span>
+                    <span class=\"sf-toolbar-file-line\">line {{ dump.line }}</span>
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@Debug/Profiler/dump.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+                    {{ dump.data|raw }}
+                </div>
+            {% endfor %}
+        {% endset %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
+    {% endif %}
+{% endblock %}
 
+{% block menu %}
+    <span class=\"label {{ collector.dumpsCount == 0 ? 'disabled' }}\">
+        <span class=\"icon\">{{ include('@Debug/Profiler/icon.svg') }}</span>
+        <strong>Debug</strong>
+    </span>
+{% endblock %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+{% block panel %}
+    <h2>Dumped Contents</h2>
 
+    {% for dump in collector.getDumps('html') %}
+        <div class=\"sf-dump sf-reset\">
+            <span class=\"metadata\">In
+                {% if dump.line %}
+                    {% set link = dump.file|file_link(dump.line) %}
+                    {% if link %}
+                        <a href=\"{{ link }}\" title=\"{{ dump.file }}\">{{ dump.name }}</a>
+                    {% else %}
+                        <abbr title=\"{{ dump.file }}\">{{ dump.name }}</abbr>
+                    {% endif %}
+                {% else %}
+                    {{ dump.name }}
+                {% endif %}
+                line <a class=\"text-small sf-toggle\" data-toggle-selector=\"#sf-trace-{{ loop.index0 }}\">{{ dump.line }}</a>:
+            </span>
+
+            <div class=\"sf-dump-compact hidden\" id=\"sf-trace-{{ loop.index0 }}\">
+                <div class=\"trace\">
+                    {{ dump.fileExcerpt ? dump.fileExcerpt|raw : dump.file|file_excerpt(dump.line) }}
+                </div>
+            </div>
+
+            {{ dump.data|raw }}
+        </div>
+    {% else %}
+        <div class=\"empty\">
+            <p>No content was dumped.</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+", "@Debug/Profiler/dump.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }

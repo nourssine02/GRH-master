@@ -23,64 +23,6 @@ class MongodbConfig
     private $uploadable;
     private $referenceIntegrity;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['translatable'])) {
-            $this->translatable = $value['translatable'];
-            unset($value['translatable']);
-        }
-
-        if (isset($value['timestampable'])) {
-            $this->timestampable = $value['timestampable'];
-            unset($value['timestampable']);
-        }
-
-        if (isset($value['blameable'])) {
-            $this->blameable = $value['blameable'];
-            unset($value['blameable']);
-        }
-
-        if (isset($value['sluggable'])) {
-            $this->sluggable = $value['sluggable'];
-            unset($value['sluggable']);
-        }
-
-        if (isset($value['tree'])) {
-            $this->tree = $value['tree'];
-            unset($value['tree']);
-        }
-
-        if (isset($value['loggable'])) {
-            $this->loggable = $value['loggable'];
-            unset($value['loggable']);
-        }
-
-        if (isset($value['sortable'])) {
-            $this->sortable = $value['sortable'];
-            unset($value['sortable']);
-        }
-
-        if (isset($value['softdeleteable'])) {
-            $this->softdeleteable = $value['softdeleteable'];
-            unset($value['softdeleteable']);
-        }
-
-        if (isset($value['uploadable'])) {
-            $this->uploadable = $value['uploadable'];
-            unset($value['uploadable']);
-        }
-
-        if (isset($value['reference_integrity'])) {
-            $this->referenceIntegrity = $value['reference_integrity'];
-            unset($value['reference_integrity']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|mixed $value
@@ -89,7 +31,7 @@ class MongodbConfig
     public function translatable($value): self
     {
         $this->translatable = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +43,7 @@ class MongodbConfig
     public function timestampable($value): self
     {
         $this->timestampable = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +55,7 @@ class MongodbConfig
     public function blameable($value): self
     {
         $this->blameable = $value;
-
+    
         return $this;
     }
     
@@ -125,7 +67,7 @@ class MongodbConfig
     public function sluggable($value): self
     {
         $this->sluggable = $value;
-
+    
         return $this;
     }
     
@@ -137,7 +79,7 @@ class MongodbConfig
     public function tree($value): self
     {
         $this->tree = $value;
-
+    
         return $this;
     }
     
@@ -149,7 +91,7 @@ class MongodbConfig
     public function loggable($value): self
     {
         $this->loggable = $value;
-
+    
         return $this;
     }
     
@@ -161,7 +103,7 @@ class MongodbConfig
     public function sortable($value): self
     {
         $this->sortable = $value;
-
+    
         return $this;
     }
     
@@ -173,7 +115,7 @@ class MongodbConfig
     public function softdeleteable($value): self
     {
         $this->softdeleteable = $value;
-
+    
         return $this;
     }
     
@@ -185,7 +127,7 @@ class MongodbConfig
     public function uploadable($value): self
     {
         $this->uploadable = $value;
-
+    
         return $this;
     }
     
@@ -197,8 +139,66 @@ class MongodbConfig
     public function referenceIntegrity($value): self
     {
         $this->referenceIntegrity = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['translatable'])) {
+            $this->translatable = $value['translatable'];
+            unset($value['translatable']);
+        }
+    
+        if (isset($value['timestampable'])) {
+            $this->timestampable = $value['timestampable'];
+            unset($value['timestampable']);
+        }
+    
+        if (isset($value['blameable'])) {
+            $this->blameable = $value['blameable'];
+            unset($value['blameable']);
+        }
+    
+        if (isset($value['sluggable'])) {
+            $this->sluggable = $value['sluggable'];
+            unset($value['sluggable']);
+        }
+    
+        if (isset($value['tree'])) {
+            $this->tree = $value['tree'];
+            unset($value['tree']);
+        }
+    
+        if (isset($value['loggable'])) {
+            $this->loggable = $value['loggable'];
+            unset($value['loggable']);
+        }
+    
+        if (isset($value['sortable'])) {
+            $this->sortable = $value['sortable'];
+            unset($value['sortable']);
+        }
+    
+        if (isset($value['softdeleteable'])) {
+            $this->softdeleteable = $value['softdeleteable'];
+            unset($value['softdeleteable']);
+        }
+    
+        if (isset($value['uploadable'])) {
+            $this->uploadable = $value['uploadable'];
+            unset($value['uploadable']);
+        }
+    
+        if (isset($value['reference_integrity'])) {
+            $this->referenceIntegrity = $value['reference_integrity'];
+            unset($value['reference_integrity']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

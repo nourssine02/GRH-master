@@ -14,19 +14,6 @@ class EntityConfig
 {
     private $listeners;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['listeners'])) {
-            $this->listeners = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\EntityListeners\EntityConfig\ListenerConfig($v); }, $value['listeners']);
-            unset($value['listeners']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function listener(string $class, array $value = []): \Symfony\Config\Doctrine\Orm\EntityManagerConfig\EntityListeners\EntityConfig\ListenerConfig
     {
         if (!isset($this->listeners[$class])) {
@@ -35,8 +22,21 @@ class EntityConfig
         if ([] === $value) {
             return $this->listeners[$class];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "listener()" has already been initialized. You cannot pass values the second time you call listener().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['listeners'])) {
+            $this->listeners = array_map(function ($v) { return new \Symfony\Config\Doctrine\Orm\EntityManagerConfig\EntityListeners\EntityConfig\ListenerConfig($v); }, $value['listeners']);
+            unset($value['listeners']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

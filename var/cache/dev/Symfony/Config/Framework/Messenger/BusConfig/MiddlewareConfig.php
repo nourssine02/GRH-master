@@ -15,24 +15,6 @@ class MiddlewareConfig
     private $id;
     private $arguments;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['arguments'])) {
-            $this->arguments = $value['arguments'];
-            unset($value['arguments']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class MiddlewareConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class MiddlewareConfig
     public function arguments($value): self
     {
         $this->arguments = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['arguments'])) {
+            $this->arguments = $value['arguments'];
+            unset($value['arguments']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

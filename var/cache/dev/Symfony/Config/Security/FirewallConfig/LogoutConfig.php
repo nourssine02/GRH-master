@@ -23,59 +23,6 @@ class LogoutConfig
     private $deleteCookies;
     private $handlers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['csrf_parameter'])) {
-            $this->csrfParameter = $value['csrf_parameter'];
-            unset($value['csrf_parameter']);
-        }
-
-        if (isset($value['csrf_token_generator'])) {
-            $this->csrfTokenGenerator = $value['csrf_token_generator'];
-            unset($value['csrf_token_generator']);
-        }
-
-        if (isset($value['csrf_token_id'])) {
-            $this->csrfTokenId = $value['csrf_token_id'];
-            unset($value['csrf_token_id']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['target'])) {
-            $this->target = $value['target'];
-            unset($value['target']);
-        }
-
-        if (isset($value['success_handler'])) {
-            $this->successHandler = $value['success_handler'];
-            unset($value['success_handler']);
-        }
-
-        if (isset($value['invalidate_session'])) {
-            $this->invalidateSession = $value['invalidate_session'];
-            unset($value['invalidate_session']);
-        }
-
-        if (isset($value['delete_cookies'])) {
-            $this->deleteCookies = array_map(function ($v) { return new \Symfony\Config\Security\FirewallConfig\Logout\DeleteCookieConfig($v); }, $value['delete_cookies']);
-            unset($value['delete_cookies']);
-        }
-
-        if (isset($value['handlers'])) {
-            $this->handlers = $value['handlers'];
-            unset($value['handlers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default '_csrf_token'
      * @param ParamConfigurator|mixed $value
@@ -84,7 +31,7 @@ class LogoutConfig
     public function csrfParameter($value): self
     {
         $this->csrfParameter = $value;
-
+    
         return $this;
     }
     
@@ -96,7 +43,7 @@ class LogoutConfig
     public function csrfTokenGenerator($value): self
     {
         $this->csrfTokenGenerator = $value;
-
+    
         return $this;
     }
     
@@ -108,7 +55,7 @@ class LogoutConfig
     public function csrfTokenId($value): self
     {
         $this->csrfTokenId = $value;
-
+    
         return $this;
     }
     
@@ -120,7 +67,7 @@ class LogoutConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -132,7 +79,7 @@ class LogoutConfig
     public function target($value): self
     {
         $this->target = $value;
-
+    
         return $this;
     }
     
@@ -145,7 +92,7 @@ class LogoutConfig
     public function successHandler($value): self
     {
         $this->successHandler = $value;
-
+    
         return $this;
     }
     
@@ -157,7 +104,7 @@ class LogoutConfig
     public function invalidateSession($value): self
     {
         $this->invalidateSession = $value;
-
+    
         return $this;
     }
     
@@ -169,7 +116,7 @@ class LogoutConfig
         if ([] === $value) {
             return $this->deleteCookies[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "deleteCookie()" has already been initialized. You cannot pass values the second time you call deleteCookie().');
     }
     
@@ -180,8 +127,61 @@ class LogoutConfig
     public function handlers($value): self
     {
         $this->handlers = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['csrf_parameter'])) {
+            $this->csrfParameter = $value['csrf_parameter'];
+            unset($value['csrf_parameter']);
+        }
+    
+        if (isset($value['csrf_token_generator'])) {
+            $this->csrfTokenGenerator = $value['csrf_token_generator'];
+            unset($value['csrf_token_generator']);
+        }
+    
+        if (isset($value['csrf_token_id'])) {
+            $this->csrfTokenId = $value['csrf_token_id'];
+            unset($value['csrf_token_id']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['target'])) {
+            $this->target = $value['target'];
+            unset($value['target']);
+        }
+    
+        if (isset($value['success_handler'])) {
+            $this->successHandler = $value['success_handler'];
+            unset($value['success_handler']);
+        }
+    
+        if (isset($value['invalidate_session'])) {
+            $this->invalidateSession = $value['invalidate_session'];
+            unset($value['invalidate_session']);
+        }
+    
+        if (isset($value['delete_cookies'])) {
+            $this->deleteCookies = array_map(function ($v) { return new \Symfony\Config\Security\FirewallConfig\Logout\DeleteCookieConfig($v); }, $value['delete_cookies']);
+            unset($value['delete_cookies']);
+        }
+    
+        if (isset($value['handlers'])) {
+            $this->handlers = $value['handlers'];
+            unset($value['handlers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

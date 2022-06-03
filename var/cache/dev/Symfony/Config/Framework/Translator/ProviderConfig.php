@@ -16,29 +16,6 @@ class ProviderConfig
     private $domains;
     private $locales;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['dsn'])) {
-            $this->dsn = $value['dsn'];
-            unset($value['dsn']);
-        }
-
-        if (isset($value['domains'])) {
-            $this->domains = $value['domains'];
-            unset($value['domains']);
-        }
-
-        if (isset($value['locales'])) {
-            $this->locales = $value['locales'];
-            unset($value['locales']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class ProviderConfig
     public function dsn($value): self
     {
         $this->dsn = $value;
-
+    
         return $this;
     }
     
@@ -58,7 +35,7 @@ class ProviderConfig
     public function domains($value): self
     {
         $this->domains = $value;
-
+    
         return $this;
     }
     
@@ -69,8 +46,31 @@ class ProviderConfig
     public function locales($value): self
     {
         $this->locales = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['dsn'])) {
+            $this->dsn = $value['dsn'];
+            unset($value['dsn']);
+        }
+    
+        if (isset($value['domains'])) {
+            $this->domains = $value['domains'];
+            unset($value['domains']);
+        }
+    
+        if (isset($value['locales'])) {
+            $this->locales = $value['locales'];
+            unset($value['locales']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

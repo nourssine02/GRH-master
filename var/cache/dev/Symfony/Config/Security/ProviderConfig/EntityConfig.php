@@ -16,29 +16,6 @@ class EntityConfig
     private $property;
     private $managerName;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['class'])) {
-            $this->class = $value['class'];
-            unset($value['class']);
-        }
-
-        if (isset($value['property'])) {
-            $this->property = $value['property'];
-            unset($value['property']);
-        }
-
-        if (isset($value['manager_name'])) {
-            $this->managerName = $value['manager_name'];
-            unset($value['manager_name']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * The full entity class name of your user class.
      * @default null
@@ -48,7 +25,7 @@ class EntityConfig
     public function class($value): self
     {
         $this->class = $value;
-
+    
         return $this;
     }
     
@@ -60,7 +37,7 @@ class EntityConfig
     public function property($value): self
     {
         $this->property = $value;
-
+    
         return $this;
     }
     
@@ -72,8 +49,31 @@ class EntityConfig
     public function managerName($value): self
     {
         $this->managerName = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['class'])) {
+            $this->class = $value['class'];
+            unset($value['class']);
+        }
+    
+        if (isset($value['property'])) {
+            $this->property = $value['property'];
+            unset($value['property']);
+        }
+    
+        if (isset($value['manager_name'])) {
+            $this->managerName = $value['manager_name'];
+            unset($value['manager_name']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

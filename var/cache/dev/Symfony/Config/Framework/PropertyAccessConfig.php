@@ -19,44 +19,6 @@ class PropertyAccessConfig
     private $throwExceptionOnInvalidIndex;
     private $throwExceptionOnInvalidPropertyPath;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['magic_call'])) {
-            $this->magicCall = $value['magic_call'];
-            unset($value['magic_call']);
-        }
-
-        if (isset($value['magic_get'])) {
-            $this->magicGet = $value['magic_get'];
-            unset($value['magic_get']);
-        }
-
-        if (isset($value['magic_set'])) {
-            $this->magicSet = $value['magic_set'];
-            unset($value['magic_set']);
-        }
-
-        if (isset($value['throw_exception_on_invalid_index'])) {
-            $this->throwExceptionOnInvalidIndex = $value['throw_exception_on_invalid_index'];
-            unset($value['throw_exception_on_invalid_index']);
-        }
-
-        if (isset($value['throw_exception_on_invalid_property_path'])) {
-            $this->throwExceptionOnInvalidPropertyPath = $value['throw_exception_on_invalid_property_path'];
-            unset($value['throw_exception_on_invalid_property_path']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -65,7 +27,7 @@ class PropertyAccessConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +39,7 @@ class PropertyAccessConfig
     public function magicCall($value): self
     {
         $this->magicCall = $value;
-
+    
         return $this;
     }
     
@@ -89,7 +51,7 @@ class PropertyAccessConfig
     public function magicGet($value): self
     {
         $this->magicGet = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +63,7 @@ class PropertyAccessConfig
     public function magicSet($value): self
     {
         $this->magicSet = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +75,7 @@ class PropertyAccessConfig
     public function throwExceptionOnInvalidIndex($value): self
     {
         $this->throwExceptionOnInvalidIndex = $value;
-
+    
         return $this;
     }
     
@@ -125,8 +87,46 @@ class PropertyAccessConfig
     public function throwExceptionOnInvalidPropertyPath($value): self
     {
         $this->throwExceptionOnInvalidPropertyPath = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['magic_call'])) {
+            $this->magicCall = $value['magic_call'];
+            unset($value['magic_call']);
+        }
+    
+        if (isset($value['magic_get'])) {
+            $this->magicGet = $value['magic_get'];
+            unset($value['magic_get']);
+        }
+    
+        if (isset($value['magic_set'])) {
+            $this->magicSet = $value['magic_set'];
+            unset($value['magic_set']);
+        }
+    
+        if (isset($value['throw_exception_on_invalid_index'])) {
+            $this->throwExceptionOnInvalidIndex = $value['throw_exception_on_invalid_index'];
+            unset($value['throw_exception_on_invalid_index']);
+        }
+    
+        if (isset($value['throw_exception_on_invalid_property_path'])) {
+            $this->throwExceptionOnInvalidPropertyPath = $value['throw_exception_on_invalid_property_path'];
+            unset($value['throw_exception_on_invalid_property_path']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

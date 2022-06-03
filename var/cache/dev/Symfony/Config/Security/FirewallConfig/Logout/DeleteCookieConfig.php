@@ -17,34 +17,6 @@ class DeleteCookieConfig
     private $secure;
     private $samesite;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['domain'])) {
-            $this->domain = $value['domain'];
-            unset($value['domain']);
-        }
-
-        if (isset($value['secure'])) {
-            $this->secure = $value['secure'];
-            unset($value['secure']);
-        }
-
-        if (isset($value['samesite'])) {
-            $this->samesite = $value['samesite'];
-            unset($value['samesite']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -53,7 +25,7 @@ class DeleteCookieConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -65,7 +37,7 @@ class DeleteCookieConfig
     public function domain($value): self
     {
         $this->domain = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +49,7 @@ class DeleteCookieConfig
     public function secure($value): self
     {
         $this->secure = $value;
-
+    
         return $this;
     }
     
@@ -89,8 +61,36 @@ class DeleteCookieConfig
     public function samesite($value): self
     {
         $this->samesite = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['domain'])) {
+            $this->domain = $value['domain'];
+            unset($value['domain']);
+        }
+    
+        if (isset($value['secure'])) {
+            $this->secure = $value['secure'];
+            unset($value['secure']);
+        }
+    
+        if (isset($value['samesite'])) {
+            $this->samesite = $value['samesite'];
+            unset($value['samesite']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

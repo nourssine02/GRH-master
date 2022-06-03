@@ -14,19 +14,6 @@ class AutoMappingConfig
 {
     private $services;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['services'])) {
-            $this->services = $value['services'];
-            unset($value['services']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -34,8 +21,21 @@ class AutoMappingConfig
     public function services($value): self
     {
         $this->services = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['services'])) {
+            $this->services = $value['services'];
+            unset($value['services']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

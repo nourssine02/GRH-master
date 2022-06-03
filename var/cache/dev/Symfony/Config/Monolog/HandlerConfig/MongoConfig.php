@@ -20,49 +20,6 @@ class MongoConfig
     private $database;
     private $collection;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['user'])) {
-            $this->user = $value['user'];
-            unset($value['user']);
-        }
-
-        if (isset($value['pass'])) {
-            $this->pass = $value['pass'];
-            unset($value['pass']);
-        }
-
-        if (isset($value['database'])) {
-            $this->database = $value['database'];
-            unset($value['database']);
-        }
-
-        if (isset($value['collection'])) {
-            $this->collection = $value['collection'];
-            unset($value['collection']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -71,7 +28,7 @@ class MongoConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -83,7 +40,7 @@ class MongoConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -95,7 +52,7 @@ class MongoConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -107,7 +64,7 @@ class MongoConfig
     public function user($value): self
     {
         $this->user = $value;
-
+    
         return $this;
     }
     
@@ -119,7 +76,7 @@ class MongoConfig
     public function pass($value): self
     {
         $this->pass = $value;
-
+    
         return $this;
     }
     
@@ -131,7 +88,7 @@ class MongoConfig
     public function database($value): self
     {
         $this->database = $value;
-
+    
         return $this;
     }
     
@@ -143,8 +100,51 @@ class MongoConfig
     public function collection($value): self
     {
         $this->collection = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['user'])) {
+            $this->user = $value['user'];
+            unset($value['user']);
+        }
+    
+        if (isset($value['pass'])) {
+            $this->pass = $value['pass'];
+            unset($value['pass']);
+        }
+    
+        if (isset($value['database'])) {
+            $this->database = $value['database'];
+            unset($value['database']);
+        }
+    
+        if (isset($value['collection'])) {
+            $this->collection = $value['collection'];
+            unset($value['collection']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

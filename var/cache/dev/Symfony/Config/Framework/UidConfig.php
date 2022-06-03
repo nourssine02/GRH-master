@@ -19,44 +19,6 @@ class UidConfig
     private $timeBasedUuidVersion;
     private $timeBasedUuidNode;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['default_uuid_version'])) {
-            $this->defaultUuidVersion = $value['default_uuid_version'];
-            unset($value['default_uuid_version']);
-        }
-
-        if (isset($value['name_based_uuid_version'])) {
-            $this->nameBasedUuidVersion = $value['name_based_uuid_version'];
-            unset($value['name_based_uuid_version']);
-        }
-
-        if (isset($value['name_based_uuid_namespace'])) {
-            $this->nameBasedUuidNamespace = $value['name_based_uuid_namespace'];
-            unset($value['name_based_uuid_namespace']);
-        }
-
-        if (isset($value['time_based_uuid_version'])) {
-            $this->timeBasedUuidVersion = $value['time_based_uuid_version'];
-            unset($value['time_based_uuid_version']);
-        }
-
-        if (isset($value['time_based_uuid_node'])) {
-            $this->timeBasedUuidNode = $value['time_based_uuid_node'];
-            unset($value['time_based_uuid_node']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -65,7 +27,7 @@ class UidConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +39,7 @@ class UidConfig
     public function defaultUuidVersion($value): self
     {
         $this->defaultUuidVersion = $value;
-
+    
         return $this;
     }
     
@@ -89,7 +51,7 @@ class UidConfig
     public function nameBasedUuidVersion($value): self
     {
         $this->nameBasedUuidVersion = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +63,7 @@ class UidConfig
     public function nameBasedUuidNamespace($value): self
     {
         $this->nameBasedUuidNamespace = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +75,7 @@ class UidConfig
     public function timeBasedUuidVersion($value): self
     {
         $this->timeBasedUuidVersion = $value;
-
+    
         return $this;
     }
     
@@ -125,8 +87,46 @@ class UidConfig
     public function timeBasedUuidNode($value): self
     {
         $this->timeBasedUuidNode = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['default_uuid_version'])) {
+            $this->defaultUuidVersion = $value['default_uuid_version'];
+            unset($value['default_uuid_version']);
+        }
+    
+        if (isset($value['name_based_uuid_version'])) {
+            $this->nameBasedUuidVersion = $value['name_based_uuid_version'];
+            unset($value['name_based_uuid_version']);
+        }
+    
+        if (isset($value['name_based_uuid_namespace'])) {
+            $this->nameBasedUuidNamespace = $value['name_based_uuid_namespace'];
+            unset($value['name_based_uuid_namespace']);
+        }
+    
+        if (isset($value['time_based_uuid_version'])) {
+            $this->timeBasedUuidVersion = $value['time_based_uuid_version'];
+            unset($value['time_based_uuid_version']);
+        }
+    
+        if (isset($value['time_based_uuid_node'])) {
+            $this->timeBasedUuidNode = $value['time_based_uuid_node'];
+            unset($value['time_based_uuid_node']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

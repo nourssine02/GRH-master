@@ -14,19 +14,6 @@ class MappingConfig
 {
     private $paths;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['paths'])) {
-            $this->paths = $value['paths'];
-            unset($value['paths']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -34,8 +21,21 @@ class MappingConfig
     public function paths($value): self
     {
         $this->paths = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['paths'])) {
+            $this->paths = $value['paths'];
+            unset($value['paths']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -16,29 +16,6 @@ class FilterConfig
     private $enabled;
     private $parameters;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['class'])) {
-            $this->class = $value['class'];
-            unset($value['class']);
-        }
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['parameters'])) {
-            $this->parameters = $value['parameters'];
-            unset($value['parameters']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class FilterConfig
     public function class($value): self
     {
         $this->class = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class FilterConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -70,8 +47,31 @@ class FilterConfig
     public function parameter(string $name, $value): self
     {
         $this->parameters[$name] = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['class'])) {
+            $this->class = $value['class'];
+            unset($value['class']);
+        }
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['parameters'])) {
+            $this->parameters = $value['parameters'];
+            unset($value['parameters']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -14,19 +14,6 @@ class FileCacheConfig
 {
     private $dir;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['dir'])) {
-            $this->dir = $value['dir'];
-            unset($value['dir']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default '%kernel.cache_dir%/vich_uploader'
      * @param ParamConfigurator|mixed $value
@@ -35,8 +22,21 @@ class FileCacheConfig
     public function dir($value): self
     {
         $this->dir = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['dir'])) {
+            $this->dir = $value['dir'];
+            unset($value['dir']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

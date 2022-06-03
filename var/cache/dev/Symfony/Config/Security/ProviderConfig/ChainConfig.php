@@ -14,19 +14,6 @@ class ChainConfig
 {
     private $providers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['providers'])) {
-            $this->providers = $value['providers'];
-            unset($value['providers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -34,8 +21,21 @@ class ChainConfig
     public function providers($value): self
     {
         $this->providers = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['providers'])) {
+            $this->providers = $value['providers'];
+            unset($value['providers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

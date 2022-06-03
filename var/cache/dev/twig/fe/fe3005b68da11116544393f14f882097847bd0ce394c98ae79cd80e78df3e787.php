@@ -30,80 +30,6 @@ class __TwigTemplate_19be888a4eb840bb59248697cd3d3861de595b6ca99c0b70fa82831b86b
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("/* Legend */
-
-.sf-profiler-timeline .legends .timeline-category {
-    border: none;
-    background: none;
-    border-left: 1em solid transparent;
-    line-height: 1em;
-    margin: 0 1em 0 0;
-    padding: 0 0.5em;
-    display: none;
-    opacity: 0.5;
-}
-
-.sf-profiler-timeline .legends .timeline-category.active {
-    opacity: 1;
-}
-
-.sf-profiler-timeline .legends .timeline-category.present {
-    display: inline-block;
-}
-
-.timeline-graph {
-    margin: 1em 0;
-    width: 100%;
-    background-color: var(--table-background);
-    border: 1px solid var(--table-border);
-}
-
-/* Typography */
-
-.timeline-graph .timeline-label {
-    font-family: var(--font-sans-serif);
-    font-size: 12px;
-    line-height: 12px;
-    font-weight: normal;
-    fill: var(--color-text);
-}
-
-.timeline-graph .timeline-label .timeline-sublabel {
-    margin-left: 1em;
-    fill: var(--color-muted);
-}
-
-.timeline-graph .timeline-subrequest,
-.timeline-graph .timeline-border {
-    fill: none;
-    stroke: var(--table-border);
-    stroke-width: 1px;
-}
-
-.timeline-graph .timeline-subrequest {
-    fill: url(#subrequest);
-    fill-opacity: 0.5;
-}
-
-.timeline-subrequest-pattern {
-    fill: var(--table-border);
-}
-
-/* Timeline periods */
-
-.timeline-graph .timeline-period {
-    stroke-width: 0;
-}
-", "@WebProfiler/Collector/time.css.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -179,10 +105,10 @@ class __TwigTemplate_19be888a4eb840bb59248697cd3d3861de595b6ca99c0b70fa82831b86b
     stroke-width: 0;
 }
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -190,5 +116,79 @@ class __TwigTemplate_19be888a4eb840bb59248697cd3d3861de595b6ca99c0b70fa82831b86b
     public function getTemplateName()
     {
         return "@WebProfiler/Collector/time.css.twig";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("/* Legend */
+
+.sf-profiler-timeline .legends .timeline-category {
+    border: none;
+    background: none;
+    border-left: 1em solid transparent;
+    line-height: 1em;
+    margin: 0 1em 0 0;
+    padding: 0 0.5em;
+    display: none;
+    opacity: 0.5;
+}
+
+.sf-profiler-timeline .legends .timeline-category.active {
+    opacity: 1;
+}
+
+.sf-profiler-timeline .legends .timeline-category.present {
+    display: inline-block;
+}
+
+.timeline-graph {
+    margin: 1em 0;
+    width: 100%;
+    background-color: var(--table-background);
+    border: 1px solid var(--table-border);
+}
+
+/* Typography */
+
+.timeline-graph .timeline-label {
+    font-family: var(--font-sans-serif);
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: normal;
+    fill: var(--color-text);
+}
+
+.timeline-graph .timeline-label .timeline-sublabel {
+    margin-left: 1em;
+    fill: var(--color-muted);
+}
+
+.timeline-graph .timeline-subrequest,
+.timeline-graph .timeline-border {
+    fill: none;
+    stroke: var(--table-border);
+    stroke-width: 1px;
+}
+
+.timeline-graph .timeline-subrequest {
+    fill: url(#subrequest);
+    fill-opacity: 0.5;
+}
+
+.timeline-subrequest-pattern {
+    fill: var(--table-border);
+}
+
+/* Timeline periods */
+
+.timeline-graph .timeline-period {
+    stroke-width: 0;
+}
+", "@WebProfiler/Collector/time.css.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
     }
 }

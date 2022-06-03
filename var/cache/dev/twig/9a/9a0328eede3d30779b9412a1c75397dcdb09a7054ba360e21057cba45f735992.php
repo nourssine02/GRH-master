@@ -32,177 +32,28 @@ class __TwigTemplate_a3f1e9771af5ba44e380ed8b9bde8bd8e0682162e8adb2e3709f651727a
         ];
     }
 
-    public function getSourceContext()
+    protected function doDisplay(array $context, array $blocks = [])
     {
-        return new Source("{% block title %} {% endblock %}
-{% block body %}
-    <style>
-        .title{
-            margin-left: 250px;
-            margin-top: 70px;
-            font-family: \"Courier New\", Courier, monospace;
-            font-size: 24px;
-        }
-        .date{
-            margin-left: 600px;
-            margin-top: -80px;
-        }
-        #gauche {
-            width: 50%;
-            float: left;
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "fiche_paie/imprimer.html.twig"));
 
-        }
-        #droite {
-            width: 50%;
-            float: left;
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "fiche_paie/imprimer.html.twig"));
 
-        }
-        span{
-            font-weight: bold;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
-<h5>STE BUS SOFTWARE <br>RUE HEDI NUIRA <br>AKOUDA<br>4022</h5>
-    <h5 class=\"date\">{{ dat_j|date(\"m-Y\") }}</h5>
+        // line 1
+        $this->displayBlock('title', $context, $blocks);
+        // line 2
+        $this->displayBlock('body', $context, $blocks);
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-    <h3 class=\"title\">Fiche de Paie</h3>
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
-    <div id=\"gauche\">
-        <p><span>Matricule:</span> {{ fiche.employe.matricule }}</p>
-        <p><span>Nom & Prénom :</span> {{ fiche.employe.nom }} {{ fiche.employe.prenom }}</p>
-        <p><span>Departement :</span> {{ fiche.employe.departement }}</p>
-        <p><span>Service : </span>{{ fiche.employe.service }}</p>
-        <p><span>Categorie :</span> {{ fiche.employe.categorie }}</p>
-        <p><span>Echelon :</span> {{ fiche.employe.echelon }}</p>
-
-    </div>
-    <div id=\"droite\">
-
-        <p><span>N CNSS : </span>{{ fiche.employe.cnss }}</p>
-        <p><span>N CIN :</span> {{ fiche.employe.cin }}</p>
-        <p><span>Situation Familial :</span> {{ fiche.employe.situationFamilial }}</p>
-        <p><span> Enfants à charge:</span> {{ fiche.employe.nbreEnfants }}</p>
-    </div>
-
-    <table style=\"width:100%;margin-top: 300px;\">
-        <thead>
-        <tr>
-            <th>Désignation</th>
-            <th>Nombre</th>
-            <th>Salaire/Primes</th>
-            <th>Retenues</th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-            <td>
-                <br>
-                Nombre de jours de présence<br>
-                <br>
-                Salaire de base<br>
-                <br>
-            </td>
-            <td>
-                <br>
-                {{ fiche.nbjTrav }}<br>
-                <br>
-                <br>
-                <br>
-            </td>
-            <td>
-                <br>
-               <br>
-                <br>
-               {{ fiche.employe.salaireBase|number_format(3)}} <br>
-                <br>
-            </td>
-            <td></td>
-
-        </tr>
-        <tr>
-            <td>
-                <br>
-            Salaire brut<br>
-{#                <br>#}
-{#            Salaire brut cotisable<br>#}
-                <br>
-            Retenue cnss<br>
-                <br>
-            Salaire brut imposable<br>
-                <br>
-            Retenue à la source<br>
-                <br>
-            Contribution sociale de solidarité<br>
-                <br>
-                Salaire Net <br>
-                <br>
-                Avances <br>
-                <br>
-            </td>
-            <td></td>
-            <td>
-                <br>
-                {{ fiche.salaireBrut|number_format(3) }}<br>
-{#                <br>#}
-{#                2222  <br>#}
-                <br>
-                 <br>
-                <br>
-                {{ fiche.salaireImposable|number_format(3) }}<br>
-                <br>
-                  <br>
-                <br>
-                <br>
-                <br>
-                {{ fiche.salaireNet|number_format(3) }}<br>
-                <br>
-                {{ fiche.avances }}<br>
-                <br>
-            </td>
-            <td>
-                <br>
-               <br>
-                <br>
-{#               <br>#}
-{#                <br>#}
-                {{ fiche.retenueCnss|number_format(3) }}<br>
-                <br>
-                <br>
-                <br>
-                {{ fiche.salaireImposable|number_format(3) }}<br>
-                <br>
-                {{ fiche.contributionSocialeSolidaire|number_format(3) }}<br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan=\"3\">Net à payer</td>
-            <td>{{ fiche.netAPayer|number_format(3) }}</td>
-        </tr>
-        </tfoot>
-    </table>
-
-
-
-
-{% endblock %}", "fiche_paie/imprimer.html.twig", "/home/hp/Téléchargements/GRH-master/templates/fiche_paie/imprimer.html.twig");
     }
 
     // line 1
-
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -222,12 +73,6 @@ class __TwigTemplate_a3f1e9771af5ba44e380ed8b9bde8bd8e0682162e8adb2e3709f651727a
     }
 
     // line 2
-
-    public function getTemplateName()
-    {
-        return "fiche_paie/imprimer.html.twig";
-    }
-
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -465,12 +310,17 @@ class __TwigTemplate_a3f1e9771af5ba44e380ed8b9bde8bd8e0682162e8adb2e3709f651727a
 
 
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "fiche_paie/imprimer.html.twig";
     }
 
     public function getDebugInfo()
@@ -478,24 +328,172 @@ class __TwigTemplate_a3f1e9771af5ba44e380ed8b9bde8bd8e0682162e8adb2e3709f651727a
         return array (  303 => 157,  287 => 144,  282 => 142,  274 => 138,  264 => 129,  259 => 127,  250 => 121,  245 => 118,  241 => 115,  222 => 98,  209 => 86,  197 => 77,  169 => 52,  165 => 51,  161 => 50,  157 => 49,  149 => 44,  145 => 43,  141 => 42,  137 => 41,  131 => 40,  127 => 39,  118 => 33,  86 => 3,  76 => 2,  57 => 1,  47 => 2,  45 => 1,);
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
+    public function getSourceContext()
     {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "fiche_paie/imprimer.html.twig"));
+        return new Source("{% block title %} {% endblock %}
+{% block body %}
+    <style>
+        .title{
+            margin-left: 250px;
+            margin-top: 70px;
+            font-family: \"Courier New\", Courier, monospace;
+            font-size: 24px;
+        }
+        .date{
+            margin-left: 600px;
+            margin-top: -80px;
+        }
+        #gauche {
+            width: 50%;
+            float: left;
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "fiche_paie/imprimer.html.twig"));
+        }
+        #droite {
+            width: 50%;
+            float: left;
 
-        // line 1
-        $this->displayBlock('title', $context, $blocks);
-        // line 2
-        $this->displayBlock('body', $context, $blocks);
+        }
+        span{
+            font-weight: bold;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+<h5>STE BUS SOFTWARE <br>RUE HEDI NUIRA <br>AKOUDA<br>4022</h5>
+    <h5 class=\"date\">{{ dat_j|date(\"m-Y\") }}</h5>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+    <h3 class=\"title\">Fiche de Paie</h3>
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+    <div id=\"gauche\">
+        <p><span>Matricule:</span> {{ fiche.employe.matricule }}</p>
+        <p><span>Nom & Prénom :</span> {{ fiche.employe.nom }} {{ fiche.employe.prenom }}</p>
+        <p><span>Departement :</span> {{ fiche.employe.departement }}</p>
+        <p><span>Service : </span>{{ fiche.employe.service }}</p>
+        <p><span>Categorie :</span> {{ fiche.employe.categorie }}</p>
+        <p><span>Echelon :</span> {{ fiche.employe.echelon }}</p>
 
+    </div>
+    <div id=\"droite\">
+
+        <p><span>N CNSS : </span>{{ fiche.employe.cnss }}</p>
+        <p><span>N CIN :</span> {{ fiche.employe.cin }}</p>
+        <p><span>Situation Familial :</span> {{ fiche.employe.situationFamilial }}</p>
+        <p><span> Enfants à charge:</span> {{ fiche.employe.nbreEnfants }}</p>
+    </div>
+
+    <table style=\"width:100%;margin-top: 300px;\">
+        <thead>
+        <tr>
+            <th>Désignation</th>
+            <th>Nombre</th>
+            <th>Salaire/Primes</th>
+            <th>Retenues</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>
+                <br>
+                Nombre de jours de présence<br>
+                <br>
+                Salaire de base<br>
+                <br>
+            </td>
+            <td>
+                <br>
+                {{ fiche.nbjTrav }}<br>
+                <br>
+                <br>
+                <br>
+            </td>
+            <td>
+                <br>
+               <br>
+                <br>
+               {{ fiche.employe.salaireBase|number_format(3)}} <br>
+                <br>
+            </td>
+            <td></td>
+
+        </tr>
+        <tr>
+            <td>
+                <br>
+            Salaire brut<br>
+{#                <br>#}
+{#            Salaire brut cotisable<br>#}
+                <br>
+            Retenue cnss<br>
+                <br>
+            Salaire brut imposable<br>
+                <br>
+            Retenue à la source<br>
+                <br>
+            Contribution sociale de solidarité<br>
+                <br>
+                Salaire Net <br>
+                <br>
+                Avances <br>
+                <br>
+            </td>
+            <td></td>
+            <td>
+                <br>
+                {{ fiche.salaireBrut|number_format(3) }}<br>
+{#                <br>#}
+{#                2222  <br>#}
+                <br>
+                 <br>
+                <br>
+                {{ fiche.salaireImposable|number_format(3) }}<br>
+                <br>
+                  <br>
+                <br>
+                <br>
+                <br>
+                {{ fiche.salaireNet|number_format(3) }}<br>
+                <br>
+                {{ fiche.avances }}<br>
+                <br>
+            </td>
+            <td>
+                <br>
+               <br>
+                <br>
+{#               <br>#}
+{#                <br>#}
+                {{ fiche.retenueCnss|number_format(3) }}<br>
+                <br>
+                <br>
+                <br>
+                {{ fiche.salaireImposable|number_format(3) }}<br>
+                <br>
+                {{ fiche.contributionSocialeSolidaire|number_format(3) }}<br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan=\"3\">Net à payer</td>
+            <td>{{ fiche.netAPayer|number_format(3) }}</td>
+        </tr>
+        </tfoot>
+    </table>
+
+
+
+
+{% endblock %}", "fiche_paie/imprimer.html.twig", "/home/hp/Téléchargements/GRH-master/templates/fiche_paie/imprimer.html.twig");
     }
 }

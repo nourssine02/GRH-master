@@ -30,92 +30,6 @@ class __TwigTemplate_2c6bbe431120616abdee613af59078fa9bf22cc33964ab351859c0194c3
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<h2>Routing</h2>
-
-<div class=\"metrics\">
-    <div class=\"metric\">
-        <span class=\"value\">{{ request.route ?: '(none)' }}</span>
-        <span class=\"label\">Matched route</span>
-    </div>
-</div>
-
-{% if request.route %}
-    <h3>Route Parameters</h3>
-
-    {% if request.routeParams is empty %}
-        <div class=\"empty\">
-            <p>No parameters.</p>
-        </div>
-    {% else %}
-        {{ include('@WebProfiler/Profiler/table.html.twig', { data: request.routeParams, labels: ['Name', 'Value'] }, with_context = false) }}
-    {% endif %}
-{% endif %}
-
-{% if router.redirect %}
-    <h3>Route Redirection</h3>
-
-    <p>This page redirects to:</p>
-    <div class=\"card break-long-words\">
-        {{ router.targetUrl }}
-        {% if router.targetRoute %}<span class=\"text-muted\">(route: \"{{ router.targetRoute }}\")</span>{% endif %}
-    </div>
-{% endif %}
-
-<h3>Route Matching Logs</h3>
-
-<div class=\"card\">
-    <strong>Path to match:</strong> <code>{{ request.pathinfo }}</code>
-</div>
-
-<table id=\"router-logs\">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Route name</th>
-            <th>Path</th>
-            <th>Log</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for trace in traces %}
-        <tr class=\"{{ trace.level == 1 ? 'status-warning' : trace.level == 2 ? 'status-success' }}\">
-            <td class=\"font-normal text-muted nowrap\">{{ loop.index }}</td>
-            <td class=\"break-long-words\">{{ trace.name }}</td>
-            <td class=\"break-long-words\">{{ trace.path }}</td>
-            <td class=\"font-normal\">
-                {% if trace.level == 1 %}
-                    Path almost matches, but
-                    <span class=\"newline\">{{ trace.log }}</span>
-                {% elseif trace.level == 2 %}
-                    {{ trace.log }}
-                {% else %}
-                    Path does not match
-                {% endif %}
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<p class=\"help\">
-    Note: These matching logs are based on the current router configuration,
-    which might differ from the configuration used when profiling this request.
-</p>
-", "@WebProfiler/Router/panel.html.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Router/panel.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  197 => 65,  181 => 62,  177 => 60,  171 => 58,  169 => 57,  165 => 56,  162 => 55,  160 => 54,  155 => 52,  151 => 51,  147 => 50,  142 => 49,  125 => 48,  109 => 35,  103 => 31,  99 => 29,  93 => 28,  89 => 27,  83 => 23,  81 => 22,  78 => 21,  71 => 18,  65 => 14,  63 => 13,  59 => 11,  57 => 10,  49 => 5,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -288,10 +202,10 @@ $context["trace"], "level", [], "any", false, false, false, 57), 2))) {
     which might differ from the configuration used when profiling this request.
 </p>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -299,5 +213,91 @@ $context["trace"], "level", [], "any", false, false, false, 57), 2))) {
     public function getTemplateName()
     {
         return "@WebProfiler/Router/panel.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  197 => 65,  181 => 62,  177 => 60,  171 => 58,  169 => 57,  165 => 56,  162 => 55,  160 => 54,  155 => 52,  151 => 51,  147 => 50,  142 => 49,  125 => 48,  109 => 35,  103 => 31,  99 => 29,  93 => 28,  89 => 27,  83 => 23,  81 => 22,  78 => 21,  71 => 18,  65 => 14,  63 => 13,  59 => 11,  57 => 10,  49 => 5,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<h2>Routing</h2>
+
+<div class=\"metrics\">
+    <div class=\"metric\">
+        <span class=\"value\">{{ request.route ?: '(none)' }}</span>
+        <span class=\"label\">Matched route</span>
+    </div>
+</div>
+
+{% if request.route %}
+    <h3>Route Parameters</h3>
+
+    {% if request.routeParams is empty %}
+        <div class=\"empty\">
+            <p>No parameters.</p>
+        </div>
+    {% else %}
+        {{ include('@WebProfiler/Profiler/table.html.twig', { data: request.routeParams, labels: ['Name', 'Value'] }, with_context = false) }}
+    {% endif %}
+{% endif %}
+
+{% if router.redirect %}
+    <h3>Route Redirection</h3>
+
+    <p>This page redirects to:</p>
+    <div class=\"card break-long-words\">
+        {{ router.targetUrl }}
+        {% if router.targetRoute %}<span class=\"text-muted\">(route: \"{{ router.targetRoute }}\")</span>{% endif %}
+    </div>
+{% endif %}
+
+<h3>Route Matching Logs</h3>
+
+<div class=\"card\">
+    <strong>Path to match:</strong> <code>{{ request.pathinfo }}</code>
+</div>
+
+<table id=\"router-logs\">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Route name</th>
+            <th>Path</th>
+            <th>Log</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for trace in traces %}
+        <tr class=\"{{ trace.level == 1 ? 'status-warning' : trace.level == 2 ? 'status-success' }}\">
+            <td class=\"font-normal text-muted nowrap\">{{ loop.index }}</td>
+            <td class=\"break-long-words\">{{ trace.name }}</td>
+            <td class=\"break-long-words\">{{ trace.path }}</td>
+            <td class=\"font-normal\">
+                {% if trace.level == 1 %}
+                    Path almost matches, but
+                    <span class=\"newline\">{{ trace.log }}</span>
+                {% elseif trace.level == 2 %}
+                    {{ trace.log }}
+                {% else %}
+                    Path does not match
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p class=\"help\">
+    Note: These matching logs are based on the current router configuration,
+    which might differ from the configuration used when profiling this request.
+</p>
+", "@WebProfiler/Router/panel.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Router/panel.html.twig");
     }
 }

@@ -43,164 +43,6 @@ class ReplicaConfig
     private $instancename;
     private $connectstring;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['url'])) {
-            $this->url = $value['url'];
-            unset($value['url']);
-        }
-
-        if (isset($value['dbname'])) {
-            $this->dbname = $value['dbname'];
-            unset($value['dbname']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['user'])) {
-            $this->user = $value['user'];
-            unset($value['user']);
-        }
-
-        if (isset($value['password'])) {
-            $this->password = $value['password'];
-            unset($value['password']);
-        }
-
-        if (isset($value['override_url'])) {
-            $this->overrideUrl = $value['override_url'];
-            unset($value['override_url']);
-        }
-
-        if (isset($value['dbname_suffix'])) {
-            $this->dbnameSuffix = $value['dbname_suffix'];
-            unset($value['dbname_suffix']);
-        }
-
-        if (isset($value['application_name'])) {
-            $this->applicationName = $value['application_name'];
-            unset($value['application_name']);
-        }
-
-        if (isset($value['charset'])) {
-            $this->charset = $value['charset'];
-            unset($value['charset']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['memory'])) {
-            $this->memory = $value['memory'];
-            unset($value['memory']);
-        }
-
-        if (isset($value['unix_socket'])) {
-            $this->unixSocket = $value['unix_socket'];
-            unset($value['unix_socket']);
-        }
-
-        if (isset($value['persistent'])) {
-            $this->persistent = $value['persistent'];
-            unset($value['persistent']);
-        }
-
-        if (isset($value['protocol'])) {
-            $this->protocol = $value['protocol'];
-            unset($value['protocol']);
-        }
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['servicename'])) {
-            $this->servicename = $value['servicename'];
-            unset($value['servicename']);
-        }
-
-        if (isset($value['sessionMode'])) {
-            $this->sessionMode = $value['sessionMode'];
-            unset($value['sessionMode']);
-        }
-
-        if (isset($value['server'])) {
-            $this->server = $value['server'];
-            unset($value['server']);
-        }
-
-        if (isset($value['default_dbname'])) {
-            $this->defaultDbname = $value['default_dbname'];
-            unset($value['default_dbname']);
-        }
-
-        if (isset($value['sslmode'])) {
-            $this->sslmode = $value['sslmode'];
-            unset($value['sslmode']);
-        }
-
-        if (isset($value['sslrootcert'])) {
-            $this->sslrootcert = $value['sslrootcert'];
-            unset($value['sslrootcert']);
-        }
-
-        if (isset($value['sslcert'])) {
-            $this->sslcert = $value['sslcert'];
-            unset($value['sslcert']);
-        }
-
-        if (isset($value['sslkey'])) {
-            $this->sslkey = $value['sslkey'];
-            unset($value['sslkey']);
-        }
-
-        if (isset($value['sslcrl'])) {
-            $this->sslcrl = $value['sslcrl'];
-            unset($value['sslcrl']);
-        }
-
-        if (isset($value['pooled'])) {
-            $this->pooled = $value['pooled'];
-            unset($value['pooled']);
-        }
-
-        if (isset($value['MultipleActiveResultSets'])) {
-            $this->multipleActiveResultSets = $value['MultipleActiveResultSets'];
-            unset($value['MultipleActiveResultSets']);
-        }
-
-        if (isset($value['use_savepoints'])) {
-            $this->useSavepoints = $value['use_savepoints'];
-            unset($value['use_savepoints']);
-        }
-
-        if (isset($value['instancename'])) {
-            $this->instancename = $value['instancename'];
-            unset($value['instancename']);
-        }
-
-        if (isset($value['connectstring'])) {
-            $this->connectstring = $value['connectstring'];
-            unset($value['connectstring']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * A URL with connection information; any parameter value parsed from this string will override explicitly set parameters
      * @default null
@@ -210,7 +52,7 @@ class ReplicaConfig
     public function url($value): self
     {
         $this->url = $value;
-
+    
         return $this;
     }
     
@@ -222,7 +64,7 @@ class ReplicaConfig
     public function dbname($value): self
     {
         $this->dbname = $value;
-
+    
         return $this;
     }
     
@@ -235,7 +77,7 @@ class ReplicaConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -248,7 +90,7 @@ class ReplicaConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -261,7 +103,7 @@ class ReplicaConfig
     public function user($value): self
     {
         $this->user = $value;
-
+    
         return $this;
     }
     
@@ -274,7 +116,7 @@ class ReplicaConfig
     public function password($value): self
     {
         $this->password = $value;
-
+    
         return $this;
     }
     
@@ -287,7 +129,7 @@ class ReplicaConfig
     public function overrideUrl($value): self
     {
         $this->overrideUrl = $value;
-
+    
         return $this;
     }
     
@@ -299,7 +141,7 @@ class ReplicaConfig
     public function dbnameSuffix($value): self
     {
         $this->dbnameSuffix = $value;
-
+    
         return $this;
     }
     
@@ -311,7 +153,7 @@ class ReplicaConfig
     public function applicationName($value): self
     {
         $this->applicationName = $value;
-
+    
         return $this;
     }
     
@@ -323,7 +165,7 @@ class ReplicaConfig
     public function charset($value): self
     {
         $this->charset = $value;
-
+    
         return $this;
     }
     
@@ -335,7 +177,7 @@ class ReplicaConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -347,7 +189,7 @@ class ReplicaConfig
     public function memory($value): self
     {
         $this->memory = $value;
-
+    
         return $this;
     }
     
@@ -360,7 +202,7 @@ class ReplicaConfig
     public function unixSocket($value): self
     {
         $this->unixSocket = $value;
-
+    
         return $this;
     }
     
@@ -373,7 +215,7 @@ class ReplicaConfig
     public function persistent($value): self
     {
         $this->persistent = $value;
-
+    
         return $this;
     }
     
@@ -386,7 +228,7 @@ class ReplicaConfig
     public function protocol($value): self
     {
         $this->protocol = $value;
-
+    
         return $this;
     }
     
@@ -399,7 +241,7 @@ class ReplicaConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -412,7 +254,7 @@ class ReplicaConfig
     public function servicename($value): self
     {
         $this->servicename = $value;
-
+    
         return $this;
     }
     
@@ -425,7 +267,7 @@ class ReplicaConfig
     public function sessionMode($value): self
     {
         $this->sessionMode = $value;
-
+    
         return $this;
     }
     
@@ -438,7 +280,7 @@ class ReplicaConfig
     public function server($value): self
     {
         $this->server = $value;
-
+    
         return $this;
     }
     
@@ -451,7 +293,7 @@ class ReplicaConfig
     public function defaultDbname($value): self
     {
         $this->defaultDbname = $value;
-
+    
         return $this;
     }
     
@@ -464,7 +306,7 @@ class ReplicaConfig
     public function sslmode($value): self
     {
         $this->sslmode = $value;
-
+    
         return $this;
     }
     
@@ -477,7 +319,7 @@ class ReplicaConfig
     public function sslrootcert($value): self
     {
         $this->sslrootcert = $value;
-
+    
         return $this;
     }
     
@@ -490,7 +332,7 @@ class ReplicaConfig
     public function sslcert($value): self
     {
         $this->sslcert = $value;
-
+    
         return $this;
     }
     
@@ -503,7 +345,7 @@ class ReplicaConfig
     public function sslkey($value): self
     {
         $this->sslkey = $value;
-
+    
         return $this;
     }
     
@@ -516,7 +358,7 @@ class ReplicaConfig
     public function sslcrl($value): self
     {
         $this->sslcrl = $value;
-
+    
         return $this;
     }
     
@@ -529,7 +371,7 @@ class ReplicaConfig
     public function pooled($value): self
     {
         $this->pooled = $value;
-
+    
         return $this;
     }
     
@@ -542,7 +384,7 @@ class ReplicaConfig
     public function multipleActiveResultSets($value): self
     {
         $this->multipleActiveResultSets = $value;
-
+    
         return $this;
     }
     
@@ -555,7 +397,7 @@ class ReplicaConfig
     public function useSavepoints($value): self
     {
         $this->useSavepoints = $value;
-
+    
         return $this;
     }
     
@@ -568,7 +410,7 @@ class ReplicaConfig
     public function instancename($value): self
     {
         $this->instancename = $value;
-
+    
         return $this;
     }
     
@@ -581,8 +423,166 @@ class ReplicaConfig
     public function connectstring($value): self
     {
         $this->connectstring = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['url'])) {
+            $this->url = $value['url'];
+            unset($value['url']);
+        }
+    
+        if (isset($value['dbname'])) {
+            $this->dbname = $value['dbname'];
+            unset($value['dbname']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['user'])) {
+            $this->user = $value['user'];
+            unset($value['user']);
+        }
+    
+        if (isset($value['password'])) {
+            $this->password = $value['password'];
+            unset($value['password']);
+        }
+    
+        if (isset($value['override_url'])) {
+            $this->overrideUrl = $value['override_url'];
+            unset($value['override_url']);
+        }
+    
+        if (isset($value['dbname_suffix'])) {
+            $this->dbnameSuffix = $value['dbname_suffix'];
+            unset($value['dbname_suffix']);
+        }
+    
+        if (isset($value['application_name'])) {
+            $this->applicationName = $value['application_name'];
+            unset($value['application_name']);
+        }
+    
+        if (isset($value['charset'])) {
+            $this->charset = $value['charset'];
+            unset($value['charset']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['memory'])) {
+            $this->memory = $value['memory'];
+            unset($value['memory']);
+        }
+    
+        if (isset($value['unix_socket'])) {
+            $this->unixSocket = $value['unix_socket'];
+            unset($value['unix_socket']);
+        }
+    
+        if (isset($value['persistent'])) {
+            $this->persistent = $value['persistent'];
+            unset($value['persistent']);
+        }
+    
+        if (isset($value['protocol'])) {
+            $this->protocol = $value['protocol'];
+            unset($value['protocol']);
+        }
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['servicename'])) {
+            $this->servicename = $value['servicename'];
+            unset($value['servicename']);
+        }
+    
+        if (isset($value['sessionMode'])) {
+            $this->sessionMode = $value['sessionMode'];
+            unset($value['sessionMode']);
+        }
+    
+        if (isset($value['server'])) {
+            $this->server = $value['server'];
+            unset($value['server']);
+        }
+    
+        if (isset($value['default_dbname'])) {
+            $this->defaultDbname = $value['default_dbname'];
+            unset($value['default_dbname']);
+        }
+    
+        if (isset($value['sslmode'])) {
+            $this->sslmode = $value['sslmode'];
+            unset($value['sslmode']);
+        }
+    
+        if (isset($value['sslrootcert'])) {
+            $this->sslrootcert = $value['sslrootcert'];
+            unset($value['sslrootcert']);
+        }
+    
+        if (isset($value['sslcert'])) {
+            $this->sslcert = $value['sslcert'];
+            unset($value['sslcert']);
+        }
+    
+        if (isset($value['sslkey'])) {
+            $this->sslkey = $value['sslkey'];
+            unset($value['sslkey']);
+        }
+    
+        if (isset($value['sslcrl'])) {
+            $this->sslcrl = $value['sslcrl'];
+            unset($value['sslcrl']);
+        }
+    
+        if (isset($value['pooled'])) {
+            $this->pooled = $value['pooled'];
+            unset($value['pooled']);
+        }
+    
+        if (isset($value['MultipleActiveResultSets'])) {
+            $this->multipleActiveResultSets = $value['MultipleActiveResultSets'];
+            unset($value['MultipleActiveResultSets']);
+        }
+    
+        if (isset($value['use_savepoints'])) {
+            $this->useSavepoints = $value['use_savepoints'];
+            unset($value['use_savepoints']);
+        }
+    
+        if (isset($value['instancename'])) {
+            $this->instancename = $value['instancename'];
+            unset($value['instancename']);
+        }
+    
+        if (isset($value['connectstring'])) {
+            $this->connectstring = $value['connectstring'];
+            unset($value['connectstring']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

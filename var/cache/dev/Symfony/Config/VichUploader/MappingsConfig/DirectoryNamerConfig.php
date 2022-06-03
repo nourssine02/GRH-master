@@ -15,24 +15,6 @@ class DirectoryNamerConfig
     private $service;
     private $options;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['options'])) {
-            $this->options = $value['options'];
-            unset($value['options']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class DirectoryNamerConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -53,8 +35,26 @@ class DirectoryNamerConfig
     public function options($value = NULL): self
     {
         $this->options = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['options'])) {
+            $this->options = $value['options'];
+            unset($value['options']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

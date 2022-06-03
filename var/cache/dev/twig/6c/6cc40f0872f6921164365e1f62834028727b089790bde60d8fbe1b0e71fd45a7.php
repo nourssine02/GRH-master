@@ -30,27 +30,6 @@ class __TwigTemplate_5ebedafedb8ca56b0dfb6e2220c0f5b45d679dee088055c1a4073159366
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<div class=\"sf-toolbar-block sf-toolbar-block-{{ name }} sf-toolbar-status-{{ status|default('normal') }} {{ additional_classes|default('') }}\" {{ block_attrs|default('')|raw }}>
-    {% if link is not defined or link %}<a href=\"{{ url('_profiler', { token: token, panel: name }) }}\">{% endif %}
-        <div class=\"sf-toolbar-icon\">{{ icon|default('') }}</div>
-    {% if link|default(false) %}</a>{% endif %}
-        <div class=\"sf-toolbar-info\">{{ text|default('') }}</div>
-</div>
-", "@WebProfiler/Profiler/toolbar_item.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_item.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  69 => 5,  65 => 4,  60 => 3,  54 => 2,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -92,10 +71,10 @@ class __TwigTemplate_5ebedafedb8ca56b0dfb6e2220c0f5b45d679dee088055c1a4073159366
         echo "</div>
 </div>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -103,5 +82,26 @@ class __TwigTemplate_5ebedafedb8ca56b0dfb6e2220c0f5b45d679dee088055c1a4073159366
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/toolbar_item.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  69 => 5,  65 => 4,  60 => 3,  54 => 2,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<div class=\"sf-toolbar-block sf-toolbar-block-{{ name }} sf-toolbar-status-{{ status|default('normal') }} {{ additional_classes|default('') }}\" {{ block_attrs|default('')|raw }}>
+    {% if link is not defined or link %}<a href=\"{{ url('_profiler', { token: token, panel: name }) }}\">{% endif %}
+        <div class=\"sf-toolbar-icon\">{{ icon|default('') }}</div>
+    {% if link|default(false) %}</a>{% endif %}
+        <div class=\"sf-toolbar-info\">{{ text|default('') }}</div>
+</div>
+", "@WebProfiler/Profiler/toolbar_item.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_item.html.twig");
     }
 }

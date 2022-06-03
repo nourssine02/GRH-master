@@ -25,69 +25,6 @@ class CacheConfig
     private $defaultPdoProvider;
     private $pools;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['prefix_seed'])) {
-            $this->prefixSeed = $value['prefix_seed'];
-            unset($value['prefix_seed']);
-        }
-
-        if (isset($value['app'])) {
-            $this->app = $value['app'];
-            unset($value['app']);
-        }
-
-        if (isset($value['system'])) {
-            $this->system = $value['system'];
-            unset($value['system']);
-        }
-
-        if (isset($value['directory'])) {
-            $this->directory = $value['directory'];
-            unset($value['directory']);
-        }
-
-        if (isset($value['default_doctrine_provider'])) {
-            $this->defaultDoctrineProvider = $value['default_doctrine_provider'];
-            unset($value['default_doctrine_provider']);
-        }
-
-        if (isset($value['default_psr6_provider'])) {
-            $this->defaultPsr6Provider = $value['default_psr6_provider'];
-            unset($value['default_psr6_provider']);
-        }
-
-        if (isset($value['default_redis_provider'])) {
-            $this->defaultRedisProvider = $value['default_redis_provider'];
-            unset($value['default_redis_provider']);
-        }
-
-        if (isset($value['default_memcached_provider'])) {
-            $this->defaultMemcachedProvider = $value['default_memcached_provider'];
-            unset($value['default_memcached_provider']);
-        }
-
-        if (isset($value['default_doctrine_dbal_provider'])) {
-            $this->defaultDoctrineDbalProvider = $value['default_doctrine_dbal_provider'];
-            unset($value['default_doctrine_dbal_provider']);
-        }
-
-        if (isset($value['default_pdo_provider'])) {
-            $this->defaultPdoProvider = $value['default_pdo_provider'];
-            unset($value['default_pdo_provider']);
-        }
-
-        if (isset($value['pools'])) {
-            $this->pools = array_map(function ($v) { return new \Symfony\Config\Framework\Cache\PoolConfig($v); }, $value['pools']);
-            unset($value['pools']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * Used to namespace cache keys when using several apps with the same shared backend
      * @example my-application-name/%kernel.environment%
@@ -98,7 +35,7 @@ class CacheConfig
     public function prefixSeed($value): self
     {
         $this->prefixSeed = $value;
-
+    
         return $this;
     }
     
@@ -111,7 +48,7 @@ class CacheConfig
     public function app($value): self
     {
         $this->app = $value;
-
+    
         return $this;
     }
     
@@ -124,7 +61,7 @@ class CacheConfig
     public function system($value): self
     {
         $this->system = $value;
-
+    
         return $this;
     }
     
@@ -136,7 +73,7 @@ class CacheConfig
     public function directory($value): self
     {
         $this->directory = $value;
-
+    
         return $this;
     }
     
@@ -148,7 +85,7 @@ class CacheConfig
     public function defaultDoctrineProvider($value): self
     {
         $this->defaultDoctrineProvider = $value;
-
+    
         return $this;
     }
     
@@ -160,7 +97,7 @@ class CacheConfig
     public function defaultPsr6Provider($value): self
     {
         $this->defaultPsr6Provider = $value;
-
+    
         return $this;
     }
     
@@ -172,7 +109,7 @@ class CacheConfig
     public function defaultRedisProvider($value): self
     {
         $this->defaultRedisProvider = $value;
-
+    
         return $this;
     }
     
@@ -184,7 +121,7 @@ class CacheConfig
     public function defaultMemcachedProvider($value): self
     {
         $this->defaultMemcachedProvider = $value;
-
+    
         return $this;
     }
     
@@ -196,7 +133,7 @@ class CacheConfig
     public function defaultDoctrineDbalProvider($value): self
     {
         $this->defaultDoctrineDbalProvider = $value;
-
+    
         return $this;
     }
     
@@ -208,7 +145,7 @@ class CacheConfig
     public function defaultPdoProvider($value): self
     {
         $this->defaultPdoProvider = $value;
-
+    
         return $this;
     }
     
@@ -220,8 +157,71 @@ class CacheConfig
         if ([] === $value) {
             return $this->pools[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "pool()" has already been initialized. You cannot pass values the second time you call pool().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['prefix_seed'])) {
+            $this->prefixSeed = $value['prefix_seed'];
+            unset($value['prefix_seed']);
+        }
+    
+        if (isset($value['app'])) {
+            $this->app = $value['app'];
+            unset($value['app']);
+        }
+    
+        if (isset($value['system'])) {
+            $this->system = $value['system'];
+            unset($value['system']);
+        }
+    
+        if (isset($value['directory'])) {
+            $this->directory = $value['directory'];
+            unset($value['directory']);
+        }
+    
+        if (isset($value['default_doctrine_provider'])) {
+            $this->defaultDoctrineProvider = $value['default_doctrine_provider'];
+            unset($value['default_doctrine_provider']);
+        }
+    
+        if (isset($value['default_psr6_provider'])) {
+            $this->defaultPsr6Provider = $value['default_psr6_provider'];
+            unset($value['default_psr6_provider']);
+        }
+    
+        if (isset($value['default_redis_provider'])) {
+            $this->defaultRedisProvider = $value['default_redis_provider'];
+            unset($value['default_redis_provider']);
+        }
+    
+        if (isset($value['default_memcached_provider'])) {
+            $this->defaultMemcachedProvider = $value['default_memcached_provider'];
+            unset($value['default_memcached_provider']);
+        }
+    
+        if (isset($value['default_doctrine_dbal_provider'])) {
+            $this->defaultDoctrineDbalProvider = $value['default_doctrine_dbal_provider'];
+            unset($value['default_doctrine_dbal_provider']);
+        }
+    
+        if (isset($value['default_pdo_provider'])) {
+            $this->defaultPdoProvider = $value['default_pdo_provider'];
+            unset($value['default_pdo_provider']);
+        }
+    
+        if (isset($value['pools'])) {
+            $this->pools = array_map(function ($v) { return new \Symfony\Config\Framework\Cache\PoolConfig($v); }, $value['pools']);
+            unset($value['pools']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

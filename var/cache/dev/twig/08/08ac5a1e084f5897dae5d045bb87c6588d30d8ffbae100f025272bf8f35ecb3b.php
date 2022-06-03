@@ -32,212 +32,35 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% import _self as helper %}
-
-{% block toolbar %}
-    {% if collector.messages|length > 0 %}
-        {% set status_color = collector.exceptionsCount ? 'red' %}
-        {% set icon %}
-            {{ include('@WebProfiler/Icon/messenger.svg') }}
-            <span class=\"sf-toolbar-value\">{{ collector.messages|length }}</span>
-        {% endset %}
-
-        {% set text %}
-            {% for bus in collector.buses %}
-                {% set exceptionsCount = collector.exceptionsCount(bus) %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>{{ bus }}</b>
-                    <span
-                        title=\"{{ exceptionsCount }} message(s) with exceptions\"
-                        class=\"sf-toolbar-status sf-toolbar-status-{{ exceptionsCount ? 'red' }}\"
-                    >
-                        {{ collector.messages(bus)|length }}
-                    </span>
-                </div>
-            {% endfor %}
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: 'messenger', status: status_color }) }}
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label{{ collector.exceptionsCount ? ' label-status-error' }}{{ collector.messages is empty ? ' disabled' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/messenger.svg') }}</span>
-        <strong>Messages</strong>
-        {% if collector.exceptionsCount > 0 %}
-            <span class=\"count\">
-                <span>{{ collector.exceptionsCount }}</span>
-            </span>
-        {% endif %}
-    </span>
-{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-    <style>
-        .message-item thead th { position: relative; cursor: pointer; user-select: none; padding-right: 35px; }
-        .message-item tbody tr td:first-child { width: 170px; }
-
-        .message-item .label { float: right; padding: 1px 5px; opacity: .75; margin-left: 5px; }
-        .message-item .toggle-button { position: absolute; right: 6px; top: 6px; opacity: .5; pointer-events: none }
-        .message-item .icon svg { height: 24px; width: 24px; }
-
-        .message-item .sf-toggle-off .icon-close, .sf-toggle-on .icon-open { display: none; }
-        .message-item .sf-toggle-off .icon-open, .sf-toggle-on .icon-close { display: block; }
-
-        .message-bus .badge.status-some-errors { line-height: 16px; border-bottom: 2px solid #B0413E; }
-
-        .message-item tbody.sf-toggle-content.sf-toggle-visible { display: table-row-group; }
-        td.message-bus-dispatch-caller { background: #f1f2f3; }
-        .theme-dark td.message-bus-dispatch-caller { background: var(--base-1); }
-    </style>
-{% endblock %}
-
-{% block panel %}
-    {% import _self as helper %}
-
-    <h2>Messages</h2>
-
-    {% if collector.messages is empty %}
-        <div class=\"empty\">
-            <p>No messages have been collected.</p>
-        </div>
-    {% else %}
-        <div class=\"sf-tabs message-bus\">
-            <div class=\"tab\">
-                {% set messages = collector.messages %}
-                {% set exceptionsCount = collector.exceptionsCount %}
-                <h3 class=\"tab-title\">All<span class=\"badge {{ exceptionsCount ? exceptionsCount == messages|length ? 'status-error' : 'status-some-errors' }}\">{{ messages|length }}</span></h3>
-
-                <div class=\"tab-content\">
-                    <p class=\"text-muted\">Ordered list of dispatched messages across all your buses</p>
-                    {{ helper.render_bus_messages(messages, true) }}
-                </div>
-            </div>
-
-            {% for bus in collector.buses %}
-                <div class=\"tab message-bus\">
-                    {% set messages = collector.messages(bus) %}
-                    {% set exceptionsCount = collector.exceptionsCount(bus) %}
-                    <h3 class=\"tab-title\">{{ bus }}<span class=\"badge {{ exceptionsCount ? exceptionsCount == messages|length ? 'status-error' : 'status-some-errors' }}\">{{ messages|length }}</span></h3>
-
-                    <div class=\"tab-content\">
-                        <p class=\"text-muted\">Ordered list of messages dispatched on the <code>{{ bus }}</code> bus</p>
-                        {{ helper.render_bus_messages(messages) }}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-{% endblock %}
-
-{% macro render_bus_messages(messages, showBus = false) %}
-    {% set discr = random() %}
-    {% for dispatchCall in messages %}
-    <table class=\"message-item\">
-        <thead>
-            <tr>
-                <th colspan=\"2\" class=\"sf-toggle\"
-                    data-toggle-selector=\"#message-item-{{ discr }}-{{ loop.index0 }}-details\"
-                    data-toggle-initial=\"{{ loop.first ? 'display' }}\"
-                >
-                    <span class=\"dump-inline\">{{ profiler_dump(dispatchCall.message.type) }}</span>
-                    {% if showBus %}
-                        <span class=\"label\">{{ dispatchCall.bus }}</span>
-                    {% endif %}
-                    {% if dispatchCall.exception is defined %}
-                        <span class=\"label status-error\">exception</span>
-                    {% endif %}
-                    <a class=\"toggle-button\">
-                        <span class=\"icon icon-close\">{{ include('@WebProfiler/images/icon-minus-square.svg') }}</span>
-                        <span class=\"icon icon-open\">{{ include('@WebProfiler/images/icon-plus-square.svg') }}</span>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody id=\"message-item-{{ discr }}-{{ loop.index0 }}-details\" class=\"sf-toggle-content\">
-            <tr>
-                <td colspan=\"2\" class=\"message-bus-dispatch-caller\">
-                    <span class=\"metadata\">In
-                        {% set caller = dispatchCall.caller %}
-                        {% if caller.line %}
-                            {% set link = caller.file|file_link(caller.line) %}
-                            {% if link %}
-                                <a href=\"{{ link }}\" title=\"{{ caller.file }}\">{{ caller.name }}</a>
-                            {% else %}
-                                <abbr title=\"{{ caller.file }}\">{{ caller.name }}</abbr>
-                            {% endif %}
-                        {% else %}
-                            {{ caller.name }}
-                        {% endif %}
-                        line <a class=\"text-small sf-toggle\" data-toggle-selector=\"#sf-trace-{{ discr }}-{{ loop.index0 }}\">{{ caller.line }}</a>
-                    </span>
-
-                    <div class=\"hidden\" id=\"sf-trace-{{ discr }}-{{ loop.index0 }}\">
-                        <div class=\"trace\">
-                            {{ caller.file|file_excerpt(caller.line)|replace({
-                                '#DD0000': 'var(--highlight-string)',
-                                '#007700': 'var(--highlight-keyword)',
-                                '#0000BB': 'var(--highlight-default)',
-                                '#FF8000': 'var(--highlight-comment)'
-                            })|raw }}
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {% if showBus %}
-                <tr>
-                    <td class=\"text-bold\">Bus</td>
-                    <td>{{ dispatchCall.bus }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <td class=\"text-bold\">Message</td>
-                <td>{{ profiler_dump(dispatchCall.message.value, maxDepth=2) }}</td>
-            </tr>
-            <tr>
-                <td class=\"text-bold\">Envelope stamps <span class=\"text-muted\">when dispatching</span></td>
-                <td>
-                    {% for item in dispatchCall.stamps %}
-                        {{ profiler_dump(item) }}
-                    {% else %}
-                        <span class=\"text-muted\">No items</span>
-                    {% endfor %}
-                </td>
-            </tr>
-            {% if dispatchCall.stamps_after_dispatch is defined %}
-                <tr>
-                    <td class=\"text-bold\">Envelope stamps <span class=\"text-muted\">after dispatch</span></td>
-                    <td>
-                        {% for item in dispatchCall.stamps_after_dispatch %}
-                            {{ profiler_dump(item) }}
-                        {% else %}
-                            <span class=\"text-muted\">No items</span>
-                        {% endfor %}
-                    </td>
-                </tr>
-            {% endif %}
-            {% if dispatchCall.exception is defined %}
-                <tr>
-                    <td class=\"text-bold\">Exception</td>
-                    <td>
-                        {{ profiler_dump(dispatchCall.exception.value, maxDepth=1) }}
-                    </td>
-                </tr>
-            {% endif %}
-        </tbody>
-    </table>
-    {% endfor %}
-{% endmacro %}
-", "@WebProfiler/Collector/messenger.html.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Collector/messenger.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/messenger.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/messenger.html.twig"));
+
+        // line 3
+        $macros["helper"] = $this->macros["helper"] = $this;
+        // line 1
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/messenger.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 5
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -317,23 +140,15 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 5
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/messenger.html.twig";
-    }
-
     // line 32
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -368,16 +183,15 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         // line 41
         echo "    </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 44
-
     public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -409,16 +223,15 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         .theme-dark td.message-bus-dispatch-caller { background: var(--base-1); }
     </style>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 65
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -514,16 +327,15 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         // line 101
         echo "
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 104
-
     public function macro_render_bus_messages($__messages__ = null, $__showBus__ = false, ...$__varargs__)
     {
         $macros = $this->macros;
@@ -800,10 +612,10 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['dispatchCall'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-
+            
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+            
             $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
 
@@ -811,6 +623,11 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         } finally {
             ob_end_clean();
         }
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/messenger.html.twig";
     }
 
     public function isTraitable()
@@ -823,31 +640,209 @@ class __TwigTemplate_79ae48875f8c55e3482324aab60c86b8acfa874c1947437de9b243321c5
         return array (  600 => 198,  593 => 194,  588 => 191,  585 => 190,  580 => 187,  573 => 185,  565 => 183,  560 => 182,  555 => 179,  553 => 178,  549 => 176,  542 => 174,  534 => 172,  529 => 171,  521 => 166,  517 => 164,  511 => 161,  507 => 159,  505 => 158,  498 => 153,  496 => 148,  489 => 146,  478 => 143,  472 => 141,  469 => 140,  461 => 138,  451 => 136,  448 => 135,  445 => 134,  442 => 133,  440 => 132,  431 => 128,  423 => 123,  419 => 122,  416 => 121,  412 => 119,  409 => 118,  403 => 116,  401 => 115,  397 => 114,  392 => 112,  386 => 111,  380 => 107,  362 => 106,  359 => 105,  339 => 104,  328 => 101,  324 => 99,  314 => 95,  310 => 94,  299 => 91,  296 => 90,  294 => 89,  291 => 88,  287 => 87,  280 => 83,  270 => 79,  267 => 78,  265 => 77,  261 => 75,  255 => 71,  253 => 70,  248 => 67,  245 => 66,  235 => 65,  205 => 45,  195 => 44,  184 => 41,  178 => 38,  175 => 37,  173 => 36,  168 => 34,  162 => 33,  152 => 32,  139 => 28,  136 => 27,  133 => 26,  123 => 22,  118 => 20,  114 => 19,  109 => 17,  106 => 16,  103 => 15,  98 => 14,  96 => 13,  93 => 12,  88 => 10,  83 => 9,  80 => 8,  77 => 7,  74 => 6,  64 => 5,  53 => 1,  51 => 3,  38 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/messenger.html.twig"));
+{% import _self as helper %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/messenger.html.twig"));
+{% block toolbar %}
+    {% if collector.messages|length > 0 %}
+        {% set status_color = collector.exceptionsCount ? 'red' %}
+        {% set icon %}
+            {{ include('@WebProfiler/Icon/messenger.svg') }}
+            <span class=\"sf-toolbar-value\">{{ collector.messages|length }}</span>
+        {% endset %}
 
-        // line 3
-        $macros["helper"] = $this->macros["helper"] = $this;
-        // line 1
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/messenger.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        {% set text %}
+            {% for bus in collector.buses %}
+                {% set exceptionsCount = collector.exceptionsCount(bus) %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>{{ bus }}</b>
+                    <span
+                        title=\"{{ exceptionsCount }} message(s) with exceptions\"
+                        class=\"sf-toolbar-status sf-toolbar-status-{{ exceptionsCount ? 'red' }}\"
+                    >
+                        {{ collector.messages(bus)|length }}
+                    </span>
+                </div>
+            {% endfor %}
+        {% endset %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: 'messenger', status: status_color }) }}
+    {% endif %}
+{% endblock %}
 
+{% block menu %}
+    <span class=\"label{{ collector.exceptionsCount ? ' label-status-error' }}{{ collector.messages is empty ? ' disabled' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/messenger.svg') }}</span>
+        <strong>Messages</strong>
+        {% if collector.exceptionsCount > 0 %}
+            <span class=\"count\">
+                <span>{{ collector.exceptionsCount }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+{% block head %}
+    {{ parent() }}
+    <style>
+        .message-item thead th { position: relative; cursor: pointer; user-select: none; padding-right: 35px; }
+        .message-item tbody tr td:first-child { width: 170px; }
 
+        .message-item .label { float: right; padding: 1px 5px; opacity: .75; margin-left: 5px; }
+        .message-item .toggle-button { position: absolute; right: 6px; top: 6px; opacity: .5; pointer-events: none }
+        .message-item .icon svg { height: 24px; width: 24px; }
+
+        .message-item .sf-toggle-off .icon-close, .sf-toggle-on .icon-open { display: none; }
+        .message-item .sf-toggle-off .icon-open, .sf-toggle-on .icon-close { display: block; }
+
+        .message-bus .badge.status-some-errors { line-height: 16px; border-bottom: 2px solid #B0413E; }
+
+        .message-item tbody.sf-toggle-content.sf-toggle-visible { display: table-row-group; }
+        td.message-bus-dispatch-caller { background: #f1f2f3; }
+        .theme-dark td.message-bus-dispatch-caller { background: var(--base-1); }
+    </style>
+{% endblock %}
+
+{% block panel %}
+    {% import _self as helper %}
+
+    <h2>Messages</h2>
+
+    {% if collector.messages is empty %}
+        <div class=\"empty\">
+            <p>No messages have been collected.</p>
+        </div>
+    {% else %}
+        <div class=\"sf-tabs message-bus\">
+            <div class=\"tab\">
+                {% set messages = collector.messages %}
+                {% set exceptionsCount = collector.exceptionsCount %}
+                <h3 class=\"tab-title\">All<span class=\"badge {{ exceptionsCount ? exceptionsCount == messages|length ? 'status-error' : 'status-some-errors' }}\">{{ messages|length }}</span></h3>
+
+                <div class=\"tab-content\">
+                    <p class=\"text-muted\">Ordered list of dispatched messages across all your buses</p>
+                    {{ helper.render_bus_messages(messages, true) }}
+                </div>
+            </div>
+
+            {% for bus in collector.buses %}
+                <div class=\"tab message-bus\">
+                    {% set messages = collector.messages(bus) %}
+                    {% set exceptionsCount = collector.exceptionsCount(bus) %}
+                    <h3 class=\"tab-title\">{{ bus }}<span class=\"badge {{ exceptionsCount ? exceptionsCount == messages|length ? 'status-error' : 'status-some-errors' }}\">{{ messages|length }}</span></h3>
+
+                    <div class=\"tab-content\">
+                        <p class=\"text-muted\">Ordered list of messages dispatched on the <code>{{ bus }}</code> bus</p>
+                        {{ helper.render_bus_messages(messages) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% macro render_bus_messages(messages, showBus = false) %}
+    {% set discr = random() %}
+    {% for dispatchCall in messages %}
+    <table class=\"message-item\">
+        <thead>
+            <tr>
+                <th colspan=\"2\" class=\"sf-toggle\"
+                    data-toggle-selector=\"#message-item-{{ discr }}-{{ loop.index0 }}-details\"
+                    data-toggle-initial=\"{{ loop.first ? 'display' }}\"
+                >
+                    <span class=\"dump-inline\">{{ profiler_dump(dispatchCall.message.type) }}</span>
+                    {% if showBus %}
+                        <span class=\"label\">{{ dispatchCall.bus }}</span>
+                    {% endif %}
+                    {% if dispatchCall.exception is defined %}
+                        <span class=\"label status-error\">exception</span>
+                    {% endif %}
+                    <a class=\"toggle-button\">
+                        <span class=\"icon icon-close\">{{ include('@WebProfiler/images/icon-minus-square.svg') }}</span>
+                        <span class=\"icon icon-open\">{{ include('@WebProfiler/images/icon-plus-square.svg') }}</span>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody id=\"message-item-{{ discr }}-{{ loop.index0 }}-details\" class=\"sf-toggle-content\">
+            <tr>
+                <td colspan=\"2\" class=\"message-bus-dispatch-caller\">
+                    <span class=\"metadata\">In
+                        {% set caller = dispatchCall.caller %}
+                        {% if caller.line %}
+                            {% set link = caller.file|file_link(caller.line) %}
+                            {% if link %}
+                                <a href=\"{{ link }}\" title=\"{{ caller.file }}\">{{ caller.name }}</a>
+                            {% else %}
+                                <abbr title=\"{{ caller.file }}\">{{ caller.name }}</abbr>
+                            {% endif %}
+                        {% else %}
+                            {{ caller.name }}
+                        {% endif %}
+                        line <a class=\"text-small sf-toggle\" data-toggle-selector=\"#sf-trace-{{ discr }}-{{ loop.index0 }}\">{{ caller.line }}</a>
+                    </span>
+
+                    <div class=\"hidden\" id=\"sf-trace-{{ discr }}-{{ loop.index0 }}\">
+                        <div class=\"trace\">
+                            {{ caller.file|file_excerpt(caller.line)|replace({
+                                '#DD0000': 'var(--highlight-string)',
+                                '#007700': 'var(--highlight-keyword)',
+                                '#0000BB': 'var(--highlight-default)',
+                                '#FF8000': 'var(--highlight-comment)'
+                            })|raw }}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% if showBus %}
+                <tr>
+                    <td class=\"text-bold\">Bus</td>
+                    <td>{{ dispatchCall.bus }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td class=\"text-bold\">Message</td>
+                <td>{{ profiler_dump(dispatchCall.message.value, maxDepth=2) }}</td>
+            </tr>
+            <tr>
+                <td class=\"text-bold\">Envelope stamps <span class=\"text-muted\">when dispatching</span></td>
+                <td>
+                    {% for item in dispatchCall.stamps %}
+                        {{ profiler_dump(item) }}
+                    {% else %}
+                        <span class=\"text-muted\">No items</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% if dispatchCall.stamps_after_dispatch is defined %}
+                <tr>
+                    <td class=\"text-bold\">Envelope stamps <span class=\"text-muted\">after dispatch</span></td>
+                    <td>
+                        {% for item in dispatchCall.stamps_after_dispatch %}
+                            {{ profiler_dump(item) }}
+                        {% else %}
+                            <span class=\"text-muted\">No items</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% if dispatchCall.exception is defined %}
+                <tr>
+                    <td class=\"text-bold\">Exception</td>
+                    <td>
+                        {{ profiler_dump(dispatchCall.exception.value, maxDepth=1) }}
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    {% endfor %}
+{% endmacro %}
+", "@WebProfiler/Collector/messenger.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/messenger.html.twig");
     }
 }

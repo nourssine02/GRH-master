@@ -15,24 +15,6 @@ class EventConfig
     private $type;
     private $method;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['method'])) {
-            $this->method = $value['method'];
-            unset($value['method']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class EventConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -53,8 +35,26 @@ class EventConfig
     public function method($value): self
     {
         $this->method = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['method'])) {
+            $this->method = $value['method'];
+            unset($value['method']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

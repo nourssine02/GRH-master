@@ -25,59 +25,6 @@ class ValidationConfig
     private $notCompromisedPassword;
     private $autoMapping;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['cache'])) {
-            $this->cache = $value['cache'];
-            unset($value['cache']);
-        }
-
-        if (isset($value['enable_annotations'])) {
-            $this->enableAnnotations = $value['enable_annotations'];
-            unset($value['enable_annotations']);
-        }
-
-        if (isset($value['static_method'])) {
-            $this->staticMethod = $value['static_method'];
-            unset($value['static_method']);
-        }
-
-        if (isset($value['translation_domain'])) {
-            $this->translationDomain = $value['translation_domain'];
-            unset($value['translation_domain']);
-        }
-
-        if (isset($value['email_validation_mode'])) {
-            $this->emailValidationMode = $value['email_validation_mode'];
-            unset($value['email_validation_mode']);
-        }
-
-        if (isset($value['mapping'])) {
-            $this->mapping = new \Symfony\Config\Framework\Validation\MappingConfig($value['mapping']);
-            unset($value['mapping']);
-        }
-
-        if (isset($value['not_compromised_password'])) {
-            $this->notCompromisedPassword = new \Symfony\Config\Framework\Validation\NotCompromisedPasswordConfig($value['not_compromised_password']);
-            unset($value['not_compromised_password']);
-        }
-
-        if (isset($value['auto_mapping'])) {
-            $this->autoMapping = array_map(function ($v) { return new \Symfony\Config\Framework\Validation\AutoMappingConfig($v); }, $value['auto_mapping']);
-            unset($value['auto_mapping']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -86,7 +33,7 @@ class ValidationConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -98,7 +45,7 @@ class ValidationConfig
     public function cache($value): self
     {
         $this->cache = $value;
-
+    
         return $this;
     }
     
@@ -110,7 +57,7 @@ class ValidationConfig
     public function enableAnnotations($value): self
     {
         $this->enableAnnotations = $value;
-
+    
         return $this;
     }
     
@@ -121,7 +68,7 @@ class ValidationConfig
     public function staticMethod($value): self
     {
         $this->staticMethod = $value;
-
+    
         return $this;
     }
     
@@ -133,7 +80,7 @@ class ValidationConfig
     public function translationDomain($value): self
     {
         $this->translationDomain = $value;
-
+    
         return $this;
     }
     
@@ -145,7 +92,7 @@ class ValidationConfig
     public function emailValidationMode($value): self
     {
         $this->emailValidationMode = $value;
-
+    
         return $this;
     }
     
@@ -156,7 +103,7 @@ class ValidationConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "mapping()" has already been initialized. You cannot pass values the second time you call mapping().');
         }
-
+    
         return $this->mapping;
     }
     
@@ -167,7 +114,7 @@ class ValidationConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "notCompromisedPassword()" has already been initialized. You cannot pass values the second time you call notCompromisedPassword().');
         }
-
+    
         return $this->notCompromisedPassword;
     }
     
@@ -179,8 +126,61 @@ class ValidationConfig
         if ([] === $value) {
             return $this->autoMapping[$namespace];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "autoMapping()" has already been initialized. You cannot pass values the second time you call autoMapping().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['cache'])) {
+            $this->cache = $value['cache'];
+            unset($value['cache']);
+        }
+    
+        if (isset($value['enable_annotations'])) {
+            $this->enableAnnotations = $value['enable_annotations'];
+            unset($value['enable_annotations']);
+        }
+    
+        if (isset($value['static_method'])) {
+            $this->staticMethod = $value['static_method'];
+            unset($value['static_method']);
+        }
+    
+        if (isset($value['translation_domain'])) {
+            $this->translationDomain = $value['translation_domain'];
+            unset($value['translation_domain']);
+        }
+    
+        if (isset($value['email_validation_mode'])) {
+            $this->emailValidationMode = $value['email_validation_mode'];
+            unset($value['email_validation_mode']);
+        }
+    
+        if (isset($value['mapping'])) {
+            $this->mapping = new \Symfony\Config\Framework\Validation\MappingConfig($value['mapping']);
+            unset($value['mapping']);
+        }
+    
+        if (isset($value['not_compromised_password'])) {
+            $this->notCompromisedPassword = new \Symfony\Config\Framework\Validation\NotCompromisedPasswordConfig($value['not_compromised_password']);
+            unset($value['not_compromised_password']);
+        }
+    
+        if (isset($value['auto_mapping'])) {
+            $this->autoMapping = array_map(function ($v) { return new \Symfony\Config\Framework\Validation\AutoMappingConfig($v); }, $value['auto_mapping']);
+            unset($value['auto_mapping']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

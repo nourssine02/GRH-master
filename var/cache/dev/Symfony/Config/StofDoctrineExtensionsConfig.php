@@ -25,54 +25,6 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
     private $persistDefaultTranslation;
     private $skipTranslationOnLoad;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['orm'])) {
-            $this->orm = array_map(function ($v) { return new \Symfony\Config\StofDoctrineExtensions\OrmConfig($v); }, $value['orm']);
-            unset($value['orm']);
-        }
-
-        if (isset($value['mongodb'])) {
-            $this->mongodb = array_map(function ($v) { return new \Symfony\Config\StofDoctrineExtensions\MongodbConfig($v); }, $value['mongodb']);
-            unset($value['mongodb']);
-        }
-
-        if (isset($value['class'])) {
-            $this->class = new \Symfony\Config\StofDoctrineExtensions\ClassConfig($value['class']);
-            unset($value['class']);
-        }
-
-        if (isset($value['uploadable'])) {
-            $this->uploadable = new \Symfony\Config\StofDoctrineExtensions\UploadableConfig($value['uploadable']);
-            unset($value['uploadable']);
-        }
-
-        if (isset($value['default_locale'])) {
-            $this->defaultLocale = $value['default_locale'];
-            unset($value['default_locale']);
-        }
-
-        if (isset($value['translation_fallback'])) {
-            $this->translationFallback = $value['translation_fallback'];
-            unset($value['translation_fallback']);
-        }
-
-        if (isset($value['persist_default_translation'])) {
-            $this->persistDefaultTranslation = $value['persist_default_translation'];
-            unset($value['persist_default_translation']);
-        }
-
-        if (isset($value['skip_translation_on_load'])) {
-            $this->skipTranslationOnLoad = $value['skip_translation_on_load'];
-            unset($value['skip_translation_on_load']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function orm(string $id, array $value = []): \Symfony\Config\StofDoctrineExtensions\OrmConfig
     {
         if (!isset($this->orm[$id])) {
@@ -81,7 +33,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
         if ([] === $value) {
             return $this->orm[$id];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "orm()" has already been initialized. You cannot pass values the second time you call orm().');
     }
     
@@ -93,7 +45,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
         if ([] === $value) {
             return $this->mongodb[$id];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "mongodb()" has already been initialized. You cannot pass values the second time you call mongodb().');
     }
     
@@ -104,7 +56,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "class()" has already been initialized. You cannot pass values the second time you call class().');
         }
-
+    
         return $this->class;
     }
     
@@ -115,7 +67,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "uploadable()" has already been initialized. You cannot pass values the second time you call uploadable().');
         }
-
+    
         return $this->uploadable;
     }
     
@@ -127,7 +79,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
     public function defaultLocale($value): self
     {
         $this->defaultLocale = $value;
-
+    
         return $this;
     }
     
@@ -139,7 +91,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
     public function translationFallback($value): self
     {
         $this->translationFallback = $value;
-
+    
         return $this;
     }
     
@@ -151,7 +103,7 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
     public function persistDefaultTranslation($value): self
     {
         $this->persistDefaultTranslation = $value;
-
+    
         return $this;
     }
     
@@ -163,13 +115,61 @@ class StofDoctrineExtensionsConfig implements \Symfony\Component\Config\Builder\
     public function skipTranslationOnLoad($value): self
     {
         $this->skipTranslationOnLoad = $value;
-
+    
         return $this;
     }
     
     public function getExtensionAlias(): string
     {
         return 'stof_doctrine_extensions';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['orm'])) {
+            $this->orm = array_map(function ($v) { return new \Symfony\Config\StofDoctrineExtensions\OrmConfig($v); }, $value['orm']);
+            unset($value['orm']);
+        }
+    
+        if (isset($value['mongodb'])) {
+            $this->mongodb = array_map(function ($v) { return new \Symfony\Config\StofDoctrineExtensions\MongodbConfig($v); }, $value['mongodb']);
+            unset($value['mongodb']);
+        }
+    
+        if (isset($value['class'])) {
+            $this->class = new \Symfony\Config\StofDoctrineExtensions\ClassConfig($value['class']);
+            unset($value['class']);
+        }
+    
+        if (isset($value['uploadable'])) {
+            $this->uploadable = new \Symfony\Config\StofDoctrineExtensions\UploadableConfig($value['uploadable']);
+            unset($value['uploadable']);
+        }
+    
+        if (isset($value['default_locale'])) {
+            $this->defaultLocale = $value['default_locale'];
+            unset($value['default_locale']);
+        }
+    
+        if (isset($value['translation_fallback'])) {
+            $this->translationFallback = $value['translation_fallback'];
+            unset($value['translation_fallback']);
+        }
+    
+        if (isset($value['persist_default_translation'])) {
+            $this->persistDefaultTranslation = $value['persist_default_translation'];
+            unset($value['persist_default_translation']);
+        }
+    
+        if (isset($value['skip_translation_on_load'])) {
+            $this->skipTranslationOnLoad = $value['skip_translation_on_load'];
+            unset($value['skip_translation_on_load']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

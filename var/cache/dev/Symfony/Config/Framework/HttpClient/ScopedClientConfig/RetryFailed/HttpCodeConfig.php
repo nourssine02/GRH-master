@@ -15,24 +15,6 @@ class HttpCodeConfig
     private $code;
     private $methods;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['code'])) {
-            $this->code = $value['code'];
-            unset($value['code']);
-        }
-
-        if (isset($value['methods'])) {
-            $this->methods = $value['methods'];
-            unset($value['methods']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|int $value
@@ -41,7 +23,7 @@ class HttpCodeConfig
     public function code($value): self
     {
         $this->code = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class HttpCodeConfig
     public function methods($value): self
     {
         $this->methods = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['code'])) {
+            $this->code = $value['code'];
+            unset($value['code']);
+        }
+    
+        if (isset($value['methods'])) {
+            $this->methods = $value['methods'];
+            unset($value['methods']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -22,59 +22,6 @@ class LdapConfig
     private $filter;
     private $passwordAttribute;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['base_dn'])) {
-            $this->baseDn = $value['base_dn'];
-            unset($value['base_dn']);
-        }
-
-        if (isset($value['search_dn'])) {
-            $this->searchDn = $value['search_dn'];
-            unset($value['search_dn']);
-        }
-
-        if (isset($value['search_password'])) {
-            $this->searchPassword = $value['search_password'];
-            unset($value['search_password']);
-        }
-
-        if (isset($value['extra_fields'])) {
-            $this->extraFields = $value['extra_fields'];
-            unset($value['extra_fields']);
-        }
-
-        if (isset($value['default_roles'])) {
-            $this->defaultRoles = $value['default_roles'];
-            unset($value['default_roles']);
-        }
-
-        if (isset($value['uid_key'])) {
-            $this->uidKey = $value['uid_key'];
-            unset($value['uid_key']);
-        }
-
-        if (isset($value['filter'])) {
-            $this->filter = $value['filter'];
-            unset($value['filter']);
-        }
-
-        if (isset($value['password_attribute'])) {
-            $this->passwordAttribute = $value['password_attribute'];
-            unset($value['password_attribute']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default 'ldap'
      * @param ParamConfigurator|mixed $value
@@ -83,7 +30,7 @@ class LdapConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -95,7 +42,7 @@ class LdapConfig
     public function baseDn($value): self
     {
         $this->baseDn = $value;
-
+    
         return $this;
     }
     
@@ -107,7 +54,7 @@ class LdapConfig
     public function searchDn($value): self
     {
         $this->searchDn = $value;
-
+    
         return $this;
     }
     
@@ -119,7 +66,7 @@ class LdapConfig
     public function searchPassword($value): self
     {
         $this->searchPassword = $value;
-
+    
         return $this;
     }
     
@@ -130,7 +77,7 @@ class LdapConfig
     public function extraFields($value): self
     {
         $this->extraFields = $value;
-
+    
         return $this;
     }
     
@@ -141,7 +88,7 @@ class LdapConfig
     public function defaultRoles($value): self
     {
         $this->defaultRoles = $value;
-
+    
         return $this;
     }
     
@@ -153,7 +100,7 @@ class LdapConfig
     public function uidKey($value): self
     {
         $this->uidKey = $value;
-
+    
         return $this;
     }
     
@@ -165,7 +112,7 @@ class LdapConfig
     public function filter($value): self
     {
         $this->filter = $value;
-
+    
         return $this;
     }
     
@@ -177,8 +124,61 @@ class LdapConfig
     public function passwordAttribute($value): self
     {
         $this->passwordAttribute = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['base_dn'])) {
+            $this->baseDn = $value['base_dn'];
+            unset($value['base_dn']);
+        }
+    
+        if (isset($value['search_dn'])) {
+            $this->searchDn = $value['search_dn'];
+            unset($value['search_dn']);
+        }
+    
+        if (isset($value['search_password'])) {
+            $this->searchPassword = $value['search_password'];
+            unset($value['search_password']);
+        }
+    
+        if (isset($value['extra_fields'])) {
+            $this->extraFields = $value['extra_fields'];
+            unset($value['extra_fields']);
+        }
+    
+        if (isset($value['default_roles'])) {
+            $this->defaultRoles = $value['default_roles'];
+            unset($value['default_roles']);
+        }
+    
+        if (isset($value['uid_key'])) {
+            $this->uidKey = $value['uid_key'];
+            unset($value['uid_key']);
+        }
+    
+        if (isset($value['filter'])) {
+            $this->filter = $value['filter'];
+            unset($value['filter']);
+        }
+    
+        if (isset($value['password_attribute'])) {
+            $this->passwordAttribute = $value['password_attribute'];
+            unset($value['password_attribute']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

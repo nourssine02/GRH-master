@@ -16,29 +16,6 @@ class SwitchUserConfig
     private $parameter;
     private $role;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['parameter'])) {
-            $this->parameter = $value['parameter'];
-            unset($value['parameter']);
-        }
-
-        if (isset($value['role'])) {
-            $this->role = $value['role'];
-            unset($value['role']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class SwitchUserConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class SwitchUserConfig
     public function parameter($value): self
     {
         $this->parameter = $value;
-
+    
         return $this;
     }
     
@@ -71,8 +48,31 @@ class SwitchUserConfig
     public function role($value): self
     {
         $this->role = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['parameter'])) {
+            $this->parameter = $value['parameter'];
+            unset($value['parameter']);
+        }
+    
+        if (isset($value['role'])) {
+            $this->role = $value['role'];
+            unset($value['role']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

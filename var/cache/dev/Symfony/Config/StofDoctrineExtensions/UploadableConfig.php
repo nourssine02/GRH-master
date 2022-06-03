@@ -17,34 +17,6 @@ class UploadableConfig
     private $defaultFileInfoClass;
     private $validateWritableDirectory;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['default_file_path'])) {
-            $this->defaultFilePath = $value['default_file_path'];
-            unset($value['default_file_path']);
-        }
-
-        if (isset($value['mime_type_guesser_class'])) {
-            $this->mimeTypeGuesserClass = $value['mime_type_guesser_class'];
-            unset($value['mime_type_guesser_class']);
-        }
-
-        if (isset($value['default_file_info_class'])) {
-            $this->defaultFileInfoClass = $value['default_file_info_class'];
-            unset($value['default_file_info_class']);
-        }
-
-        if (isset($value['validate_writable_directory'])) {
-            $this->validateWritableDirectory = $value['validate_writable_directory'];
-            unset($value['validate_writable_directory']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -53,7 +25,7 @@ class UploadableConfig
     public function defaultFilePath($value): self
     {
         $this->defaultFilePath = $value;
-
+    
         return $this;
     }
     
@@ -65,7 +37,7 @@ class UploadableConfig
     public function mimeTypeGuesserClass($value): self
     {
         $this->mimeTypeGuesserClass = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +49,7 @@ class UploadableConfig
     public function defaultFileInfoClass($value): self
     {
         $this->defaultFileInfoClass = $value;
-
+    
         return $this;
     }
     
@@ -89,8 +61,36 @@ class UploadableConfig
     public function validateWritableDirectory($value): self
     {
         $this->validateWritableDirectory = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['default_file_path'])) {
+            $this->defaultFilePath = $value['default_file_path'];
+            unset($value['default_file_path']);
+        }
+    
+        if (isset($value['mime_type_guesser_class'])) {
+            $this->mimeTypeGuesserClass = $value['mime_type_guesser_class'];
+            unset($value['mime_type_guesser_class']);
+        }
+    
+        if (isset($value['default_file_info_class'])) {
+            $this->defaultFileInfoClass = $value['default_file_info_class'];
+            unset($value['default_file_info_class']);
+        }
+    
+        if (isset($value['validate_writable_directory'])) {
+            $this->validateWritableDirectory = $value['validate_writable_directory'];
+            unset($value['validate_writable_directory']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

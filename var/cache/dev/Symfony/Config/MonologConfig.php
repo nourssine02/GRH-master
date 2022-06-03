@@ -17,29 +17,6 @@ class MonologConfig implements \Symfony\Component\Config\Builder\ConfigBuilderIn
     private $channels;
     private $handlers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['use_microseconds'])) {
-            $this->useMicroseconds = $value['use_microseconds'];
-            unset($value['use_microseconds']);
-        }
-
-        if (isset($value['channels'])) {
-            $this->channels = $value['channels'];
-            unset($value['channels']);
-        }
-
-        if (isset($value['handlers'])) {
-            $this->handlers = array_map(function ($v) { return new \Symfony\Config\Monolog\HandlerConfig($v); }, $value['handlers']);
-            unset($value['handlers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|mixed $value
@@ -48,7 +25,7 @@ class MonologConfig implements \Symfony\Component\Config\Builder\ConfigBuilderIn
     public function useMicroseconds($value): self
     {
         $this->useMicroseconds = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class MonologConfig implements \Symfony\Component\Config\Builder\ConfigBuilderIn
     public function channels($value): self
     {
         $this->channels = $value;
-
+    
         return $this;
     }
     
@@ -71,13 +48,36 @@ class MonologConfig implements \Symfony\Component\Config\Builder\ConfigBuilderIn
         if ([] === $value) {
             return $this->handlers[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "handler()" has already been initialized. You cannot pass values the second time you call handler().');
     }
     
     public function getExtensionAlias(): string
     {
         return 'monolog';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['use_microseconds'])) {
+            $this->useMicroseconds = $value['use_microseconds'];
+            unset($value['use_microseconds']);
+        }
+    
+        if (isset($value['channels'])) {
+            $this->channels = $value['channels'];
+            unset($value['channels']);
+        }
+    
+        if (isset($value['handlers'])) {
+            $this->handlers = array_map(function ($v) { return new \Symfony\Config\Monolog\HandlerConfig($v); }, $value['handlers']);
+            unset($value['handlers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

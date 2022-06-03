@@ -15,24 +15,6 @@ class DirectoryConfig
     private $path;
     private $namespacePrefix;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['namespace_prefix'])) {
-            $this->namespacePrefix = $value['namespace_prefix'];
-            unset($value['namespace_prefix']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class DirectoryConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class DirectoryConfig
     public function namespacePrefix($value): self
     {
         $this->namespacePrefix = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['namespace_prefix'])) {
+            $this->namespacePrefix = $value['namespace_prefix'];
+            unset($value['namespace_prefix']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

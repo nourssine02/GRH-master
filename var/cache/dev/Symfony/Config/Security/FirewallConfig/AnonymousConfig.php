@@ -15,24 +15,6 @@ class AnonymousConfig
     private $lazy;
     private $secret;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['lazy'])) {
-            $this->lazy = $value['lazy'];
-            unset($value['lazy']);
-        }
-
-        if (isset($value['secret'])) {
-            $this->secret = $value['secret'];
-            unset($value['secret']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -42,7 +24,7 @@ class AnonymousConfig
     public function lazy($value): self
     {
         $this->lazy = $value;
-
+    
         return $this;
     }
     
@@ -54,8 +36,26 @@ class AnonymousConfig
     public function secret($value): self
     {
         $this->secret = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['lazy'])) {
+            $this->lazy = $value['lazy'];
+            unset($value['lazy']);
+        }
+    
+        if (isset($value['secret'])) {
+            $this->secret = $value['secret'];
+            unset($value['secret']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -114,474 +114,6 @@ class HandlerConfig
     private $formatter;
     private $nested;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['priority'])) {
-            $this->priority = $value['priority'];
-            unset($value['priority']);
-        }
-
-        if (isset($value['level'])) {
-            $this->level = $value['level'];
-            unset($value['level']);
-        }
-
-        if (isset($value['bubble'])) {
-            $this->bubble = $value['bubble'];
-            unset($value['bubble']);
-        }
-
-        if (isset($value['app_name'])) {
-            $this->appName = $value['app_name'];
-            unset($value['app_name']);
-        }
-
-        if (isset($value['include_stacktraces'])) {
-            $this->includeStacktraces = $value['include_stacktraces'];
-            unset($value['include_stacktraces']);
-        }
-
-        if (isset($value['process_psr_3_messages'])) {
-            $this->processPsr3Messages = $value['process_psr_3_messages'];
-            unset($value['process_psr_3_messages']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['file_permission'])) {
-            $this->filePermission = $value['file_permission'];
-            unset($value['file_permission']);
-        }
-
-        if (isset($value['use_locking'])) {
-            $this->useLocking = $value['use_locking'];
-            unset($value['use_locking']);
-        }
-
-        if (isset($value['filename_format'])) {
-            $this->filenameFormat = $value['filename_format'];
-            unset($value['filename_format']);
-        }
-
-        if (isset($value['date_format'])) {
-            $this->dateFormat = $value['date_format'];
-            unset($value['date_format']);
-        }
-
-        if (isset($value['ident'])) {
-            $this->ident = $value['ident'];
-            unset($value['ident']);
-        }
-
-        if (isset($value['logopts'])) {
-            $this->logopts = $value['logopts'];
-            unset($value['logopts']);
-        }
-
-        if (isset($value['facility'])) {
-            $this->facility = $value['facility'];
-            unset($value['facility']);
-        }
-
-        if (isset($value['max_files'])) {
-            $this->maxFiles = $value['max_files'];
-            unset($value['max_files']);
-        }
-
-        if (isset($value['action_level'])) {
-            $this->actionLevel = $value['action_level'];
-            unset($value['action_level']);
-        }
-
-        if (isset($value['activation_strategy'])) {
-            $this->activationStrategy = $value['activation_strategy'];
-            unset($value['activation_strategy']);
-        }
-
-        if (isset($value['stop_buffering'])) {
-            $this->stopBuffering = $value['stop_buffering'];
-            unset($value['stop_buffering']);
-        }
-
-        if (isset($value['passthru_level'])) {
-            $this->passthruLevel = $value['passthru_level'];
-            unset($value['passthru_level']);
-        }
-
-        if (isset($value['excluded_404s'])) {
-            $this->excluded404s = $value['excluded_404s'];
-            unset($value['excluded_404s']);
-        }
-
-        if (isset($value['excluded_http_codes'])) {
-            $this->excludedHttpCodes = array_map(function ($v) { return new \Symfony\Config\Monolog\HandlerConfig\ExcludedHttpCodeConfig($v); }, $value['excluded_http_codes']);
-            unset($value['excluded_http_codes']);
-        }
-
-        if (isset($value['accepted_levels'])) {
-            $this->acceptedLevels = $value['accepted_levels'];
-            unset($value['accepted_levels']);
-        }
-
-        if (isset($value['min_level'])) {
-            $this->minLevel = $value['min_level'];
-            unset($value['min_level']);
-        }
-
-        if (isset($value['max_level'])) {
-            $this->maxLevel = $value['max_level'];
-            unset($value['max_level']);
-        }
-
-        if (isset($value['buffer_size'])) {
-            $this->bufferSize = $value['buffer_size'];
-            unset($value['buffer_size']);
-        }
-
-        if (isset($value['flush_on_overflow'])) {
-            $this->flushOnOverflow = $value['flush_on_overflow'];
-            unset($value['flush_on_overflow']);
-        }
-
-        if (isset($value['handler'])) {
-            $this->handler = $value['handler'];
-            unset($value['handler']);
-        }
-
-        if (isset($value['url'])) {
-            $this->url = $value['url'];
-            unset($value['url']);
-        }
-
-        if (isset($value['exchange'])) {
-            $this->exchange = $value['exchange'];
-            unset($value['exchange']);
-        }
-
-        if (isset($value['exchange_name'])) {
-            $this->exchangeName = $value['exchange_name'];
-            unset($value['exchange_name']);
-        }
-
-        if (isset($value['room'])) {
-            $this->room = $value['room'];
-            unset($value['room']);
-        }
-
-        if (isset($value['message_format'])) {
-            $this->messageFormat = $value['message_format'];
-            unset($value['message_format']);
-        }
-
-        if (isset($value['api_version'])) {
-            $this->apiVersion = $value['api_version'];
-            unset($value['api_version']);
-        }
-
-        if (isset($value['channel'])) {
-            $this->channel = $value['channel'];
-            unset($value['channel']);
-        }
-
-        if (isset($value['bot_name'])) {
-            $this->botName = $value['bot_name'];
-            unset($value['bot_name']);
-        }
-
-        if (isset($value['use_attachment'])) {
-            $this->useAttachment = $value['use_attachment'];
-            unset($value['use_attachment']);
-        }
-
-        if (isset($value['use_short_attachment'])) {
-            $this->useShortAttachment = $value['use_short_attachment'];
-            unset($value['use_short_attachment']);
-        }
-
-        if (isset($value['include_extra'])) {
-            $this->includeExtra = $value['include_extra'];
-            unset($value['include_extra']);
-        }
-
-        if (isset($value['icon_emoji'])) {
-            $this->iconEmoji = $value['icon_emoji'];
-            unset($value['icon_emoji']);
-        }
-
-        if (isset($value['webhook_url'])) {
-            $this->webhookUrl = $value['webhook_url'];
-            unset($value['webhook_url']);
-        }
-
-        if (isset($value['team'])) {
-            $this->team = $value['team'];
-            unset($value['team']);
-        }
-
-        if (isset($value['notify'])) {
-            $this->notify = $value['notify'];
-            unset($value['notify']);
-        }
-
-        if (isset($value['nickname'])) {
-            $this->nickname = $value['nickname'];
-            unset($value['nickname']);
-        }
-
-        if (isset($value['token'])) {
-            $this->token = $value['token'];
-            unset($value['token']);
-        }
-
-        if (isset($value['region'])) {
-            $this->region = $value['region'];
-            unset($value['region']);
-        }
-
-        if (isset($value['source'])) {
-            $this->source = $value['source'];
-            unset($value['source']);
-        }
-
-        if (isset($value['use_ssl'])) {
-            $this->useSsl = $value['use_ssl'];
-            unset($value['use_ssl']);
-        }
-
-        if (isset($value['user'])) {
-            $this->user = $value['user'];
-            unset($value['user']);
-        }
-
-        if (isset($value['title'])) {
-            $this->title = $value['title'];
-            unset($value['title']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['publisher'])) {
-            $this->publisher = new \Symfony\Config\Monolog\HandlerConfig\PublisherConfig($value['publisher']);
-            unset($value['publisher']);
-        }
-
-        if (isset($value['mongo'])) {
-            $this->mongo = new \Symfony\Config\Monolog\HandlerConfig\MongoConfig($value['mongo']);
-            unset($value['mongo']);
-        }
-
-        if (isset($value['elasticsearch'])) {
-            $this->elasticsearch = new \Symfony\Config\Monolog\HandlerConfig\ElasticsearchConfig($value['elasticsearch']);
-            unset($value['elasticsearch']);
-        }
-
-        if (isset($value['index'])) {
-            $this->index = $value['index'];
-            unset($value['index']);
-        }
-
-        if (isset($value['document_type'])) {
-            $this->documentType = $value['document_type'];
-            unset($value['document_type']);
-        }
-
-        if (isset($value['ignore_error'])) {
-            $this->ignoreError = $value['ignore_error'];
-            unset($value['ignore_error']);
-        }
-
-        if (isset($value['redis'])) {
-            $this->redis = new \Symfony\Config\Monolog\HandlerConfig\RedisConfig($value['redis']);
-            unset($value['redis']);
-        }
-
-        if (isset($value['predis'])) {
-            $this->predis = new \Symfony\Config\Monolog\HandlerConfig\PredisConfig($value['predis']);
-            unset($value['predis']);
-        }
-
-        if (isset($value['config'])) {
-            $this->config = $value['config'];
-            unset($value['config']);
-        }
-
-        if (isset($value['members'])) {
-            $this->members = $value['members'];
-            unset($value['members']);
-        }
-
-        if (isset($value['from_email'])) {
-            $this->fromEmail = $value['from_email'];
-            unset($value['from_email']);
-        }
-
-        if (isset($value['to_email'])) {
-            $this->toEmail = $value['to_email'];
-            unset($value['to_email']);
-        }
-
-        if (isset($value['subject'])) {
-            $this->subject = $value['subject'];
-            unset($value['subject']);
-        }
-
-        if (isset($value['content_type'])) {
-            $this->contentType = $value['content_type'];
-            unset($value['content_type']);
-        }
-
-        if (isset($value['headers'])) {
-            $this->headers = $value['headers'];
-            unset($value['headers']);
-        }
-
-        if (isset($value['mailer'])) {
-            $this->mailer = $value['mailer'];
-            unset($value['mailer']);
-        }
-
-        if (isset($value['email_prototype'])) {
-            $this->emailPrototype = new \Symfony\Config\Monolog\HandlerConfig\EmailPrototypeConfig($value['email_prototype']);
-            unset($value['email_prototype']);
-        }
-
-        if (isset($value['lazy'])) {
-            $this->lazy = $value['lazy'];
-            unset($value['lazy']);
-        }
-
-        if (isset($value['connection_string'])) {
-            $this->connectionString = $value['connection_string'];
-            unset($value['connection_string']);
-        }
-
-        if (isset($value['timeout'])) {
-            $this->timeout = $value['timeout'];
-            unset($value['timeout']);
-        }
-
-        if (isset($value['time'])) {
-            $this->time = $value['time'];
-            unset($value['time']);
-        }
-
-        if (isset($value['deduplication_level'])) {
-            $this->deduplicationLevel = $value['deduplication_level'];
-            unset($value['deduplication_level']);
-        }
-
-        if (isset($value['store'])) {
-            $this->store = $value['store'];
-            unset($value['store']);
-        }
-
-        if (isset($value['connection_timeout'])) {
-            $this->connectionTimeout = $value['connection_timeout'];
-            unset($value['connection_timeout']);
-        }
-
-        if (isset($value['persistent'])) {
-            $this->persistent = $value['persistent'];
-            unset($value['persistent']);
-        }
-
-        if (isset($value['dsn'])) {
-            $this->dsn = $value['dsn'];
-            unset($value['dsn']);
-        }
-
-        if (isset($value['hub_id'])) {
-            $this->hubId = $value['hub_id'];
-            unset($value['hub_id']);
-        }
-
-        if (isset($value['client_id'])) {
-            $this->clientId = $value['client_id'];
-            unset($value['client_id']);
-        }
-
-        if (isset($value['auto_log_stacks'])) {
-            $this->autoLogStacks = $value['auto_log_stacks'];
-            unset($value['auto_log_stacks']);
-        }
-
-        if (isset($value['release'])) {
-            $this->release = $value['release'];
-            unset($value['release']);
-        }
-
-        if (isset($value['environment'])) {
-            $this->environment = $value['environment'];
-            unset($value['environment']);
-        }
-
-        if (isset($value['message_type'])) {
-            $this->messageType = $value['message_type'];
-            unset($value['message_type']);
-        }
-
-        if (isset($value['tags'])) {
-            $this->tags = $value['tags'];
-            unset($value['tags']);
-        }
-
-        if (isset($value['console_formater_options'])) {
-            $this->consoleFormaterOptions = $value['console_formater_options'];
-            unset($value['console_formater_options']);
-        }
-
-        if (isset($value['console_formatter_options'])) {
-            $this->consoleFormatterOptions = $value['console_formatter_options'];
-            unset($value['console_formatter_options']);
-        }
-
-        if (isset($value['verbosity_levels'])) {
-            $this->verbosityLevels = new \Symfony\Config\Monolog\HandlerConfig\VerbosityLevelsConfig($value['verbosity_levels']);
-            unset($value['verbosity_levels']);
-        }
-
-        if (isset($value['channels'])) {
-            $this->channels = new \Symfony\Config\Monolog\HandlerConfig\ChannelsConfig($value['channels']);
-            unset($value['channels']);
-        }
-
-        if (isset($value['formatter'])) {
-            $this->formatter = $value['formatter'];
-            unset($value['formatter']);
-        }
-
-        if (isset($value['nested'])) {
-            $this->nested = $value['nested'];
-            unset($value['nested']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -590,7 +122,7 @@ class HandlerConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -602,7 +134,7 @@ class HandlerConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -614,7 +146,7 @@ class HandlerConfig
     public function priority($value): self
     {
         $this->priority = $value;
-
+    
         return $this;
     }
     
@@ -626,7 +158,7 @@ class HandlerConfig
     public function level($value): self
     {
         $this->level = $value;
-
+    
         return $this;
     }
     
@@ -638,7 +170,7 @@ class HandlerConfig
     public function bubble($value): self
     {
         $this->bubble = $value;
-
+    
         return $this;
     }
     
@@ -650,7 +182,7 @@ class HandlerConfig
     public function appName($value): self
     {
         $this->appName = $value;
-
+    
         return $this;
     }
     
@@ -662,7 +194,7 @@ class HandlerConfig
     public function includeStacktraces($value): self
     {
         $this->includeStacktraces = $value;
-
+    
         return $this;
     }
     
@@ -674,7 +206,7 @@ class HandlerConfig
     public function processPsr3Messages($value): self
     {
         $this->processPsr3Messages = $value;
-
+    
         return $this;
     }
     
@@ -686,7 +218,7 @@ class HandlerConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -698,7 +230,7 @@ class HandlerConfig
     public function filePermission($value): self
     {
         $this->filePermission = $value;
-
+    
         return $this;
     }
     
@@ -710,7 +242,7 @@ class HandlerConfig
     public function useLocking($value): self
     {
         $this->useLocking = $value;
-
+    
         return $this;
     }
     
@@ -722,7 +254,7 @@ class HandlerConfig
     public function filenameFormat($value): self
     {
         $this->filenameFormat = $value;
-
+    
         return $this;
     }
     
@@ -734,7 +266,7 @@ class HandlerConfig
     public function dateFormat($value): self
     {
         $this->dateFormat = $value;
-
+    
         return $this;
     }
     
@@ -746,7 +278,7 @@ class HandlerConfig
     public function ident($value): self
     {
         $this->ident = $value;
-
+    
         return $this;
     }
     
@@ -758,7 +290,7 @@ class HandlerConfig
     public function logopts($value): self
     {
         $this->logopts = $value;
-
+    
         return $this;
     }
     
@@ -770,7 +302,7 @@ class HandlerConfig
     public function facility($value): self
     {
         $this->facility = $value;
-
+    
         return $this;
     }
     
@@ -782,7 +314,7 @@ class HandlerConfig
     public function maxFiles($value): self
     {
         $this->maxFiles = $value;
-
+    
         return $this;
     }
     
@@ -794,7 +326,7 @@ class HandlerConfig
     public function actionLevel($value): self
     {
         $this->actionLevel = $value;
-
+    
         return $this;
     }
     
@@ -806,7 +338,7 @@ class HandlerConfig
     public function activationStrategy($value): self
     {
         $this->activationStrategy = $value;
-
+    
         return $this;
     }
     
@@ -818,7 +350,7 @@ class HandlerConfig
     public function stopBuffering($value): self
     {
         $this->stopBuffering = $value;
-
+    
         return $this;
     }
     
@@ -830,7 +362,7 @@ class HandlerConfig
     public function passthruLevel($value): self
     {
         $this->passthruLevel = $value;
-
+    
         return $this;
     }
     
@@ -841,7 +373,7 @@ class HandlerConfig
     public function excluded404s($value): self
     {
         $this->excluded404s = $value;
-
+    
         return $this;
     }
     
@@ -857,7 +389,7 @@ class HandlerConfig
     public function acceptedLevels($value): self
     {
         $this->acceptedLevels = $value;
-
+    
         return $this;
     }
     
@@ -869,7 +401,7 @@ class HandlerConfig
     public function minLevel($value): self
     {
         $this->minLevel = $value;
-
+    
         return $this;
     }
     
@@ -881,7 +413,7 @@ class HandlerConfig
     public function maxLevel($value): self
     {
         $this->maxLevel = $value;
-
+    
         return $this;
     }
     
@@ -893,7 +425,7 @@ class HandlerConfig
     public function bufferSize($value): self
     {
         $this->bufferSize = $value;
-
+    
         return $this;
     }
     
@@ -905,7 +437,7 @@ class HandlerConfig
     public function flushOnOverflow($value): self
     {
         $this->flushOnOverflow = $value;
-
+    
         return $this;
     }
     
@@ -917,7 +449,7 @@ class HandlerConfig
     public function handler($value): self
     {
         $this->handler = $value;
-
+    
         return $this;
     }
     
@@ -929,7 +461,7 @@ class HandlerConfig
     public function url($value): self
     {
         $this->url = $value;
-
+    
         return $this;
     }
     
@@ -941,7 +473,7 @@ class HandlerConfig
     public function exchange($value): self
     {
         $this->exchange = $value;
-
+    
         return $this;
     }
     
@@ -953,7 +485,7 @@ class HandlerConfig
     public function exchangeName($value): self
     {
         $this->exchangeName = $value;
-
+    
         return $this;
     }
     
@@ -965,7 +497,7 @@ class HandlerConfig
     public function room($value): self
     {
         $this->room = $value;
-
+    
         return $this;
     }
     
@@ -977,7 +509,7 @@ class HandlerConfig
     public function messageFormat($value): self
     {
         $this->messageFormat = $value;
-
+    
         return $this;
     }
     
@@ -989,7 +521,7 @@ class HandlerConfig
     public function apiVersion($value): self
     {
         $this->apiVersion = $value;
-
+    
         return $this;
     }
     
@@ -1001,7 +533,7 @@ class HandlerConfig
     public function channel($value): self
     {
         $this->channel = $value;
-
+    
         return $this;
     }
     
@@ -1013,7 +545,7 @@ class HandlerConfig
     public function botName($value): self
     {
         $this->botName = $value;
-
+    
         return $this;
     }
     
@@ -1025,7 +557,7 @@ class HandlerConfig
     public function useAttachment($value): self
     {
         $this->useAttachment = $value;
-
+    
         return $this;
     }
     
@@ -1037,7 +569,7 @@ class HandlerConfig
     public function useShortAttachment($value): self
     {
         $this->useShortAttachment = $value;
-
+    
         return $this;
     }
     
@@ -1049,7 +581,7 @@ class HandlerConfig
     public function includeExtra($value): self
     {
         $this->includeExtra = $value;
-
+    
         return $this;
     }
     
@@ -1061,7 +593,7 @@ class HandlerConfig
     public function iconEmoji($value): self
     {
         $this->iconEmoji = $value;
-
+    
         return $this;
     }
     
@@ -1073,7 +605,7 @@ class HandlerConfig
     public function webhookUrl($value): self
     {
         $this->webhookUrl = $value;
-
+    
         return $this;
     }
     
@@ -1085,7 +617,7 @@ class HandlerConfig
     public function team($value): self
     {
         $this->team = $value;
-
+    
         return $this;
     }
     
@@ -1097,7 +629,7 @@ class HandlerConfig
     public function notify($value): self
     {
         $this->notify = $value;
-
+    
         return $this;
     }
     
@@ -1109,7 +641,7 @@ class HandlerConfig
     public function nickname($value): self
     {
         $this->nickname = $value;
-
+    
         return $this;
     }
     
@@ -1121,7 +653,7 @@ class HandlerConfig
     public function token($value): self
     {
         $this->token = $value;
-
+    
         return $this;
     }
     
@@ -1133,7 +665,7 @@ class HandlerConfig
     public function region($value): self
     {
         $this->region = $value;
-
+    
         return $this;
     }
     
@@ -1145,7 +677,7 @@ class HandlerConfig
     public function source($value): self
     {
         $this->source = $value;
-
+    
         return $this;
     }
     
@@ -1157,7 +689,7 @@ class HandlerConfig
     public function useSsl($value): self
     {
         $this->useSsl = $value;
-
+    
         return $this;
     }
     
@@ -1169,7 +701,7 @@ class HandlerConfig
     public function user($value): self
     {
         $this->user = $value;
-
+    
         return $this;
     }
     
@@ -1181,7 +713,7 @@ class HandlerConfig
     public function title($value): self
     {
         $this->title = $value;
-
+    
         return $this;
     }
     
@@ -1193,7 +725,7 @@ class HandlerConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -1205,7 +737,7 @@ class HandlerConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -1216,7 +748,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "publisher()" has already been initialized. You cannot pass values the second time you call publisher().');
         }
-
+    
         return $this->publisher;
     }
     
@@ -1227,7 +759,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "mongo()" has already been initialized. You cannot pass values the second time you call mongo().');
         }
-
+    
         return $this->mongo;
     }
     
@@ -1238,7 +770,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "elasticsearch()" has already been initialized. You cannot pass values the second time you call elasticsearch().');
         }
-
+    
         return $this->elasticsearch;
     }
     
@@ -1250,7 +782,7 @@ class HandlerConfig
     public function index($value): self
     {
         $this->index = $value;
-
+    
         return $this;
     }
     
@@ -1262,7 +794,7 @@ class HandlerConfig
     public function documentType($value): self
     {
         $this->documentType = $value;
-
+    
         return $this;
     }
     
@@ -1274,7 +806,7 @@ class HandlerConfig
     public function ignoreError($value): self
     {
         $this->ignoreError = $value;
-
+    
         return $this;
     }
     
@@ -1285,7 +817,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "redis()" has already been initialized. You cannot pass values the second time you call redis().');
         }
-
+    
         return $this->redis;
     }
     
@@ -1296,7 +828,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "predis()" has already been initialized. You cannot pass values the second time you call predis().');
         }
-
+    
         return $this->predis;
     }
     
@@ -1307,7 +839,7 @@ class HandlerConfig
     public function config($value): self
     {
         $this->config = $value;
-
+    
         return $this;
     }
     
@@ -1318,7 +850,7 @@ class HandlerConfig
     public function members($value): self
     {
         $this->members = $value;
-
+    
         return $this;
     }
     
@@ -1330,7 +862,7 @@ class HandlerConfig
     public function fromEmail($value): self
     {
         $this->fromEmail = $value;
-
+    
         return $this;
     }
     
@@ -1341,7 +873,7 @@ class HandlerConfig
     public function toEmail($value): self
     {
         $this->toEmail = $value;
-
+    
         return $this;
     }
     
@@ -1353,7 +885,7 @@ class HandlerConfig
     public function subject($value): self
     {
         $this->subject = $value;
-
+    
         return $this;
     }
     
@@ -1365,7 +897,7 @@ class HandlerConfig
     public function contentType($value): self
     {
         $this->contentType = $value;
-
+    
         return $this;
     }
     
@@ -1376,7 +908,7 @@ class HandlerConfig
     public function headers($value): self
     {
         $this->headers = $value;
-
+    
         return $this;
     }
     
@@ -1388,7 +920,7 @@ class HandlerConfig
     public function mailer($value): self
     {
         $this->mailer = $value;
-
+    
         return $this;
     }
     
@@ -1399,7 +931,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "emailPrototype()" has already been initialized. You cannot pass values the second time you call emailPrototype().');
         }
-
+    
         return $this->emailPrototype;
     }
     
@@ -1411,7 +943,7 @@ class HandlerConfig
     public function lazy($value): self
     {
         $this->lazy = $value;
-
+    
         return $this;
     }
     
@@ -1423,7 +955,7 @@ class HandlerConfig
     public function connectionString($value): self
     {
         $this->connectionString = $value;
-
+    
         return $this;
     }
     
@@ -1435,7 +967,7 @@ class HandlerConfig
     public function timeout($value): self
     {
         $this->timeout = $value;
-
+    
         return $this;
     }
     
@@ -1447,7 +979,7 @@ class HandlerConfig
     public function time($value): self
     {
         $this->time = $value;
-
+    
         return $this;
     }
     
@@ -1459,7 +991,7 @@ class HandlerConfig
     public function deduplicationLevel($value): self
     {
         $this->deduplicationLevel = $value;
-
+    
         return $this;
     }
     
@@ -1471,7 +1003,7 @@ class HandlerConfig
     public function store($value): self
     {
         $this->store = $value;
-
+    
         return $this;
     }
     
@@ -1483,7 +1015,7 @@ class HandlerConfig
     public function connectionTimeout($value): self
     {
         $this->connectionTimeout = $value;
-
+    
         return $this;
     }
     
@@ -1495,7 +1027,7 @@ class HandlerConfig
     public function persistent($value): self
     {
         $this->persistent = $value;
-
+    
         return $this;
     }
     
@@ -1507,7 +1039,7 @@ class HandlerConfig
     public function dsn($value): self
     {
         $this->dsn = $value;
-
+    
         return $this;
     }
     
@@ -1519,7 +1051,7 @@ class HandlerConfig
     public function hubId($value): self
     {
         $this->hubId = $value;
-
+    
         return $this;
     }
     
@@ -1531,7 +1063,7 @@ class HandlerConfig
     public function clientId($value): self
     {
         $this->clientId = $value;
-
+    
         return $this;
     }
     
@@ -1543,7 +1075,7 @@ class HandlerConfig
     public function autoLogStacks($value): self
     {
         $this->autoLogStacks = $value;
-
+    
         return $this;
     }
     
@@ -1555,7 +1087,7 @@ class HandlerConfig
     public function release($value): self
     {
         $this->release = $value;
-
+    
         return $this;
     }
     
@@ -1567,7 +1099,7 @@ class HandlerConfig
     public function environment($value): self
     {
         $this->environment = $value;
-
+    
         return $this;
     }
     
@@ -1579,7 +1111,7 @@ class HandlerConfig
     public function messageType($value): self
     {
         $this->messageType = $value;
-
+    
         return $this;
     }
     
@@ -1590,7 +1122,7 @@ class HandlerConfig
     public function tags($value): self
     {
         $this->tags = $value;
-
+    
         return $this;
     }
     
@@ -1603,7 +1135,7 @@ class HandlerConfig
     public function consoleFormaterOptions($value): self
     {
         $this->consoleFormaterOptions = $value;
-
+    
         return $this;
     }
     
@@ -1617,7 +1149,7 @@ class HandlerConfig
     )): self
     {
         $this->consoleFormatterOptions = $value;
-
+    
         return $this;
     }
     
@@ -1628,7 +1160,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "verbosityLevels()" has already been initialized. You cannot pass values the second time you call verbosityLevels().');
         }
-
+    
         return $this->verbosityLevels;
     }
     
@@ -1639,7 +1171,7 @@ class HandlerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "channels()" has already been initialized. You cannot pass values the second time you call channels().');
         }
-
+    
         return $this->channels;
     }
     
@@ -1651,7 +1183,7 @@ class HandlerConfig
     public function formatter($value): self
     {
         $this->formatter = $value;
-
+    
         return $this;
     }
     
@@ -1663,8 +1195,476 @@ class HandlerConfig
     public function nested($value): self
     {
         $this->nested = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['priority'])) {
+            $this->priority = $value['priority'];
+            unset($value['priority']);
+        }
+    
+        if (isset($value['level'])) {
+            $this->level = $value['level'];
+            unset($value['level']);
+        }
+    
+        if (isset($value['bubble'])) {
+            $this->bubble = $value['bubble'];
+            unset($value['bubble']);
+        }
+    
+        if (isset($value['app_name'])) {
+            $this->appName = $value['app_name'];
+            unset($value['app_name']);
+        }
+    
+        if (isset($value['include_stacktraces'])) {
+            $this->includeStacktraces = $value['include_stacktraces'];
+            unset($value['include_stacktraces']);
+        }
+    
+        if (isset($value['process_psr_3_messages'])) {
+            $this->processPsr3Messages = $value['process_psr_3_messages'];
+            unset($value['process_psr_3_messages']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['file_permission'])) {
+            $this->filePermission = $value['file_permission'];
+            unset($value['file_permission']);
+        }
+    
+        if (isset($value['use_locking'])) {
+            $this->useLocking = $value['use_locking'];
+            unset($value['use_locking']);
+        }
+    
+        if (isset($value['filename_format'])) {
+            $this->filenameFormat = $value['filename_format'];
+            unset($value['filename_format']);
+        }
+    
+        if (isset($value['date_format'])) {
+            $this->dateFormat = $value['date_format'];
+            unset($value['date_format']);
+        }
+    
+        if (isset($value['ident'])) {
+            $this->ident = $value['ident'];
+            unset($value['ident']);
+        }
+    
+        if (isset($value['logopts'])) {
+            $this->logopts = $value['logopts'];
+            unset($value['logopts']);
+        }
+    
+        if (isset($value['facility'])) {
+            $this->facility = $value['facility'];
+            unset($value['facility']);
+        }
+    
+        if (isset($value['max_files'])) {
+            $this->maxFiles = $value['max_files'];
+            unset($value['max_files']);
+        }
+    
+        if (isset($value['action_level'])) {
+            $this->actionLevel = $value['action_level'];
+            unset($value['action_level']);
+        }
+    
+        if (isset($value['activation_strategy'])) {
+            $this->activationStrategy = $value['activation_strategy'];
+            unset($value['activation_strategy']);
+        }
+    
+        if (isset($value['stop_buffering'])) {
+            $this->stopBuffering = $value['stop_buffering'];
+            unset($value['stop_buffering']);
+        }
+    
+        if (isset($value['passthru_level'])) {
+            $this->passthruLevel = $value['passthru_level'];
+            unset($value['passthru_level']);
+        }
+    
+        if (isset($value['excluded_404s'])) {
+            $this->excluded404s = $value['excluded_404s'];
+            unset($value['excluded_404s']);
+        }
+    
+        if (isset($value['excluded_http_codes'])) {
+            $this->excludedHttpCodes = array_map(function ($v) { return new \Symfony\Config\Monolog\HandlerConfig\ExcludedHttpCodeConfig($v); }, $value['excluded_http_codes']);
+            unset($value['excluded_http_codes']);
+        }
+    
+        if (isset($value['accepted_levels'])) {
+            $this->acceptedLevels = $value['accepted_levels'];
+            unset($value['accepted_levels']);
+        }
+    
+        if (isset($value['min_level'])) {
+            $this->minLevel = $value['min_level'];
+            unset($value['min_level']);
+        }
+    
+        if (isset($value['max_level'])) {
+            $this->maxLevel = $value['max_level'];
+            unset($value['max_level']);
+        }
+    
+        if (isset($value['buffer_size'])) {
+            $this->bufferSize = $value['buffer_size'];
+            unset($value['buffer_size']);
+        }
+    
+        if (isset($value['flush_on_overflow'])) {
+            $this->flushOnOverflow = $value['flush_on_overflow'];
+            unset($value['flush_on_overflow']);
+        }
+    
+        if (isset($value['handler'])) {
+            $this->handler = $value['handler'];
+            unset($value['handler']);
+        }
+    
+        if (isset($value['url'])) {
+            $this->url = $value['url'];
+            unset($value['url']);
+        }
+    
+        if (isset($value['exchange'])) {
+            $this->exchange = $value['exchange'];
+            unset($value['exchange']);
+        }
+    
+        if (isset($value['exchange_name'])) {
+            $this->exchangeName = $value['exchange_name'];
+            unset($value['exchange_name']);
+        }
+    
+        if (isset($value['room'])) {
+            $this->room = $value['room'];
+            unset($value['room']);
+        }
+    
+        if (isset($value['message_format'])) {
+            $this->messageFormat = $value['message_format'];
+            unset($value['message_format']);
+        }
+    
+        if (isset($value['api_version'])) {
+            $this->apiVersion = $value['api_version'];
+            unset($value['api_version']);
+        }
+    
+        if (isset($value['channel'])) {
+            $this->channel = $value['channel'];
+            unset($value['channel']);
+        }
+    
+        if (isset($value['bot_name'])) {
+            $this->botName = $value['bot_name'];
+            unset($value['bot_name']);
+        }
+    
+        if (isset($value['use_attachment'])) {
+            $this->useAttachment = $value['use_attachment'];
+            unset($value['use_attachment']);
+        }
+    
+        if (isset($value['use_short_attachment'])) {
+            $this->useShortAttachment = $value['use_short_attachment'];
+            unset($value['use_short_attachment']);
+        }
+    
+        if (isset($value['include_extra'])) {
+            $this->includeExtra = $value['include_extra'];
+            unset($value['include_extra']);
+        }
+    
+        if (isset($value['icon_emoji'])) {
+            $this->iconEmoji = $value['icon_emoji'];
+            unset($value['icon_emoji']);
+        }
+    
+        if (isset($value['webhook_url'])) {
+            $this->webhookUrl = $value['webhook_url'];
+            unset($value['webhook_url']);
+        }
+    
+        if (isset($value['team'])) {
+            $this->team = $value['team'];
+            unset($value['team']);
+        }
+    
+        if (isset($value['notify'])) {
+            $this->notify = $value['notify'];
+            unset($value['notify']);
+        }
+    
+        if (isset($value['nickname'])) {
+            $this->nickname = $value['nickname'];
+            unset($value['nickname']);
+        }
+    
+        if (isset($value['token'])) {
+            $this->token = $value['token'];
+            unset($value['token']);
+        }
+    
+        if (isset($value['region'])) {
+            $this->region = $value['region'];
+            unset($value['region']);
+        }
+    
+        if (isset($value['source'])) {
+            $this->source = $value['source'];
+            unset($value['source']);
+        }
+    
+        if (isset($value['use_ssl'])) {
+            $this->useSsl = $value['use_ssl'];
+            unset($value['use_ssl']);
+        }
+    
+        if (isset($value['user'])) {
+            $this->user = $value['user'];
+            unset($value['user']);
+        }
+    
+        if (isset($value['title'])) {
+            $this->title = $value['title'];
+            unset($value['title']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['publisher'])) {
+            $this->publisher = new \Symfony\Config\Monolog\HandlerConfig\PublisherConfig($value['publisher']);
+            unset($value['publisher']);
+        }
+    
+        if (isset($value['mongo'])) {
+            $this->mongo = new \Symfony\Config\Monolog\HandlerConfig\MongoConfig($value['mongo']);
+            unset($value['mongo']);
+        }
+    
+        if (isset($value['elasticsearch'])) {
+            $this->elasticsearch = new \Symfony\Config\Monolog\HandlerConfig\ElasticsearchConfig($value['elasticsearch']);
+            unset($value['elasticsearch']);
+        }
+    
+        if (isset($value['index'])) {
+            $this->index = $value['index'];
+            unset($value['index']);
+        }
+    
+        if (isset($value['document_type'])) {
+            $this->documentType = $value['document_type'];
+            unset($value['document_type']);
+        }
+    
+        if (isset($value['ignore_error'])) {
+            $this->ignoreError = $value['ignore_error'];
+            unset($value['ignore_error']);
+        }
+    
+        if (isset($value['redis'])) {
+            $this->redis = new \Symfony\Config\Monolog\HandlerConfig\RedisConfig($value['redis']);
+            unset($value['redis']);
+        }
+    
+        if (isset($value['predis'])) {
+            $this->predis = new \Symfony\Config\Monolog\HandlerConfig\PredisConfig($value['predis']);
+            unset($value['predis']);
+        }
+    
+        if (isset($value['config'])) {
+            $this->config = $value['config'];
+            unset($value['config']);
+        }
+    
+        if (isset($value['members'])) {
+            $this->members = $value['members'];
+            unset($value['members']);
+        }
+    
+        if (isset($value['from_email'])) {
+            $this->fromEmail = $value['from_email'];
+            unset($value['from_email']);
+        }
+    
+        if (isset($value['to_email'])) {
+            $this->toEmail = $value['to_email'];
+            unset($value['to_email']);
+        }
+    
+        if (isset($value['subject'])) {
+            $this->subject = $value['subject'];
+            unset($value['subject']);
+        }
+    
+        if (isset($value['content_type'])) {
+            $this->contentType = $value['content_type'];
+            unset($value['content_type']);
+        }
+    
+        if (isset($value['headers'])) {
+            $this->headers = $value['headers'];
+            unset($value['headers']);
+        }
+    
+        if (isset($value['mailer'])) {
+            $this->mailer = $value['mailer'];
+            unset($value['mailer']);
+        }
+    
+        if (isset($value['email_prototype'])) {
+            $this->emailPrototype = new \Symfony\Config\Monolog\HandlerConfig\EmailPrototypeConfig($value['email_prototype']);
+            unset($value['email_prototype']);
+        }
+    
+        if (isset($value['lazy'])) {
+            $this->lazy = $value['lazy'];
+            unset($value['lazy']);
+        }
+    
+        if (isset($value['connection_string'])) {
+            $this->connectionString = $value['connection_string'];
+            unset($value['connection_string']);
+        }
+    
+        if (isset($value['timeout'])) {
+            $this->timeout = $value['timeout'];
+            unset($value['timeout']);
+        }
+    
+        if (isset($value['time'])) {
+            $this->time = $value['time'];
+            unset($value['time']);
+        }
+    
+        if (isset($value['deduplication_level'])) {
+            $this->deduplicationLevel = $value['deduplication_level'];
+            unset($value['deduplication_level']);
+        }
+    
+        if (isset($value['store'])) {
+            $this->store = $value['store'];
+            unset($value['store']);
+        }
+    
+        if (isset($value['connection_timeout'])) {
+            $this->connectionTimeout = $value['connection_timeout'];
+            unset($value['connection_timeout']);
+        }
+    
+        if (isset($value['persistent'])) {
+            $this->persistent = $value['persistent'];
+            unset($value['persistent']);
+        }
+    
+        if (isset($value['dsn'])) {
+            $this->dsn = $value['dsn'];
+            unset($value['dsn']);
+        }
+    
+        if (isset($value['hub_id'])) {
+            $this->hubId = $value['hub_id'];
+            unset($value['hub_id']);
+        }
+    
+        if (isset($value['client_id'])) {
+            $this->clientId = $value['client_id'];
+            unset($value['client_id']);
+        }
+    
+        if (isset($value['auto_log_stacks'])) {
+            $this->autoLogStacks = $value['auto_log_stacks'];
+            unset($value['auto_log_stacks']);
+        }
+    
+        if (isset($value['release'])) {
+            $this->release = $value['release'];
+            unset($value['release']);
+        }
+    
+        if (isset($value['environment'])) {
+            $this->environment = $value['environment'];
+            unset($value['environment']);
+        }
+    
+        if (isset($value['message_type'])) {
+            $this->messageType = $value['message_type'];
+            unset($value['message_type']);
+        }
+    
+        if (isset($value['tags'])) {
+            $this->tags = $value['tags'];
+            unset($value['tags']);
+        }
+    
+        if (isset($value['console_formater_options'])) {
+            $this->consoleFormaterOptions = $value['console_formater_options'];
+            unset($value['console_formater_options']);
+        }
+    
+        if (isset($value['console_formatter_options'])) {
+            $this->consoleFormatterOptions = $value['console_formatter_options'];
+            unset($value['console_formatter_options']);
+        }
+    
+        if (isset($value['verbosity_levels'])) {
+            $this->verbosityLevels = new \Symfony\Config\Monolog\HandlerConfig\VerbosityLevelsConfig($value['verbosity_levels']);
+            unset($value['verbosity_levels']);
+        }
+    
+        if (isset($value['channels'])) {
+            $this->channels = new \Symfony\Config\Monolog\HandlerConfig\ChannelsConfig($value['channels']);
+            unset($value['channels']);
+        }
+    
+        if (isset($value['formatter'])) {
+            $this->formatter = $value['formatter'];
+            unset($value['formatter']);
+        }
+    
+        if (isset($value['nested'])) {
+            $this->nested = $value['nested'];
+            unset($value['nested']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -18,39 +18,6 @@ class TransitionConfig
     private $to;
     private $metadata;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['name'])) {
-            $this->name = $value['name'];
-            unset($value['name']);
-        }
-
-        if (isset($value['guard'])) {
-            $this->guard = $value['guard'];
-            unset($value['guard']);
-        }
-
-        if (isset($value['from'])) {
-            $this->from = $value['from'];
-            unset($value['from']);
-        }
-
-        if (isset($value['to'])) {
-            $this->to = $value['to'];
-            unset($value['to']);
-        }
-
-        if (isset($value['metadata'])) {
-            $this->metadata = $value['metadata'];
-            unset($value['metadata']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -59,7 +26,7 @@ class TransitionConfig
     public function name($value): self
     {
         $this->name = $value;
-
+    
         return $this;
     }
     
@@ -73,7 +40,7 @@ class TransitionConfig
     public function guard($value): self
     {
         $this->guard = $value;
-
+    
         return $this;
     }
     
@@ -84,7 +51,7 @@ class TransitionConfig
     public function from($value): self
     {
         $this->from = $value;
-
+    
         return $this;
     }
     
@@ -95,7 +62,7 @@ class TransitionConfig
     public function to($value): self
     {
         $this->to = $value;
-
+    
         return $this;
     }
     
@@ -106,8 +73,41 @@ class TransitionConfig
     public function metadata($value): self
     {
         $this->metadata = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['name'])) {
+            $this->name = $value['name'];
+            unset($value['name']);
+        }
+    
+        if (isset($value['guard'])) {
+            $this->guard = $value['guard'];
+            unset($value['guard']);
+        }
+    
+        if (isset($value['from'])) {
+            $this->from = $value['from'];
+            unset($value['from']);
+        }
+    
+        if (isset($value['to'])) {
+            $this->to = $value['to'];
+            unset($value['to']);
+        }
+    
+        if (isset($value['metadata'])) {
+            $this->metadata = $value['metadata'];
+            unset($value['metadata']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

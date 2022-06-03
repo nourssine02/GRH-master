@@ -14,19 +14,6 @@ class RoutingConfig
 {
     private $senders;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['senders'])) {
-            $this->senders = $value['senders'];
-            unset($value['senders']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -34,8 +21,21 @@ class RoutingConfig
     public function senders($value): self
     {
         $this->senders = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['senders'])) {
+            $this->senders = $value['senders'];
+            unset($value['senders']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

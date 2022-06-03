@@ -17,34 +17,6 @@ class SecretsConfig
     private $localDotenvFile;
     private $decryptionEnvVar;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['vault_directory'])) {
-            $this->vaultDirectory = $value['vault_directory'];
-            unset($value['vault_directory']);
-        }
-
-        if (isset($value['local_dotenv_file'])) {
-            $this->localDotenvFile = $value['local_dotenv_file'];
-            unset($value['local_dotenv_file']);
-        }
-
-        if (isset($value['decryption_env_var'])) {
-            $this->decryptionEnvVar = $value['decryption_env_var'];
-            unset($value['decryption_env_var']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -53,7 +25,7 @@ class SecretsConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -65,7 +37,7 @@ class SecretsConfig
     public function vaultDirectory($value): self
     {
         $this->vaultDirectory = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +49,7 @@ class SecretsConfig
     public function localDotenvFile($value): self
     {
         $this->localDotenvFile = $value;
-
+    
         return $this;
     }
     
@@ -89,8 +61,36 @@ class SecretsConfig
     public function decryptionEnvVar($value): self
     {
         $this->decryptionEnvVar = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['vault_directory'])) {
+            $this->vaultDirectory = $value['vault_directory'];
+            unset($value['vault_directory']);
+        }
+    
+        if (isset($value['local_dotenv_file'])) {
+            $this->localDotenvFile = $value['local_dotenv_file'];
+            unset($value['local_dotenv_file']);
+        }
+    
+        if (isset($value['decryption_env_var'])) {
+            $this->decryptionEnvVar = $value['decryption_env_var'];
+            unset($value['decryption_env_var']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

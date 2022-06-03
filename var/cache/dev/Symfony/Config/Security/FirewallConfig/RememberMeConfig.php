@@ -30,94 +30,6 @@ class RememberMeConfig
     private $alwaysRememberMe;
     private $rememberMeParameter;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['secret'])) {
-            $this->secret = $value['secret'];
-            unset($value['secret']);
-        }
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['user_providers'])) {
-            $this->userProviders = $value['user_providers'];
-            unset($value['user_providers']);
-        }
-
-        if (isset($value['catch_exceptions'])) {
-            $this->catchExceptions = $value['catch_exceptions'];
-            unset($value['catch_exceptions']);
-        }
-
-        if (isset($value['signature_properties'])) {
-            $this->signatureProperties = $value['signature_properties'];
-            unset($value['signature_properties']);
-        }
-
-        if (isset($value['token_provider'])) {
-            $this->tokenProvider = new \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig($value['token_provider']);
-            unset($value['token_provider']);
-        }
-
-        if (isset($value['token_verifier'])) {
-            $this->tokenVerifier = $value['token_verifier'];
-            unset($value['token_verifier']);
-        }
-
-        if (isset($value['name'])) {
-            $this->name = $value['name'];
-            unset($value['name']);
-        }
-
-        if (isset($value['lifetime'])) {
-            $this->lifetime = $value['lifetime'];
-            unset($value['lifetime']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['domain'])) {
-            $this->domain = $value['domain'];
-            unset($value['domain']);
-        }
-
-        if (isset($value['secure'])) {
-            $this->secure = $value['secure'];
-            unset($value['secure']);
-        }
-
-        if (isset($value['httponly'])) {
-            $this->httponly = $value['httponly'];
-            unset($value['httponly']);
-        }
-
-        if (isset($value['samesite'])) {
-            $this->samesite = $value['samesite'];
-            unset($value['samesite']);
-        }
-
-        if (isset($value['always_remember_me'])) {
-            $this->alwaysRememberMe = $value['always_remember_me'];
-            unset($value['always_remember_me']);
-        }
-
-        if (isset($value['remember_me_parameter'])) {
-            $this->rememberMeParameter = $value['remember_me_parameter'];
-            unset($value['remember_me_parameter']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -126,7 +38,7 @@ class RememberMeConfig
     public function secret($value): self
     {
         $this->secret = $value;
-
+    
         return $this;
     }
     
@@ -138,7 +50,7 @@ class RememberMeConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -149,7 +61,7 @@ class RememberMeConfig
     public function userProviders($value): self
     {
         $this->userProviders = $value;
-
+    
         return $this;
     }
     
@@ -161,7 +73,7 @@ class RememberMeConfig
     public function catchExceptions($value): self
     {
         $this->catchExceptions = $value;
-
+    
         return $this;
     }
     
@@ -172,7 +84,7 @@ class RememberMeConfig
     public function signatureProperties($value): self
     {
         $this->signatureProperties = $value;
-
+    
         return $this;
     }
     
@@ -183,7 +95,7 @@ class RememberMeConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "tokenProvider()" has already been initialized. You cannot pass values the second time you call tokenProvider().');
         }
-
+    
         return $this->tokenProvider;
     }
     
@@ -196,7 +108,7 @@ class RememberMeConfig
     public function tokenVerifier($value): self
     {
         $this->tokenVerifier = $value;
-
+    
         return $this;
     }
     
@@ -208,7 +120,7 @@ class RememberMeConfig
     public function name($value): self
     {
         $this->name = $value;
-
+    
         return $this;
     }
     
@@ -220,7 +132,7 @@ class RememberMeConfig
     public function lifetime($value): self
     {
         $this->lifetime = $value;
-
+    
         return $this;
     }
     
@@ -232,7 +144,7 @@ class RememberMeConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -244,7 +156,7 @@ class RememberMeConfig
     public function domain($value): self
     {
         $this->domain = $value;
-
+    
         return $this;
     }
     
@@ -256,7 +168,7 @@ class RememberMeConfig
     public function secure($value): self
     {
         $this->secure = $value;
-
+    
         return $this;
     }
     
@@ -268,7 +180,7 @@ class RememberMeConfig
     public function httponly($value): self
     {
         $this->httponly = $value;
-
+    
         return $this;
     }
     
@@ -280,7 +192,7 @@ class RememberMeConfig
     public function samesite($value): self
     {
         $this->samesite = $value;
-
+    
         return $this;
     }
     
@@ -292,7 +204,7 @@ class RememberMeConfig
     public function alwaysRememberMe($value): self
     {
         $this->alwaysRememberMe = $value;
-
+    
         return $this;
     }
     
@@ -304,8 +216,96 @@ class RememberMeConfig
     public function rememberMeParameter($value): self
     {
         $this->rememberMeParameter = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['secret'])) {
+            $this->secret = $value['secret'];
+            unset($value['secret']);
+        }
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['user_providers'])) {
+            $this->userProviders = $value['user_providers'];
+            unset($value['user_providers']);
+        }
+    
+        if (isset($value['catch_exceptions'])) {
+            $this->catchExceptions = $value['catch_exceptions'];
+            unset($value['catch_exceptions']);
+        }
+    
+        if (isset($value['signature_properties'])) {
+            $this->signatureProperties = $value['signature_properties'];
+            unset($value['signature_properties']);
+        }
+    
+        if (isset($value['token_provider'])) {
+            $this->tokenProvider = new \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig($value['token_provider']);
+            unset($value['token_provider']);
+        }
+    
+        if (isset($value['token_verifier'])) {
+            $this->tokenVerifier = $value['token_verifier'];
+            unset($value['token_verifier']);
+        }
+    
+        if (isset($value['name'])) {
+            $this->name = $value['name'];
+            unset($value['name']);
+        }
+    
+        if (isset($value['lifetime'])) {
+            $this->lifetime = $value['lifetime'];
+            unset($value['lifetime']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['domain'])) {
+            $this->domain = $value['domain'];
+            unset($value['domain']);
+        }
+    
+        if (isset($value['secure'])) {
+            $this->secure = $value['secure'];
+            unset($value['secure']);
+        }
+    
+        if (isset($value['httponly'])) {
+            $this->httponly = $value['httponly'];
+            unset($value['httponly']);
+        }
+    
+        if (isset($value['samesite'])) {
+            $this->samesite = $value['samesite'];
+            unset($value['samesite']);
+        }
+    
+        if (isset($value['always_remember_me'])) {
+            $this->alwaysRememberMe = $value['always_remember_me'];
+            unset($value['always_remember_me']);
+        }
+    
+        if (isset($value['remember_me_parameter'])) {
+            $this->rememberMeParameter = $value['remember_me_parameter'];
+            unset($value['remember_me_parameter']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

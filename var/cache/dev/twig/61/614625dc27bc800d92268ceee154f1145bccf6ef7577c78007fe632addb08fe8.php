@@ -30,33 +30,32 @@ class __TwigTemplate_9292235af9e1b4e51bd53c8527702ce45c2477a5669f6d5db82caed8d93
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/base.html.twig' %}
-
-{% block head %}
-    <style>
-        {{ include('@WebProfiler/Profiler/open.css.twig') }}
-    </style>
-{% endblock %}
-
-{% block body %}
-    {% set source = filename|file_excerpt(line, -1) %}
-    <div class=\"header\">
-        <h1>{{ file }}{% if 0 < line %} <small>line {{ line }}</small>{% endif %}</h1>
-        <a class=\"doc\" href=\"https://symfony.com/doc/{{ constant('Symfony\\\\Component\\\\HttpKernel\\\\Kernel::VERSION') }}/reference/configuration/framework.html#ide\" rel=\"help\">Open in your IDE?</a>
-    </div>
-    <div class=\"source\">
-        {% if source is null %}
-            <p class=\"empty\">The file is not readable.</p>
-        {% else %}
-            {{ source|raw }}
-        {% endif %}
-    </div>
-{% endblock %}
-", "@WebProfiler/Profiler/open.html.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/open.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/base.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/open.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/open.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/base.html.twig", "@WebProfiler/Profiler/open.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -74,23 +73,15 @@ class __TwigTemplate_9292235af9e1b4e51bd53c8527702ce45c2477a5669f6d5db82caed8d93
         echo "
     </style>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Profiler/open.html.twig";
-    }
-
     // line 9
-
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -136,12 +127,17 @@ class __TwigTemplate_9292235af9e1b4e51bd53c8527702ce45c2477a5669f6d5db82caed8d93
         // line 21
         echo "    </div>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Profiler/open.html.twig";
     }
 
     public function isTraitable()
@@ -154,28 +150,30 @@ class __TwigTemplate_9292235af9e1b4e51bd53c8527702ce45c2477a5669f6d5db82caed8d93
         return array (  128 => 21,  122 => 19,  118 => 17,  116 => 16,  110 => 13,  101 => 12,  98 => 11,  95 => 10,  85 => 9,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/base.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/base.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/open.html.twig"));
+{% block head %}
+    <style>
+        {{ include('@WebProfiler/Profiler/open.css.twig') }}
+    </style>
+{% endblock %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/open.html.twig"));
-
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/base.html.twig", "@WebProfiler/Profiler/open.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
-
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
-
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
+{% block body %}
+    {% set source = filename|file_excerpt(line, -1) %}
+    <div class=\"header\">
+        <h1>{{ file }}{% if 0 < line %} <small>line {{ line }}</small>{% endif %}</h1>
+        <a class=\"doc\" href=\"https://symfony.com/doc/{{ constant('Symfony\\\\Component\\\\HttpKernel\\\\Kernel::VERSION') }}/reference/configuration/framework.html#ide\" rel=\"help\">Open in your IDE?</a>
+    </div>
+    <div class=\"source\">
+        {% if source is null %}
+            <p class=\"empty\">The file is not readable.</p>
+        {% else %}
+            {{ source|raw }}
+        {% endif %}
+    </div>
+{% endblock %}
+", "@WebProfiler/Profiler/open.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/open.html.twig");
     }
 }

@@ -21,44 +21,6 @@ class MailerConfig
     private $envelope;
     private $headers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['message_bus'])) {
-            $this->messageBus = $value['message_bus'];
-            unset($value['message_bus']);
-        }
-
-        if (isset($value['dsn'])) {
-            $this->dsn = $value['dsn'];
-            unset($value['dsn']);
-        }
-
-        if (isset($value['transports'])) {
-            $this->transports = $value['transports'];
-            unset($value['transports']);
-        }
-
-        if (isset($value['envelope'])) {
-            $this->envelope = new \Symfony\Config\Framework\Mailer\EnvelopeConfig($value['envelope']);
-            unset($value['envelope']);
-        }
-
-        if (isset($value['headers'])) {
-            $this->headers = array_map(function ($v) { return new \Symfony\Config\Framework\Mailer\HeaderConfig($v); }, $value['headers']);
-            unset($value['headers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -67,7 +29,7 @@ class MailerConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -80,7 +42,7 @@ class MailerConfig
     public function messageBus($value): self
     {
         $this->messageBus = $value;
-
+    
         return $this;
     }
     
@@ -92,7 +54,7 @@ class MailerConfig
     public function dsn($value): self
     {
         $this->dsn = $value;
-
+    
         return $this;
     }
     
@@ -103,7 +65,7 @@ class MailerConfig
     public function transport(string $name, $value): self
     {
         $this->transports[$name] = $value;
-
+    
         return $this;
     }
     
@@ -114,7 +76,7 @@ class MailerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "envelope()" has already been initialized. You cannot pass values the second time you call envelope().');
         }
-
+    
         return $this->envelope;
     }
     
@@ -126,8 +88,46 @@ class MailerConfig
         if ([] === $value) {
             return $this->headers[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "header()" has already been initialized. You cannot pass values the second time you call header().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['message_bus'])) {
+            $this->messageBus = $value['message_bus'];
+            unset($value['message_bus']);
+        }
+    
+        if (isset($value['dsn'])) {
+            $this->dsn = $value['dsn'];
+            unset($value['dsn']);
+        }
+    
+        if (isset($value['transports'])) {
+            $this->transports = $value['transports'];
+            unset($value['transports']);
+        }
+    
+        if (isset($value['envelope'])) {
+            $this->envelope = new \Symfony\Config\Framework\Mailer\EnvelopeConfig($value['envelope']);
+            unset($value['envelope']);
+        }
+    
+        if (isset($value['headers'])) {
+            $this->headers = array_map(function ($v) { return new \Symfony\Config\Framework\Mailer\HeaderConfig($v); }, $value['headers']);
+            unset($value['headers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

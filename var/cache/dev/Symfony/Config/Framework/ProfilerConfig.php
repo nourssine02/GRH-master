@@ -20,49 +20,6 @@ class ProfilerConfig
     private $onlyMasterRequests;
     private $dsn;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['collect'])) {
-            $this->collect = $value['collect'];
-            unset($value['collect']);
-        }
-
-        if (isset($value['collect_parameter'])) {
-            $this->collectParameter = $value['collect_parameter'];
-            unset($value['collect_parameter']);
-        }
-
-        if (isset($value['only_exceptions'])) {
-            $this->onlyExceptions = $value['only_exceptions'];
-            unset($value['only_exceptions']);
-        }
-
-        if (isset($value['only_main_requests'])) {
-            $this->onlyMainRequests = $value['only_main_requests'];
-            unset($value['only_main_requests']);
-        }
-
-        if (isset($value['only_master_requests'])) {
-            $this->onlyMasterRequests = $value['only_master_requests'];
-            unset($value['only_master_requests']);
-        }
-
-        if (isset($value['dsn'])) {
-            $this->dsn = $value['dsn'];
-            unset($value['dsn']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -71,7 +28,7 @@ class ProfilerConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -83,7 +40,7 @@ class ProfilerConfig
     public function collect($value): self
     {
         $this->collect = $value;
-
+    
         return $this;
     }
     
@@ -96,7 +53,7 @@ class ProfilerConfig
     public function collectParameter($value): self
     {
         $this->collectParameter = $value;
-
+    
         return $this;
     }
     
@@ -108,7 +65,7 @@ class ProfilerConfig
     public function onlyExceptions($value): self
     {
         $this->onlyExceptions = $value;
-
+    
         return $this;
     }
     
@@ -120,7 +77,7 @@ class ProfilerConfig
     public function onlyMainRequests($value): self
     {
         $this->onlyMainRequests = $value;
-
+    
         return $this;
     }
     
@@ -133,7 +90,7 @@ class ProfilerConfig
     public function onlyMasterRequests($value): self
     {
         $this->onlyMasterRequests = $value;
-
+    
         return $this;
     }
     
@@ -145,8 +102,51 @@ class ProfilerConfig
     public function dsn($value): self
     {
         $this->dsn = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['collect'])) {
+            $this->collect = $value['collect'];
+            unset($value['collect']);
+        }
+    
+        if (isset($value['collect_parameter'])) {
+            $this->collectParameter = $value['collect_parameter'];
+            unset($value['collect_parameter']);
+        }
+    
+        if (isset($value['only_exceptions'])) {
+            $this->onlyExceptions = $value['only_exceptions'];
+            unset($value['only_exceptions']);
+        }
+    
+        if (isset($value['only_main_requests'])) {
+            $this->onlyMainRequests = $value['only_main_requests'];
+            unset($value['only_main_requests']);
+        }
+    
+        if (isset($value['only_master_requests'])) {
+            $this->onlyMasterRequests = $value['only_master_requests'];
+            unset($value['only_master_requests']);
+        }
+    
+        if (isset($value['dsn'])) {
+            $this->dsn = $value['dsn'];
+            unset($value['dsn']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

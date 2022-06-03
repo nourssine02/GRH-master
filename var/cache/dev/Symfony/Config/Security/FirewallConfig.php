@@ -58,164 +58,6 @@ class FirewallConfig
     private $rememberMe;
     private $anonymous;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['pattern'])) {
-            $this->pattern = $value['pattern'];
-            unset($value['pattern']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['methods'])) {
-            $this->methods = $value['methods'];
-            unset($value['methods']);
-        }
-
-        if (isset($value['security'])) {
-            $this->security = $value['security'];
-            unset($value['security']);
-        }
-
-        if (isset($value['user_checker'])) {
-            $this->userChecker = $value['user_checker'];
-            unset($value['user_checker']);
-        }
-
-        if (isset($value['request_matcher'])) {
-            $this->requestMatcher = $value['request_matcher'];
-            unset($value['request_matcher']);
-        }
-
-        if (isset($value['access_denied_url'])) {
-            $this->accessDeniedUrl = $value['access_denied_url'];
-            unset($value['access_denied_url']);
-        }
-
-        if (isset($value['access_denied_handler'])) {
-            $this->accessDeniedHandler = $value['access_denied_handler'];
-            unset($value['access_denied_handler']);
-        }
-
-        if (isset($value['entry_point'])) {
-            $this->entryPoint = $value['entry_point'];
-            unset($value['entry_point']);
-        }
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['stateless'])) {
-            $this->stateless = $value['stateless'];
-            unset($value['stateless']);
-        }
-
-        if (isset($value['lazy'])) {
-            $this->lazy = $value['lazy'];
-            unset($value['lazy']);
-        }
-
-        if (isset($value['context'])) {
-            $this->context = $value['context'];
-            unset($value['context']);
-        }
-
-        if (isset($value['logout'])) {
-            $this->logout = new \Symfony\Config\Security\FirewallConfig\LogoutConfig($value['logout']);
-            unset($value['logout']);
-        }
-
-        if (isset($value['switch_user'])) {
-            $this->switchUser = new \Symfony\Config\Security\FirewallConfig\SwitchUserConfig($value['switch_user']);
-            unset($value['switch_user']);
-        }
-
-        if (isset($value['required_badges'])) {
-            $this->requiredBadges = $value['required_badges'];
-            unset($value['required_badges']);
-        }
-
-        if (isset($value['guard'])) {
-            $this->guard = new \Symfony\Config\Security\FirewallConfig\GuardConfig($value['guard']);
-            unset($value['guard']);
-        }
-
-        if (isset($value['custom_authenticators'])) {
-            $this->customAuthenticators = $value['custom_authenticators'];
-            unset($value['custom_authenticators']);
-        }
-
-        if (isset($value['login_throttling'])) {
-            $this->loginThrottling = new \Symfony\Config\Security\FirewallConfig\LoginThrottlingConfig($value['login_throttling']);
-            unset($value['login_throttling']);
-        }
-
-        if (isset($value['x509'])) {
-            $this->x509 = new \Symfony\Config\Security\FirewallConfig\X509Config($value['x509']);
-            unset($value['x509']);
-        }
-
-        if (isset($value['remote_user'])) {
-            $this->remoteUser = new \Symfony\Config\Security\FirewallConfig\RemoteUserConfig($value['remote_user']);
-            unset($value['remote_user']);
-        }
-
-        if (isset($value['login_link'])) {
-            $this->loginLink = new \Symfony\Config\Security\FirewallConfig\LoginLinkConfig($value['login_link']);
-            unset($value['login_link']);
-        }
-
-        if (isset($value['form_login'])) {
-            $this->formLogin = new \Symfony\Config\Security\FirewallConfig\FormLoginConfig($value['form_login']);
-            unset($value['form_login']);
-        }
-
-        if (isset($value['form_login_ldap'])) {
-            $this->formLoginLdap = new \Symfony\Config\Security\FirewallConfig\FormLoginLdapConfig($value['form_login_ldap']);
-            unset($value['form_login_ldap']);
-        }
-
-        if (isset($value['json_login'])) {
-            $this->jsonLogin = new \Symfony\Config\Security\FirewallConfig\JsonLoginConfig($value['json_login']);
-            unset($value['json_login']);
-        }
-
-        if (isset($value['json_login_ldap'])) {
-            $this->jsonLoginLdap = new \Symfony\Config\Security\FirewallConfig\JsonLoginLdapConfig($value['json_login_ldap']);
-            unset($value['json_login_ldap']);
-        }
-
-        if (isset($value['http_basic'])) {
-            $this->httpBasic = new \Symfony\Config\Security\FirewallConfig\HttpBasicConfig($value['http_basic']);
-            unset($value['http_basic']);
-        }
-
-        if (isset($value['http_basic_ldap'])) {
-            $this->httpBasicLdap = new \Symfony\Config\Security\FirewallConfig\HttpBasicLdapConfig($value['http_basic_ldap']);
-            unset($value['http_basic_ldap']);
-        }
-
-        if (isset($value['remember_me'])) {
-            $this->rememberMe = new \Symfony\Config\Security\FirewallConfig\RememberMeConfig($value['remember_me']);
-            unset($value['remember_me']);
-        }
-
-        if (isset($value['anonymous'])) {
-            $this->anonymous = new \Symfony\Config\Security\FirewallConfig\AnonymousConfig($value['anonymous']);
-            unset($value['anonymous']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -224,7 +66,7 @@ class FirewallConfig
     public function pattern($value): self
     {
         $this->pattern = $value;
-
+    
         return $this;
     }
     
@@ -236,7 +78,7 @@ class FirewallConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -247,7 +89,7 @@ class FirewallConfig
     public function methods($value): self
     {
         $this->methods = $value;
-
+    
         return $this;
     }
     
@@ -259,7 +101,7 @@ class FirewallConfig
     public function security($value): self
     {
         $this->security = $value;
-
+    
         return $this;
     }
     
@@ -272,7 +114,7 @@ class FirewallConfig
     public function userChecker($value): self
     {
         $this->userChecker = $value;
-
+    
         return $this;
     }
     
@@ -284,7 +126,7 @@ class FirewallConfig
     public function requestMatcher($value): self
     {
         $this->requestMatcher = $value;
-
+    
         return $this;
     }
     
@@ -296,7 +138,7 @@ class FirewallConfig
     public function accessDeniedUrl($value): self
     {
         $this->accessDeniedUrl = $value;
-
+    
         return $this;
     }
     
@@ -308,7 +150,7 @@ class FirewallConfig
     public function accessDeniedHandler($value): self
     {
         $this->accessDeniedHandler = $value;
-
+    
         return $this;
     }
     
@@ -321,7 +163,7 @@ class FirewallConfig
     public function entryPoint($value): self
     {
         $this->entryPoint = $value;
-
+    
         return $this;
     }
     
@@ -333,7 +175,7 @@ class FirewallConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -345,7 +187,7 @@ class FirewallConfig
     public function stateless($value): self
     {
         $this->stateless = $value;
-
+    
         return $this;
     }
     
@@ -357,7 +199,7 @@ class FirewallConfig
     public function lazy($value): self
     {
         $this->lazy = $value;
-
+    
         return $this;
     }
     
@@ -369,7 +211,7 @@ class FirewallConfig
     public function context($value): self
     {
         $this->context = $value;
-
+    
         return $this;
     }
     
@@ -380,7 +222,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "logout()" has already been initialized. You cannot pass values the second time you call logout().');
         }
-
+    
         return $this->logout;
     }
     
@@ -391,7 +233,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "switchUser()" has already been initialized. You cannot pass values the second time you call switchUser().');
         }
-
+    
         return $this->switchUser;
     }
     
@@ -402,7 +244,7 @@ class FirewallConfig
     public function requiredBadges($value): self
     {
         $this->requiredBadges = $value;
-
+    
         return $this;
     }
     
@@ -413,7 +255,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "guard()" has already been initialized. You cannot pass values the second time you call guard().');
         }
-
+    
         return $this->guard;
     }
     
@@ -424,7 +266,7 @@ class FirewallConfig
     public function customAuthenticators($value): self
     {
         $this->customAuthenticators = $value;
-
+    
         return $this;
     }
     
@@ -435,7 +277,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "loginThrottling()" has already been initialized. You cannot pass values the second time you call loginThrottling().');
         }
-
+    
         return $this->loginThrottling;
     }
     
@@ -446,7 +288,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "x509()" has already been initialized. You cannot pass values the second time you call x509().');
         }
-
+    
         return $this->x509;
     }
     
@@ -457,7 +299,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "remoteUser()" has already been initialized. You cannot pass values the second time you call remoteUser().');
         }
-
+    
         return $this->remoteUser;
     }
     
@@ -468,7 +310,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "loginLink()" has already been initialized. You cannot pass values the second time you call loginLink().');
         }
-
+    
         return $this->loginLink;
     }
     
@@ -479,7 +321,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "formLogin()" has already been initialized. You cannot pass values the second time you call formLogin().');
         }
-
+    
         return $this->formLogin;
     }
     
@@ -490,7 +332,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "formLoginLdap()" has already been initialized. You cannot pass values the second time you call formLoginLdap().');
         }
-
+    
         return $this->formLoginLdap;
     }
     
@@ -501,7 +343,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "jsonLogin()" has already been initialized. You cannot pass values the second time you call jsonLogin().');
         }
-
+    
         return $this->jsonLogin;
     }
     
@@ -512,7 +354,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "jsonLoginLdap()" has already been initialized. You cannot pass values the second time you call jsonLoginLdap().');
         }
-
+    
         return $this->jsonLoginLdap;
     }
     
@@ -523,7 +365,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "httpBasic()" has already been initialized. You cannot pass values the second time you call httpBasic().');
         }
-
+    
         return $this->httpBasic;
     }
     
@@ -534,7 +376,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "httpBasicLdap()" has already been initialized. You cannot pass values the second time you call httpBasicLdap().');
         }
-
+    
         return $this->httpBasicLdap;
     }
     
@@ -545,7 +387,7 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "rememberMe()" has already been initialized. You cannot pass values the second time you call rememberMe().');
         }
-
+    
         return $this->rememberMe;
     }
     
@@ -556,8 +398,166 @@ class FirewallConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "anonymous()" has already been initialized. You cannot pass values the second time you call anonymous().');
         }
-
+    
         return $this->anonymous;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['pattern'])) {
+            $this->pattern = $value['pattern'];
+            unset($value['pattern']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['methods'])) {
+            $this->methods = $value['methods'];
+            unset($value['methods']);
+        }
+    
+        if (isset($value['security'])) {
+            $this->security = $value['security'];
+            unset($value['security']);
+        }
+    
+        if (isset($value['user_checker'])) {
+            $this->userChecker = $value['user_checker'];
+            unset($value['user_checker']);
+        }
+    
+        if (isset($value['request_matcher'])) {
+            $this->requestMatcher = $value['request_matcher'];
+            unset($value['request_matcher']);
+        }
+    
+        if (isset($value['access_denied_url'])) {
+            $this->accessDeniedUrl = $value['access_denied_url'];
+            unset($value['access_denied_url']);
+        }
+    
+        if (isset($value['access_denied_handler'])) {
+            $this->accessDeniedHandler = $value['access_denied_handler'];
+            unset($value['access_denied_handler']);
+        }
+    
+        if (isset($value['entry_point'])) {
+            $this->entryPoint = $value['entry_point'];
+            unset($value['entry_point']);
+        }
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['stateless'])) {
+            $this->stateless = $value['stateless'];
+            unset($value['stateless']);
+        }
+    
+        if (isset($value['lazy'])) {
+            $this->lazy = $value['lazy'];
+            unset($value['lazy']);
+        }
+    
+        if (isset($value['context'])) {
+            $this->context = $value['context'];
+            unset($value['context']);
+        }
+    
+        if (isset($value['logout'])) {
+            $this->logout = new \Symfony\Config\Security\FirewallConfig\LogoutConfig($value['logout']);
+            unset($value['logout']);
+        }
+    
+        if (isset($value['switch_user'])) {
+            $this->switchUser = new \Symfony\Config\Security\FirewallConfig\SwitchUserConfig($value['switch_user']);
+            unset($value['switch_user']);
+        }
+    
+        if (isset($value['required_badges'])) {
+            $this->requiredBadges = $value['required_badges'];
+            unset($value['required_badges']);
+        }
+    
+        if (isset($value['guard'])) {
+            $this->guard = new \Symfony\Config\Security\FirewallConfig\GuardConfig($value['guard']);
+            unset($value['guard']);
+        }
+    
+        if (isset($value['custom_authenticators'])) {
+            $this->customAuthenticators = $value['custom_authenticators'];
+            unset($value['custom_authenticators']);
+        }
+    
+        if (isset($value['login_throttling'])) {
+            $this->loginThrottling = new \Symfony\Config\Security\FirewallConfig\LoginThrottlingConfig($value['login_throttling']);
+            unset($value['login_throttling']);
+        }
+    
+        if (isset($value['x509'])) {
+            $this->x509 = new \Symfony\Config\Security\FirewallConfig\X509Config($value['x509']);
+            unset($value['x509']);
+        }
+    
+        if (isset($value['remote_user'])) {
+            $this->remoteUser = new \Symfony\Config\Security\FirewallConfig\RemoteUserConfig($value['remote_user']);
+            unset($value['remote_user']);
+        }
+    
+        if (isset($value['login_link'])) {
+            $this->loginLink = new \Symfony\Config\Security\FirewallConfig\LoginLinkConfig($value['login_link']);
+            unset($value['login_link']);
+        }
+    
+        if (isset($value['form_login'])) {
+            $this->formLogin = new \Symfony\Config\Security\FirewallConfig\FormLoginConfig($value['form_login']);
+            unset($value['form_login']);
+        }
+    
+        if (isset($value['form_login_ldap'])) {
+            $this->formLoginLdap = new \Symfony\Config\Security\FirewallConfig\FormLoginLdapConfig($value['form_login_ldap']);
+            unset($value['form_login_ldap']);
+        }
+    
+        if (isset($value['json_login'])) {
+            $this->jsonLogin = new \Symfony\Config\Security\FirewallConfig\JsonLoginConfig($value['json_login']);
+            unset($value['json_login']);
+        }
+    
+        if (isset($value['json_login_ldap'])) {
+            $this->jsonLoginLdap = new \Symfony\Config\Security\FirewallConfig\JsonLoginLdapConfig($value['json_login_ldap']);
+            unset($value['json_login_ldap']);
+        }
+    
+        if (isset($value['http_basic'])) {
+            $this->httpBasic = new \Symfony\Config\Security\FirewallConfig\HttpBasicConfig($value['http_basic']);
+            unset($value['http_basic']);
+        }
+    
+        if (isset($value['http_basic_ldap'])) {
+            $this->httpBasicLdap = new \Symfony\Config\Security\FirewallConfig\HttpBasicLdapConfig($value['http_basic_ldap']);
+            unset($value['http_basic_ldap']);
+        }
+    
+        if (isset($value['remember_me'])) {
+            $this->rememberMe = new \Symfony\Config\Security\FirewallConfig\RememberMeConfig($value['remember_me']);
+            unset($value['remember_me']);
+        }
+    
+        if (isset($value['anonymous'])) {
+            $this->anonymous = new \Symfony\Config\Security\FirewallConfig\AnonymousConfig($value['anonymous']);
+            unset($value['anonymous']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

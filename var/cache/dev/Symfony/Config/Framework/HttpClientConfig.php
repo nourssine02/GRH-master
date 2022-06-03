@@ -20,39 +20,6 @@ class HttpClientConfig
     private $mockResponseFactory;
     private $scopedClients;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['max_host_connections'])) {
-            $this->maxHostConnections = $value['max_host_connections'];
-            unset($value['max_host_connections']);
-        }
-
-        if (isset($value['default_options'])) {
-            $this->defaultOptions = new \Symfony\Config\Framework\HttpClient\DefaultOptionsConfig($value['default_options']);
-            unset($value['default_options']);
-        }
-
-        if (isset($value['mock_response_factory'])) {
-            $this->mockResponseFactory = $value['mock_response_factory'];
-            unset($value['mock_response_factory']);
-        }
-
-        if (isset($value['scoped_clients'])) {
-            $this->scopedClients = array_map(function ($v) { return new \Symfony\Config\Framework\HttpClient\ScopedClientConfig($v); }, $value['scoped_clients']);
-            unset($value['scoped_clients']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -61,7 +28,7 @@ class HttpClientConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -74,7 +41,7 @@ class HttpClientConfig
     public function maxHostConnections($value): self
     {
         $this->maxHostConnections = $value;
-
+    
         return $this;
     }
     
@@ -85,7 +52,7 @@ class HttpClientConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "defaultOptions()" has already been initialized. You cannot pass values the second time you call defaultOptions().');
         }
-
+    
         return $this->defaultOptions;
     }
     
@@ -98,7 +65,7 @@ class HttpClientConfig
     public function mockResponseFactory($value): self
     {
         $this->mockResponseFactory = $value;
-
+    
         return $this;
     }
     
@@ -110,8 +77,41 @@ class HttpClientConfig
         if ([] === $value) {
             return $this->scopedClients[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "scopedClient()" has already been initialized. You cannot pass values the second time you call scopedClient().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['max_host_connections'])) {
+            $this->maxHostConnections = $value['max_host_connections'];
+            unset($value['max_host_connections']);
+        }
+    
+        if (isset($value['default_options'])) {
+            $this->defaultOptions = new \Symfony\Config\Framework\HttpClient\DefaultOptionsConfig($value['default_options']);
+            unset($value['default_options']);
+        }
+    
+        if (isset($value['mock_response_factory'])) {
+            $this->mockResponseFactory = $value['mock_response_factory'];
+            unset($value['mock_response_factory']);
+        }
+    
+        if (isset($value['scoped_clients'])) {
+            $this->scopedClients = array_map(function ($v) { return new \Symfony\Config\Framework\HttpClient\ScopedClientConfig($v); }, $value['scoped_clients']);
+            unset($value['scoped_clients']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

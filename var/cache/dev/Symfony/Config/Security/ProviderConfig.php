@@ -22,39 +22,6 @@ class ProviderConfig
     private $memory;
     private $ldap;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['chain'])) {
-            $this->chain = new \Symfony\Config\Security\ProviderConfig\ChainConfig($value['chain']);
-            unset($value['chain']);
-        }
-
-        if (isset($value['entity'])) {
-            $this->entity = new \Symfony\Config\Security\ProviderConfig\EntityConfig($value['entity']);
-            unset($value['entity']);
-        }
-
-        if (isset($value['memory'])) {
-            $this->memory = new \Symfony\Config\Security\ProviderConfig\MemoryConfig($value['memory']);
-            unset($value['memory']);
-        }
-
-        if (isset($value['ldap'])) {
-            $this->ldap = new \Symfony\Config\Security\ProviderConfig\LdapConfig($value['ldap']);
-            unset($value['ldap']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -63,7 +30,7 @@ class ProviderConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -74,7 +41,7 @@ class ProviderConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "chain()" has already been initialized. You cannot pass values the second time you call chain().');
         }
-
+    
         return $this->chain;
     }
     
@@ -85,7 +52,7 @@ class ProviderConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "entity()" has already been initialized. You cannot pass values the second time you call entity().');
         }
-
+    
         return $this->entity;
     }
     
@@ -96,7 +63,7 @@ class ProviderConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "memory()" has already been initialized. You cannot pass values the second time you call memory().');
         }
-
+    
         return $this->memory;
     }
     
@@ -107,8 +74,41 @@ class ProviderConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "ldap()" has already been initialized. You cannot pass values the second time you call ldap().');
         }
-
+    
         return $this->ldap;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['chain'])) {
+            $this->chain = new \Symfony\Config\Security\ProviderConfig\ChainConfig($value['chain']);
+            unset($value['chain']);
+        }
+    
+        if (isset($value['entity'])) {
+            $this->entity = new \Symfony\Config\Security\ProviderConfig\EntityConfig($value['entity']);
+            unset($value['entity']);
+        }
+    
+        if (isset($value['memory'])) {
+            $this->memory = new \Symfony\Config\Security\ProviderConfig\MemoryConfig($value['memory']);
+            unset($value['memory']);
+        }
+    
+        if (isset($value['ldap'])) {
+            $this->ldap = new \Symfony\Config\Security\ProviderConfig\LdapConfig($value['ldap']);
+            unset($value['ldap']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

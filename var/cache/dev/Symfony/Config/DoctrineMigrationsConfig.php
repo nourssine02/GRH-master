@@ -27,79 +27,6 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     private $enableProfiler;
     private $transactional;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['migrations_paths'])) {
-            $this->migrationsPaths = $value['migrations_paths'];
-            unset($value['migrations_paths']);
-        }
-
-        if (isset($value['services'])) {
-            $this->services = $value['services'];
-            unset($value['services']);
-        }
-
-        if (isset($value['factories'])) {
-            $this->factories = $value['factories'];
-            unset($value['factories']);
-        }
-
-        if (isset($value['storage'])) {
-            $this->storage = new \Symfony\Config\DoctrineMigrations\StorageConfig($value['storage']);
-            unset($value['storage']);
-        }
-
-        if (isset($value['migrations'])) {
-            $this->migrations = $value['migrations'];
-            unset($value['migrations']);
-        }
-
-        if (isset($value['connection'])) {
-            $this->connection = $value['connection'];
-            unset($value['connection']);
-        }
-
-        if (isset($value['em'])) {
-            $this->em = $value['em'];
-            unset($value['em']);
-        }
-
-        if (isset($value['all_or_nothing'])) {
-            $this->allOrNothing = $value['all_or_nothing'];
-            unset($value['all_or_nothing']);
-        }
-
-        if (isset($value['check_database_platform'])) {
-            $this->checkDatabasePlatform = $value['check_database_platform'];
-            unset($value['check_database_platform']);
-        }
-
-        if (isset($value['custom_template'])) {
-            $this->customTemplate = $value['custom_template'];
-            unset($value['custom_template']);
-        }
-
-        if (isset($value['organize_migrations'])) {
-            $this->organizeMigrations = $value['organize_migrations'];
-            unset($value['organize_migrations']);
-        }
-
-        if (isset($value['enable_profiler'])) {
-            $this->enableProfiler = $value['enable_profiler'];
-            unset($value['enable_profiler']);
-        }
-
-        if (isset($value['transactional'])) {
-            $this->transactional = $value['transactional'];
-            unset($value['transactional']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|mixed $value
      * @return $this
@@ -107,7 +34,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function migrationsPath(string $namespace, $value): self
     {
         $this->migrationsPaths[$namespace] = $value;
-
+    
         return $this;
     }
     
@@ -118,7 +45,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function services(string $service, $value): self
     {
         $this->services[$service] = $value;
-
+    
         return $this;
     }
     
@@ -129,7 +56,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function factories(string $factory, $value): self
     {
         $this->factories[$factory] = $value;
-
+    
         return $this;
     }
     
@@ -140,7 +67,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "storage()" has already been initialized. You cannot pass values the second time you call storage().');
         }
-
+    
         return $this->storage;
     }
     
@@ -151,7 +78,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function migrations($value): self
     {
         $this->migrations = $value;
-
+    
         return $this;
     }
     
@@ -164,7 +91,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function connection($value): self
     {
         $this->connection = $value;
-
+    
         return $this;
     }
     
@@ -177,7 +104,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function em($value): self
     {
         $this->em = $value;
-
+    
         return $this;
     }
     
@@ -190,7 +117,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function allOrNothing($value): self
     {
         $this->allOrNothing = $value;
-
+    
         return $this;
     }
     
@@ -203,7 +130,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function checkDatabasePlatform($value): self
     {
         $this->checkDatabasePlatform = $value;
-
+    
         return $this;
     }
     
@@ -216,7 +143,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function customTemplate($value): self
     {
         $this->customTemplate = $value;
-
+    
         return $this;
     }
     
@@ -229,7 +156,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function organizeMigrations($value): self
     {
         $this->organizeMigrations = $value;
-
+    
         return $this;
     }
     
@@ -242,7 +169,7 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function enableProfiler($value): self
     {
         $this->enableProfiler = $value;
-
+    
         return $this;
     }
     
@@ -255,13 +182,86 @@ class DoctrineMigrationsConfig implements \Symfony\Component\Config\Builder\Conf
     public function transactional($value): self
     {
         $this->transactional = $value;
-
+    
         return $this;
     }
     
     public function getExtensionAlias(): string
     {
         return 'doctrine_migrations';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['migrations_paths'])) {
+            $this->migrationsPaths = $value['migrations_paths'];
+            unset($value['migrations_paths']);
+        }
+    
+        if (isset($value['services'])) {
+            $this->services = $value['services'];
+            unset($value['services']);
+        }
+    
+        if (isset($value['factories'])) {
+            $this->factories = $value['factories'];
+            unset($value['factories']);
+        }
+    
+        if (isset($value['storage'])) {
+            $this->storage = new \Symfony\Config\DoctrineMigrations\StorageConfig($value['storage']);
+            unset($value['storage']);
+        }
+    
+        if (isset($value['migrations'])) {
+            $this->migrations = $value['migrations'];
+            unset($value['migrations']);
+        }
+    
+        if (isset($value['connection'])) {
+            $this->connection = $value['connection'];
+            unset($value['connection']);
+        }
+    
+        if (isset($value['em'])) {
+            $this->em = $value['em'];
+            unset($value['em']);
+        }
+    
+        if (isset($value['all_or_nothing'])) {
+            $this->allOrNothing = $value['all_or_nothing'];
+            unset($value['all_or_nothing']);
+        }
+    
+        if (isset($value['check_database_platform'])) {
+            $this->checkDatabasePlatform = $value['check_database_platform'];
+            unset($value['check_database_platform']);
+        }
+    
+        if (isset($value['custom_template'])) {
+            $this->customTemplate = $value['custom_template'];
+            unset($value['custom_template']);
+        }
+    
+        if (isset($value['organize_migrations'])) {
+            $this->organizeMigrations = $value['organize_migrations'];
+            unset($value['organize_migrations']);
+        }
+    
+        if (isset($value['enable_profiler'])) {
+            $this->enableProfiler = $value['enable_profiler'];
+            unset($value['enable_profiler']);
+        }
+    
+        if (isset($value['transactional'])) {
+            $this->transactional = $value['transactional'];
+            unset($value['transactional']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

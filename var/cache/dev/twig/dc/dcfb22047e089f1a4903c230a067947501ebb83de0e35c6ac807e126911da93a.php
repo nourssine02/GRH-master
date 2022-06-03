@@ -30,41 +30,6 @@ class __TwigTemplate_0c00c74c12884bfaa9bde497501eb6b8e7f7ff3f430bd30b1e6075cf258
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<table class=\"{{ class|default('') }}\">
-    <thead>
-        <tr>
-            <th scope=\"col\" class=\"key\">{{ labels is defined ? labels[0] : 'Key' }}</th>
-            <th scope=\"col\">{{ labels is defined ? labels[1] : 'Value' }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for key in bag.keys|sort %}
-            <tr>
-                <th>{{ key }}</th>
-                <td>{{ profiler_dump(bag.get(key), maxDepth=maxDepth|default(0)) }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan=\"2\">(no data)</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-", "@WebProfiler/Profiler/bag.html.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/bag.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  90 => 19,  81 => 15,  73 => 12,  69 => 11,  66 => 10,  61 => 9,  54 => 5,  50 => 4,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -125,10 +90,10 @@ class __TwigTemplate_0c00c74c12884bfaa9bde497501eb6b8e7f7ff3f430bd30b1e6075cf258
         echo "    </tbody>
 </table>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -136,5 +101,40 @@ class __TwigTemplate_0c00c74c12884bfaa9bde497501eb6b8e7f7ff3f430bd30b1e6075cf258
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/bag.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  90 => 19,  81 => 15,  73 => 12,  69 => 11,  66 => 10,  61 => 9,  54 => 5,  50 => 4,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<table class=\"{{ class|default('') }}\">
+    <thead>
+        <tr>
+            <th scope=\"col\" class=\"key\">{{ labels is defined ? labels[0] : 'Key' }}</th>
+            <th scope=\"col\">{{ labels is defined ? labels[1] : 'Value' }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key in bag.keys|sort %}
+            <tr>
+                <th>{{ key }}</th>
+                <td>{{ profiler_dump(bag.get(key), maxDepth=maxDepth|default(0)) }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan=\"2\">(no data)</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+", "@WebProfiler/Profiler/bag.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/bag.html.twig");
     }
 }

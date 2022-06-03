@@ -14,19 +14,6 @@ class MemoryConfig
 {
     private $users;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['users'])) {
-            $this->users = array_map(function ($v) { return new \Symfony\Config\Security\ProviderConfig\Memory\UserConfig($v); }, $value['users']);
-            unset($value['users']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function user(string $identifier, array $value = []): \Symfony\Config\Security\ProviderConfig\Memory\UserConfig
     {
         if (!isset($this->users[$identifier])) {
@@ -35,8 +22,21 @@ class MemoryConfig
         if ([] === $value) {
             return $this->users[$identifier];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "user()" has already been initialized. You cannot pass values the second time you call user().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['users'])) {
+            $this->users = array_map(function ($v) { return new \Symfony\Config\Security\ProviderConfig\Memory\UserConfig($v); }, $value['users']);
+            unset($value['users']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

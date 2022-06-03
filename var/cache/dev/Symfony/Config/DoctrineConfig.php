@@ -16,24 +16,6 @@ class DoctrineConfig implements \Symfony\Component\Config\Builder\ConfigBuilderI
     private $dbal;
     private $orm;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['dbal'])) {
-            $this->dbal = new \Symfony\Config\Doctrine\DbalConfig($value['dbal']);
-            unset($value['dbal']);
-        }
-
-        if (isset($value['orm'])) {
-            $this->orm = new \Symfony\Config\Doctrine\OrmConfig($value['orm']);
-            unset($value['orm']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     public function dbal(array $value = []): \Symfony\Config\Doctrine\DbalConfig
     {
         if (null === $this->dbal) {
@@ -41,7 +23,7 @@ class DoctrineConfig implements \Symfony\Component\Config\Builder\ConfigBuilderI
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "dbal()" has already been initialized. You cannot pass values the second time you call dbal().');
         }
-
+    
         return $this->dbal;
     }
     
@@ -52,13 +34,31 @@ class DoctrineConfig implements \Symfony\Component\Config\Builder\ConfigBuilderI
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "orm()" has already been initialized. You cannot pass values the second time you call orm().');
         }
-
+    
         return $this->orm;
     }
     
     public function getExtensionAlias(): string
     {
         return 'doctrine';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['dbal'])) {
+            $this->dbal = new \Symfony\Config\Doctrine\DbalConfig($value['dbal']);
+            unset($value['dbal']);
+        }
+    
+        if (isset($value['orm'])) {
+            $this->orm = new \Symfony\Config\Doctrine\OrmConfig($value['orm']);
+            unset($value['orm']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

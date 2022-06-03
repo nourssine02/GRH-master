@@ -15,24 +15,6 @@ class RateConfig
     private $interval;
     private $amount;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['interval'])) {
-            $this->interval = $value['interval'];
-            unset($value['interval']);
-        }
-
-        if (isset($value['amount'])) {
-            $this->amount = $value['amount'];
-            unset($value['amount']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * Configures the rate interval. The value must be a number followed by "second", "minute", "hour", "day", "week" or "month" (or their plural equivalent).
      * @default null
@@ -42,7 +24,7 @@ class RateConfig
     public function interval($value): self
     {
         $this->interval = $value;
-
+    
         return $this;
     }
     
@@ -55,8 +37,26 @@ class RateConfig
     public function amount($value): self
     {
         $this->amount = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['interval'])) {
+            $this->interval = $value['interval'];
+            unset($value['interval']);
+        }
+    
+        if (isset($value['amount'])) {
+            $this->amount = $value['amount'];
+            unset($value['amount']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

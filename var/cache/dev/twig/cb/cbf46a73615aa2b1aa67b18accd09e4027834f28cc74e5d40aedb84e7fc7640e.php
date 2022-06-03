@@ -30,49 +30,6 @@ class __TwigTemplate_24d3d32564c2c92b672be42f41acdef0b5c3b4a6af212775904fccc03df
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("{% if data[0]|length > 1 %}
-    {# The platform returns a table for the explanation (e.g. MySQL), display all columns #}
-    <table style=\"margin: 5px 0;\">
-        <thead>
-            <tr>
-                {% for label in data[0]|keys %}
-                    <th>{{ label }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
-            <tr>
-                {% for key, item in row %}
-                    <td>{{ item|replace({',': ', '}) }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {# The Platform returns a single column for a textual explanation (e.g. PostgreSQL), display all lines #}
-    <pre style=\"margin: 5px 0;\">
-        {%- for row in data -%}
-            {{ row|first }}{{ \"\\n\" }}
-        {%- endfor -%}
-    </pre>
-{% endif %}
-", "@Doctrine/Collector/explain.html.twig", "/home/hp/Symfony/GRH/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  118 => 27,  110 => 25,  106 => 24,  104 => 23,  102 => 22,  97 => 19,  90 => 17,  81 => 15,  77 => 14,  74 => 13,  70 => 12,  65 => 9,  56 => 7,  52 => 6,  47 => 3,  45 => 2,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -161,10 +118,10 @@ class __TwigTemplate_24d3d32564c2c92b672be42f41acdef0b5c3b4a6af212775904fccc03df
             echo "</pre>
 ";
         }
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -172,5 +129,48 @@ class __TwigTemplate_24d3d32564c2c92b672be42f41acdef0b5c3b4a6af212775904fccc03df
     public function getTemplateName()
     {
         return "@Doctrine/Collector/explain.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  118 => 27,  110 => 25,  106 => 24,  104 => 23,  102 => 22,  97 => 19,  90 => 17,  81 => 15,  77 => 14,  74 => 13,  70 => 12,  65 => 9,  56 => 7,  52 => 6,  47 => 3,  45 => 2,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("{% if data[0]|length > 1 %}
+    {# The platform returns a table for the explanation (e.g. MySQL), display all columns #}
+    <table style=\"margin: 5px 0;\">
+        <thead>
+            <tr>
+                {% for label in data[0]|keys %}
+                    <th>{{ label }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for key, item in row %}
+                    <td>{{ item|replace({',': ', '}) }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {# The Platform returns a single column for a textual explanation (e.g. PostgreSQL), display all lines #}
+    <pre style=\"margin: 5px 0;\">
+        {%- for row in data -%}
+            {{ row|first }}{{ \"\\n\" }}
+        {%- endfor -%}
+    </pre>
+{% endif %}
+", "@Doctrine/Collector/explain.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
     }
 }

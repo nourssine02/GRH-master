@@ -19,39 +19,6 @@ class TransportConfig
     private $failureTransport;
     private $retryStrategy;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['dsn'])) {
-            $this->dsn = $value['dsn'];
-            unset($value['dsn']);
-        }
-
-        if (isset($value['serializer'])) {
-            $this->serializer = $value['serializer'];
-            unset($value['serializer']);
-        }
-
-        if (isset($value['options'])) {
-            $this->options = $value['options'];
-            unset($value['options']);
-        }
-
-        if (isset($value['failure_transport'])) {
-            $this->failureTransport = $value['failure_transport'];
-            unset($value['failure_transport']);
-        }
-
-        if (isset($value['retry_strategy'])) {
-            $this->retryStrategy = new \Symfony\Config\Framework\Messenger\TransportConfig\RetryStrategyConfig($value['retry_strategy']);
-            unset($value['retry_strategy']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -60,7 +27,7 @@ class TransportConfig
     public function dsn($value): self
     {
         $this->dsn = $value;
-
+    
         return $this;
     }
     
@@ -73,7 +40,7 @@ class TransportConfig
     public function serializer($value): self
     {
         $this->serializer = $value;
-
+    
         return $this;
     }
     
@@ -84,7 +51,7 @@ class TransportConfig
     public function options($value): self
     {
         $this->options = $value;
-
+    
         return $this;
     }
     
@@ -97,7 +64,7 @@ class TransportConfig
     public function failureTransport($value): self
     {
         $this->failureTransport = $value;
-
+    
         return $this;
     }
     
@@ -108,8 +75,41 @@ class TransportConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "retryStrategy()" has already been initialized. You cannot pass values the second time you call retryStrategy().');
         }
-
+    
         return $this->retryStrategy;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['dsn'])) {
+            $this->dsn = $value['dsn'];
+            unset($value['dsn']);
+        }
+    
+        if (isset($value['serializer'])) {
+            $this->serializer = $value['serializer'];
+            unset($value['serializer']);
+        }
+    
+        if (isset($value['options'])) {
+            $this->options = $value['options'];
+            unset($value['options']);
+        }
+    
+        if (isset($value['failure_transport'])) {
+            $this->failureTransport = $value['failure_transport'];
+            unset($value['failure_transport']);
+        }
+    
+        if (isset($value['retry_strategy'])) {
+            $this->retryStrategy = new \Symfony\Config\Framework\Messenger\TransportConfig\RetryStrategyConfig($value['retry_strategy']);
+            unset($value['retry_strategy']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

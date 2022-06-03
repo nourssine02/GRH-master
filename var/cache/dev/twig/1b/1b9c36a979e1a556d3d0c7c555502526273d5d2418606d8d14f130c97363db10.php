@@ -30,221 +30,32 @@ class __TwigTemplate_fe8697bcb8cb1e14c04770faee85b1a58cfab8c478e3396d04df7da6c28
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends 'base.html.twig' %}
-{% block title %}{% endblock %}
-{% block body %}
-
-<h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
-\tAjouter des Heures Supplementaire
-</h4>
-
-
-<style>
-\t.tabs {
-\t\twidth: 100%;
-\t\tdisplay: inline-block;
-\t}
-
-\t.tabs h4 {
-\t\tcolor: #CB997E;
-\t\tmargin: 5px 0 15px;
-\t\tdisplay: inline-block;
-\t}
-
-\t.tab-links:after {
-\t\tdisplay: block;
-\t\tclear: both;
-\t\tcontent: '';
-\t}
-
-\t.tab-links {
-\t\tpadding: 0;
-\t\tmargin: 10px 0 0;
-\t\tposition: relative;
-\t\ttop: 2px;
-\t}
-
-\t.tab-links li {
-\t\tmargin: 0 5px 0 0;
-\t\tfloat: left;
-\t\tpadding-top: 2px;
-\t\tlist-style: none;
-\t}
-
-\t.tab-links a {
-\t\tpadding: 9px 8px 6px;
-\t\tdisplay: inline-block;
-\t\tbackground: #CB997E;
-\t\tborder: 2px solid #CB997E;
-\t\tborder-bottom: 3px solid #CB997E;
-\t\tfont-size: 10.5px;
-\t\tfont-weight: 600;
-\t\tcolor: #fff;
-\t\ttransition: all linear 0.15s;
-\t}
-
-\t.tab-links button {
-\t\tpadding: 9px 8px 6px;
-\t\tdisplay: inline-block;
-\t\tbackground: #CB997E;
-\t\tborder: 2px solid #CB997E;
-\t\tborder-bottom: 3px solid #CB997E;
-\t\tfont-size: 10.5px;
-\t\tfont-weight: 600;
-\t\tcolor: #fff;
-\t\ttransition: all linear 0.15s;
-\t}
-
-\t.tab-links a:hover {
-\t\tbackground: #CB997E;
-\t\ttext-decoration: none;
-\t\tborder: 2px solid #CB997E;
-\t\tborder-bottom: 3px solid #CB997E;
-\t\tcolor: #fff;
-\t}
-
-\tli.active a,
-\tli.active a:hover {
-\t\tbackground: #CB997E;
-\t\theight: 35px;
-\t\tborder-bottom: none;
-\t\tcolor: #fff;
-\t}
-
-\t.tab-content,
-\t.uploaded-documents-container {
-\t\tpadding: 15px;
-\t\tborder-radius: 3px;
-\t\tborder: 2px solid #CB997E;
-\t\tbackground: #fff;
-\t\tfont-size: 0.95em;
-\t}
-
-\t.tab-content-scroll {
-\t\tmax-height: 375px;
-\t\tmin-height: 375px;
-\t\tmax-width: 1100px;
-\t\tmin-width: 450px;
-\t\toverflow: auto;
-\t\tclear: both;
-\t}
-
-\t.tab-content-scroll-home {
-\t\tmin-height: 135px;
-\t}
-
-\t.button-bar-scroll {
-\t\tmin-height: 235px;
-\t}
-
-\t.tab-content-scroll>p {
-\t\tmargin-top: 0;
-\t\tpadding-right: 12px;
-\t}
-
-\t.tab-content a {
-\t\tmargin-top: 10px;
-\t\tcolor: #fff;
-\t}
-
-\t.tab {
-\t\tdisplay: none;
-\t}
-
-\t.tab.active {
-\t\tdisplay: block;
-\t}
-</style>
-
-<div class=\"tabs\">
-\t<ul class=\"tab-links\" hidden>
-\t\t<li class=\"active\">
-\t\t\t<a href=\"#tab1\">Tab #1</a>
-\t\t</li>
-
-\t</ul>
-
-\t<div class=\"tab-content\">
-\t\t<form action=\"{{ path('gestionSupp_new')}}\" method=\"post\">
-
-\t\t\t{{form_start(formG)}}
-
-
-\t\t\t<div id=\"tab1\" class=\"tab active\">
-\t\t\t\t<div class=\"wrapper\">
-
-
-\t\t\t\t\t<div class=\"box1\">
-\t\t\t\t\t\t<label class=\"block text-sm\">
-\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Employé</span>
-\t\t\t\t\t\t\t{{form_row(formG.employe , { 'label' : false})}}
-\t\t\t\t\t\t</label>
-\t\t\t\t\t</div>
-
-
-
-\t\t\t\t\t<div class=\"box2\">
-\t\t\t\t\t\t<label class=\"block text-sm\">
-\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Date</span>
-
-\t\t\t\t\t\t\t{{form_row(formG.date , { 'label' : false})}}
-
-
-\t\t\t\t\t\t</label>
-
-\t\t\t\t\t</div>
-
-\t\t\t\t\t<div class=\"box3\">
-\t\t\t\t\t\t<label class=\"block text-sm\">
-\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Jour Ferié</span>
-\t\t\t\t\t\t\t{{form_row(formG.jourFerie , { 'label' : false})}}
-
-
-\t\t\t\t\t\t</label>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"box4\">
-\t\t\t\t\t\t<label class=\"block text-sm\">
-\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Nombre des Heures Supplementaire</span>
-\t\t\t\t\t\t\t{{form_row(formG.nbreHeurSupp , { 'label' : false})}}
-
-
-\t\t\t\t\t\t</label>
-\t\t\t\t\t</div>
-
-\t\t\t\t\t<div class=\"box5\">
-\t\t\t\t\t\t<label class=\"block text-sm\">
-\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Montant</span>
-\t\t\t\t\t\t\t{{form_row(formG.montant , { 'label' : false})}}
-
-
-\t\t\t\t\t\t</label>
-\t\t\t\t\t</div>
-
-\t\t\t\t</div>
-
-\t\t\t\t<ul class=\"tab-links\">
-\t\t\t\t\t<li>
-\t\t\t\t\t\t<a href=\"{{ path('gestionSupp_list')}}\" type=\"submit\">Cancel</a>
-\t\t\t\t\t\t<button href=\"{{ path('gestionSupp_list') }}\" type=\"submit\">Submit</button>
-
-\t\t\t\t\t</li>
-\t\t\t\t</ul>
-\t\t\t</div>
-
-
-\t\t\t{{form_end(formG)}}
-\t\t</form>
-\t</div>
-
-
-</div>
-
-
-{% endblock %}", "gestionSupp/new.html.twig", "/home/hp/Symfony/GRH/templates/gestionSupp/new.html.twig");
+        // line 1
+        return "base.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "gestionSupp/new.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "gestionSupp/new.html.twig"));
+
+        $this->parent = $this->loadTemplate("base.html.twig", "gestionSupp/new.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 2
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -254,23 +65,15 @@ class __TwigTemplate_fe8697bcb8cb1e14c04770faee85b1a58cfab8c478e3396d04df7da6c28
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 2
-
-    public function getTemplateName()
-    {
-        return "gestionSupp/new.html.twig";
-    }
-
     // line 3
-
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -519,12 +322,17 @@ class __TwigTemplate_fe8697bcb8cb1e14c04770faee85b1a58cfab8c478e3396d04df7da6c28
 
 
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "gestionSupp/new.html.twig";
     }
 
     public function isTraitable()
@@ -537,28 +345,218 @@ class __TwigTemplate_fe8697bcb8cb1e14c04770faee85b1a58cfab8c478e3396d04df7da6c28
         return array (  315 => 203,  305 => 196,  301 => 195,  288 => 185,  276 => 176,  265 => 168,  252 => 158,  239 => 148,  226 => 138,  221 => 136,  87 => 4,  77 => 3,  59 => 2,  36 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "base.html.twig";
-    }
+        return new Source("{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+{% block body %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "gestionSupp/new.html.twig"));
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "gestionSupp/new.html.twig"));
-
-        $this->parent = $this->loadTemplate("base.html.twig", "gestionSupp/new.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
-
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+<h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
+\tAjouter des Heures Supplementaire
+</h4>
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+<style>
+\t.tabs {
+\t\twidth: 100%;
+\t\tdisplay: inline-block;
+\t}
 
+\t.tabs h4 {
+\t\tcolor: #CB997E;
+\t\tmargin: 5px 0 15px;
+\t\tdisplay: inline-block;
+\t}
+
+\t.tab-links:after {
+\t\tdisplay: block;
+\t\tclear: both;
+\t\tcontent: '';
+\t}
+
+\t.tab-links {
+\t\tpadding: 0;
+\t\tmargin: 10px 0 0;
+\t\tposition: relative;
+\t\ttop: 2px;
+\t}
+
+\t.tab-links li {
+\t\tmargin: 0 5px 0 0;
+\t\tfloat: left;
+\t\tpadding-top: 2px;
+\t\tlist-style: none;
+\t}
+
+\t.tab-links a {
+\t\tpadding: 9px 8px 6px;
+\t\tdisplay: inline-block;
+\t\tbackground: #CB997E;
+\t\tborder: 2px solid #CB997E;
+\t\tborder-bottom: 3px solid #CB997E;
+\t\tfont-size: 10.5px;
+\t\tfont-weight: 600;
+\t\tcolor: #fff;
+\t\ttransition: all linear 0.15s;
+\t}
+
+\t.tab-links button {
+\t\tpadding: 9px 8px 6px;
+\t\tdisplay: inline-block;
+\t\tbackground: #CB997E;
+\t\tborder: 2px solid #CB997E;
+\t\tborder-bottom: 3px solid #CB997E;
+\t\tfont-size: 10.5px;
+\t\tfont-weight: 600;
+\t\tcolor: #fff;
+\t\ttransition: all linear 0.15s;
+\t}
+
+\t.tab-links a:hover {
+\t\tbackground: #CB997E;
+\t\ttext-decoration: none;
+\t\tborder: 2px solid #CB997E;
+\t\tborder-bottom: 3px solid #CB997E;
+\t\tcolor: #fff;
+\t}
+
+\tli.active a,
+\tli.active a:hover {
+\t\tbackground: #CB997E;
+\t\theight: 35px;
+\t\tborder-bottom: none;
+\t\tcolor: #fff;
+\t}
+
+\t.tab-content,
+\t.uploaded-documents-container {
+\t\tpadding: 15px;
+\t\tborder-radius: 3px;
+\t\tborder: 2px solid #CB997E;
+\t\tbackground: #fff;
+\t\tfont-size: 0.95em;
+\t}
+
+\t.tab-content-scroll {
+\t\tmax-height: 375px;
+\t\tmin-height: 375px;
+\t\tmax-width: 1100px;
+\t\tmin-width: 450px;
+\t\toverflow: auto;
+\t\tclear: both;
+\t}
+
+\t.tab-content-scroll-home {
+\t\tmin-height: 135px;
+\t}
+
+\t.button-bar-scroll {
+\t\tmin-height: 235px;
+\t}
+
+\t.tab-content-scroll>p {
+\t\tmargin-top: 0;
+\t\tpadding-right: 12px;
+\t}
+
+\t.tab-content a {
+\t\tmargin-top: 10px;
+\t\tcolor: #fff;
+\t}
+
+\t.tab {
+\t\tdisplay: none;
+\t}
+
+\t.tab.active {
+\t\tdisplay: block;
+\t}
+</style>
+
+<div class=\"tabs\">
+\t<ul class=\"tab-links\" hidden>
+\t\t<li class=\"active\">
+\t\t\t<a href=\"#tab1\">Tab #1</a>
+\t\t</li>
+
+\t</ul>
+
+\t<div class=\"tab-content\">
+\t\t<form action=\"{{ path('gestionSupp_new')}}\" method=\"post\">
+
+\t\t\t{{form_start(formG)}}
+
+
+\t\t\t<div id=\"tab1\" class=\"tab active\">
+\t\t\t\t<div class=\"wrapper\">
+
+
+\t\t\t\t\t<div class=\"box1\">
+\t\t\t\t\t\t<label class=\"block text-sm\">
+\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Employé</span>
+\t\t\t\t\t\t\t{{form_row(formG.employe , { 'label' : false})}}
+\t\t\t\t\t\t</label>
+\t\t\t\t\t</div>
+
+
+
+\t\t\t\t\t<div class=\"box2\">
+\t\t\t\t\t\t<label class=\"block text-sm\">
+\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Date</span>
+
+\t\t\t\t\t\t\t{{form_row(formG.date , { 'label' : false})}}
+
+
+\t\t\t\t\t\t</label>
+
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"box3\">
+\t\t\t\t\t\t<label class=\"block text-sm\">
+\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Jour Ferié</span>
+\t\t\t\t\t\t\t{{form_row(formG.jourFerie , { 'label' : false})}}
+
+
+\t\t\t\t\t\t</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"box4\">
+\t\t\t\t\t\t<label class=\"block text-sm\">
+\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Nombre des Heures Supplementaire</span>
+\t\t\t\t\t\t\t{{form_row(formG.nbreHeurSupp , { 'label' : false})}}
+
+
+\t\t\t\t\t\t</label>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"box5\">
+\t\t\t\t\t\t<label class=\"block text-sm\">
+\t\t\t\t\t\t\t<span class=\"text-gray-700 dark:text-gray-400\">Montant</span>
+\t\t\t\t\t\t\t{{form_row(formG.montant , { 'label' : false})}}
+
+
+\t\t\t\t\t\t</label>
+\t\t\t\t\t</div>
+
+\t\t\t\t</div>
+
+\t\t\t\t<ul class=\"tab-links\">
+\t\t\t\t\t<li>
+\t\t\t\t\t\t<a href=\"{{ path('gestionSupp_list')}}\" type=\"submit\">Cancel</a>
+\t\t\t\t\t\t<button href=\"{{ path('gestionSupp_list') }}\" type=\"submit\">Submit</button>
+
+\t\t\t\t\t</li>
+\t\t\t\t</ul>
+\t\t\t</div>
+
+
+\t\t\t{{form_end(formG)}}
+\t\t</form>
+\t</div>
+
+
+</div>
+
+
+{% endblock %}", "gestionSupp/new.html.twig", "/home/hp/Téléchargements/GRH-master/templates/gestionSupp/new.html.twig");
     }
 }

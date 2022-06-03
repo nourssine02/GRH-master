@@ -32,49 +32,25 @@ class __TwigTemplate_5e8f29c6ab19d8006697c5c8b467757cfe4696d4e66686a53c1b0688d6d
         ];
     }
 
-    public function getSourceContext()
+    protected function doDisplay(array $context, array $blocks = [])
     {
-        return new Source("{% block title %}{% endblock %} {% block body %}
-<link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('css/styles.css')}}\">
-<!----===== Boxicons CSS ===== -->
-<link rel=\"stylesheet\" href=\"https://pro.fontawesome.com/releases/v5.10.0/css/all.css\" integrity=\"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p\" crossorigin=\"anonymous\" />
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "registration/register.html.twig"));
 
-<div class=\"container\">
-    <div class=\"screen\">
-        <div class=\"screen__content\">
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "registration/register.html.twig"));
 
-            <div class=\"register\">
+        // line 1
+        $this->displayBlock('title', $context, $blocks);
+        echo " ";
+        $this->displayBlock('body', $context, $blocks);
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-                <div class=\"title\">Créer un Compte</div>
-                <div class=\"dejaCompte\">
-                    Vous avez déjà un compte ?
-                    <a href=\"{{path('app_login')}}\">
-\t\t\t\t\t\tConnectez-vous ici
-\t\t\t\t\t</a>
-                </div>
-                <img class=\"welcoming\" src=\"{{ asset ('images/welcome.svg')}}\" alt=\"welcoming\">
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-                      {{ form_start(registrationForm, {'attr': {'novalidate' : 'novalidate'}})}}
-                      <i class=\"login__icon fas fa-user\"></i>
-                      {{ form_row(registrationForm.name) }}
-                      <i class=\"login__icon  fas fa-regular fa-at\"></i>
-                      <br>
-                      {{ form_row(registrationForm.email) }}
-                      <i class=\"login__icon fas fa-lock\"></i>
-                      <br>
-                      {{ form_row(registrationForm.plainPassword) }}
-                      <button class=\"button login__submit\" type=\"submit\">
-                          <span class=\"button__text\">S'inscrire</span>
-                      </button>
-                      {{ form_end(registrationForm) }}
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-{% endblock %}", "registration/register.html.twig", "/home/hp/Téléchargements/GRH-master/templates/registration/register.html.twig");
     }
 
     public function block_title($context, array $blocks = [])
@@ -92,11 +68,6 @@ class __TwigTemplate_5e8f29c6ab19d8006697c5c8b467757cfe4696d4e66686a53c1b0688d6d
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-    }
-
-    public function getTemplateName()
-    {
-        return "registration/register.html.twig";
     }
 
     public function block_body($context, array $blocks = [])
@@ -172,12 +143,17 @@ class __TwigTemplate_5e8f29c6ab19d8006697c5c8b467757cfe4696d4e66686a53c1b0688d6d
 
 
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "registration/register.html.twig";
     }
 
     public function getDebugInfo()
@@ -185,24 +161,48 @@ class __TwigTemplate_5e8f29c6ab19d8006697c5c8b467757cfe4696d4e66686a53c1b0688d6d
         return array (  136 => 33,  129 => 29,  123 => 26,  117 => 23,  112 => 21,  107 => 19,  100 => 15,  83 => 2,  45 => 1,);
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
+    public function getSourceContext()
     {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "registration/register.html.twig"));
+        return new Source("{% block title %}{% endblock %} {% block body %}
+<link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('css/styles.css')}}\">
+<!----===== Boxicons CSS ===== -->
+<link rel=\"stylesheet\" href=\"https://pro.fontawesome.com/releases/v5.10.0/css/all.css\" integrity=\"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p\" crossorigin=\"anonymous\" />
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "registration/register.html.twig"));
+<div class=\"container\">
+    <div class=\"screen\">
+        <div class=\"screen__content\">
 
-        // line 1
-        $this->displayBlock('title', $context, $blocks);
-        echo " ";
-        $this->displayBlock('body', $context, $blocks);
+            <div class=\"register\">
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+                <div class=\"title\">Créer un Compte</div>
+                <div class=\"dejaCompte\">
+                    Vous avez déjà un compte ?
+                    <a href=\"{{path('app_login')}}\">
+\t\t\t\t\t\tConnectez-vous ici
+\t\t\t\t\t</a>
+                </div>
+                <img class=\"welcoming\" src=\"{{ asset ('images/welcome.svg')}}\" alt=\"welcoming\">
+
+                      {{ form_start(registrationForm, {'attr': {'novalidate' : 'novalidate'}})}}
+                      <i class=\"login__icon fas fa-user\"></i>
+                      {{ form_row(registrationForm.name) }}
+                      <i class=\"login__icon  fas fa-regular fa-at\"></i>
+                      <br>
+                      {{ form_row(registrationForm.email) }}
+                      <i class=\"login__icon fas fa-lock\"></i>
+                      <br>
+                      {{ form_row(registrationForm.plainPassword) }}
+                      <button class=\"button login__submit\" type=\"submit\">
+                          <span class=\"button__text\">S'inscrire</span>
+                      </button>
+                      {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
+{% endblock %}", "registration/register.html.twig", "/home/hp/Téléchargements/GRH-master/templates/registration/register.html.twig");
     }
 }

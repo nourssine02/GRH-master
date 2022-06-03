@@ -20,49 +20,6 @@ class PoolConfig
     private $earlyExpirationMessageBus;
     private $clearer;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['adapters'])) {
-            $this->adapters = $value['adapters'];
-            unset($value['adapters']);
-        }
-
-        if (isset($value['tags'])) {
-            $this->tags = $value['tags'];
-            unset($value['tags']);
-        }
-
-        if (isset($value['public'])) {
-            $this->public = $value['public'];
-            unset($value['public']);
-        }
-
-        if (isset($value['default_lifetime'])) {
-            $this->defaultLifetime = $value['default_lifetime'];
-            unset($value['default_lifetime']);
-        }
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['early_expiration_message_bus'])) {
-            $this->earlyExpirationMessageBus = $value['early_expiration_message_bus'];
-            unset($value['early_expiration_message_bus']);
-        }
-
-        if (isset($value['clearer'])) {
-            $this->clearer = $value['clearer'];
-            unset($value['clearer']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -70,7 +27,7 @@ class PoolConfig
     public function adapters($value): self
     {
         $this->adapters = $value;
-
+    
         return $this;
     }
     
@@ -82,7 +39,7 @@ class PoolConfig
     public function tags($value): self
     {
         $this->tags = $value;
-
+    
         return $this;
     }
     
@@ -94,7 +51,7 @@ class PoolConfig
     public function public($value): self
     {
         $this->public = $value;
-
+    
         return $this;
     }
     
@@ -108,7 +65,7 @@ class PoolConfig
     public function defaultLifetime($value): self
     {
         $this->defaultLifetime = $value;
-
+    
         return $this;
     }
     
@@ -121,7 +78,7 @@ class PoolConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -134,7 +91,7 @@ class PoolConfig
     public function earlyExpirationMessageBus($value): self
     {
         $this->earlyExpirationMessageBus = $value;
-
+    
         return $this;
     }
     
@@ -146,8 +103,51 @@ class PoolConfig
     public function clearer($value): self
     {
         $this->clearer = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['adapters'])) {
+            $this->adapters = $value['adapters'];
+            unset($value['adapters']);
+        }
+    
+        if (isset($value['tags'])) {
+            $this->tags = $value['tags'];
+            unset($value['tags']);
+        }
+    
+        if (isset($value['public'])) {
+            $this->public = $value['public'];
+            unset($value['public']);
+        }
+    
+        if (isset($value['default_lifetime'])) {
+            $this->defaultLifetime = $value['default_lifetime'];
+            unset($value['default_lifetime']);
+        }
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['early_expiration_message_bus'])) {
+            $this->earlyExpirationMessageBus = $value['early_expiration_message_bus'];
+            unset($value['early_expiration_message_bus']);
+        }
+    
+        if (isset($value['clearer'])) {
+            $this->clearer = $value['clearer'];
+            unset($value['clearer']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

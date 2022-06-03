@@ -23,64 +23,6 @@ class JsonLoginConfig
     private $usernamePath;
     private $passwordPath;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['remember_me'])) {
-            $this->rememberMe = $value['remember_me'];
-            unset($value['remember_me']);
-        }
-
-        if (isset($value['success_handler'])) {
-            $this->successHandler = $value['success_handler'];
-            unset($value['success_handler']);
-        }
-
-        if (isset($value['failure_handler'])) {
-            $this->failureHandler = $value['failure_handler'];
-            unset($value['failure_handler']);
-        }
-
-        if (isset($value['check_path'])) {
-            $this->checkPath = $value['check_path'];
-            unset($value['check_path']);
-        }
-
-        if (isset($value['use_forward'])) {
-            $this->useForward = $value['use_forward'];
-            unset($value['use_forward']);
-        }
-
-        if (isset($value['require_previous_session'])) {
-            $this->requirePreviousSession = $value['require_previous_session'];
-            unset($value['require_previous_session']);
-        }
-
-        if (isset($value['login_path'])) {
-            $this->loginPath = $value['login_path'];
-            unset($value['login_path']);
-        }
-
-        if (isset($value['username_path'])) {
-            $this->usernamePath = $value['username_path'];
-            unset($value['username_path']);
-        }
-
-        if (isset($value['password_path'])) {
-            $this->passwordPath = $value['password_path'];
-            unset($value['password_path']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -89,7 +31,7 @@ class JsonLoginConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +43,7 @@ class JsonLoginConfig
     public function rememberMe($value): self
     {
         $this->rememberMe = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +55,7 @@ class JsonLoginConfig
     public function successHandler($value): self
     {
         $this->successHandler = $value;
-
+    
         return $this;
     }
     
@@ -125,7 +67,7 @@ class JsonLoginConfig
     public function failureHandler($value): self
     {
         $this->failureHandler = $value;
-
+    
         return $this;
     }
     
@@ -137,7 +79,7 @@ class JsonLoginConfig
     public function checkPath($value): self
     {
         $this->checkPath = $value;
-
+    
         return $this;
     }
     
@@ -149,7 +91,7 @@ class JsonLoginConfig
     public function useForward($value): self
     {
         $this->useForward = $value;
-
+    
         return $this;
     }
     
@@ -161,7 +103,7 @@ class JsonLoginConfig
     public function requirePreviousSession($value): self
     {
         $this->requirePreviousSession = $value;
-
+    
         return $this;
     }
     
@@ -173,7 +115,7 @@ class JsonLoginConfig
     public function loginPath($value): self
     {
         $this->loginPath = $value;
-
+    
         return $this;
     }
     
@@ -185,7 +127,7 @@ class JsonLoginConfig
     public function usernamePath($value): self
     {
         $this->usernamePath = $value;
-
+    
         return $this;
     }
     
@@ -197,8 +139,66 @@ class JsonLoginConfig
     public function passwordPath($value): self
     {
         $this->passwordPath = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['remember_me'])) {
+            $this->rememberMe = $value['remember_me'];
+            unset($value['remember_me']);
+        }
+    
+        if (isset($value['success_handler'])) {
+            $this->successHandler = $value['success_handler'];
+            unset($value['success_handler']);
+        }
+    
+        if (isset($value['failure_handler'])) {
+            $this->failureHandler = $value['failure_handler'];
+            unset($value['failure_handler']);
+        }
+    
+        if (isset($value['check_path'])) {
+            $this->checkPath = $value['check_path'];
+            unset($value['check_path']);
+        }
+    
+        if (isset($value['use_forward'])) {
+            $this->useForward = $value['use_forward'];
+            unset($value['use_forward']);
+        }
+    
+        if (isset($value['require_previous_session'])) {
+            $this->requirePreviousSession = $value['require_previous_session'];
+            unset($value['require_previous_session']);
+        }
+    
+        if (isset($value['login_path'])) {
+            $this->loginPath = $value['login_path'];
+            unset($value['login_path']);
+        }
+    
+        if (isset($value['username_path'])) {
+            $this->usernamePath = $value['username_path'];
+            unset($value['username_path']);
+        }
+    
+        if (isset($value['password_path'])) {
+            $this->passwordPath = $value['password_path'];
+            unset($value['password_path']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

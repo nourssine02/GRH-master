@@ -15,24 +15,6 @@ class ChannelsConfig
     private $type;
     private $elements;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['elements'])) {
-            $this->elements = $value['elements'];
-            unset($value['elements']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class ChannelsConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class ChannelsConfig
     public function elements($value): self
     {
         $this->elements = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['elements'])) {
+            $this->elements = $value['elements'];
+            unset($value['elements']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -17,29 +17,6 @@ class FormConfig
     private $csrfProtection;
     private $legacyErrorMessages;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['csrf_protection'])) {
-            $this->csrfProtection = new \Symfony\Config\Framework\Form\CsrfProtectionConfig($value['csrf_protection']);
-            unset($value['csrf_protection']);
-        }
-
-        if (isset($value['legacy_error_messages'])) {
-            $this->legacyErrorMessages = $value['legacy_error_messages'];
-            unset($value['legacy_error_messages']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -48,7 +25,7 @@ class FormConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class FormConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "csrfProtection()" has already been initialized. You cannot pass values the second time you call csrfProtection().');
         }
-
+    
         return $this->csrfProtection;
     }
     
@@ -71,8 +48,31 @@ class FormConfig
     public function legacyErrorMessages($value): self
     {
         $this->legacyErrorMessages = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['csrf_protection'])) {
+            $this->csrfProtection = new \Symfony\Config\Framework\Form\CsrfProtectionConfig($value['csrf_protection']);
+            unset($value['csrf_protection']);
+        }
+    
+        if (isset($value['legacy_error_messages'])) {
+            $this->legacyErrorMessages = $value['legacy_error_messages'];
+            unset($value['legacy_error_messages']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

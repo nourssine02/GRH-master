@@ -31,67 +31,32 @@ class __TwigTemplate_b558c238dd2e5a0c19e629255b5eed5286ae9eac9e9b4dd457bec017f2d
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% set icon %}
-        {% include '@VichUploader/Collector/icon_grey.html.twig' %}
-        <span class=\"sf-toolbar-value\">{{ collector.mappingsCount }}</span>
-    {% endset %}
-
-    {% set text %}
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Mappings</b>
-            <span class=\"sf-toolbar-status sf-toolbar-status-grey\">{{ collector.mappingsCount }}</span>
-        </div>
-    {% endset %}
-
-    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
-{% endblock %}
-
-{% block menu %}
-    {# This left-hand menu appears when using the full-screen profiler. #}
-    <span class=\"label\">
-        <span class=\"icon\">
-            {% include '@VichUploader/Collector/icon_white.html.twig' %}
-        </span>
-        <strong>VichUploader</strong>
-    </span>
-{% endblock %}
-
-{% block panel %}
-    <h2>VichUploaderBundle Mappings</h2>
-    <p class=\"help\"><strong>Note</strong>: Only classes configured using XML or YAML are displayed.</p>
-    <table>
-        <thead>
-            <tr>
-                <th scope=\"col\">Field</th>
-                <th scope=\"col\">Mapping</th>
-                <th scope=\"col\">Filename property</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for class, data in collector.mappings %}
-                <tr>
-                    <th scope=\"row\" colspan=\"4\">{{ class }}</th>
-                </tr>
-                {% for mdata in data %}
-                    <tr>
-                        <td>{{ mdata.propertyName }}</td>
-                        <td>{{ mdata.mapping }}</td>
-                        <td>{{ mdata.fileNameProperty }}</td>
-                    </tr>
-                {% endfor %}
-                {# TODO size, mimeType, originalName,dimesions? #}
-            {% endfor %}
-        </tbody>
-    </table>
-{% endblock %}
-", "@VichUploader/Collector/mapping_collector.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/vich/uploader-bundle/templates/Collector/mapping_collector.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@VichUploader/Collector/mapping_collector.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@VichUploader/Collector/mapping_collector.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@VichUploader/Collector/mapping_collector.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -135,23 +100,15 @@ class __TwigTemplate_b558c238dd2e5a0c19e629255b5eed5286ae9eac9e9b4dd457bec017f2d
         echo twig_include($this->env, $context, "@WebProfiler/Profiler/toolbar_item.html.twig", ["link" => true]);
         echo "
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@VichUploader/Collector/mapping_collector.html.twig";
-    }
-
     // line 19
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -174,16 +131,15 @@ class __TwigTemplate_b558c238dd2e5a0c19e629255b5eed5286ae9eac9e9b4dd457bec017f2d
         <strong>VichUploader</strong>
     </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 29
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -254,12 +210,17 @@ class __TwigTemplate_b558c238dd2e5a0c19e629255b5eed5286ae9eac9e9b4dd457bec017f2d
         echo "        </tbody>
     </table>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@VichUploader/Collector/mapping_collector.html.twig";
     }
 
     public function isTraitable()
@@ -272,28 +233,64 @@ class __TwigTemplate_b558c238dd2e5a0c19e629255b5eed5286ae9eac9e9b4dd457bec017f2d
         return array (  210 => 54,  204 => 53,  202 => 52,  193 => 49,  189 => 48,  185 => 47,  182 => 46,  178 => 45,  173 => 43,  170 => 42,  166 => 41,  153 => 30,  143 => 29,  130 => 24,  128 => 23,  124 => 21,  122 => 20,  112 => 19,  100 => 16,  97 => 15,  91 => 12,  87 => 10,  85 => 9,  82 => 8,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@VichUploader/Collector/mapping_collector.html.twig"));
+{% block toolbar %}
+    {% set icon %}
+        {% include '@VichUploader/Collector/icon_grey.html.twig' %}
+        <span class=\"sf-toolbar-value\">{{ collector.mappingsCount }}</span>
+    {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@VichUploader/Collector/mapping_collector.html.twig"));
+    {% set text %}
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Mappings</b>
+            <span class=\"sf-toolbar-status sf-toolbar-status-grey\">{{ collector.mappingsCount }}</span>
+        </div>
+    {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@VichUploader/Collector/mapping_collector.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
+{% endblock %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+{% block menu %}
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class=\"label\">
+        <span class=\"icon\">
+            {% include '@VichUploader/Collector/icon_white.html.twig' %}
+        </span>
+        <strong>VichUploader</strong>
+    </span>
+{% endblock %}
 
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
+{% block panel %}
+    <h2>VichUploaderBundle Mappings</h2>
+    <p class=\"help\"><strong>Note</strong>: Only classes configured using XML or YAML are displayed.</p>
+    <table>
+        <thead>
+            <tr>
+                <th scope=\"col\">Field</th>
+                <th scope=\"col\">Mapping</th>
+                <th scope=\"col\">Filename property</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for class, data in collector.mappings %}
+                <tr>
+                    <th scope=\"row\" colspan=\"4\">{{ class }}</th>
+                </tr>
+                {% for mdata in data %}
+                    <tr>
+                        <td>{{ mdata.propertyName }}</td>
+                        <td>{{ mdata.mapping }}</td>
+                        <td>{{ mdata.fileNameProperty }}</td>
+                    </tr>
+                {% endfor %}
+                {# TODO size, mimeType, originalName,dimesions? #}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+", "@VichUploader/Collector/mapping_collector.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/vich/uploader-bundle/templates/Collector/mapping_collector.html.twig");
     }
 }

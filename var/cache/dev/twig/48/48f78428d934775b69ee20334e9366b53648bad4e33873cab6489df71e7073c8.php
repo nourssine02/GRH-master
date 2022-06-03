@@ -29,186 +29,32 @@ class __TwigTemplate_4f0997796d0940f2670f64f0ab927b536552701f73218599e89693faed7
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends \"base.html.twig\" %}
+        // line 1
+        return "base.html.twig";
+    }
 
-{% block body %}
-<style>
-    li {
-        font-weight: lighter;
-        font-size: 14px;
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "profil/update.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "profil/update.html.twig"));
+
+        $this->parent = $this->loadTemplate("base.html.twig", "profil/update.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
 
-    body {
-        background-color: #CB997E
-    }
-
-    .card {
-        border: none
-    }
-
-    .image {
-        position: relative
-    }
-
-    .image span {
-        background-color: #CB997E;
-        color: #fff;
-        padding: 6px;
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        font-size: 12px;
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: -0px;
-        right: 0px
-    }
-
-    .user-details h4 {
-        color: #CB997E
-    }
-
-
-    .user-details span {
-        text-align: left
-    }
-
-    .inputs label {
-        display: flex;
-        margin-left: 3px;
-        font-weight: 200;
-        font-size: 13px;
-        margin-bottom: 4px
-    }
-
-    .inputs input {
-        font-size: 14px;
-        height: 40px;
-        border: 2px solid #ced4da
-    }
-
-    .inputs input:focus {
-        box-shadow: none;
-        border: 2px solid #CB997E
-    }
-
-    .about-inputs label {
-        display: flex;
-        margin-left: 3px;
-        font-weight: 400;
-        font-size: 13px;
-        margin-bottom: 4px
-    }
-
-    .about-inputs textarea {
-        font-size: 14px;
-        height: 100px;
-        border: 2px solid #ced4da;
-        resize: none
-    }
-
-    .about-inputs textarea:focus {
-        box-shadow: none
-    }
-
-    .btn {
-        font-weight: 400
-    }
-
-    .btn:focus {
-        box-shadow: none
-    }
-
-    .rounded-circle {
-        width: 150px;
-    }
-</style>
-<div class=\"container mt-1\">
-    <div class=\"card p-3 text-center\">
-        <div class=\"d-flex flex-row justify-content-center mb-3\">
-            <div class=\"image\">
-                <img src=\"{{ asset('images/user.png')}}\" class=\"rounded-circle\">
-                <span>
-                    <input type=\"file\" name=\"avatar\" id=\"avatar\" style=\"opacity: 0; height: 1px; display: none;\">
-                    <a href=\"javascript:void(0)\" id=\"change_avatar\"> <i class='bx bxs-camera-plus'></i></a>
-
-                </span>
-            </div>
-            <div class=\"d-flex flex-column ms-3 user-details\">
-                <h4 class=\"mb-0\">{{app.user.name.nom}}</h4>
-                <span>{{app.user.name.service}}</span>
-            </div>
-        </div>
-
-
-        <h4 style=\"margin-left: -130px; margin: top 20px;\">Modifier Profile</h4>
-        <br>
-        <form action=\"{{ path('profil_update', {'id': app.user.name.id})}}\" method=\"POST\">
-
-
-            {{form_start(form)}}
-
-            <div class=\"row  \">
-                <div class=\"col-md-6 \">
-                    <div class=\"inputs\">
-                        {{form_row(form.nom)}}
-
-                    </div>
-                </div>
-                <div class=\"col-md-6 \">
-                    <div class=\"inputs\">
-                        {{form_row(form.prenom)}}
-
-                    </div>
-                </div>
-                <div class=\"col-md-6 \">
-                    <div class=\"inputs\">
-                        {{form_row(form.email)}}
-
-                    </div>
-                </div>
-
-                <div class=\"col-md-6 \">
-                    <div class=\"inputs\">
-                        {{form_row(form.telephone)}}
-
-                    </div>
-                </div>
-                <div class=\"col-md-6 \">
-                    <div class=\"inputs\">
-                        {{form_row(form.adresse)}}
-
-                    </div>
-                </div>
-
-
-            </div>
-       <br>
-            <button href=\"{{ path('profil') }}\" type=\"submit\"   class=\"btn shadow-1 rounded-1 btn-outline btn-opening text-airforce text-light-2\"><span
-                    class=\"btn-outline-text btn-outline-invert\"> Submit</span></button>
-
-
-
-
-            {{form_end(form)}}
-        </form>
-    </div>
-
-</div>
-
-<script>
-    \$(document).on('click', '#change_avatar', function () {
-        \$('#avatar').click();
-    });
-</script>
-{% endblock %}", "profil/update.html.twig", "/home/hp/Téléchargements/GRH-master/templates/profil/update.html.twig");
-    }
-
+    // line 3
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -428,15 +274,13 @@ class __TwigTemplate_4f0997796d0940f2670f64f0ab927b536552701f73218599e89693faed7
     });
 </script>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
-
-    // line 3
 
     public function getTemplateName()
     {
@@ -453,28 +297,183 @@ class __TwigTemplate_4f0997796d0940f2670f64f0ab927b536552701f73218599e89693faed7
         return array (  264 => 165,  255 => 159,  244 => 151,  235 => 145,  225 => 138,  216 => 132,  207 => 126,  199 => 121,  193 => 118,  183 => 111,  179 => 110,  168 => 102,  68 => 4,  58 => 3,  35 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "base.html.twig";
+        return new Source("{% extends \"base.html.twig\" %}
+
+{% block body %}
+<style>
+    li {
+        font-weight: lighter;
+        font-size: 14px;
+
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "profil/update.html.twig"));
+    body {
+        background-color: #CB997E
+    }
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "profil/update.html.twig"));
+    .card {
+        border: none
+    }
 
-        $this->parent = $this->loadTemplate("base.html.twig", "profil/update.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    .image {
+        position: relative
+    }
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+    .image span {
+        background-color: #CB997E;
+        color: #fff;
+        padding: 6px;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        font-size: 12px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: -0px;
+        right: 0px
+    }
+
+    .user-details h4 {
+        color: #CB997E
+    }
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+    .user-details span {
+        text-align: left
+    }
 
+    .inputs label {
+        display: flex;
+        margin-left: 3px;
+        font-weight: 200;
+        font-size: 13px;
+        margin-bottom: 4px
+    }
+
+    .inputs input {
+        font-size: 14px;
+        height: 40px;
+        border: 2px solid #ced4da
+    }
+
+    .inputs input:focus {
+        box-shadow: none;
+        border: 2px solid #CB997E
+    }
+
+    .about-inputs label {
+        display: flex;
+        margin-left: 3px;
+        font-weight: 400;
+        font-size: 13px;
+        margin-bottom: 4px
+    }
+
+    .about-inputs textarea {
+        font-size: 14px;
+        height: 100px;
+        border: 2px solid #ced4da;
+        resize: none
+    }
+
+    .about-inputs textarea:focus {
+        box-shadow: none
+    }
+
+    .btn {
+        font-weight: 400
+    }
+
+    .btn:focus {
+        box-shadow: none
+    }
+
+    .rounded-circle {
+        width: 150px;
+    }
+</style>
+<div class=\"container mt-1\">
+    <div class=\"card p-3 text-center\">
+        <div class=\"d-flex flex-row justify-content-center mb-3\">
+            <div class=\"image\">
+                <img src=\"{{ asset('images/user.png')}}\" class=\"rounded-circle\">
+                <span>
+                    <input type=\"file\" name=\"avatar\" id=\"avatar\" style=\"opacity: 0; height: 1px; display: none;\">
+                    <a href=\"javascript:void(0)\" id=\"change_avatar\"> <i class='bx bxs-camera-plus'></i></a>
+
+                </span>
+            </div>
+            <div class=\"d-flex flex-column ms-3 user-details\">
+                <h4 class=\"mb-0\">{{app.user.name.nom}}</h4>
+                <span>{{app.user.name.service}}</span>
+            </div>
+        </div>
+
+
+        <h4 style=\"margin-left: -130px; margin: top 20px;\">Modifier Profile</h4>
+        <br>
+        <form action=\"{{ path('profil_update', {'id': app.user.name.id})}}\" method=\"POST\">
+
+
+            {{form_start(form)}}
+
+            <div class=\"row  \">
+                <div class=\"col-md-6 \">
+                    <div class=\"inputs\">
+                        {{form_row(form.nom)}}
+
+                    </div>
+                </div>
+                <div class=\"col-md-6 \">
+                    <div class=\"inputs\">
+                        {{form_row(form.prenom)}}
+
+                    </div>
+                </div>
+                <div class=\"col-md-6 \">
+                    <div class=\"inputs\">
+                        {{form_row(form.email)}}
+
+                    </div>
+                </div>
+
+                <div class=\"col-md-6 \">
+                    <div class=\"inputs\">
+                        {{form_row(form.telephone)}}
+
+                    </div>
+                </div>
+                <div class=\"col-md-6 \">
+                    <div class=\"inputs\">
+                        {{form_row(form.adresse)}}
+
+                    </div>
+                </div>
+
+
+            </div>
+       <br>
+            <button href=\"{{ path('profil') }}\" type=\"submit\"   class=\"btn shadow-1 rounded-1 btn-outline btn-opening text-airforce text-light-2\"><span
+                    class=\"btn-outline-text btn-outline-invert\"> Submit</span></button>
+
+
+
+
+            {{form_end(form)}}
+        </form>
+    </div>
+
+</div>
+
+<script>
+    \$(document).on('click', '#change_avatar', function () {
+        \$('#avatar').click();
+    });
+</script>
+{% endblock %}", "profil/update.html.twig", "/home/hp/Téléchargements/GRH-master/templates/profil/update.html.twig");
     }
 }

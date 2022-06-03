@@ -19,44 +19,6 @@ class ElasticsearchConfig
     private $user;
     private $password;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['transport'])) {
-            $this->transport = $value['transport'];
-            unset($value['transport']);
-        }
-
-        if (isset($value['user'])) {
-            $this->user = $value['user'];
-            unset($value['user']);
-        }
-
-        if (isset($value['password'])) {
-            $this->password = $value['password'];
-            unset($value['password']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -65,7 +27,7 @@ class ElasticsearchConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +39,7 @@ class ElasticsearchConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -89,7 +51,7 @@ class ElasticsearchConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +63,7 @@ class ElasticsearchConfig
     public function transport($value): self
     {
         $this->transport = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +75,7 @@ class ElasticsearchConfig
     public function user($value): self
     {
         $this->user = $value;
-
+    
         return $this;
     }
     
@@ -125,8 +87,46 @@ class ElasticsearchConfig
     public function password($value): self
     {
         $this->password = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['transport'])) {
+            $this->transport = $value['transport'];
+            unset($value['transport']);
+        }
+    
+        if (isset($value['user'])) {
+            $this->user = $value['user'];
+            unset($value['user']);
+        }
+    
+        if (isset($value['password'])) {
+            $this->password = $value['password'];
+            unset($value['password']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -18,39 +18,6 @@ class RetryStrategyConfig
     private $multiplier;
     private $maxDelay;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['max_retries'])) {
-            $this->maxRetries = $value['max_retries'];
-            unset($value['max_retries']);
-        }
-
-        if (isset($value['delay'])) {
-            $this->delay = $value['delay'];
-            unset($value['delay']);
-        }
-
-        if (isset($value['multiplier'])) {
-            $this->multiplier = $value['multiplier'];
-            unset($value['multiplier']);
-        }
-
-        if (isset($value['max_delay'])) {
-            $this->maxDelay = $value['max_delay'];
-            unset($value['max_delay']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * Service id to override the retry strategy entirely
      * @default null
@@ -60,7 +27,7 @@ class RetryStrategyConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -72,7 +39,7 @@ class RetryStrategyConfig
     public function maxRetries($value): self
     {
         $this->maxRetries = $value;
-
+    
         return $this;
     }
     
@@ -85,7 +52,7 @@ class RetryStrategyConfig
     public function delay($value): self
     {
         $this->delay = $value;
-
+    
         return $this;
     }
     
@@ -98,7 +65,7 @@ class RetryStrategyConfig
     public function multiplier($value): self
     {
         $this->multiplier = $value;
-
+    
         return $this;
     }
     
@@ -111,8 +78,41 @@ class RetryStrategyConfig
     public function maxDelay($value): self
     {
         $this->maxDelay = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['max_retries'])) {
+            $this->maxRetries = $value['max_retries'];
+            unset($value['max_retries']);
+        }
+    
+        if (isset($value['delay'])) {
+            $this->delay = $value['delay'];
+            unset($value['delay']);
+        }
+    
+        if (isset($value['multiplier'])) {
+            $this->multiplier = $value['multiplier'];
+            unset($value['multiplier']);
+        }
+    
+        if (isset($value['max_delay'])) {
+            $this->maxDelay = $value['max_delay'];
+            unset($value['max_delay']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

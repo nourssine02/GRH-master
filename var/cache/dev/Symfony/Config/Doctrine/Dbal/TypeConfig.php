@@ -15,24 +15,6 @@ class TypeConfig
     private $class;
     private $commented;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['class'])) {
-            $this->class = $value['class'];
-            unset($value['class']);
-        }
-
-        if (isset($value['commented'])) {
-            $this->commented = $value['commented'];
-            unset($value['commented']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class TypeConfig
     public function class($value): self
     {
         $this->class = $value;
-
+    
         return $this;
     }
     
@@ -54,8 +36,26 @@ class TypeConfig
     public function commented($value): self
     {
         $this->commented = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['class'])) {
+            $this->class = $value['class'];
+            unset($value['class']);
+        }
+    
+        if (isset($value['commented'])) {
+            $this->commented = $value['commented'];
+            unset($value['commented']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

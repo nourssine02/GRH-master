@@ -21,54 +21,6 @@ class AccessControlConfig
     private $allowIf;
     private $roles;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['requires_channel'])) {
-            $this->requiresChannel = $value['requires_channel'];
-            unset($value['requires_channel']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if (isset($value['host'])) {
-            $this->host = $value['host'];
-            unset($value['host']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['ips'])) {
-            $this->ips = $value['ips'];
-            unset($value['ips']);
-        }
-
-        if (isset($value['methods'])) {
-            $this->methods = $value['methods'];
-            unset($value['methods']);
-        }
-
-        if (isset($value['allow_if'])) {
-            $this->allowIf = $value['allow_if'];
-            unset($value['allow_if']);
-        }
-
-        if (isset($value['roles'])) {
-            $this->roles = $value['roles'];
-            unset($value['roles']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -77,7 +29,7 @@ class AccessControlConfig
     public function requiresChannel($value): self
     {
         $this->requiresChannel = $value;
-
+    
         return $this;
     }
     
@@ -91,7 +43,7 @@ class AccessControlConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
     }
     
@@ -103,7 +55,7 @@ class AccessControlConfig
     public function host($value): self
     {
         $this->host = $value;
-
+    
         return $this;
     }
     
@@ -115,7 +67,7 @@ class AccessControlConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -126,7 +78,7 @@ class AccessControlConfig
     public function ips($value): self
     {
         $this->ips = $value;
-
+    
         return $this;
     }
     
@@ -137,7 +89,7 @@ class AccessControlConfig
     public function methods($value): self
     {
         $this->methods = $value;
-
+    
         return $this;
     }
     
@@ -149,7 +101,7 @@ class AccessControlConfig
     public function allowIf($value): self
     {
         $this->allowIf = $value;
-
+    
         return $this;
     }
     
@@ -160,8 +112,56 @@ class AccessControlConfig
     public function roles($value): self
     {
         $this->roles = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['requires_channel'])) {
+            $this->requiresChannel = $value['requires_channel'];
+            unset($value['requires_channel']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if (isset($value['host'])) {
+            $this->host = $value['host'];
+            unset($value['host']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['ips'])) {
+            $this->ips = $value['ips'];
+            unset($value['ips']);
+        }
+    
+        if (isset($value['methods'])) {
+            $this->methods = $value['methods'];
+            unset($value['methods']);
+        }
+    
+        if (isset($value['allow_if'])) {
+            $this->allowIf = $value['allow_if'];
+            unset($value['allow_if']);
+        }
+    
+        if (isset($value['roles'])) {
+            $this->roles = $value['roles'];
+            unset($value['roles']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

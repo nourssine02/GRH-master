@@ -23,64 +23,6 @@ class HttpCacheConfig
     private $staleWhileRevalidate;
     private $staleIfError;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['debug'])) {
-            $this->debug = $value['debug'];
-            unset($value['debug']);
-        }
-
-        if (isset($value['trace_level'])) {
-            $this->traceLevel = $value['trace_level'];
-            unset($value['trace_level']);
-        }
-
-        if (isset($value['trace_header'])) {
-            $this->traceHeader = $value['trace_header'];
-            unset($value['trace_header']);
-        }
-
-        if (isset($value['default_ttl'])) {
-            $this->defaultTtl = $value['default_ttl'];
-            unset($value['default_ttl']);
-        }
-
-        if (isset($value['private_headers'])) {
-            $this->privateHeaders = $value['private_headers'];
-            unset($value['private_headers']);
-        }
-
-        if (isset($value['allow_reload'])) {
-            $this->allowReload = $value['allow_reload'];
-            unset($value['allow_reload']);
-        }
-
-        if (isset($value['allow_revalidate'])) {
-            $this->allowRevalidate = $value['allow_revalidate'];
-            unset($value['allow_revalidate']);
-        }
-
-        if (isset($value['stale_while_revalidate'])) {
-            $this->staleWhileRevalidate = $value['stale_while_revalidate'];
-            unset($value['stale_while_revalidate']);
-        }
-
-        if (isset($value['stale_if_error'])) {
-            $this->staleIfError = $value['stale_if_error'];
-            unset($value['stale_if_error']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -89,7 +31,7 @@ class HttpCacheConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +43,7 @@ class HttpCacheConfig
     public function debug($value): self
     {
         $this->debug = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +55,7 @@ class HttpCacheConfig
     public function traceLevel($value): self
     {
         $this->traceLevel = $value;
-
+    
         return $this;
     }
     
@@ -125,7 +67,7 @@ class HttpCacheConfig
     public function traceHeader($value): self
     {
         $this->traceHeader = $value;
-
+    
         return $this;
     }
     
@@ -137,7 +79,7 @@ class HttpCacheConfig
     public function defaultTtl($value): self
     {
         $this->defaultTtl = $value;
-
+    
         return $this;
     }
     
@@ -148,7 +90,7 @@ class HttpCacheConfig
     public function privateHeaders($value): self
     {
         $this->privateHeaders = $value;
-
+    
         return $this;
     }
     
@@ -160,7 +102,7 @@ class HttpCacheConfig
     public function allowReload($value): self
     {
         $this->allowReload = $value;
-
+    
         return $this;
     }
     
@@ -172,7 +114,7 @@ class HttpCacheConfig
     public function allowRevalidate($value): self
     {
         $this->allowRevalidate = $value;
-
+    
         return $this;
     }
     
@@ -184,7 +126,7 @@ class HttpCacheConfig
     public function staleWhileRevalidate($value): self
     {
         $this->staleWhileRevalidate = $value;
-
+    
         return $this;
     }
     
@@ -196,8 +138,66 @@ class HttpCacheConfig
     public function staleIfError($value): self
     {
         $this->staleIfError = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['debug'])) {
+            $this->debug = $value['debug'];
+            unset($value['debug']);
+        }
+    
+        if (isset($value['trace_level'])) {
+            $this->traceLevel = $value['trace_level'];
+            unset($value['trace_level']);
+        }
+    
+        if (isset($value['trace_header'])) {
+            $this->traceHeader = $value['trace_header'];
+            unset($value['trace_header']);
+        }
+    
+        if (isset($value['default_ttl'])) {
+            $this->defaultTtl = $value['default_ttl'];
+            unset($value['default_ttl']);
+        }
+    
+        if (isset($value['private_headers'])) {
+            $this->privateHeaders = $value['private_headers'];
+            unset($value['private_headers']);
+        }
+    
+        if (isset($value['allow_reload'])) {
+            $this->allowReload = $value['allow_reload'];
+            unset($value['allow_reload']);
+        }
+    
+        if (isset($value['allow_revalidate'])) {
+            $this->allowRevalidate = $value['allow_revalidate'];
+            unset($value['allow_revalidate']);
+        }
+    
+        if (isset($value['stale_while_revalidate'])) {
+            $this->staleWhileRevalidate = $value['stale_while_revalidate'];
+            unset($value['stale_while_revalidate']);
+        }
+    
+        if (isset($value['stale_if_error'])) {
+            $this->staleIfError = $value['stale_if_error'];
+            unset($value['stale_if_error']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

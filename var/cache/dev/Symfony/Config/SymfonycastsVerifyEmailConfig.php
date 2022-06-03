@@ -14,19 +14,6 @@ class SymfonycastsVerifyEmailConfig implements \Symfony\Component\Config\Builder
 {
     private $lifetime;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['lifetime'])) {
-            $this->lifetime = $value['lifetime'];
-            unset($value['lifetime']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * The length of time in seconds that a signed URI is valid for after it is created.
      * @default 3600
@@ -36,13 +23,26 @@ class SymfonycastsVerifyEmailConfig implements \Symfony\Component\Config\Builder
     public function lifetime($value): self
     {
         $this->lifetime = $value;
-
+    
         return $this;
     }
     
     public function getExtensionAlias(): string
     {
         return 'symfonycasts_verify_email';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['lifetime'])) {
+            $this->lifetime = $value['lifetime'];
+            unset($value['lifetime']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

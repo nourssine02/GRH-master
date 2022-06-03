@@ -24,69 +24,6 @@ class PasswordHasherConfig
     private $timeCost;
     private $id;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['algorithm'])) {
-            $this->algorithm = $value['algorithm'];
-            unset($value['algorithm']);
-        }
-
-        if (isset($value['migrate_from'])) {
-            $this->migrateFrom = $value['migrate_from'];
-            unset($value['migrate_from']);
-        }
-
-        if (isset($value['hash_algorithm'])) {
-            $this->hashAlgorithm = $value['hash_algorithm'];
-            unset($value['hash_algorithm']);
-        }
-
-        if (isset($value['key_length'])) {
-            $this->keyLength = $value['key_length'];
-            unset($value['key_length']);
-        }
-
-        if (isset($value['ignore_case'])) {
-            $this->ignoreCase = $value['ignore_case'];
-            unset($value['ignore_case']);
-        }
-
-        if (isset($value['encode_as_base64'])) {
-            $this->encodeAsBase64 = $value['encode_as_base64'];
-            unset($value['encode_as_base64']);
-        }
-
-        if (isset($value['iterations'])) {
-            $this->iterations = $value['iterations'];
-            unset($value['iterations']);
-        }
-
-        if (isset($value['cost'])) {
-            $this->cost = $value['cost'];
-            unset($value['cost']);
-        }
-
-        if (isset($value['memory_cost'])) {
-            $this->memoryCost = $value['memory_cost'];
-            unset($value['memory_cost']);
-        }
-
-        if (isset($value['time_cost'])) {
-            $this->timeCost = $value['time_cost'];
-            unset($value['time_cost']);
-        }
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -95,7 +32,7 @@ class PasswordHasherConfig
     public function algorithm($value): self
     {
         $this->algorithm = $value;
-
+    
         return $this;
     }
     
@@ -106,7 +43,7 @@ class PasswordHasherConfig
     public function migrateFrom($value): self
     {
         $this->migrateFrom = $value;
-
+    
         return $this;
     }
     
@@ -119,7 +56,7 @@ class PasswordHasherConfig
     public function hashAlgorithm($value): self
     {
         $this->hashAlgorithm = $value;
-
+    
         return $this;
     }
     
@@ -131,7 +68,7 @@ class PasswordHasherConfig
     public function keyLength($value): self
     {
         $this->keyLength = $value;
-
+    
         return $this;
     }
     
@@ -143,7 +80,7 @@ class PasswordHasherConfig
     public function ignoreCase($value): self
     {
         $this->ignoreCase = $value;
-
+    
         return $this;
     }
     
@@ -155,7 +92,7 @@ class PasswordHasherConfig
     public function encodeAsBase64($value): self
     {
         $this->encodeAsBase64 = $value;
-
+    
         return $this;
     }
     
@@ -167,7 +104,7 @@ class PasswordHasherConfig
     public function iterations($value): self
     {
         $this->iterations = $value;
-
+    
         return $this;
     }
     
@@ -179,7 +116,7 @@ class PasswordHasherConfig
     public function cost($value): self
     {
         $this->cost = $value;
-
+    
         return $this;
     }
     
@@ -191,7 +128,7 @@ class PasswordHasherConfig
     public function memoryCost($value): self
     {
         $this->memoryCost = $value;
-
+    
         return $this;
     }
     
@@ -203,7 +140,7 @@ class PasswordHasherConfig
     public function timeCost($value): self
     {
         $this->timeCost = $value;
-
+    
         return $this;
     }
     
@@ -215,8 +152,71 @@ class PasswordHasherConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['algorithm'])) {
+            $this->algorithm = $value['algorithm'];
+            unset($value['algorithm']);
+        }
+    
+        if (isset($value['migrate_from'])) {
+            $this->migrateFrom = $value['migrate_from'];
+            unset($value['migrate_from']);
+        }
+    
+        if (isset($value['hash_algorithm'])) {
+            $this->hashAlgorithm = $value['hash_algorithm'];
+            unset($value['hash_algorithm']);
+        }
+    
+        if (isset($value['key_length'])) {
+            $this->keyLength = $value['key_length'];
+            unset($value['key_length']);
+        }
+    
+        if (isset($value['ignore_case'])) {
+            $this->ignoreCase = $value['ignore_case'];
+            unset($value['ignore_case']);
+        }
+    
+        if (isset($value['encode_as_base64'])) {
+            $this->encodeAsBase64 = $value['encode_as_base64'];
+            unset($value['encode_as_base64']);
+        }
+    
+        if (isset($value['iterations'])) {
+            $this->iterations = $value['iterations'];
+            unset($value['iterations']);
+        }
+    
+        if (isset($value['cost'])) {
+            $this->cost = $value['cost'];
+            unset($value['cost']);
+        }
+    
+        if (isset($value['memory_cost'])) {
+            $this->memoryCost = $value['memory_cost'];
+            unset($value['memory_cost']);
+        }
+    
+        if (isset($value['time_cost'])) {
+            $this->timeCost = $value['time_cost'];
+            unset($value['time_cost']);
+        }
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

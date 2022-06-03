@@ -28,22 +28,6 @@ class __TwigTemplate_8cdea208971caab448534d0cd98f724331748ee81e0ee67ac2005e567f7
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("{% extends \"@email/zurb_2/notification/body.txt.twig\" %}
-", "@email/default/notification/body.txt.twig", "/home/hp/Symfony/GRH/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.txt.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  34 => 1,);
-    }
-
     protected function doGetParent(array $context)
     {
         // line 1
@@ -61,10 +45,10 @@ class __TwigTemplate_8cdea208971caab448534d0cd98f724331748ee81e0ee67ac2005e567f7
 
         $this->parent = $this->loadTemplate("@email/zurb_2/notification/body.txt.twig", "@email/default/notification/body.txt.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -72,5 +56,21 @@ class __TwigTemplate_8cdea208971caab448534d0cd98f724331748ee81e0ee67ac2005e567f7
     public function getTemplateName()
     {
         return "@email/default/notification/body.txt.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  34 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("{% extends \"@email/zurb_2/notification/body.txt.twig\" %}
+", "@email/default/notification/body.txt.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/twig-bridge/Resources/views/Email/default/notification/body.txt.twig");
     }
 }

@@ -16,29 +16,6 @@ class GuardConfig
     private $entryPoint;
     private $authenticators;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['entry_point'])) {
-            $this->entryPoint = $value['entry_point'];
-            unset($value['entry_point']);
-        }
-
-        if (isset($value['authenticators'])) {
-            $this->authenticators = $value['authenticators'];
-            unset($value['authenticators']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * A key from the "providers" section of your security config, in case your user provider is different than the firewall
      * @default null
@@ -48,7 +25,7 @@ class GuardConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -61,7 +38,7 @@ class GuardConfig
     public function entryPoint($value): self
     {
         $this->entryPoint = $value;
-
+    
         return $this;
     }
     
@@ -72,8 +49,31 @@ class GuardConfig
     public function authenticators($value): self
     {
         $this->authenticators = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['entry_point'])) {
+            $this->entryPoint = $value['entry_point'];
+            unset($value['entry_point']);
+        }
+    
+        if (isset($value['authenticators'])) {
+            $this->authenticators = $value['authenticators'];
+            unset($value['authenticators']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

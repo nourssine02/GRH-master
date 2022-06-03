@@ -20,39 +20,6 @@ class MetadataConfig
     private $autoDetection;
     private $directories;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['cache'])) {
-            $this->cache = $value['cache'];
-            unset($value['cache']);
-        }
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['file_cache'])) {
-            $this->fileCache = new \Symfony\Config\VichUploader\Metadata\FileCacheConfig($value['file_cache']);
-            unset($value['file_cache']);
-        }
-
-        if (isset($value['auto_detection'])) {
-            $this->autoDetection = $value['auto_detection'];
-            unset($value['auto_detection']);
-        }
-
-        if (isset($value['directories'])) {
-            $this->directories = array_map(function ($v) { return new \Symfony\Config\VichUploader\Metadata\DirectoryConfig($v); }, $value['directories']);
-            unset($value['directories']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default 'file'
      * @param ParamConfigurator|mixed $value
@@ -61,7 +28,7 @@ class MetadataConfig
     public function cache($value): self
     {
         $this->cache = $value;
-
+    
         return $this;
     }
     
@@ -73,7 +40,7 @@ class MetadataConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -84,7 +51,7 @@ class MetadataConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "fileCache()" has already been initialized. You cannot pass values the second time you call fileCache().');
         }
-
+    
         return $this->fileCache;
     }
     
@@ -96,13 +63,46 @@ class MetadataConfig
     public function autoDetection($value): self
     {
         $this->autoDetection = $value;
-
+    
         return $this;
     }
     
     public function directory(array $value = []): \Symfony\Config\VichUploader\Metadata\DirectoryConfig
     {
         return $this->directories[] = new \Symfony\Config\VichUploader\Metadata\DirectoryConfig($value);
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['cache'])) {
+            $this->cache = $value['cache'];
+            unset($value['cache']);
+        }
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['file_cache'])) {
+            $this->fileCache = new \Symfony\Config\VichUploader\Metadata\FileCacheConfig($value['file_cache']);
+            unset($value['file_cache']);
+        }
+    
+        if (isset($value['auto_detection'])) {
+            $this->autoDetection = $value['auto_detection'];
+            unset($value['auto_detection']);
+        }
+    
+        if (isset($value['directories'])) {
+            $this->directories = array_map(function ($v) { return new \Symfony\Config\VichUploader\Metadata\DirectoryConfig($v); }, $value['directories']);
+            unset($value['directories']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

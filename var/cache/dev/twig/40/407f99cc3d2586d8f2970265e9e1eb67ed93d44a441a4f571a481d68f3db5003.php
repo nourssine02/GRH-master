@@ -31,85 +31,23 @@ class __TwigTemplate_cef2add5ae3aab148f02823d1a1592052c2cdb78fc00c9713fbe03ed674
         ];
     }
 
-    public function getSourceContext()
+    protected function doDisplay(array $context, array $blocks = [])
     {
-        return new Source("{% block body %}
-<!DOCTYPE html>
-<html lang=\"fr\">
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/login.html.twig"));
 
-<head>
-    <meta charset=\"UTF-8\">
-    <title>Bus Software</title>
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('css/styles.css')}}\">
-    <!----===== Boxicons CSS ===== -->
-    <link rel=\"stylesheet\" href=\"https://pro.fontawesome.com/releases/v5.10.0/css/all.css\" integrity=\"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p\" crossorigin=\"anonymous\" />
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/login.html.twig"));
 
-</head>
+        // line 1
+        $this->displayBlock('body', $context, $blocks);
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-<body>
-    <div class=\"container\">
-        <div class=\"screen\">
-            <div class=\"screen__content\">
-                <form class=\"register\" method=\"post\">
-                    <div class=\"title\">S'identifier</div>
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-                    <div class=\"creeCompte\">
-                        Vous n'avez pas encore de compte ?
-                        <a href=\"{{ path('app_register')}}\">
-
-\t\t\t\t\t\t\tCréer un compte ici
-
-\t\t\t\t\t\t</a>
-                    </div>
-                    <img class=\"welcoming\" src=\"{{ asset ('images/welcome.svg')}}\" alt=\"welcoming\">
-
-                    <!-- {% if app.user %}
-\t\t\t\t<div class=\"mb-3\">
-\t\t\t\t\tYou are logged in as
-\t\t\t\t\t{{ app.user.username }},
-\t\t\t\t
-\t\t\t\t</div>
-\t\t\t\t\t{% endif %} -->
-
-                    <div class=\"login__field\">
-                        <i class=\"login__icon  fas fa-regular fa-at\" style=\"top: 46px; left: 3px;\"></i>
-                        <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" placeholder=\"Email\" class=\"login__input\" autocomplete=\"email\" required>
-
-                    </div>
-
-                    <div class=\"login__field\">
-                        <i class=\"login__icon fas fa-lock\" style=\"top: 43px; left: 2px;\"></i>
-                        <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"login__input\" autocomplete=\"current-password\" placeholder=\"Mot de passe\" required>
-
-
-                    </div>
-                    <div class=\"remember\">
-                        <input type=\"checkbox\" name=\"rememberCheck\" checked /><label>Remember me</label>
-                    </div>
-
-                    <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
-
-                    <div class=\"login_button\">
-                        <button class=\"button login__submit\" type=\"submit\">
-\t\t\t\t\t\t\t<span class=\"button__text\">Connexion</span>
-\t\t\t\t\t\t</button>
-
-
-                    </div>
-
-                </form>
-
-
-            </div>
-
-        </div>
-    </div>
-
-</body>
-
-</html>
-
-{% endblock %}", "security/login.html.twig", "/home/hp/Téléchargements/GRH-master/templates/security/login.html.twig");
     }
 
     public function block_body($context, array $blocks = [])
@@ -240,22 +178,84 @@ class __TwigTemplate_cef2add5ae3aab148f02823d1a1592052c2cdb78fc00c9713fbe03ed674
         return array (  139 => 55,  122 => 41,  116 => 37,  109 => 34,  105 => 32,  103 => 31,  98 => 29,  89 => 23,  71 => 8,  63 => 2,  44 => 1,);
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
+    public function getSourceContext()
     {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/login.html.twig"));
+        return new Source("{% block body %}
+<!DOCTYPE html>
+<html lang=\"fr\">
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "security/login.html.twig"));
+<head>
+    <meta charset=\"UTF-8\">
+    <title>Bus Software</title>
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('css/styles.css')}}\">
+    <!----===== Boxicons CSS ===== -->
+    <link rel=\"stylesheet\" href=\"https://pro.fontawesome.com/releases/v5.10.0/css/all.css\" integrity=\"sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p\" crossorigin=\"anonymous\" />
 
-        // line 1
-        $this->displayBlock('body', $context, $blocks);
+</head>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+<body>
+    <div class=\"container\">
+        <div class=\"screen\">
+            <div class=\"screen__content\">
+                <form class=\"register\" method=\"post\">
+                    <div class=\"title\">S'identifier</div>
+
+                    <div class=\"creeCompte\">
+                        Vous n'avez pas encore de compte ?
+                        <a href=\"{{ path('app_register')}}\">
+
+\t\t\t\t\t\t\tCréer un compte ici
+
+\t\t\t\t\t\t</a>
+                    </div>
+                    <img class=\"welcoming\" src=\"{{ asset ('images/welcome.svg')}}\" alt=\"welcoming\">
+
+                    <!-- {% if app.user %}
+\t\t\t\t<div class=\"mb-3\">
+\t\t\t\t\tYou are logged in as
+\t\t\t\t\t{{ app.user.username }},
+\t\t\t\t
+\t\t\t\t</div>
+\t\t\t\t\t{% endif %} -->
+
+                    <div class=\"login__field\">
+                        <i class=\"login__icon  fas fa-regular fa-at\" style=\"top: 46px; left: 3px;\"></i>
+                        <input type=\"email\" value=\"{{ last_username }}\" name=\"email\" id=\"inputEmail\" placeholder=\"Email\" class=\"login__input\" autocomplete=\"email\" required>
+
+                    </div>
+
+                    <div class=\"login__field\">
+                        <i class=\"login__icon fas fa-lock\" style=\"top: 43px; left: 2px;\"></i>
+                        <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"login__input\" autocomplete=\"current-password\" placeholder=\"Mot de passe\" required>
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+                    </div>
+                    <div class=\"remember\">
+                        <input type=\"checkbox\" name=\"rememberCheck\" checked /><label>Remember me</label>
+                    </div>
 
+                    <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
+
+                    <div class=\"login_button\">
+                        <button class=\"button login__submit\" type=\"submit\">
+\t\t\t\t\t\t\t<span class=\"button__text\">Connexion</span>
+\t\t\t\t\t\t</button>
+
+
+                    </div>
+
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+{% endblock %}", "security/login.html.twig", "/home/hp/Téléchargements/GRH-master/templates/security/login.html.twig");
     }
 }

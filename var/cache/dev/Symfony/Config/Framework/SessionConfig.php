@@ -32,109 +32,6 @@ class SessionConfig
     private $sidLength;
     private $sidBitsPerCharacter;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['storage_id'])) {
-            $this->storageId = $value['storage_id'];
-            unset($value['storage_id']);
-        }
-
-        if (isset($value['storage_factory_id'])) {
-            $this->storageFactoryId = $value['storage_factory_id'];
-            unset($value['storage_factory_id']);
-        }
-
-        if (isset($value['handler_id'])) {
-            $this->handlerId = $value['handler_id'];
-            unset($value['handler_id']);
-        }
-
-        if (isset($value['name'])) {
-            $this->name = $value['name'];
-            unset($value['name']);
-        }
-
-        if (isset($value['cookie_lifetime'])) {
-            $this->cookieLifetime = $value['cookie_lifetime'];
-            unset($value['cookie_lifetime']);
-        }
-
-        if (isset($value['cookie_path'])) {
-            $this->cookiePath = $value['cookie_path'];
-            unset($value['cookie_path']);
-        }
-
-        if (isset($value['cookie_domain'])) {
-            $this->cookieDomain = $value['cookie_domain'];
-            unset($value['cookie_domain']);
-        }
-
-        if (isset($value['cookie_secure'])) {
-            $this->cookieSecure = $value['cookie_secure'];
-            unset($value['cookie_secure']);
-        }
-
-        if (isset($value['cookie_httponly'])) {
-            $this->cookieHttponly = $value['cookie_httponly'];
-            unset($value['cookie_httponly']);
-        }
-
-        if (isset($value['cookie_samesite'])) {
-            $this->cookieSamesite = $value['cookie_samesite'];
-            unset($value['cookie_samesite']);
-        }
-
-        if (isset($value['use_cookies'])) {
-            $this->useCookies = $value['use_cookies'];
-            unset($value['use_cookies']);
-        }
-
-        if (isset($value['gc_divisor'])) {
-            $this->gcDivisor = $value['gc_divisor'];
-            unset($value['gc_divisor']);
-        }
-
-        if (isset($value['gc_probability'])) {
-            $this->gcProbability = $value['gc_probability'];
-            unset($value['gc_probability']);
-        }
-
-        if (isset($value['gc_maxlifetime'])) {
-            $this->gcMaxlifetime = $value['gc_maxlifetime'];
-            unset($value['gc_maxlifetime']);
-        }
-
-        if (isset($value['save_path'])) {
-            $this->savePath = $value['save_path'];
-            unset($value['save_path']);
-        }
-
-        if (isset($value['metadata_update_threshold'])) {
-            $this->metadataUpdateThreshold = $value['metadata_update_threshold'];
-            unset($value['metadata_update_threshold']);
-        }
-
-        if (isset($value['sid_length'])) {
-            $this->sidLength = $value['sid_length'];
-            unset($value['sid_length']);
-        }
-
-        if (isset($value['sid_bits_per_character'])) {
-            $this->sidBitsPerCharacter = $value['sid_bits_per_character'];
-            unset($value['sid_bits_per_character']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -143,7 +40,7 @@ class SessionConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -155,7 +52,7 @@ class SessionConfig
     public function storageId($value): self
     {
         $this->storageId = $value;
-
+    
         return $this;
     }
     
@@ -167,7 +64,7 @@ class SessionConfig
     public function storageFactoryId($value): self
     {
         $this->storageFactoryId = $value;
-
+    
         return $this;
     }
     
@@ -179,7 +76,7 @@ class SessionConfig
     public function handlerId($value): self
     {
         $this->handlerId = $value;
-
+    
         return $this;
     }
     
@@ -191,7 +88,7 @@ class SessionConfig
     public function name($value): self
     {
         $this->name = $value;
-
+    
         return $this;
     }
     
@@ -203,7 +100,7 @@ class SessionConfig
     public function cookieLifetime($value): self
     {
         $this->cookieLifetime = $value;
-
+    
         return $this;
     }
     
@@ -215,7 +112,7 @@ class SessionConfig
     public function cookiePath($value): self
     {
         $this->cookiePath = $value;
-
+    
         return $this;
     }
     
@@ -227,7 +124,7 @@ class SessionConfig
     public function cookieDomain($value): self
     {
         $this->cookieDomain = $value;
-
+    
         return $this;
     }
     
@@ -239,7 +136,7 @@ class SessionConfig
     public function cookieSecure($value): self
     {
         $this->cookieSecure = $value;
-
+    
         return $this;
     }
     
@@ -251,7 +148,7 @@ class SessionConfig
     public function cookieHttponly($value): self
     {
         $this->cookieHttponly = $value;
-
+    
         return $this;
     }
     
@@ -263,7 +160,7 @@ class SessionConfig
     public function cookieSamesite($value): self
     {
         $this->cookieSamesite = $value;
-
+    
         return $this;
     }
     
@@ -275,7 +172,7 @@ class SessionConfig
     public function useCookies($value): self
     {
         $this->useCookies = $value;
-
+    
         return $this;
     }
     
@@ -287,7 +184,7 @@ class SessionConfig
     public function gcDivisor($value): self
     {
         $this->gcDivisor = $value;
-
+    
         return $this;
     }
     
@@ -299,7 +196,7 @@ class SessionConfig
     public function gcProbability($value): self
     {
         $this->gcProbability = $value;
-
+    
         return $this;
     }
     
@@ -311,7 +208,7 @@ class SessionConfig
     public function gcMaxlifetime($value): self
     {
         $this->gcMaxlifetime = $value;
-
+    
         return $this;
     }
     
@@ -323,7 +220,7 @@ class SessionConfig
     public function savePath($value): self
     {
         $this->savePath = $value;
-
+    
         return $this;
     }
     
@@ -336,7 +233,7 @@ class SessionConfig
     public function metadataUpdateThreshold($value): self
     {
         $this->metadataUpdateThreshold = $value;
-
+    
         return $this;
     }
     
@@ -348,7 +245,7 @@ class SessionConfig
     public function sidLength($value): self
     {
         $this->sidLength = $value;
-
+    
         return $this;
     }
     
@@ -360,8 +257,111 @@ class SessionConfig
     public function sidBitsPerCharacter($value): self
     {
         $this->sidBitsPerCharacter = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['storage_id'])) {
+            $this->storageId = $value['storage_id'];
+            unset($value['storage_id']);
+        }
+    
+        if (isset($value['storage_factory_id'])) {
+            $this->storageFactoryId = $value['storage_factory_id'];
+            unset($value['storage_factory_id']);
+        }
+    
+        if (isset($value['handler_id'])) {
+            $this->handlerId = $value['handler_id'];
+            unset($value['handler_id']);
+        }
+    
+        if (isset($value['name'])) {
+            $this->name = $value['name'];
+            unset($value['name']);
+        }
+    
+        if (isset($value['cookie_lifetime'])) {
+            $this->cookieLifetime = $value['cookie_lifetime'];
+            unset($value['cookie_lifetime']);
+        }
+    
+        if (isset($value['cookie_path'])) {
+            $this->cookiePath = $value['cookie_path'];
+            unset($value['cookie_path']);
+        }
+    
+        if (isset($value['cookie_domain'])) {
+            $this->cookieDomain = $value['cookie_domain'];
+            unset($value['cookie_domain']);
+        }
+    
+        if (isset($value['cookie_secure'])) {
+            $this->cookieSecure = $value['cookie_secure'];
+            unset($value['cookie_secure']);
+        }
+    
+        if (isset($value['cookie_httponly'])) {
+            $this->cookieHttponly = $value['cookie_httponly'];
+            unset($value['cookie_httponly']);
+        }
+    
+        if (isset($value['cookie_samesite'])) {
+            $this->cookieSamesite = $value['cookie_samesite'];
+            unset($value['cookie_samesite']);
+        }
+    
+        if (isset($value['use_cookies'])) {
+            $this->useCookies = $value['use_cookies'];
+            unset($value['use_cookies']);
+        }
+    
+        if (isset($value['gc_divisor'])) {
+            $this->gcDivisor = $value['gc_divisor'];
+            unset($value['gc_divisor']);
+        }
+    
+        if (isset($value['gc_probability'])) {
+            $this->gcProbability = $value['gc_probability'];
+            unset($value['gc_probability']);
+        }
+    
+        if (isset($value['gc_maxlifetime'])) {
+            $this->gcMaxlifetime = $value['gc_maxlifetime'];
+            unset($value['gc_maxlifetime']);
+        }
+    
+        if (isset($value['save_path'])) {
+            $this->savePath = $value['save_path'];
+            unset($value['save_path']);
+        }
+    
+        if (isset($value['metadata_update_threshold'])) {
+            $this->metadataUpdateThreshold = $value['metadata_update_threshold'];
+            unset($value['metadata_update_threshold']);
+        }
+    
+        if (isset($value['sid_length'])) {
+            $this->sidLength = $value['sid_length'];
+            unset($value['sid_length']);
+        }
+    
+        if (isset($value['sid_bits_per_character'])) {
+            $this->sidBitsPerCharacter = $value['sid_bits_per_character'];
+            unset($value['sid_bits_per_character']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

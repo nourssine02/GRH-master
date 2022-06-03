@@ -30,99 +30,6 @@ class LoginLinkConfig
     private $failureForward;
     private $failurePathParameter;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['check_route'])) {
-            $this->checkRoute = $value['check_route'];
-            unset($value['check_route']);
-        }
-
-        if (isset($value['check_post_only'])) {
-            $this->checkPostOnly = $value['check_post_only'];
-            unset($value['check_post_only']);
-        }
-
-        if (isset($value['signature_properties'])) {
-            $this->signatureProperties = $value['signature_properties'];
-            unset($value['signature_properties']);
-        }
-
-        if (isset($value['lifetime'])) {
-            $this->lifetime = $value['lifetime'];
-            unset($value['lifetime']);
-        }
-
-        if (isset($value['max_uses'])) {
-            $this->maxUses = $value['max_uses'];
-            unset($value['max_uses']);
-        }
-
-        if (isset($value['used_link_cache'])) {
-            $this->usedLinkCache = $value['used_link_cache'];
-            unset($value['used_link_cache']);
-        }
-
-        if (isset($value['success_handler'])) {
-            $this->successHandler = $value['success_handler'];
-            unset($value['success_handler']);
-        }
-
-        if (isset($value['failure_handler'])) {
-            $this->failureHandler = $value['failure_handler'];
-            unset($value['failure_handler']);
-        }
-
-        if (isset($value['provider'])) {
-            $this->provider = $value['provider'];
-            unset($value['provider']);
-        }
-
-        if (isset($value['always_use_default_target_path'])) {
-            $this->alwaysUseDefaultTargetPath = $value['always_use_default_target_path'];
-            unset($value['always_use_default_target_path']);
-        }
-
-        if (isset($value['default_target_path'])) {
-            $this->defaultTargetPath = $value['default_target_path'];
-            unset($value['default_target_path']);
-        }
-
-        if (isset($value['login_path'])) {
-            $this->loginPath = $value['login_path'];
-            unset($value['login_path']);
-        }
-
-        if (isset($value['target_path_parameter'])) {
-            $this->targetPathParameter = $value['target_path_parameter'];
-            unset($value['target_path_parameter']);
-        }
-
-        if (isset($value['use_referer'])) {
-            $this->useReferer = $value['use_referer'];
-            unset($value['use_referer']);
-        }
-
-        if (isset($value['failure_path'])) {
-            $this->failurePath = $value['failure_path'];
-            unset($value['failure_path']);
-        }
-
-        if (isset($value['failure_forward'])) {
-            $this->failureForward = $value['failure_forward'];
-            unset($value['failure_forward']);
-        }
-
-        if (isset($value['failure_path_parameter'])) {
-            $this->failurePathParameter = $value['failure_path_parameter'];
-            unset($value['failure_path_parameter']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * Route that will validate the login link - e.g. "app_login_link_verify".
      * @default null
@@ -132,7 +39,7 @@ class LoginLinkConfig
     public function checkRoute($value): self
     {
         $this->checkRoute = $value;
-
+    
         return $this;
     }
     
@@ -145,7 +52,7 @@ class LoginLinkConfig
     public function checkPostOnly($value): self
     {
         $this->checkPostOnly = $value;
-
+    
         return $this;
     }
     
@@ -156,7 +63,7 @@ class LoginLinkConfig
     public function signatureProperties($value): self
     {
         $this->signatureProperties = $value;
-
+    
         return $this;
     }
     
@@ -169,7 +76,7 @@ class LoginLinkConfig
     public function lifetime($value): self
     {
         $this->lifetime = $value;
-
+    
         return $this;
     }
     
@@ -182,7 +89,7 @@ class LoginLinkConfig
     public function maxUses($value): self
     {
         $this->maxUses = $value;
-
+    
         return $this;
     }
     
@@ -195,7 +102,7 @@ class LoginLinkConfig
     public function usedLinkCache($value): self
     {
         $this->usedLinkCache = $value;
-
+    
         return $this;
     }
     
@@ -208,7 +115,7 @@ class LoginLinkConfig
     public function successHandler($value): self
     {
         $this->successHandler = $value;
-
+    
         return $this;
     }
     
@@ -221,7 +128,7 @@ class LoginLinkConfig
     public function failureHandler($value): self
     {
         $this->failureHandler = $value;
-
+    
         return $this;
     }
     
@@ -234,7 +141,7 @@ class LoginLinkConfig
     public function provider($value): self
     {
         $this->provider = $value;
-
+    
         return $this;
     }
     
@@ -246,7 +153,7 @@ class LoginLinkConfig
     public function alwaysUseDefaultTargetPath($value): self
     {
         $this->alwaysUseDefaultTargetPath = $value;
-
+    
         return $this;
     }
     
@@ -258,7 +165,7 @@ class LoginLinkConfig
     public function defaultTargetPath($value): self
     {
         $this->defaultTargetPath = $value;
-
+    
         return $this;
     }
     
@@ -270,7 +177,7 @@ class LoginLinkConfig
     public function loginPath($value): self
     {
         $this->loginPath = $value;
-
+    
         return $this;
     }
     
@@ -282,7 +189,7 @@ class LoginLinkConfig
     public function targetPathParameter($value): self
     {
         $this->targetPathParameter = $value;
-
+    
         return $this;
     }
     
@@ -294,7 +201,7 @@ class LoginLinkConfig
     public function useReferer($value): self
     {
         $this->useReferer = $value;
-
+    
         return $this;
     }
     
@@ -306,7 +213,7 @@ class LoginLinkConfig
     public function failurePath($value): self
     {
         $this->failurePath = $value;
-
+    
         return $this;
     }
     
@@ -318,7 +225,7 @@ class LoginLinkConfig
     public function failureForward($value): self
     {
         $this->failureForward = $value;
-
+    
         return $this;
     }
     
@@ -330,8 +237,101 @@ class LoginLinkConfig
     public function failurePathParameter($value): self
     {
         $this->failurePathParameter = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['check_route'])) {
+            $this->checkRoute = $value['check_route'];
+            unset($value['check_route']);
+        }
+    
+        if (isset($value['check_post_only'])) {
+            $this->checkPostOnly = $value['check_post_only'];
+            unset($value['check_post_only']);
+        }
+    
+        if (isset($value['signature_properties'])) {
+            $this->signatureProperties = $value['signature_properties'];
+            unset($value['signature_properties']);
+        }
+    
+        if (isset($value['lifetime'])) {
+            $this->lifetime = $value['lifetime'];
+            unset($value['lifetime']);
+        }
+    
+        if (isset($value['max_uses'])) {
+            $this->maxUses = $value['max_uses'];
+            unset($value['max_uses']);
+        }
+    
+        if (isset($value['used_link_cache'])) {
+            $this->usedLinkCache = $value['used_link_cache'];
+            unset($value['used_link_cache']);
+        }
+    
+        if (isset($value['success_handler'])) {
+            $this->successHandler = $value['success_handler'];
+            unset($value['success_handler']);
+        }
+    
+        if (isset($value['failure_handler'])) {
+            $this->failureHandler = $value['failure_handler'];
+            unset($value['failure_handler']);
+        }
+    
+        if (isset($value['provider'])) {
+            $this->provider = $value['provider'];
+            unset($value['provider']);
+        }
+    
+        if (isset($value['always_use_default_target_path'])) {
+            $this->alwaysUseDefaultTargetPath = $value['always_use_default_target_path'];
+            unset($value['always_use_default_target_path']);
+        }
+    
+        if (isset($value['default_target_path'])) {
+            $this->defaultTargetPath = $value['default_target_path'];
+            unset($value['default_target_path']);
+        }
+    
+        if (isset($value['login_path'])) {
+            $this->loginPath = $value['login_path'];
+            unset($value['login_path']);
+        }
+    
+        if (isset($value['target_path_parameter'])) {
+            $this->targetPathParameter = $value['target_path_parameter'];
+            unset($value['target_path_parameter']);
+        }
+    
+        if (isset($value['use_referer'])) {
+            $this->useReferer = $value['use_referer'];
+            unset($value['use_referer']);
+        }
+    
+        if (isset($value['failure_path'])) {
+            $this->failurePath = $value['failure_path'];
+            unset($value['failure_path']);
+        }
+    
+        if (isset($value['failure_forward'])) {
+            $this->failureForward = $value['failure_forward'];
+            unset($value['failure_forward']);
+        }
+    
+        if (isset($value['failure_path_parameter'])) {
+            $this->failurePathParameter = $value['failure_path_parameter'];
+            unset($value['failure_path_parameter']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

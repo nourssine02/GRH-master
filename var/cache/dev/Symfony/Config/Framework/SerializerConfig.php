@@ -21,49 +21,6 @@ class SerializerConfig
     private $mapping;
     private $defaultContext;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['enable_annotations'])) {
-            $this->enableAnnotations = $value['enable_annotations'];
-            unset($value['enable_annotations']);
-        }
-
-        if (isset($value['name_converter'])) {
-            $this->nameConverter = $value['name_converter'];
-            unset($value['name_converter']);
-        }
-
-        if (isset($value['circular_reference_handler'])) {
-            $this->circularReferenceHandler = $value['circular_reference_handler'];
-            unset($value['circular_reference_handler']);
-        }
-
-        if (isset($value['max_depth_handler'])) {
-            $this->maxDepthHandler = $value['max_depth_handler'];
-            unset($value['max_depth_handler']);
-        }
-
-        if (isset($value['mapping'])) {
-            $this->mapping = new \Symfony\Config\Framework\Serializer\MappingConfig($value['mapping']);
-            unset($value['mapping']);
-        }
-
-        if (isset($value['default_context'])) {
-            $this->defaultContext = $value['default_context'];
-            unset($value['default_context']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -72,7 +29,7 @@ class SerializerConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -84,7 +41,7 @@ class SerializerConfig
     public function enableAnnotations($value): self
     {
         $this->enableAnnotations = $value;
-
+    
         return $this;
     }
     
@@ -96,7 +53,7 @@ class SerializerConfig
     public function nameConverter($value): self
     {
         $this->nameConverter = $value;
-
+    
         return $this;
     }
     
@@ -108,7 +65,7 @@ class SerializerConfig
     public function circularReferenceHandler($value): self
     {
         $this->circularReferenceHandler = $value;
-
+    
         return $this;
     }
     
@@ -120,7 +77,7 @@ class SerializerConfig
     public function maxDepthHandler($value): self
     {
         $this->maxDepthHandler = $value;
-
+    
         return $this;
     }
     
@@ -131,7 +88,7 @@ class SerializerConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "mapping()" has already been initialized. You cannot pass values the second time you call mapping().');
         }
-
+    
         return $this->mapping;
     }
     
@@ -142,8 +99,51 @@ class SerializerConfig
     public function defaultContext(string $name, $value): self
     {
         $this->defaultContext[$name] = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['enable_annotations'])) {
+            $this->enableAnnotations = $value['enable_annotations'];
+            unset($value['enable_annotations']);
+        }
+    
+        if (isset($value['name_converter'])) {
+            $this->nameConverter = $value['name_converter'];
+            unset($value['name_converter']);
+        }
+    
+        if (isset($value['circular_reference_handler'])) {
+            $this->circularReferenceHandler = $value['circular_reference_handler'];
+            unset($value['circular_reference_handler']);
+        }
+    
+        if (isset($value['max_depth_handler'])) {
+            $this->maxDepthHandler = $value['max_depth_handler'];
+            unset($value['max_depth_handler']);
+        }
+    
+        if (isset($value['mapping'])) {
+            $this->mapping = new \Symfony\Config\Framework\Serializer\MappingConfig($value['mapping']);
+            unset($value['mapping']);
+        }
+    
+        if (isset($value['default_context'])) {
+            $this->defaultContext = $value['default_context'];
+            unset($value['default_context']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

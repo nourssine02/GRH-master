@@ -21,54 +21,6 @@ class RouterConfig
     private $strictRequirements;
     private $utf8;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['resource'])) {
-            $this->resource = $value['resource'];
-            unset($value['resource']);
-        }
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['default_uri'])) {
-            $this->defaultUri = $value['default_uri'];
-            unset($value['default_uri']);
-        }
-
-        if (isset($value['http_port'])) {
-            $this->httpPort = $value['http_port'];
-            unset($value['http_port']);
-        }
-
-        if (isset($value['https_port'])) {
-            $this->httpsPort = $value['https_port'];
-            unset($value['https_port']);
-        }
-
-        if (isset($value['strict_requirements'])) {
-            $this->strictRequirements = $value['strict_requirements'];
-            unset($value['strict_requirements']);
-        }
-
-        if (isset($value['utf8'])) {
-            $this->utf8 = $value['utf8'];
-            unset($value['utf8']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -77,7 +29,7 @@ class RouterConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -89,7 +41,7 @@ class RouterConfig
     public function resource($value): self
     {
         $this->resource = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +53,7 @@ class RouterConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -114,7 +66,7 @@ class RouterConfig
     public function defaultUri($value): self
     {
         $this->defaultUri = $value;
-
+    
         return $this;
     }
     
@@ -126,7 +78,7 @@ class RouterConfig
     public function httpPort($value): self
     {
         $this->httpPort = $value;
-
+    
         return $this;
     }
     
@@ -138,7 +90,7 @@ class RouterConfig
     public function httpsPort($value): self
     {
         $this->httpsPort = $value;
-
+    
         return $this;
     }
     
@@ -154,7 +106,7 @@ class RouterConfig
     public function strictRequirements($value): self
     {
         $this->strictRequirements = $value;
-
+    
         return $this;
     }
     
@@ -166,8 +118,56 @@ class RouterConfig
     public function utf8($value): self
     {
         $this->utf8 = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['resource'])) {
+            $this->resource = $value['resource'];
+            unset($value['resource']);
+        }
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['default_uri'])) {
+            $this->defaultUri = $value['default_uri'];
+            unset($value['default_uri']);
+        }
+    
+        if (isset($value['http_port'])) {
+            $this->httpPort = $value['http_port'];
+            unset($value['http_port']);
+        }
+    
+        if (isset($value['https_port'])) {
+            $this->httpsPort = $value['https_port'];
+            unset($value['https_port']);
+        }
+    
+        if (isset($value['strict_requirements'])) {
+            $this->strictRequirements = $value['strict_requirements'];
+            unset($value['strict_requirements']);
+        }
+    
+        if (isset($value['utf8'])) {
+            $this->utf8 = $value['utf8'];
+            unset($value['utf8']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

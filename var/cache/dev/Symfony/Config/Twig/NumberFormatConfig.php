@@ -16,29 +16,6 @@ class NumberFormatConfig
     private $decimalPoint;
     private $thousandsSeparator;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['decimals'])) {
-            $this->decimals = $value['decimals'];
-            unset($value['decimals']);
-        }
-
-        if (isset($value['decimal_point'])) {
-            $this->decimalPoint = $value['decimal_point'];
-            unset($value['decimal_point']);
-        }
-
-        if (isset($value['thousands_separator'])) {
-            $this->thousandsSeparator = $value['thousands_separator'];
-            unset($value['thousands_separator']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default 0
      * @param ParamConfigurator|int $value
@@ -47,7 +24,7 @@ class NumberFormatConfig
     public function decimals($value): self
     {
         $this->decimals = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class NumberFormatConfig
     public function decimalPoint($value): self
     {
         $this->decimalPoint = $value;
-
+    
         return $this;
     }
     
@@ -71,8 +48,31 @@ class NumberFormatConfig
     public function thousandsSeparator($value): self
     {
         $this->thousandsSeparator = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['decimals'])) {
+            $this->decimals = $value['decimals'];
+            unset($value['decimals']);
+        }
+    
+        if (isset($value['decimal_point'])) {
+            $this->decimalPoint = $value['decimal_point'];
+            unset($value['decimal_point']);
+        }
+    
+        if (isset($value['thousands_separator'])) {
+            $this->thousandsSeparator = $value['thousands_separator'];
+            unset($value['thousands_separator']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

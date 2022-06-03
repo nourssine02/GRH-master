@@ -18,39 +18,6 @@ class AccessDecisionManagerConfig
     private $allowIfAllAbstain;
     private $allowIfEqualGrantedDenied;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['strategy'])) {
-            $this->strategy = $value['strategy'];
-            unset($value['strategy']);
-        }
-
-        if (isset($value['service'])) {
-            $this->service = $value['service'];
-            unset($value['service']);
-        }
-
-        if (isset($value['strategy_service'])) {
-            $this->strategyService = $value['strategy_service'];
-            unset($value['strategy_service']);
-        }
-
-        if (isset($value['allow_if_all_abstain'])) {
-            $this->allowIfAllAbstain = $value['allow_if_all_abstain'];
-            unset($value['allow_if_all_abstain']);
-        }
-
-        if (isset($value['allow_if_equal_granted_denied'])) {
-            $this->allowIfEqualGrantedDenied = $value['allow_if_equal_granted_denied'];
-            unset($value['allow_if_equal_granted_denied']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|'affirmative'|'consensus'|'unanimous'|'priority' $value
@@ -59,7 +26,7 @@ class AccessDecisionManagerConfig
     public function strategy($value): self
     {
         $this->strategy = $value;
-
+    
         return $this;
     }
     
@@ -71,7 +38,7 @@ class AccessDecisionManagerConfig
     public function service($value): self
     {
         $this->service = $value;
-
+    
         return $this;
     }
     
@@ -83,7 +50,7 @@ class AccessDecisionManagerConfig
     public function strategyService($value): self
     {
         $this->strategyService = $value;
-
+    
         return $this;
     }
     
@@ -95,7 +62,7 @@ class AccessDecisionManagerConfig
     public function allowIfAllAbstain($value): self
     {
         $this->allowIfAllAbstain = $value;
-
+    
         return $this;
     }
     
@@ -107,8 +74,41 @@ class AccessDecisionManagerConfig
     public function allowIfEqualGrantedDenied($value): self
     {
         $this->allowIfEqualGrantedDenied = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['strategy'])) {
+            $this->strategy = $value['strategy'];
+            unset($value['strategy']);
+        }
+    
+        if (isset($value['service'])) {
+            $this->service = $value['service'];
+            unset($value['service']);
+        }
+    
+        if (isset($value['strategy_service'])) {
+            $this->strategyService = $value['strategy_service'];
+            unset($value['strategy_service']);
+        }
+    
+        if (isset($value['allow_if_all_abstain'])) {
+            $this->allowIfAllAbstain = $value['allow_if_all_abstain'];
+            unset($value['allow_if_all_abstain']);
+        }
+    
+        if (isset($value['allow_if_equal_granted_denied'])) {
+            $this->allowIfEqualGrantedDenied = $value['allow_if_equal_granted_denied'];
+            unset($value['allow_if_equal_granted_denied']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

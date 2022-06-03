@@ -16,24 +16,6 @@ class WorkflowsConfig
     private $enabled;
     private $workflows;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['workflows'])) {
-            $this->workflows = array_map(function ($v) { return new \Symfony\Config\Framework\Workflows\WorkflowsConfig($v); }, $value['workflows']);
-            unset($value['workflows']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -42,7 +24,7 @@ class WorkflowsConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -54,8 +36,26 @@ class WorkflowsConfig
         if ([] === $value) {
             return $this->workflows[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "workflows()" has already been initialized. You cannot pass values the second time you call workflows().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['workflows'])) {
+            $this->workflows = array_map(function ($v) { return new \Symfony\Config\Framework\Workflows\WorkflowsConfig($v); }, $value['workflows']);
+            unset($value['workflows']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

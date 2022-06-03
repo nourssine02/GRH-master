@@ -16,29 +16,6 @@ class DateConfig
     private $intervalFormat;
     private $timezone;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['format'])) {
-            $this->format = $value['format'];
-            unset($value['format']);
-        }
-
-        if (isset($value['interval_format'])) {
-            $this->intervalFormat = $value['interval_format'];
-            unset($value['interval_format']);
-        }
-
-        if (isset($value['timezone'])) {
-            $this->timezone = $value['timezone'];
-            unset($value['timezone']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default 'F j, Y H:i'
      * @param ParamConfigurator|mixed $value
@@ -47,7 +24,7 @@ class DateConfig
     public function format($value): self
     {
         $this->format = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class DateConfig
     public function intervalFormat($value): self
     {
         $this->intervalFormat = $value;
-
+    
         return $this;
     }
     
@@ -72,8 +49,31 @@ class DateConfig
     public function timezone($value): self
     {
         $this->timezone = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['format'])) {
+            $this->format = $value['format'];
+            unset($value['format']);
+        }
+    
+        if (isset($value['interval_format'])) {
+            $this->intervalFormat = $value['interval_format'];
+            unset($value['interval_format']);
+        }
+    
+        if (isset($value['timezone'])) {
+            $this->timezone = $value['timezone'];
+            unset($value['timezone']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

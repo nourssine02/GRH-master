@@ -15,24 +15,6 @@ class PlaceConfig
     private $name;
     private $metadata;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['name'])) {
-            $this->name = $value['name'];
-            unset($value['name']);
-        }
-
-        if (isset($value['metadata'])) {
-            $this->metadata = $value['metadata'];
-            unset($value['metadata']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class PlaceConfig
     public function name($value): self
     {
         $this->name = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class PlaceConfig
     public function metadata($value): self
     {
         $this->metadata = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['name'])) {
+            $this->name = $value['name'];
+            unset($value['name']);
+        }
+    
+        if (isset($value['metadata'])) {
+            $this->metadata = $value['metadata'];
+            unset($value['metadata']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

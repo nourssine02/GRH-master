@@ -16,29 +16,6 @@ class WebProfilerConfig implements \Symfony\Component\Config\Builder\ConfigBuild
     private $interceptRedirects;
     private $excludedAjaxPaths;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['toolbar'])) {
-            $this->toolbar = $value['toolbar'];
-            unset($value['toolbar']);
-        }
-
-        if (isset($value['intercept_redirects'])) {
-            $this->interceptRedirects = $value['intercept_redirects'];
-            unset($value['intercept_redirects']);
-        }
-
-        if (isset($value['excluded_ajax_paths'])) {
-            $this->excludedAjaxPaths = $value['excluded_ajax_paths'];
-            unset($value['excluded_ajax_paths']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -47,7 +24,7 @@ class WebProfilerConfig implements \Symfony\Component\Config\Builder\ConfigBuild
     public function toolbar($value): self
     {
         $this->toolbar = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class WebProfilerConfig implements \Symfony\Component\Config\Builder\ConfigBuild
     public function interceptRedirects($value): self
     {
         $this->interceptRedirects = $value;
-
+    
         return $this;
     }
     
@@ -71,13 +48,36 @@ class WebProfilerConfig implements \Symfony\Component\Config\Builder\ConfigBuild
     public function excludedAjaxPaths($value): self
     {
         $this->excludedAjaxPaths = $value;
-
+    
         return $this;
     }
     
     public function getExtensionAlias(): string
     {
         return 'web_profiler';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['toolbar'])) {
+            $this->toolbar = $value['toolbar'];
+            unset($value['toolbar']);
+        }
+    
+        if (isset($value['intercept_redirects'])) {
+            $this->interceptRedirects = $value['intercept_redirects'];
+            unset($value['intercept_redirects']);
+        }
+    
+        if (isset($value['excluded_ajax_paths'])) {
+            $this->excludedAjaxPaths = $value['excluded_ajax_paths'];
+            unset($value['excluded_ajax_paths']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

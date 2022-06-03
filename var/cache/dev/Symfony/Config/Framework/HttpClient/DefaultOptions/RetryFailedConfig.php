@@ -22,54 +22,6 @@ class RetryFailedConfig
     private $maxDelay;
     private $jitter;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['retry_strategy'])) {
-            $this->retryStrategy = $value['retry_strategy'];
-            unset($value['retry_strategy']);
-        }
-
-        if (isset($value['http_codes'])) {
-            $this->httpCodes = array_map(function ($v) { return new \Symfony\Config\Framework\HttpClient\DefaultOptions\RetryFailed\HttpCodeConfig($v); }, $value['http_codes']);
-            unset($value['http_codes']);
-        }
-
-        if (isset($value['max_retries'])) {
-            $this->maxRetries = $value['max_retries'];
-            unset($value['max_retries']);
-        }
-
-        if (isset($value['delay'])) {
-            $this->delay = $value['delay'];
-            unset($value['delay']);
-        }
-
-        if (isset($value['multiplier'])) {
-            $this->multiplier = $value['multiplier'];
-            unset($value['multiplier']);
-        }
-
-        if (isset($value['max_delay'])) {
-            $this->maxDelay = $value['max_delay'];
-            unset($value['max_delay']);
-        }
-
-        if (isset($value['jitter'])) {
-            $this->jitter = $value['jitter'];
-            unset($value['jitter']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -78,7 +30,7 @@ class RetryFailedConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -91,7 +43,7 @@ class RetryFailedConfig
     public function retryStrategy($value): self
     {
         $this->retryStrategy = $value;
-
+    
         return $this;
     }
     
@@ -103,7 +55,7 @@ class RetryFailedConfig
         if ([] === $value) {
             return $this->httpCodes[$code];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "httpCode()" has already been initialized. You cannot pass values the second time you call httpCode().');
     }
     
@@ -115,7 +67,7 @@ class RetryFailedConfig
     public function maxRetries($value): self
     {
         $this->maxRetries = $value;
-
+    
         return $this;
     }
     
@@ -128,7 +80,7 @@ class RetryFailedConfig
     public function delay($value): self
     {
         $this->delay = $value;
-
+    
         return $this;
     }
     
@@ -141,7 +93,7 @@ class RetryFailedConfig
     public function multiplier($value): self
     {
         $this->multiplier = $value;
-
+    
         return $this;
     }
     
@@ -154,7 +106,7 @@ class RetryFailedConfig
     public function maxDelay($value): self
     {
         $this->maxDelay = $value;
-
+    
         return $this;
     }
     
@@ -167,8 +119,56 @@ class RetryFailedConfig
     public function jitter($value): self
     {
         $this->jitter = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['retry_strategy'])) {
+            $this->retryStrategy = $value['retry_strategy'];
+            unset($value['retry_strategy']);
+        }
+    
+        if (isset($value['http_codes'])) {
+            $this->httpCodes = array_map(function ($v) { return new \Symfony\Config\Framework\HttpClient\DefaultOptions\RetryFailed\HttpCodeConfig($v); }, $value['http_codes']);
+            unset($value['http_codes']);
+        }
+    
+        if (isset($value['max_retries'])) {
+            $this->maxRetries = $value['max_retries'];
+            unset($value['max_retries']);
+        }
+    
+        if (isset($value['delay'])) {
+            $this->delay = $value['delay'];
+            unset($value['delay']);
+        }
+    
+        if (isset($value['multiplier'])) {
+            $this->multiplier = $value['multiplier'];
+            unset($value['multiplier']);
+        }
+    
+        if (isset($value['max_delay'])) {
+            $this->maxDelay = $value['max_delay'];
+            unset($value['max_delay']);
+        }
+    
+        if (isset($value['jitter'])) {
+            $this->jitter = $value['jitter'];
+            unset($value['jitter']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

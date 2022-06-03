@@ -25,64 +25,6 @@ class TranslatorConfig
     private $pseudoLocalization;
     private $providers;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['fallbacks'])) {
-            $this->fallbacks = $value['fallbacks'];
-            unset($value['fallbacks']);
-        }
-
-        if (isset($value['logging'])) {
-            $this->logging = $value['logging'];
-            unset($value['logging']);
-        }
-
-        if (isset($value['formatter'])) {
-            $this->formatter = $value['formatter'];
-            unset($value['formatter']);
-        }
-
-        if (isset($value['cache_dir'])) {
-            $this->cacheDir = $value['cache_dir'];
-            unset($value['cache_dir']);
-        }
-
-        if (isset($value['default_path'])) {
-            $this->defaultPath = $value['default_path'];
-            unset($value['default_path']);
-        }
-
-        if (isset($value['paths'])) {
-            $this->paths = $value['paths'];
-            unset($value['paths']);
-        }
-
-        if (isset($value['enabled_locales'])) {
-            $this->enabledLocales = $value['enabled_locales'];
-            unset($value['enabled_locales']);
-        }
-
-        if (isset($value['pseudo_localization'])) {
-            $this->pseudoLocalization = new \Symfony\Config\Framework\Translator\PseudoLocalizationConfig($value['pseudo_localization']);
-            unset($value['pseudo_localization']);
-        }
-
-        if (isset($value['providers'])) {
-            $this->providers = array_map(function ($v) { return new \Symfony\Config\Framework\Translator\ProviderConfig($v); }, $value['providers']);
-            unset($value['providers']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|bool $value
@@ -91,7 +33,7 @@ class TranslatorConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -102,7 +44,7 @@ class TranslatorConfig
     public function fallbacks($value): self
     {
         $this->fallbacks = $value;
-
+    
         return $this;
     }
     
@@ -114,7 +56,7 @@ class TranslatorConfig
     public function logging($value): self
     {
         $this->logging = $value;
-
+    
         return $this;
     }
     
@@ -126,7 +68,7 @@ class TranslatorConfig
     public function formatter($value): self
     {
         $this->formatter = $value;
-
+    
         return $this;
     }
     
@@ -138,7 +80,7 @@ class TranslatorConfig
     public function cacheDir($value): self
     {
         $this->cacheDir = $value;
-
+    
         return $this;
     }
     
@@ -151,7 +93,7 @@ class TranslatorConfig
     public function defaultPath($value): self
     {
         $this->defaultPath = $value;
-
+    
         return $this;
     }
     
@@ -162,7 +104,7 @@ class TranslatorConfig
     public function paths($value): self
     {
         $this->paths = $value;
-
+    
         return $this;
     }
     
@@ -173,7 +115,7 @@ class TranslatorConfig
     public function enabledLocales($value): self
     {
         $this->enabledLocales = $value;
-
+    
         return $this;
     }
     
@@ -184,7 +126,7 @@ class TranslatorConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "pseudoLocalization()" has already been initialized. You cannot pass values the second time you call pseudoLocalization().');
         }
-
+    
         return $this->pseudoLocalization;
     }
     
@@ -196,8 +138,66 @@ class TranslatorConfig
         if ([] === $value) {
             return $this->providers[$name];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "provider()" has already been initialized. You cannot pass values the second time you call provider().');
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['fallbacks'])) {
+            $this->fallbacks = $value['fallbacks'];
+            unset($value['fallbacks']);
+        }
+    
+        if (isset($value['logging'])) {
+            $this->logging = $value['logging'];
+            unset($value['logging']);
+        }
+    
+        if (isset($value['formatter'])) {
+            $this->formatter = $value['formatter'];
+            unset($value['formatter']);
+        }
+    
+        if (isset($value['cache_dir'])) {
+            $this->cacheDir = $value['cache_dir'];
+            unset($value['cache_dir']);
+        }
+    
+        if (isset($value['default_path'])) {
+            $this->defaultPath = $value['default_path'];
+            unset($value['default_path']);
+        }
+    
+        if (isset($value['paths'])) {
+            $this->paths = $value['paths'];
+            unset($value['paths']);
+        }
+    
+        if (isset($value['enabled_locales'])) {
+            $this->enabledLocales = $value['enabled_locales'];
+            unset($value['enabled_locales']);
+        }
+    
+        if (isset($value['pseudo_localization'])) {
+            $this->pseudoLocalization = new \Symfony\Config\Framework\Translator\PseudoLocalizationConfig($value['pseudo_localization']);
+            unset($value['pseudo_localization']);
+        }
+    
+        if (isset($value['providers'])) {
+            $this->providers = array_map(function ($v) { return new \Symfony\Config\Framework\Translator\ProviderConfig($v); }, $value['providers']);
+            unset($value['providers']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

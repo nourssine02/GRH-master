@@ -15,24 +15,6 @@ class ExcludedHttpCodeConfig
     private $code;
     private $urls;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['code'])) {
-            $this->code = $value['code'];
-            unset($value['code']);
-        }
-
-        if (isset($value['urls'])) {
-            $this->urls = $value['urls'];
-            unset($value['urls']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -41,7 +23,7 @@ class ExcludedHttpCodeConfig
     public function code($value): self
     {
         $this->code = $value;
-
+    
         return $this;
     }
     
@@ -52,8 +34,26 @@ class ExcludedHttpCodeConfig
     public function urls($value): self
     {
         $this->urls = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['code'])) {
+            $this->code = $value['code'];
+            unset($value['code']);
+        }
+    
+        if (isset($value['urls'])) {
+            $this->urls = $value['urls'];
+            unset($value['urls']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

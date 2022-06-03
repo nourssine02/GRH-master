@@ -23,54 +23,6 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     private $metadata;
     private $mappings;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['default_filename_attribute_suffix'])) {
-            $this->defaultFilenameAttributeSuffix = $value['default_filename_attribute_suffix'];
-            unset($value['default_filename_attribute_suffix']);
-        }
-
-        if (isset($value['db_driver'])) {
-            $this->dbDriver = $value['db_driver'];
-            unset($value['db_driver']);
-        }
-
-        if (isset($value['storage'])) {
-            $this->storage = $value['storage'];
-            unset($value['storage']);
-        }
-
-        if (isset($value['templating'])) {
-            $this->templating = $value['templating'];
-            unset($value['templating']);
-        }
-
-        if (isset($value['twig'])) {
-            $this->twig = $value['twig'];
-            unset($value['twig']);
-        }
-
-        if (isset($value['form'])) {
-            $this->form = $value['form'];
-            unset($value['form']);
-        }
-
-        if (isset($value['metadata'])) {
-            $this->metadata = new \Symfony\Config\VichUploader\MetadataConfig($value['metadata']);
-            unset($value['metadata']);
-        }
-
-        if (isset($value['mappings'])) {
-            $this->mappings = array_map(function ($v) { return new \Symfony\Config\VichUploader\MappingsConfig($v); }, $value['mappings']);
-            unset($value['mappings']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default '_name'
      * @param ParamConfigurator|mixed $value
@@ -79,7 +31,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function defaultFilenameAttributeSuffix($value): self
     {
         $this->defaultFilenameAttributeSuffix = $value;
-
+    
         return $this;
     }
     
@@ -91,7 +43,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function dbDriver($value): self
     {
         $this->dbDriver = $value;
-
+    
         return $this;
     }
     
@@ -103,7 +55,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function storage($value): self
     {
         $this->storage = $value;
-
+    
         return $this;
     }
     
@@ -116,7 +68,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function templating($value): self
     {
         $this->templating = $value;
-
+    
         return $this;
     }
     
@@ -129,7 +81,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function twig($value): self
     {
         $this->twig = $value;
-
+    
         return $this;
     }
     
@@ -141,7 +93,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
     public function form($value): self
     {
         $this->form = $value;
-
+    
         return $this;
     }
     
@@ -152,7 +104,7 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "metadata()" has already been initialized. You cannot pass values the second time you call metadata().');
         }
-
+    
         return $this->metadata;
     }
     
@@ -164,13 +116,61 @@ class VichUploaderConfig implements \Symfony\Component\Config\Builder\ConfigBuil
         if ([] === $value) {
             return $this->mappings[$id];
         }
-
+    
         throw new InvalidConfigurationException('The node created by "mappings()" has already been initialized. You cannot pass values the second time you call mappings().');
     }
     
     public function getExtensionAlias(): string
     {
         return 'vich_uploader';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['default_filename_attribute_suffix'])) {
+            $this->defaultFilenameAttributeSuffix = $value['default_filename_attribute_suffix'];
+            unset($value['default_filename_attribute_suffix']);
+        }
+    
+        if (isset($value['db_driver'])) {
+            $this->dbDriver = $value['db_driver'];
+            unset($value['db_driver']);
+        }
+    
+        if (isset($value['storage'])) {
+            $this->storage = $value['storage'];
+            unset($value['storage']);
+        }
+    
+        if (isset($value['templating'])) {
+            $this->templating = $value['templating'];
+            unset($value['templating']);
+        }
+    
+        if (isset($value['twig'])) {
+            $this->twig = $value['twig'];
+            unset($value['twig']);
+        }
+    
+        if (isset($value['form'])) {
+            $this->form = $value['form'];
+            unset($value['form']);
+        }
+    
+        if (isset($value['metadata'])) {
+            $this->metadata = new \Symfony\Config\VichUploader\MetadataConfig($value['metadata']);
+            unset($value['metadata']);
+        }
+    
+        if (isset($value['mappings'])) {
+            $this->mappings = array_map(function ($v) { return new \Symfony\Config\VichUploader\MappingsConfig($v); }, $value['mappings']);
+            unset($value['mappings']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

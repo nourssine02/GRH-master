@@ -14,19 +14,6 @@ class MakerConfig implements \Symfony\Component\Config\Builder\ConfigBuilderInte
 {
     private $rootNamespace;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['root_namespace'])) {
-            $this->rootNamespace = $value['root_namespace'];
-            unset($value['root_namespace']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default 'App'
      * @param ParamConfigurator|mixed $value
@@ -35,13 +22,26 @@ class MakerConfig implements \Symfony\Component\Config\Builder\ConfigBuilderInte
     public function rootNamespace($value): self
     {
         $this->rootNamespace = $value;
-
+    
         return $this;
     }
     
     public function getExtensionAlias(): string
     {
         return 'maker';
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['root_namespace'])) {
+            $this->rootNamespace = $value['root_namespace'];
+            unset($value['root_namespace']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

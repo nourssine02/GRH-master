@@ -16,24 +16,6 @@ class BusConfig
     private $defaultMiddleware;
     private $middleware;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['default_middleware'])) {
-            $this->defaultMiddleware = $value['default_middleware'];
-            unset($value['default_middleware']);
-        }
-
-        if (isset($value['middleware'])) {
-            $this->middleware = array_map(function ($v) { return new \Symfony\Config\Framework\Messenger\BusConfig\MiddlewareConfig($v); }, $value['middleware']);
-            unset($value['middleware']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|true|false|'allow_no_handlers' $value
@@ -42,13 +24,31 @@ class BusConfig
     public function defaultMiddleware($value): self
     {
         $this->defaultMiddleware = $value;
-
+    
         return $this;
     }
     
     public function middleware(array $value = []): \Symfony\Config\Framework\Messenger\BusConfig\MiddlewareConfig
     {
         return $this->middleware[] = new \Symfony\Config\Framework\Messenger\BusConfig\MiddlewareConfig($value);
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['default_middleware'])) {
+            $this->defaultMiddleware = $value['default_middleware'];
+            unset($value['default_middleware']);
+        }
+    
+        if (isset($value['middleware'])) {
+            $this->middleware = array_map(function ($v) { return new \Symfony\Config\Framework\Messenger\BusConfig\MiddlewareConfig($v); }, $value['middleware']);
+            unset($value['middleware']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

@@ -32,179 +32,32 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% set events = collector.events %}
-
-    {% if events.messages|length %}
-        {% set icon %}
-            {% include('@WebProfiler/Icon/notifier.svg') %}
-            <span class=\"sf-toolbar-value\">{{ events.messages|length }}</span>
-        {% endset %}
-
-        {% set text %}
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Sent notifications</b>
-                <span class=\"sf-toolbar-status\">{{ events.messages|length }}</span>
-            </div>
-
-            {% for transport in events.transports %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>{{ transport }}</b>
-                    <span class=\"sf-toolbar-status\">{{ events.messages(transport)|length }}</span>
-                </div>
-            {% endfor %}
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': profiler_url }) }}
-    {% endif %}
-{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-    <style type=\"text/css\">
-        /* utility classes */
-        .m-t-0 { margin-top: 0 !important; }
-        .m-t-10 { margin-top: 10px !important; }
-
-        /* basic grid */
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-        .col {
-            flex-basis: 0;
-            flex-grow: 1;
-            max-width: 100%;
-            position: relative;
-            width: 100%;
-            min-height: 1px;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        .col-4 {
-            flex: 0 0 33.333333%;
-            max-width: 33.333333%;
-        }
-
-        /* small tabs */
-        .sf-tabs-sm .tab-navigation li {
-            font-size: 14px;
-            padding: .3em .5em;
-        }
-    </style>
-{% endblock %}
-
-{% block menu %}
-    {% set events = collector.events %}
-
-    <span class=\"label {{ events.messages|length ? '' : 'disabled' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/notifier.svg') }}</span>
-
-        <strong>Notifications</strong>
-        {% if events.messages|length > 0 %}
-            <span class=\"count\">
-                <span>{{ events.messages|length }}</span>
-            </span>
-        {% endif %}
-    </span>
-{% endblock %}
-
-{% block panel %}
-    {% set events = collector.events %}
-
-    <h2>Notifications</h2>
-
-    {% if not events.messages|length %}
-        <div class=\"empty\">
-            <p>No notifications were sent.</p>
-        </div>
-    {% endif %}
-
-    <div class=\"metrics\">
-        {% for transport in events.transports %}
-            <div class=\"metric\">
-                <span class=\"value\">{{ events.messages(transport)|length }}</span>
-                <span class=\"label\">{{ transport }}</span>
-            </div>
-        {% endfor %}
-    </div>
-
-    {% for transport in events.transports %}
-        <h3>{{ transport }}</h3>
-
-        <div class=\"card-block\">
-            <div class=\"sf-tabs sf-tabs-sm\">
-                {% for event in events.events(transport) %}
-                    {% set message = event.message %}
-                    <div class=\"tab\">
-                        <h3 class=\"tab-title\">Message #{{ loop.index }} <small>({{ event.isQueued() ? 'queued' : 'sent' }})</small></h3>
-                        <div class=\"tab-content\">
-                            <div class=\"card\">
-                                <div class=\"card-block\">
-                                    <span class=\"label\">Subject</span>
-                                    <h2 class=\"m-t-10\">{{ message.getSubject() ?? '(empty)' }}</h2>
-                                </div>
-                                {% if message.getNotification is defined %}
-                                    <div class=\"card-block\">
-                                        <div class=\"row\">
-                                            <div class=\"col\">
-                                                <span class=\"label\">Content</span>
-                                                <pre class=\"prewrap\">{{ message.getNotification().getContent() ?? '(empty)' }}</pre>
-                                                <span class=\"label\">Importance</span>
-                                                <pre class=\"prewrap\">{{ message.getNotification().getImportance() }}</pre>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                                    <div class=\"card-block\">
-                                        <div class=\"sf-tabs sf-tabs-sm\">
-                                            {% if message.getNotification is defined %}
-                                                <div class=\"tab\">
-                                                    <h3 class=\"tab-title\">Notification</h3>
-                                                    {% set notification = event.message.getNotification() %}
-                                                    <div class=\"tab-content\">
-                                                        <pre class=\"prewrap\" style=\"max-height: 600px\">
-                                                            {{- 'Subject: ' ~ notification.getSubject() }}<br/>
-                                                            {{- 'Content: ' ~ notification.getContent() }}<br/>
-                                                            {{- 'Importance: ' ~ notification.getImportance() }}<br/>
-                                                            {{- 'Emoji: ' ~ (notification.getEmoji() is empty ? '(empty)' : notification.getEmoji()) }}<br/>
-                                                            {{- 'Exception: ' ~ notification.getException() ?? '(empty)' }}<br/>
-                                                            {{- 'ExceptionAsString: ' ~ (notification.getExceptionAsString() is empty ? '(empty)' : notification.getExceptionAsString()) }}
-                                                        </pre>
-                                                    </div>
-                                                </div>
-                                            {% endif %}
-                                                <div class=\"tab\">
-                                                    <h3 class=\"tab-title\">Message Options</h3>
-                                                    <div class=\"tab-content\">
-                                                        <pre class=\"prewrap\" style=\"max-height: 600px\">
-                                                            {%- if message.getOptions() is null %}
-                                                                {{- '(empty)' }}
-                                                            {%- else %}
-                                                                {{- message.getOptions()|json_encode(constant('JSON_PRETTY_PRINT')) }}
-                                                            {%- endif %}
-                                                        </pre>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endfor %}
-{% endblock %}
-", "@WebProfiler/Collector/notifier.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/notifier.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/notifier.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/notifier.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/notifier.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -280,23 +133,15 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/notifier.html.twig";
-    }
-
     // line 30
-
     public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -344,16 +189,15 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
         }
     </style>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 67
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -393,16 +237,15 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
         // line 79
         echo "    </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 82
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -608,12 +451,17 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['transport'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/notifier.html.twig";
     }
 
     public function isTraitable()
@@ -626,28 +474,176 @@ class __TwigTemplate_ef0bd1d34754f65da50b9a60ecbab8f7d2ebeab781b2e3e3544321915f7
         return array (  447 => 165,  425 => 156,  422 => 154,  419 => 152,  417 => 151,  412 => 147,  404 => 142,  401 => 141,  398 => 140,  395 => 139,  392 => 138,  389 => 137,  386 => 135,  384 => 134,  380 => 132,  378 => 131,  374 => 129,  366 => 124,  361 => 122,  355 => 118,  353 => 117,  348 => 115,  338 => 110,  335 => 109,  332 => 108,  315 => 107,  307 => 103,  303 => 102,  299 => 100,  290 => 97,  286 => 96,  283 => 95,  279 => 94,  275 => 92,  269 => 88,  267 => 87,  262 => 84,  259 => 83,  249 => 82,  238 => 79,  232 => 76,  229 => 75,  227 => 74,  221 => 71,  217 => 70,  214 => 69,  211 => 68,  201 => 67,  155 => 31,  145 => 30,  132 => 26,  129 => 25,  126 => 24,  117 => 21,  113 => 20,  110 => 19,  106 => 18,  100 => 15,  96 => 13,  94 => 12,  91 => 11,  85 => 9,  82 => 8,  79 => 7,  77 => 6,  74 => 5,  71 => 4,  61 => 3,  38 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/notifier.html.twig"));
+{% block toolbar %}
+    {% set events = collector.events %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/notifier.html.twig"));
+    {% if events.messages|length %}
+        {% set icon %}
+            {% include('@WebProfiler/Icon/notifier.svg') %}
+            <span class=\"sf-toolbar-value\">{{ events.messages|length }}</span>
+        {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/notifier.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        {% set text %}
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Sent notifications</b>
+                <span class=\"sf-toolbar-status\">{{ events.messages|length }}</span>
+            </div>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+            {% for transport in events.transports %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>{{ transport }}</b>
+                    <span class=\"sf-toolbar-status\">{{ events.messages(transport)|length }}</span>
+                </div>
+            {% endfor %}
+        {% endset %}
 
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': profiler_url }) }}
+    {% endif %}
+{% endblock %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+{% block head %}
+    {{ parent() }}
+    <style type=\"text/css\">
+        /* utility classes */
+        .m-t-0 { margin-top: 0 !important; }
+        .m-t-10 { margin-top: 10px !important; }
 
+        /* basic grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .col {
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .col-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        /* small tabs */
+        .sf-tabs-sm .tab-navigation li {
+            font-size: 14px;
+            padding: .3em .5em;
+        }
+    </style>
+{% endblock %}
+
+{% block menu %}
+    {% set events = collector.events %}
+
+    <span class=\"label {{ events.messages|length ? '' : 'disabled' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/notifier.svg') }}</span>
+
+        <strong>Notifications</strong>
+        {% if events.messages|length > 0 %}
+            <span class=\"count\">
+                <span>{{ events.messages|length }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {% set events = collector.events %}
+
+    <h2>Notifications</h2>
+
+    {% if not events.messages|length %}
+        <div class=\"empty\">
+            <p>No notifications were sent.</p>
+        </div>
+    {% endif %}
+
+    <div class=\"metrics\">
+        {% for transport in events.transports %}
+            <div class=\"metric\">
+                <span class=\"value\">{{ events.messages(transport)|length }}</span>
+                <span class=\"label\">{{ transport }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% for transport in events.transports %}
+        <h3>{{ transport }}</h3>
+
+        <div class=\"card-block\">
+            <div class=\"sf-tabs sf-tabs-sm\">
+                {% for event in events.events(transport) %}
+                    {% set message = event.message %}
+                    <div class=\"tab\">
+                        <h3 class=\"tab-title\">Message #{{ loop.index }} <small>({{ event.isQueued() ? 'queued' : 'sent' }})</small></h3>
+                        <div class=\"tab-content\">
+                            <div class=\"card\">
+                                <div class=\"card-block\">
+                                    <span class=\"label\">Subject</span>
+                                    <h2 class=\"m-t-10\">{{ message.getSubject() ?? '(empty)' }}</h2>
+                                </div>
+                                {% if message.getNotification is defined %}
+                                    <div class=\"card-block\">
+                                        <div class=\"row\">
+                                            <div class=\"col\">
+                                                <span class=\"label\">Content</span>
+                                                <pre class=\"prewrap\">{{ message.getNotification().getContent() ?? '(empty)' }}</pre>
+                                                <span class=\"label\">Importance</span>
+                                                <pre class=\"prewrap\">{{ message.getNotification().getImportance() }}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                    <div class=\"card-block\">
+                                        <div class=\"sf-tabs sf-tabs-sm\">
+                                            {% if message.getNotification is defined %}
+                                                <div class=\"tab\">
+                                                    <h3 class=\"tab-title\">Notification</h3>
+                                                    {% set notification = event.message.getNotification() %}
+                                                    <div class=\"tab-content\">
+                                                        <pre class=\"prewrap\" style=\"max-height: 600px\">
+                                                            {{- 'Subject: ' ~ notification.getSubject() }}<br/>
+                                                            {{- 'Content: ' ~ notification.getContent() }}<br/>
+                                                            {{- 'Importance: ' ~ notification.getImportance() }}<br/>
+                                                            {{- 'Emoji: ' ~ (notification.getEmoji() is empty ? '(empty)' : notification.getEmoji()) }}<br/>
+                                                            {{- 'Exception: ' ~ notification.getException() ?? '(empty)' }}<br/>
+                                                            {{- 'ExceptionAsString: ' ~ (notification.getExceptionAsString() is empty ? '(empty)' : notification.getExceptionAsString()) }}
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                                <div class=\"tab\">
+                                                    <h3 class=\"tab-title\">Message Options</h3>
+                                                    <div class=\"tab-content\">
+                                                        <pre class=\"prewrap\" style=\"max-height: 600px\">
+                                                            {%- if message.getOptions() is null %}
+                                                                {{- '(empty)' }}
+                                                            {%- else %}
+                                                                {{- message.getOptions()|json_encode(constant('JSON_PRETTY_PRINT')) }}
+                                                            {%- endif %}
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+", "@WebProfiler/Collector/notifier.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/notifier.html.twig");
     }
 }

@@ -16,29 +16,6 @@ class FragmentsConfig
     private $hincludeDefaultTemplate;
     private $path;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['enabled'])) {
-            $this->enabled = $value['enabled'];
-            unset($value['enabled']);
-        }
-
-        if (isset($value['hinclude_default_template'])) {
-            $this->hincludeDefaultTemplate = $value['hinclude_default_template'];
-            unset($value['hinclude_default_template']);
-        }
-
-        if (isset($value['path'])) {
-            $this->path = $value['path'];
-            unset($value['path']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default false
      * @param ParamConfigurator|bool $value
@@ -47,7 +24,7 @@ class FragmentsConfig
     public function enabled($value): self
     {
         $this->enabled = $value;
-
+    
         return $this;
     }
     
@@ -59,7 +36,7 @@ class FragmentsConfig
     public function hincludeDefaultTemplate($value): self
     {
         $this->hincludeDefaultTemplate = $value;
-
+    
         return $this;
     }
     
@@ -71,8 +48,31 @@ class FragmentsConfig
     public function path($value): self
     {
         $this->path = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['enabled'])) {
+            $this->enabled = $value['enabled'];
+            unset($value['enabled']);
+        }
+    
+        if (isset($value['hinclude_default_template'])) {
+            $this->hincludeDefaultTemplate = $value['hinclude_default_template'];
+            unset($value['hinclude_default_template']);
+        }
+    
+        if (isset($value['path'])) {
+            $this->path = $value['path'];
+            unset($value['path']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

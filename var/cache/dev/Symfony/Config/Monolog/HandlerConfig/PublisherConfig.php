@@ -17,34 +17,6 @@ class PublisherConfig
     private $port;
     private $chunkSize;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['id'])) {
-            $this->id = $value['id'];
-            unset($value['id']);
-        }
-
-        if (isset($value['hostname'])) {
-            $this->hostname = $value['hostname'];
-            unset($value['hostname']);
-        }
-
-        if (isset($value['port'])) {
-            $this->port = $value['port'];
-            unset($value['port']);
-        }
-
-        if (isset($value['chunk_size'])) {
-            $this->chunkSize = $value['chunk_size'];
-            unset($value['chunk_size']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
@@ -53,7 +25,7 @@ class PublisherConfig
     public function id($value): self
     {
         $this->id = $value;
-
+    
         return $this;
     }
     
@@ -65,7 +37,7 @@ class PublisherConfig
     public function hostname($value): self
     {
         $this->hostname = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +49,7 @@ class PublisherConfig
     public function port($value): self
     {
         $this->port = $value;
-
+    
         return $this;
     }
     
@@ -89,8 +61,36 @@ class PublisherConfig
     public function chunkSize($value): self
     {
         $this->chunkSize = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['id'])) {
+            $this->id = $value['id'];
+            unset($value['id']);
+        }
+    
+        if (isset($value['hostname'])) {
+            $this->hostname = $value['hostname'];
+            unset($value['hostname']);
+        }
+    
+        if (isset($value['port'])) {
+            $this->port = $value['port'];
+            unset($value['port']);
+        }
+    
+        if (isset($value['chunk_size'])) {
+            $this->chunkSize = $value['chunk_size'];
+            unset($value['chunk_size']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

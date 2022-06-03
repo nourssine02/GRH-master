@@ -30,130 +30,35 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% import _self as helper %}
-
-{% block menu %}
-<span class=\"label\">
-    <span class=\"icon\">{{ include('@WebProfiler/Icon/event.svg') }}</span>
-    <strong>Events</strong>
-</span>
-{% endblock %}
-
-{% block panel %}
-    <h2>Event Dispatcher</h2>
-
-    {% if collector.calledlisteners is empty %}
-        <div class=\"empty\">
-            <p>No events have been recorded. Check that debugging is enabled in the kernel.</p>
-        </div>
-    {% else %}
-        <div class=\"sf-tabs\">
-            <div class=\"tab\">
-                <h3 class=\"tab-title\">Called Listeners <span class=\"badge\">{{ collector.calledlisteners|length }}</span></h3>
-
-                <div class=\"tab-content\">
-                    {{ helper.render_table(collector.calledlisteners) }}
-                </div>
-            </div>
-
-            <div class=\"tab\">
-                <h3 class=\"tab-title\">Not Called Listeners <span class=\"badge\">{{ collector.notcalledlisteners|length }}</span></h3>
-                <div class=\"tab-content\">
-                    {% if collector.notcalledlisteners is empty %}
-                        <div class=\"empty\">
-                            <p>
-                                <strong>There are no uncalled listeners</strong>.
-                            </p>
-                            <p>
-                                All listeners were called for this request or an error occurred
-                                when trying to collect uncalled listeners (in which case check the
-                                logs to get more information).
-                            </p>
-                        </div>
-                    {% else %}
-                        {{ helper.render_table(collector.notcalledlisteners) }}
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class=\"tab\">
-                <h3 class=\"tab-title\">Orphaned Events <span class=\"badge\">{{ collector.orphanedEvents|length }}</span></h3>
-                <div class=\"tab-content\">
-                    {% if collector.orphanedEvents is empty %}
-                        <div class=\"empty\">
-                            <p>
-                                <strong>There are no orphaned events</strong>.
-                            </p>
-                            <p>
-                                All dispatched events were handled or an error occurred
-                                when trying to collect orphaned events (in which case check the
-                                logs to get more information).
-                            </p>
-                        </div>
-                    {% else %}
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Event</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for event in collector.orphanedEvents %}
-                                    <tr>
-                                        <td class=\"font-normal\">{{ event }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-{% endblock %}
-
-{% macro render_table(listeners) %}
-    <table>
-        <thead>
-            <tr>
-                <th class=\"text-right\">Priority</th>
-                <th>Listener</th>
-            </tr>
-        </thead>
-
-        {% set previous_event = (listeners|first).event %}
-        {% for listener in listeners %}
-            {% if loop.first or listener.event != previous_event %}
-                {% if not loop.first %}
-                    </tbody>
-                {% endif %}
-
-                <tbody>
-                    <tr>
-                        <th colspan=\"2\" class=\"colored font-normal\">{{ listener.event }}</th>
-                    </tr>
-
-                {% set previous_event = listener.event %}
-            {% endif %}
-
-            <tr>
-                <td class=\"text-right nowrap\">{{ listener.priority|default('-') }}</td>
-                <td class=\"font-normal\">{{ profiler_dump(listener.stub) }}</td>
-            </tr>
-
-            {% if loop.last %}
-                </tbody>
-            {% endif %}
-        {% endfor %}
-    </table>
-{% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/events.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/events.html.twig"));
+
+        // line 3
+        $macros["helper"] = $this->macros["helper"] = $this;
+        // line 1
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/events.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 5
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -172,23 +77,15 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
     <strong>Events</strong>
 </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 5
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/events.html.twig";
-    }
-
     // line 12
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -316,16 +213,15 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
         </div>
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 85
-
     public function macro_render_table($__listeners__ = null, ...$__varargs__)
     {
         $macros = $this->macros;
@@ -437,10 +333,10 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
             // line 118
             echo "    </table>
 ";
-
+            
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+            
             $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
 
@@ -448,6 +344,11 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
         } finally {
             ob_end_clean();
         }
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/events.html.twig";
     }
 
     public function isTraitable()
@@ -460,31 +361,127 @@ class __TwigTemplate_cf762643cc9236ef3afb7b9bf8695aa38aa8846ef43277c02d8361670dc
         return array (  334 => 118,  320 => 117,  316 => 115,  314 => 114,  308 => 111,  304 => 110,  300 => 108,  297 => 107,  295 => 106,  289 => 103,  284 => 100,  280 => 98,  277 => 97,  274 => 96,  256 => 95,  254 => 94,  244 => 86,  225 => 85,  211 => 79,  206 => 76,  197 => 73,  194 => 72,  190 => 71,  181 => 64,  168 => 53,  166 => 52,  161 => 50,  155 => 46,  149 => 44,  136 => 33,  134 => 32,  129 => 30,  121 => 25,  115 => 22,  111 => 20,  105 => 16,  103 => 15,  99 => 13,  89 => 12,  75 => 7,  72 => 6,  62 => 5,  51 => 1,  49 => 3,  36 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/events.html.twig"));
+{% import _self as helper %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/events.html.twig"));
+{% block menu %}
+<span class=\"label\">
+    <span class=\"icon\">{{ include('@WebProfiler/Icon/event.svg') }}</span>
+    <strong>Events</strong>
+</span>
+{% endblock %}
 
-        // line 3
-        $macros["helper"] = $this->macros["helper"] = $this;
-        // line 1
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/events.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+{% block panel %}
+    <h2>Event Dispatcher</h2>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+    {% if collector.calledlisteners is empty %}
+        <div class=\"empty\">
+            <p>No events have been recorded. Check that debugging is enabled in the kernel.</p>
+        </div>
+    {% else %}
+        <div class=\"sf-tabs\">
+            <div class=\"tab\">
+                <h3 class=\"tab-title\">Called Listeners <span class=\"badge\">{{ collector.calledlisteners|length }}</span></h3>
 
+                <div class=\"tab-content\">
+                    {{ helper.render_table(collector.calledlisteners) }}
+                </div>
+            </div>
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+            <div class=\"tab\">
+                <h3 class=\"tab-title\">Not Called Listeners <span class=\"badge\">{{ collector.notcalledlisteners|length }}</span></h3>
+                <div class=\"tab-content\">
+                    {% if collector.notcalledlisteners is empty %}
+                        <div class=\"empty\">
+                            <p>
+                                <strong>There are no uncalled listeners</strong>.
+                            </p>
+                            <p>
+                                All listeners were called for this request or an error occurred
+                                when trying to collect uncalled listeners (in which case check the
+                                logs to get more information).
+                            </p>
+                        </div>
+                    {% else %}
+                        {{ helper.render_table(collector.notcalledlisteners) }}
+                    {% endif %}
+                </div>
+            </div>
 
+            <div class=\"tab\">
+                <h3 class=\"tab-title\">Orphaned Events <span class=\"badge\">{{ collector.orphanedEvents|length }}</span></h3>
+                <div class=\"tab-content\">
+                    {% if collector.orphanedEvents is empty %}
+                        <div class=\"empty\">
+                            <p>
+                                <strong>There are no orphaned events</strong>.
+                            </p>
+                            <p>
+                                All dispatched events were handled or an error occurred
+                                when trying to collect orphaned events (in which case check the
+                                logs to get more information).
+                            </p>
+                        </div>
+                    {% else %}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in collector.orphanedEvents %}
+                                    <tr>
+                                        <td class=\"font-normal\">{{ event }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% macro render_table(listeners) %}
+    <table>
+        <thead>
+            <tr>
+                <th class=\"text-right\">Priority</th>
+                <th>Listener</th>
+            </tr>
+        </thead>
+
+        {% set previous_event = (listeners|first).event %}
+        {% for listener in listeners %}
+            {% if loop.first or listener.event != previous_event %}
+                {% if not loop.first %}
+                    </tbody>
+                {% endif %}
+
+                <tbody>
+                    <tr>
+                        <th colspan=\"2\" class=\"colored font-normal\">{{ listener.event }}</th>
+                    </tr>
+
+                {% set previous_event = listener.event %}
+            {% endif %}
+
+            <tr>
+                <td class=\"text-right nowrap\">{{ listener.priority|default('-') }}</td>
+                <td class=\"font-normal\">{{ profiler_dump(listener.stub) }}</td>
+            </tr>
+
+            {% if loop.last %}
+                </tbody>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endmacro %}
+", "@WebProfiler/Collector/events.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
     }
 }

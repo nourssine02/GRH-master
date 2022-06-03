@@ -30,78 +30,35 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% macro profile_search_filter(request, result, property) %}
-    {%- if request.hasSession -%}
-        <a href=\"{{ path('_profiler_search_results', request.query.all|merge({token: result.token})|merge({ (property): result[property] })) }}\" title=\"Search\"><span title=\"Search\" class=\"sf-icon sf-search\">{{ include('@WebProfiler/Icon/search.svg') }}</span></a>
-    {%- endif -%}
-{% endmacro %}
-
-{% import _self as helper %}
-
-{% block summary %}
-    <div class=\"status\">
-        <div class=\"container\">
-            <h2>Profile Search</h2>
-        </div>
-    </div>
-{% endblock %}
-
-{% block panel %}
-    <h2>{{ tokens ? tokens|length : 'No' }} results found</h2>
-
-    {% if tokens %}
-        <table id=\"search-results\">
-            <thead>
-                <tr>
-                    <th scope=\"col\" class=\"text-center\">Status</th>
-                    <th scope=\"col\">IP</th>
-                    <th scope=\"col\">Method</th>
-                    <th scope=\"col\">URL</th>
-                    <th scope=\"col\">Time</th>
-                    <th scope=\"col\">Token</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in tokens %}
-                    {% set css_class = result.status_code|default(0) > 399 ? 'status-error' : result.status_code|default(0) > 299 ? 'status-warning' : 'status-success' %}
-
-                    <tr>
-                        <td class=\"text-center\">
-                            <span class=\"label {{ css_class }}\">{{ result.status_code|default('n/a') }}</span>
-                        </td>
-                        <td>
-                            <span class=\"nowrap\">{{ result.ip }} {{ helper.profile_search_filter(request, result, 'ip') }}</span>
-                        </td>
-                        <td>
-                            <span class=\"nowrap\">{{ result.method }} {{ helper.profile_search_filter(request, result, 'method') }}</span>
-                        </td>
-                        <td class=\"break-long-words\">
-                            {{ result.url }}
-                            {{ helper.profile_search_filter(request, result, 'url') }}
-                        </td>
-                        <td class=\"text-small\">
-                            <span class=\"nowrap\">{{ result.time|date('d-M-Y') }}</span>
-                            <span class=\"nowrap newline\">{{ result.time|date('H:i:s') }}</span>
-                        </td>
-                        <td class=\"nowrap\"><a href=\"{{ path('_profiler', { token: result.token }) }}\">{{ result.token }}</a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class=\"empty\">
-            <p>The query returned no result.</p>
-        </div>
-    {% endif %}
-
-{% endblock %}
-", "@WebProfiler/Profiler/results.html.twig", "/home/hp/Symfony/GRH/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/results.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/results.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/results.html.twig"));
+
+        // line 9
+        $macros["helper"] = $this->macros["helper"] = $this;
+        // line 1
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Profiler/results.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 11
     public function block_summary($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -118,23 +75,15 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
         </div>
     </div>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 11
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Profiler/results.html.twig";
-    }
-
     // line 19
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -246,16 +195,15 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
         // line 66
         echo "
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 3
-
     public function macro_profile_search_filter($__request__ = null, $__result__ = null, $__property__ = null, ...$__varargs__)
     {
         $macros = $this->macros;
@@ -285,10 +233,10 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
                 echo twig_include($this->env, $context, "@WebProfiler/Icon/search.svg");
                 echo "</span></a>";
             }
-
+            
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+            
             $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
 
@@ -296,6 +244,11 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
         } finally {
             ob_end_clean();
         }
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Profiler/results.html.twig";
     }
 
     public function isTraitable()
@@ -308,31 +261,75 @@ class __TwigTemplate_43f678577fa77907e5795c13b9bfd2b44ce6cec8857c861c52c7ddfb152
         return array (  230 => 5,  228 => 4,  207 => 3,  196 => 66,  190 => 62,  185 => 59,  174 => 56,  169 => 54,  165 => 53,  159 => 50,  155 => 49,  147 => 46,  139 => 43,  131 => 40,  126 => 37,  123 => 36,  119 => 35,  105 => 23,  103 => 22,  97 => 20,  87 => 19,  72 => 12,  62 => 11,  51 => 1,  49 => 9,  36 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/results.html.twig"));
+{% macro profile_search_filter(request, result, property) %}
+    {%- if request.hasSession -%}
+        <a href=\"{{ path('_profiler_search_results', request.query.all|merge({token: result.token})|merge({ (property): result[property] })) }}\" title=\"Search\"><span title=\"Search\" class=\"sf-icon sf-search\">{{ include('@WebProfiler/Icon/search.svg') }}</span></a>
+    {%- endif -%}
+{% endmacro %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/results.html.twig"));
+{% import _self as helper %}
 
-        // line 9
-        $macros["helper"] = $this->macros["helper"] = $this;
-        // line 1
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Profiler/results.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+{% block summary %}
+    <div class=\"status\">
+        <div class=\"container\">
+            <h2>Profile Search</h2>
+        </div>
+    </div>
+{% endblock %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+{% block panel %}
+    <h2>{{ tokens ? tokens|length : 'No' }} results found</h2>
 
+    {% if tokens %}
+        <table id=\"search-results\">
+            <thead>
+                <tr>
+                    <th scope=\"col\" class=\"text-center\">Status</th>
+                    <th scope=\"col\">IP</th>
+                    <th scope=\"col\">Method</th>
+                    <th scope=\"col\">URL</th>
+                    <th scope=\"col\">Time</th>
+                    <th scope=\"col\">Token</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in tokens %}
+                    {% set css_class = result.status_code|default(0) > 399 ? 'status-error' : result.status_code|default(0) > 299 ? 'status-warning' : 'status-success' %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+                    <tr>
+                        <td class=\"text-center\">
+                            <span class=\"label {{ css_class }}\">{{ result.status_code|default('n/a') }}</span>
+                        </td>
+                        <td>
+                            <span class=\"nowrap\">{{ result.ip }} {{ helper.profile_search_filter(request, result, 'ip') }}</span>
+                        </td>
+                        <td>
+                            <span class=\"nowrap\">{{ result.method }} {{ helper.profile_search_filter(request, result, 'method') }}</span>
+                        </td>
+                        <td class=\"break-long-words\">
+                            {{ result.url }}
+                            {{ helper.profile_search_filter(request, result, 'url') }}
+                        </td>
+                        <td class=\"text-small\">
+                            <span class=\"nowrap\">{{ result.time|date('d-M-Y') }}</span>
+                            <span class=\"nowrap newline\">{{ result.time|date('H:i:s') }}</span>
+                        </td>
+                        <td class=\"nowrap\"><a href=\"{{ path('_profiler', { token: result.token }) }}\">{{ result.token }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class=\"empty\">
+            <p>The query returned no result.</p>
+        </div>
+    {% endif %}
 
+{% endblock %}
+", "@WebProfiler/Profiler/results.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/results.html.twig");
     }
 }

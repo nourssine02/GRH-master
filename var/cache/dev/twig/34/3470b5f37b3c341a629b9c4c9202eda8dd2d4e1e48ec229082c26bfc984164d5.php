@@ -30,17 +30,6 @@ class __TwigTemplate_56201879658433e1417e5bc0a3fcc8b8d181394677c288b8a906d2c92d1
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<div id=\"calendar-holder\"></div>
-", "@Calendar/calendar.html", "/home/hp/Symfony/GRH/vendor/tattali/calendar-bundle/src/Resources/views/calendar.html");
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -53,10 +42,10 @@ class __TwigTemplate_56201879658433e1417e5bc0a3fcc8b8d181394677c288b8a906d2c92d1
         // line 1
         echo "<div id=\"calendar-holder\"></div>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -64,5 +53,16 @@ class __TwigTemplate_56201879658433e1417e5bc0a3fcc8b8d181394677c288b8a906d2c92d1
     public function getTemplateName()
     {
         return "@Calendar/calendar.html";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<div id=\"calendar-holder\"></div>
+", "@Calendar/calendar.html", "/home/hp/Téléchargements/GRH-master/vendor/tattali/calendar-bundle/src/Resources/views/calendar.html");
     }
 }

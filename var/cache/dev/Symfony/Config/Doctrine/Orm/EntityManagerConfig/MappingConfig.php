@@ -19,44 +19,6 @@ class MappingConfig
     private $prefix;
     private $isBundle;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['mapping'])) {
-            $this->mapping = $value['mapping'];
-            unset($value['mapping']);
-        }
-
-        if (isset($value['type'])) {
-            $this->type = $value['type'];
-            unset($value['type']);
-        }
-
-        if (isset($value['dir'])) {
-            $this->dir = $value['dir'];
-            unset($value['dir']);
-        }
-
-        if (isset($value['alias'])) {
-            $this->alias = $value['alias'];
-            unset($value['alias']);
-        }
-
-        if (isset($value['prefix'])) {
-            $this->prefix = $value['prefix'];
-            unset($value['prefix']);
-        }
-
-        if (isset($value['is_bundle'])) {
-            $this->isBundle = $value['is_bundle'];
-            unset($value['is_bundle']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @default true
      * @param ParamConfigurator|mixed $value
@@ -65,7 +27,7 @@ class MappingConfig
     public function mapping($value): self
     {
         $this->mapping = $value;
-
+    
         return $this;
     }
     
@@ -77,7 +39,7 @@ class MappingConfig
     public function type($value): self
     {
         $this->type = $value;
-
+    
         return $this;
     }
     
@@ -89,7 +51,7 @@ class MappingConfig
     public function dir($value): self
     {
         $this->dir = $value;
-
+    
         return $this;
     }
     
@@ -101,7 +63,7 @@ class MappingConfig
     public function alias($value): self
     {
         $this->alias = $value;
-
+    
         return $this;
     }
     
@@ -113,7 +75,7 @@ class MappingConfig
     public function prefix($value): self
     {
         $this->prefix = $value;
-
+    
         return $this;
     }
     
@@ -125,8 +87,46 @@ class MappingConfig
     public function isBundle($value): self
     {
         $this->isBundle = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['mapping'])) {
+            $this->mapping = $value['mapping'];
+            unset($value['mapping']);
+        }
+    
+        if (isset($value['type'])) {
+            $this->type = $value['type'];
+            unset($value['type']);
+        }
+    
+        if (isset($value['dir'])) {
+            $this->dir = $value['dir'];
+            unset($value['dir']);
+        }
+    
+        if (isset($value['alias'])) {
+            $this->alias = $value['alias'];
+            unset($value['alias']);
+        }
+    
+        if (isset($value['prefix'])) {
+            $this->prefix = $value['prefix'];
+            unset($value['prefix']);
+        }
+    
+        if (isset($value['is_bundle'])) {
+            $this->isBundle = $value['is_bundle'];
+            unset($value['is_bundle']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

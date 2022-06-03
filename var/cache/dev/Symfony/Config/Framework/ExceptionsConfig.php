@@ -15,24 +15,6 @@ class ExceptionsConfig
     private $logLevel;
     private $statusCode;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['log_level'])) {
-            $this->logLevel = $value['log_level'];
-            unset($value['log_level']);
-        }
-
-        if (isset($value['status_code'])) {
-            $this->statusCode = $value['status_code'];
-            unset($value['status_code']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * The level of log message. Null to let Symfony decide.
      * @default null
@@ -42,7 +24,7 @@ class ExceptionsConfig
     public function logLevel($value): self
     {
         $this->logLevel = $value;
-
+    
         return $this;
     }
     
@@ -55,8 +37,26 @@ class ExceptionsConfig
     public function statusCode($value): self
     {
         $this->statusCode = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['log_level'])) {
+            $this->logLevel = $value['log_level'];
+            unset($value['log_level']);
+        }
+    
+        if (isset($value['status_code'])) {
+            $this->statusCode = $value['status_code'];
+            unset($value['status_code']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

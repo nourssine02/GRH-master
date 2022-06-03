@@ -40,139 +40,6 @@ class ScopedClientConfig
     private $peerFingerprint;
     private $retryFailed;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['scope'])) {
-            $this->scope = $value['scope'];
-            unset($value['scope']);
-        }
-
-        if (isset($value['base_uri'])) {
-            $this->baseUri = $value['base_uri'];
-            unset($value['base_uri']);
-        }
-
-        if (isset($value['auth_basic'])) {
-            $this->authBasic = $value['auth_basic'];
-            unset($value['auth_basic']);
-        }
-
-        if (isset($value['auth_bearer'])) {
-            $this->authBearer = $value['auth_bearer'];
-            unset($value['auth_bearer']);
-        }
-
-        if (isset($value['auth_ntlm'])) {
-            $this->authNtlm = $value['auth_ntlm'];
-            unset($value['auth_ntlm']);
-        }
-
-        if (isset($value['query'])) {
-            $this->query = $value['query'];
-            unset($value['query']);
-        }
-
-        if (isset($value['headers'])) {
-            $this->headers = $value['headers'];
-            unset($value['headers']);
-        }
-
-        if (isset($value['max_redirects'])) {
-            $this->maxRedirects = $value['max_redirects'];
-            unset($value['max_redirects']);
-        }
-
-        if (isset($value['http_version'])) {
-            $this->httpVersion = $value['http_version'];
-            unset($value['http_version']);
-        }
-
-        if (isset($value['resolve'])) {
-            $this->resolve = $value['resolve'];
-            unset($value['resolve']);
-        }
-
-        if (isset($value['proxy'])) {
-            $this->proxy = $value['proxy'];
-            unset($value['proxy']);
-        }
-
-        if (isset($value['no_proxy'])) {
-            $this->noProxy = $value['no_proxy'];
-            unset($value['no_proxy']);
-        }
-
-        if (isset($value['timeout'])) {
-            $this->timeout = $value['timeout'];
-            unset($value['timeout']);
-        }
-
-        if (isset($value['max_duration'])) {
-            $this->maxDuration = $value['max_duration'];
-            unset($value['max_duration']);
-        }
-
-        if (isset($value['bindto'])) {
-            $this->bindto = $value['bindto'];
-            unset($value['bindto']);
-        }
-
-        if (isset($value['verify_peer'])) {
-            $this->verifyPeer = $value['verify_peer'];
-            unset($value['verify_peer']);
-        }
-
-        if (isset($value['verify_host'])) {
-            $this->verifyHost = $value['verify_host'];
-            unset($value['verify_host']);
-        }
-
-        if (isset($value['cafile'])) {
-            $this->cafile = $value['cafile'];
-            unset($value['cafile']);
-        }
-
-        if (isset($value['capath'])) {
-            $this->capath = $value['capath'];
-            unset($value['capath']);
-        }
-
-        if (isset($value['local_cert'])) {
-            $this->localCert = $value['local_cert'];
-            unset($value['local_cert']);
-        }
-
-        if (isset($value['local_pk'])) {
-            $this->localPk = $value['local_pk'];
-            unset($value['local_pk']);
-        }
-
-        if (isset($value['passphrase'])) {
-            $this->passphrase = $value['passphrase'];
-            unset($value['passphrase']);
-        }
-
-        if (isset($value['ciphers'])) {
-            $this->ciphers = $value['ciphers'];
-            unset($value['ciphers']);
-        }
-
-        if (isset($value['peer_fingerprint'])) {
-            $this->peerFingerprint = new \Symfony\Config\Framework\HttpClient\ScopedClientConfig\PeerFingerprintConfig($value['peer_fingerprint']);
-            unset($value['peer_fingerprint']);
-        }
-
-        if (isset($value['retry_failed'])) {
-            $this->retryFailed = new \Symfony\Config\Framework\HttpClient\ScopedClientConfig\RetryFailedConfig($value['retry_failed']);
-            unset($value['retry_failed']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * The regular expression that the request URL must match before adding the other options. When none is provided, the base URI is used instead.
      * @default null
@@ -182,7 +49,7 @@ class ScopedClientConfig
     public function scope($value): self
     {
         $this->scope = $value;
-
+    
         return $this;
     }
     
@@ -195,7 +62,7 @@ class ScopedClientConfig
     public function baseUri($value): self
     {
         $this->baseUri = $value;
-
+    
         return $this;
     }
     
@@ -208,7 +75,7 @@ class ScopedClientConfig
     public function authBasic($value): self
     {
         $this->authBasic = $value;
-
+    
         return $this;
     }
     
@@ -221,7 +88,7 @@ class ScopedClientConfig
     public function authBearer($value): self
     {
         $this->authBearer = $value;
-
+    
         return $this;
     }
     
@@ -234,7 +101,7 @@ class ScopedClientConfig
     public function authNtlm($value): self
     {
         $this->authNtlm = $value;
-
+    
         return $this;
     }
     
@@ -245,7 +112,7 @@ class ScopedClientConfig
     public function query(string $key, $value): self
     {
         $this->query[$key] = $value;
-
+    
         return $this;
     }
     
@@ -256,7 +123,7 @@ class ScopedClientConfig
     public function header(string $name, $value): self
     {
         $this->headers[$name] = $value;
-
+    
         return $this;
     }
     
@@ -269,7 +136,7 @@ class ScopedClientConfig
     public function maxRedirects($value): self
     {
         $this->maxRedirects = $value;
-
+    
         return $this;
     }
     
@@ -282,7 +149,7 @@ class ScopedClientConfig
     public function httpVersion($value): self
     {
         $this->httpVersion = $value;
-
+    
         return $this;
     }
     
@@ -293,7 +160,7 @@ class ScopedClientConfig
     public function resolve(string $host, $value): self
     {
         $this->resolve[$host] = $value;
-
+    
         return $this;
     }
     
@@ -306,7 +173,7 @@ class ScopedClientConfig
     public function proxy($value): self
     {
         $this->proxy = $value;
-
+    
         return $this;
     }
     
@@ -319,7 +186,7 @@ class ScopedClientConfig
     public function noProxy($value): self
     {
         $this->noProxy = $value;
-
+    
         return $this;
     }
     
@@ -332,7 +199,7 @@ class ScopedClientConfig
     public function timeout($value): self
     {
         $this->timeout = $value;
-
+    
         return $this;
     }
     
@@ -345,7 +212,7 @@ class ScopedClientConfig
     public function maxDuration($value): self
     {
         $this->maxDuration = $value;
-
+    
         return $this;
     }
     
@@ -358,7 +225,7 @@ class ScopedClientConfig
     public function bindto($value): self
     {
         $this->bindto = $value;
-
+    
         return $this;
     }
     
@@ -371,7 +238,7 @@ class ScopedClientConfig
     public function verifyPeer($value): self
     {
         $this->verifyPeer = $value;
-
+    
         return $this;
     }
     
@@ -384,7 +251,7 @@ class ScopedClientConfig
     public function verifyHost($value): self
     {
         $this->verifyHost = $value;
-
+    
         return $this;
     }
     
@@ -397,7 +264,7 @@ class ScopedClientConfig
     public function cafile($value): self
     {
         $this->cafile = $value;
-
+    
         return $this;
     }
     
@@ -410,7 +277,7 @@ class ScopedClientConfig
     public function capath($value): self
     {
         $this->capath = $value;
-
+    
         return $this;
     }
     
@@ -423,7 +290,7 @@ class ScopedClientConfig
     public function localCert($value): self
     {
         $this->localCert = $value;
-
+    
         return $this;
     }
     
@@ -436,7 +303,7 @@ class ScopedClientConfig
     public function localPk($value): self
     {
         $this->localPk = $value;
-
+    
         return $this;
     }
     
@@ -449,7 +316,7 @@ class ScopedClientConfig
     public function passphrase($value): self
     {
         $this->passphrase = $value;
-
+    
         return $this;
     }
     
@@ -462,7 +329,7 @@ class ScopedClientConfig
     public function ciphers($value): self
     {
         $this->ciphers = $value;
-
+    
         return $this;
     }
     
@@ -473,7 +340,7 @@ class ScopedClientConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "peerFingerprint()" has already been initialized. You cannot pass values the second time you call peerFingerprint().');
         }
-
+    
         return $this->peerFingerprint;
     }
     
@@ -484,8 +351,141 @@ class ScopedClientConfig
         } elseif ([] !== $value) {
             throw new InvalidConfigurationException('The node created by "retryFailed()" has already been initialized. You cannot pass values the second time you call retryFailed().');
         }
-
+    
         return $this->retryFailed;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['scope'])) {
+            $this->scope = $value['scope'];
+            unset($value['scope']);
+        }
+    
+        if (isset($value['base_uri'])) {
+            $this->baseUri = $value['base_uri'];
+            unset($value['base_uri']);
+        }
+    
+        if (isset($value['auth_basic'])) {
+            $this->authBasic = $value['auth_basic'];
+            unset($value['auth_basic']);
+        }
+    
+        if (isset($value['auth_bearer'])) {
+            $this->authBearer = $value['auth_bearer'];
+            unset($value['auth_bearer']);
+        }
+    
+        if (isset($value['auth_ntlm'])) {
+            $this->authNtlm = $value['auth_ntlm'];
+            unset($value['auth_ntlm']);
+        }
+    
+        if (isset($value['query'])) {
+            $this->query = $value['query'];
+            unset($value['query']);
+        }
+    
+        if (isset($value['headers'])) {
+            $this->headers = $value['headers'];
+            unset($value['headers']);
+        }
+    
+        if (isset($value['max_redirects'])) {
+            $this->maxRedirects = $value['max_redirects'];
+            unset($value['max_redirects']);
+        }
+    
+        if (isset($value['http_version'])) {
+            $this->httpVersion = $value['http_version'];
+            unset($value['http_version']);
+        }
+    
+        if (isset($value['resolve'])) {
+            $this->resolve = $value['resolve'];
+            unset($value['resolve']);
+        }
+    
+        if (isset($value['proxy'])) {
+            $this->proxy = $value['proxy'];
+            unset($value['proxy']);
+        }
+    
+        if (isset($value['no_proxy'])) {
+            $this->noProxy = $value['no_proxy'];
+            unset($value['no_proxy']);
+        }
+    
+        if (isset($value['timeout'])) {
+            $this->timeout = $value['timeout'];
+            unset($value['timeout']);
+        }
+    
+        if (isset($value['max_duration'])) {
+            $this->maxDuration = $value['max_duration'];
+            unset($value['max_duration']);
+        }
+    
+        if (isset($value['bindto'])) {
+            $this->bindto = $value['bindto'];
+            unset($value['bindto']);
+        }
+    
+        if (isset($value['verify_peer'])) {
+            $this->verifyPeer = $value['verify_peer'];
+            unset($value['verify_peer']);
+        }
+    
+        if (isset($value['verify_host'])) {
+            $this->verifyHost = $value['verify_host'];
+            unset($value['verify_host']);
+        }
+    
+        if (isset($value['cafile'])) {
+            $this->cafile = $value['cafile'];
+            unset($value['cafile']);
+        }
+    
+        if (isset($value['capath'])) {
+            $this->capath = $value['capath'];
+            unset($value['capath']);
+        }
+    
+        if (isset($value['local_cert'])) {
+            $this->localCert = $value['local_cert'];
+            unset($value['local_cert']);
+        }
+    
+        if (isset($value['local_pk'])) {
+            $this->localPk = $value['local_pk'];
+            unset($value['local_pk']);
+        }
+    
+        if (isset($value['passphrase'])) {
+            $this->passphrase = $value['passphrase'];
+            unset($value['passphrase']);
+        }
+    
+        if (isset($value['ciphers'])) {
+            $this->ciphers = $value['ciphers'];
+            unset($value['ciphers']);
+        }
+    
+        if (isset($value['peer_fingerprint'])) {
+            $this->peerFingerprint = new \Symfony\Config\Framework\HttpClient\ScopedClientConfig\PeerFingerprintConfig($value['peer_fingerprint']);
+            unset($value['peer_fingerprint']);
+        }
+    
+        if (isset($value['retry_failed'])) {
+            $this->retryFailed = new \Symfony\Config\Framework\HttpClient\ScopedClientConfig\RetryFailedConfig($value['retry_failed']);
+            unset($value['retry_failed']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

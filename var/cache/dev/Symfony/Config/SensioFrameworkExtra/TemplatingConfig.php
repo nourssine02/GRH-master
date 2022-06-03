@@ -14,19 +14,6 @@ class TemplatingConfig
 {
     private $controllerPatterns;
     
-    public function __construct(array $value = [])
-    {
-
-        if (isset($value['controller_patterns'])) {
-            $this->controllerPatterns = $value['controller_patterns'];
-            unset($value['controller_patterns']);
-        }
-
-        if ([] !== $value) {
-            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
-        }
-    }
-    
     /**
      * @param ParamConfigurator|list<mixed|ParamConfigurator> $value
      * @return $this
@@ -34,8 +21,21 @@ class TemplatingConfig
     public function controllerPatterns($value): self
     {
         $this->controllerPatterns = $value;
-
+    
         return $this;
+    }
+    
+    public function __construct(array $value = [])
+    {
+    
+        if (isset($value['controller_patterns'])) {
+            $this->controllerPatterns = $value['controller_patterns'];
+            unset($value['controller_patterns']);
+        }
+    
+        if ([] !== $value) {
+            throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
+        }
     }
     
     public function toArray(): array

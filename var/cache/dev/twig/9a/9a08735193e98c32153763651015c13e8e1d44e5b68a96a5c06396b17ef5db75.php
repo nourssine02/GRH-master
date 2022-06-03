@@ -30,35 +30,6 @@ class __TwigTemplate_14a533c97e70b439eafd74a1beb7e07de7c9868c6df843d26d7c637b0eb
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<div id=\"header\">
-    <div class=\"container\">
-        <h1>{{ include('@WebProfiler/Icon/symfony.svg') }} Symfony <span>Profiler</span></h1>
-
-        <div class=\"search\">
-            <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
-                <div class=\"form-row\">
-                    <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\">
-                    <button type=\"submit\" class=\"btn\">Search</button>
-                </div>
-           </form>
-        </div>
-    </div>
-</div>
-", "@WebProfiler/Profiler/header.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/header.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  47 => 3,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -87,10 +58,10 @@ class __TwigTemplate_14a533c97e70b439eafd74a1beb7e07de7c9868c6df843d26d7c637b0eb
     </div>
 </div>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -98,5 +69,34 @@ class __TwigTemplate_14a533c97e70b439eafd74a1beb7e07de7c9868c6df843d26d7c637b0eb
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/header.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  47 => 3,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<div id=\"header\">
+    <div class=\"container\">
+        <h1>{{ include('@WebProfiler/Icon/symfony.svg') }} Symfony <span>Profiler</span></h1>
+
+        <div class=\"search\">
+            <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
+                <div class=\"form-row\">
+                    <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\">
+                    <button type=\"submit\" class=\"btn\">Search</button>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>
+", "@WebProfiler/Profiler/header.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/header.html.twig");
     }
 }
