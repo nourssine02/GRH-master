@@ -52,8 +52,9 @@ class Pointage
     {
         $this->datePointage = new \DateTime('now');
         $aujourdhui = date("d", time());
-
         $this->listeJours[] = $aujourdhui ;
+
+
     }
 
     public function getId(): ?int

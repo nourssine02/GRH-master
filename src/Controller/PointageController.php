@@ -27,6 +27,7 @@ class PointageController extends AbstractController
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $pointages =$doctrine->getRepository(Pointage::class)->findAll();
         $total=0;
+        $liste =[];
         $dat_j=date("Y-m",time())."-01";
 
         $nbj_m=date("t",strtotime($dat_j));
@@ -39,6 +40,17 @@ class PointageController extends AbstractController
             }
             $sommeJour [] = $i;
         }
+        for ($i=1; $i<= $aujourdhui;$i++){
+            $liste[] = (integer)$i;
+           // $total = count($liste);
+        }
+
+//        foreach ($pointages as $pointage){
+//            $pointage->setListeJours($liste);
+//
+//            $pointage->setTotal($total);
+//        }
+
 
         return $this->render('pointage/show.html.twig', [
             'employes' => $employes,
@@ -46,6 +58,7 @@ class PointageController extends AbstractController
             'sommeJour' => $sommeJour,
             'aujourdhui' => $aujourdhui,
             'total' => $total,
+            'liste' => $liste
 
 
 
@@ -71,6 +84,7 @@ class PointageController extends AbstractController
         $aujourdhui = date("d", time());
         //  $total = 1;
         $liste = [];
+        $liste []  = $aujourdhui;
 
         for ($i = 1; $i < $nbj_m + 1; $i++) {
             if (strlen($i) == 1) {

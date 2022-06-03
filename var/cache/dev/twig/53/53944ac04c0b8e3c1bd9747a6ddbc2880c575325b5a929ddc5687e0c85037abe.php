@@ -177,12 +177,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t\t\t\t\t\t\t\t\t";
                 // line 54
                 if (twig_in_filter($context["jour"], twig_get_attribute($this->env, $this->source, $context["pointage"], "listeJours", [], "any", false, false, false, 54))) {
-                    echo " checked ";
-                }
-                // line 55
-                echo "\t\t\t\t\t\t\t\t\t\t\t\t";
-                if ((0 === twig_compare((isset($context["aujourdhui"]) || array_key_exists("aujourdhui", $context) ? $context["aujourdhui"] : (function () { throw new RuntimeError('Variable "aujourdhui" does not exist.', 55, $this->source); })()), $context["jour"]))) {
-                    echo " checked ";
+                    echo " checked  ";
                 }
                 // line 56
                 echo "\t\t\t\t\t\t\t\t\t\t>
@@ -239,7 +234,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 
     public function getDebugInfo()
     {
-        return array (  214 => 72,  196 => 59,  188 => 56,  183 => 55,  179 => 54,  172 => 53,  168 => 52,  159 => 46,  149 => 41,  138 => 33,  133 => 30,  129 => 29,  122 => 24,  113 => 22,  109 => 21,  94 => 10,  85 => 2,  36 => 1,);
+        return array (  209 => 72,  191 => 59,  183 => 56,  179 => 54,  172 => 53,  168 => 52,  159 => 46,  149 => 41,  138 => 33,  133 => 30,  129 => 29,  122 => 24,  113 => 22,  109 => 21,  94 => 10,  85 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -297,8 +292,8 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t\t\t{% for jour in sommeJour %}
 \t\t\t\t\t\t\t\t\t\t<input style=\"margin-left: 6px;\" type=\"checkbox\" class=\"jour\" value=\"{{jour}}\" name=\"{{pointage.employe.id}}[]\"
-\t\t\t\t\t\t\t\t\t\t\t\t{% if jour in pointage.listeJours %} checked {% endif %}
-\t\t\t\t\t\t\t\t\t\t\t\t{% if aujourdhui==jour %} checked {% endif %}
+\t\t\t\t\t\t\t\t\t\t\t\t{% if jour in pointage.listeJours %} checked  {% endif %}
+{#\t\t\t\t\t\t\t\t\t\t\t\t{% if aujourdhui==jour %} checked {% endif %}#}
 \t\t\t\t\t\t\t\t\t\t>
 
 \t\t\t\t\t\t\t\t\t{% endfor %}
