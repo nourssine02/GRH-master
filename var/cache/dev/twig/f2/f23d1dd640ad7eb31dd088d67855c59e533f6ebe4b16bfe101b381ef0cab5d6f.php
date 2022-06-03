@@ -269,7 +269,7 @@ class __TwigTemplate_1e1a17f53183b3af50653c87a299ee4c76cd4abc08d1e932425b741f231
         </div>
 
         <div class=\"mt-3 gap-2 d-flex justify-content-end\">
-            
+
             <a href=\"";
         // line 170
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("dashboard_page");
@@ -491,7 +491,7 @@ class __TwigTemplate_1e1a17f53183b3af50653c87a299ee4c76cd4abc08d1e932425b741f231
         </div>
 
         <div class=\"mt-3 gap-2 d-flex justify-content-end\">
-            
+
             <a href=\"{{ path('dashboard_page')}}\"
                 class=\"btn shadow-1 rounded-1 btn-outline btn-opening text-airforce text-light-2\"><span
                     class=\"btn-outline-text btn-outline-invert\">Cancel</span></a>

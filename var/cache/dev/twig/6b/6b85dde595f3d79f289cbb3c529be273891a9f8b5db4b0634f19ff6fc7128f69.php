@@ -367,14 +367,8 @@ $context["mission"], "dateFin", [], "any", false, false, false, 151), null))) {
                     // line 192
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mission"], "id", [], "any", false, false, false, 192), "html", null, true);
                     echo "\">
-\t\t\t\t\t\t\t\t\t\t<span ";
+\t\t\t\t\t\t\t\t\t\t<span class=\"datefin\">";
                     // line 193
-                    if ((0 === twig_compare((isset($context["valid"]) || array_key_exists("valid", $context) ? $context["valid"] : (function () { throw new RuntimeError('Variable "valid" does not exist.', 193, $this->source); })()), true))) {
-                        echo " style=\"color: green; font-weight: bold;\" ";
-                    } else {
-                        echo " style=\"color: red; font-weight: bold;\"";
-                    }
-                    echo ">";
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["mission"], "dateFin", [], "any", false, false, false, 193), "html", null, true);
                     echo "</span>
 
@@ -574,7 +568,7 @@ $context["mission"], "dateFin", [], "any", false, false, false, 235), null))) {
 
     public function getDebugInfo()
     {
-        return array (  504 => 270,  501 => 269,  486 => 256,  479 => 254,  476 => 253,  469 => 248,  453 => 236,  449 => 235,  446 => 234,  430 => 222,  426 => 221,  423 => 220,  405 => 208,  401 => 207,  396 => 205,  389 => 200,  387 => 199,  372 => 193,  368 => 192,  361 => 188,  353 => 183,  347 => 180,  339 => 175,  333 => 171,  330 => 170,  322 => 164,  306 => 152,  302 => 151,  299 => 150,  283 => 138,  279 => 137,  276 => 136,  258 => 124,  254 => 123,  249 => 121,  242 => 116,  240 => 115,  233 => 111,  229 => 110,  222 => 106,  214 => 101,  208 => 98,  200 => 93,  194 => 89,  191 => 88,  187 => 87,  161 => 64,  152 => 57,  140 => 52,  136 => 51,  91 => 8,  87 => 4,  77 => 3,  59 => 2,  36 => 1,);
+        return array (  498 => 270,  495 => 269,  480 => 256,  473 => 254,  470 => 253,  463 => 248,  447 => 236,  443 => 235,  440 => 234,  424 => 222,  420 => 221,  417 => 220,  399 => 208,  395 => 207,  390 => 205,  383 => 200,  381 => 199,  372 => 193,  368 => 192,  361 => 188,  353 => 183,  347 => 180,  339 => 175,  333 => 171,  330 => 170,  322 => 164,  306 => 152,  302 => 151,  299 => 150,  283 => 138,  279 => 137,  276 => 136,  258 => 124,  254 => 123,  249 => 121,  242 => 116,  240 => 115,  233 => 111,  229 => 110,  222 => 106,  214 => 101,  208 => 98,  200 => 93,  194 => 89,  191 => 88,  187 => 87,  161 => 64,  152 => 57,  140 => 52,  136 => 51,  91 => 8,  87 => 4,  77 => 3,  59 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -771,7 +765,7 @@ $context["mission"], "dateFin", [], "any", false, false, false, 235), null))) {
 \t\t\t\t\t\t\t\t\t</td>
 
 \t\t\t\t\t\t\t\t\t<td class=\"px-4 py-3 text-sm\" id=\"{{mission.id}}\">
-\t\t\t\t\t\t\t\t\t\t<span {% if valid == true %} style=\"color: green; font-weight: bold;\" {% else %} style=\"color: red; font-weight: bold;\"{% endif %}>{{mission.dateFin }}</span>
+\t\t\t\t\t\t\t\t\t\t<span class=\"datefin\">{{mission.dateFin }}</span>
 
 
 \t\t\t\t\t\t\t\t\t</td>
