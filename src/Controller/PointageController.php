@@ -10,6 +10,7 @@ use App\Form\PointageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Integer;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,8 +42,8 @@ class PointageController extends AbstractController
             $sommeJour [] = $i;
         }
         for ($i=1; $i<= $aujourdhui;$i++){
-            $liste[] = (integer)$i;
-           // $total = count($liste);
+            $liste[] = (String)$i;
+            $total = count($liste);
         }
 
 //        foreach ($pointages as $pointage){
@@ -84,7 +85,6 @@ class PointageController extends AbstractController
         $aujourdhui = date("d", time());
         //  $total = 1;
         $liste = [];
-        $liste []  = $aujourdhui;
 
         for ($i = 1; $i < $nbj_m + 1; $i++) {
             if (strlen($i) == 1) {

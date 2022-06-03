@@ -23,9 +23,9 @@ class MissionController extends AbstractController
     {
         $missions = $doctrine->getRepository(Mission::class)->findAll();
 
-          
+
         return $this->render('mission/list.html.twig', [
-            'missions' => $missions
+            'missions' => $missions,
         ]);
     }
 
@@ -117,6 +117,7 @@ class MissionController extends AbstractController
         $mission =$doctrine->getRepository(Mission::class)->find($id);
         $missions = $doctrine->getRepository(Mission::class)->findAll();
 
+        $valid= false;
         $em = $doctrine->getManager();   
         // $mission = $request->get('id');
         $date=  new \DateTime('now');
@@ -124,8 +125,15 @@ class MissionController extends AbstractController
         $month = $date->format('m');
         $year = $date->format('Y');
  
-        $dateFin = $day.'-'.$month.'-'.$year;
+        $dateFin = $day.'/'.$month.'/'.$year;
         $mission->setDateFin($dateFin);
+       $dateFinPrevue= $mission->getDatefinPrevue();
+        if ($dateFinPrevue >=  $dateFin){
+            $valid = true;
+        }
+        else{
+            $valid = false;
+        }
         //dd($mission);
         $em->persist($mission);
         $em->flush();
@@ -135,6 +143,7 @@ class MissionController extends AbstractController
         return $this->render('mission/ajax.html.twig', [
             'missions' => $missions,
             'mission' => $mission,
+            'valid' => $valid
         ]);
     }
 
