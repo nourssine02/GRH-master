@@ -30,23 +30,6 @@ class __TwigTemplate_4ac86a511cc48954baf290a3464283a449a58c637186243bcb28dfafdb8
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">
-    <polygon fill=\"#AAA\" points=\"0 0 24 0 24 7 17.5 7 16.5 3 15.5 7 11 7 12 3 3 3 4 7 0 7\" />
-    <polygon fill=\"#AAA\" points=\"0 8.5 4.5 8.5 6 15.5 0 15.5\" />
-    <polygon fill=\"#AAA\" points=\"10.5 8.5 15 8.5 13.5 15.5 9 15.5\" />
-    <polygon fill=\"#AAA\" points=\"18 8.5 24 8.5 24 15.5 19.5 15.5\" />
-    <polygon fill=\"#AAA\" points=\"0 17 6.5 17 7.5 21 8.5 17 13 17 12 21 21 21 20 17 24 17 24 24 0 24\" />
-</svg>
-", "@DoctrineMigrations/Collector/icon.svg", "/home/hp/Téléchargements/GRH-master/vendor/doctrine/doctrine-migrations-bundle/Resources/views/Collector/icon.svg");
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -65,10 +48,10 @@ class __TwigTemplate_4ac86a511cc48954baf290a3464283a449a58c637186243bcb28dfafdb8
     <polygon fill=\"#AAA\" points=\"0 17 6.5 17 7.5 21 8.5 17 13 17 12 21 21 21 20 17 24 17 24 24 0 24\" />
 </svg>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -76,5 +59,22 @@ class __TwigTemplate_4ac86a511cc48954baf290a3464283a449a58c637186243bcb28dfafdb8
     public function getTemplateName()
     {
         return "@DoctrineMigrations/Collector/icon.svg";
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\">
+    <polygon fill=\"#AAA\" points=\"0 0 24 0 24 7 17.5 7 16.5 3 15.5 7 11 7 12 3 3 3 4 7 0 7\" />
+    <polygon fill=\"#AAA\" points=\"0 8.5 4.5 8.5 6 15.5 0 15.5\" />
+    <polygon fill=\"#AAA\" points=\"10.5 8.5 15 8.5 13.5 15.5 9 15.5\" />
+    <polygon fill=\"#AAA\" points=\"18 8.5 24 8.5 24 15.5 19.5 15.5\" />
+    <polygon fill=\"#AAA\" points=\"0 17 6.5 17 7.5 21 8.5 17 13 17 12 21 21 21 20 17 24 17 24 24 0 24\" />
+</svg>
+", "@DoctrineMigrations/Collector/icon.svg", "/home/hp/Téléchargements/GRH-master/vendor/doctrine/doctrine-migrations-bundle/Resources/views/Collector/icon.svg");
     }
 }

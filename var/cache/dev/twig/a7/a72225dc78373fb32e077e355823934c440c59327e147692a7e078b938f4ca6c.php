@@ -31,164 +31,32 @@ class __TwigTemplate_532c9acd564e4f7a0abb64788a1ebd9682c28effd3200310231f208c52f
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% if collector.totals.calls > 0 %}
-        {% set icon %}
-            {{ include('@WebProfiler/Icon/cache.svg') }}
-            <span class=\"sf-toolbar-value\">{{ collector.totals.calls }}</span>
-            <span class=\"sf-toolbar-info-piece-additional-detail\">
-                <span class=\"sf-toolbar-label\">in</span>
-                <span class=\"sf-toolbar-value\">{{ '%0.2f'|format(collector.totals.time * 1000) }}</span>
-                <span class=\"sf-toolbar-label\">ms</span>
-            </span>
-        {% endset %}
-        {% set text %}
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Cache Calls</b>
-            <span>{{ collector.totals.calls }}</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Total time</b>
-            <span>{{ '%0.2f'|format(collector.totals.time * 1000) }} ms</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Cache hits</b>
-            <span>{{ collector.totals.hits }} / {{ collector.totals.reads }}{% if collector.totals.hit_read_ratio is not null %} ({{ collector.totals.hit_read_ratio }}%){% endif %}</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Cache writes</b>
-            <span>{{ collector.totals.writes }}</span>
-        </div>
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label {{ collector.totals.calls == 0 ? 'disabled' }}\">
-    <span class=\"icon\">
-        {{ include('@WebProfiler/Icon/cache.svg') }}
-    </span>
-    <strong>Cache</strong>
-</span>
-{% endblock %}
-
-{% block panel %}
-    <h2>Cache</h2>
-
-    {% if collector.totals.calls == 0 %}
-        <div class=\"empty\">
-            <p>No cache calls were made.</p>
-        </div>
-    {% else %}
-        <div class=\"metrics\">
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.calls }}</span>
-                <span class=\"label\">Total calls</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ '%0.2f'|format(collector.totals.time * 1000) }} <span class=\"unit\">ms</span></span>
-                <span class=\"label\">Total time</span>
-            </div>
-            <div class=\"metric-divider\"></div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.reads }}</span>
-                <span class=\"label\">Total reads</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.writes }}</span>
-                <span class=\"label\">Total writes</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.deletes }}</span>
-                <span class=\"label\">Total deletes</span>
-            </div>
-            <div class=\"metric-divider\"></div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.hits }}</span>
-                <span class=\"label\">Total hits</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.totals.misses }}</span>
-                <span class=\"label\">Total misses</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">
-                    {{ collector.totals.hit_read_ratio ?? 0 }} <span class=\"unit\">%</span>
-                </span>
-                <span class=\"label\">Hits/reads</span>
-            </div>
-        </div>
-
-        <h2>Pools</h2>
-        <div class=\"sf-tabs\">
-            {% for name, calls in collector.calls %}
-                <div class=\"tab {{ calls|length == 0 ? 'disabled' }}\">
-                    <h3 class=\"tab-title\">{{ name }} <span class=\"badge\">{{ collector.statistics[name].calls }}</span></h3>
-
-                    <div class=\"tab-content\">
-                        {% if calls|length == 0 %}
-                            <div class=\"empty\">
-                                <p>No calls were made for {{ name }} pool.</p>
-                            </div>
-                        {% else %}
-                            <h4>Metrics</h4>
-                            <div class=\"metrics\">
-                                {% for key, value in collector.statistics[name] %}
-                                    <div class=\"metric\">
-                                        <span class=\"value\">
-                                            {% if key == 'time' %}
-                                                {{ '%0.2f'|format(1000 * value) }} <span class=\"unit\">ms</span>
-                                            {% elseif key == 'hit_read_ratio' %}
-                                                {{ value ?? 0 }} <span class=\"unit\">%</span>
-                                            {% else %}
-                                                {{ value }}
-                                            {% endif %}
-                                        </span>
-                                        <span class=\"label\">{{ key == 'hit_read_ratio' ? 'Hits/reads' : key|capitalize }}</span>
-                                    </div>
-                                    {% if key == 'time' or key == 'deletes' %}
-                                        <div class=\"metric-divider\"></div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-
-                            <h4>Calls</h4>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Time</th>
-                                        <th>Call</th>
-                                        <th>Hit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for call in calls %}
-                                    <tr>
-                                        <td class=\"font-normal text-small text-muted nowrap\">{{ loop.index }}</td>
-                                        <td class=\"nowrap\">{{ '%0.2f'|format((call.end - call.start) * 1000) }} ms</td>
-                                        <td class=\"nowrap\">{{ call.name }}()</td>
-                                        <td>{{ profiler_dump(call.value.result, maxDepth=2) }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-{% endblock %}
-", "@WebProfiler/Collector/cache.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/cache.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/cache.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/cache.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/cache.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -271,23 +139,15 @@ class __TwigTemplate_532c9acd564e4f7a0abb64788a1ebd9682c28effd3200310231f208c52f
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/cache.html.twig";
-    }
-
     // line 37
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -310,16 +170,15 @@ class __TwigTemplate_532c9acd564e4f7a0abb64788a1ebd9682c28effd3200310231f208c52f
     <strong>Cache</strong>
 </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 46
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -570,12 +429,17 @@ $context["key"], "hit_read_ratio"))) {
             echo "        </div>
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/cache.html.twig";
     }
 
     public function isTraitable()
@@ -588,28 +452,161 @@ $context["key"], "hit_read_ratio"))) {
         return array (  429 => 151,  421 => 148,  416 => 145,  399 => 142,  395 => 141,  391 => 140,  387 => 139,  384 => 138,  367 => 137,  352 => 124,  346 => 123,  342 => 121,  340 => 120,  335 => 118,  332 => 117,  326 => 115,  320 => 113,  318 => 112,  313 => 111,  311 => 110,  307 => 108,  303 => 107,  299 => 105,  293 => 102,  290 => 101,  288 => 100,  280 => 97,  275 => 96,  271 => 95,  260 => 87,  252 => 82,  245 => 78,  237 => 73,  230 => 69,  223 => 65,  215 => 60,  208 => 56,  204 => 54,  198 => 50,  196 => 49,  192 => 47,  182 => 46,  167 => 40,  161 => 38,  151 => 37,  138 => 33,  135 => 32,  129 => 29,  115 => 25,  108 => 21,  101 => 17,  97 => 15,  94 => 14,  87 => 10,  81 => 7,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/cache.html.twig"));
+{% block toolbar %}
+    {% if collector.totals.calls > 0 %}
+        {% set icon %}
+            {{ include('@WebProfiler/Icon/cache.svg') }}
+            <span class=\"sf-toolbar-value\">{{ collector.totals.calls }}</span>
+            <span class=\"sf-toolbar-info-piece-additional-detail\">
+                <span class=\"sf-toolbar-label\">in</span>
+                <span class=\"sf-toolbar-value\">{{ '%0.2f'|format(collector.totals.time * 1000) }}</span>
+                <span class=\"sf-toolbar-label\">ms</span>
+            </span>
+        {% endset %}
+        {% set text %}
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Cache Calls</b>
+            <span>{{ collector.totals.calls }}</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Total time</b>
+            <span>{{ '%0.2f'|format(collector.totals.time * 1000) }} ms</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Cache hits</b>
+            <span>{{ collector.totals.hits }} / {{ collector.totals.reads }}{% if collector.totals.hit_read_ratio is not null %} ({{ collector.totals.hit_read_ratio }}%){% endif %}</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Cache writes</b>
+            <span>{{ collector.totals.writes }}</span>
+        </div>
+        {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/cache.html.twig"));
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
+    {% endif %}
+{% endblock %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/cache.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+{% block menu %}
+    <span class=\"label {{ collector.totals.calls == 0 ? 'disabled' }}\">
+    <span class=\"icon\">
+        {{ include('@WebProfiler/Icon/cache.svg') }}
+    </span>
+    <strong>Cache</strong>
+</span>
+{% endblock %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+{% block panel %}
+    <h2>Cache</h2>
 
+    {% if collector.totals.calls == 0 %}
+        <div class=\"empty\">
+            <p>No cache calls were made.</p>
+        </div>
+    {% else %}
+        <div class=\"metrics\">
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.calls }}</span>
+                <span class=\"label\">Total calls</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ '%0.2f'|format(collector.totals.time * 1000) }} <span class=\"unit\">ms</span></span>
+                <span class=\"label\">Total time</span>
+            </div>
+            <div class=\"metric-divider\"></div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.reads }}</span>
+                <span class=\"label\">Total reads</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.writes }}</span>
+                <span class=\"label\">Total writes</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.deletes }}</span>
+                <span class=\"label\">Total deletes</span>
+            </div>
+            <div class=\"metric-divider\"></div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.hits }}</span>
+                <span class=\"label\">Total hits</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.totals.misses }}</span>
+                <span class=\"label\">Total misses</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">
+                    {{ collector.totals.hit_read_ratio ?? 0 }} <span class=\"unit\">%</span>
+                </span>
+                <span class=\"label\">Hits/reads</span>
+            </div>
+        </div>
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        <h2>Pools</h2>
+        <div class=\"sf-tabs\">
+            {% for name, calls in collector.calls %}
+                <div class=\"tab {{ calls|length == 0 ? 'disabled' }}\">
+                    <h3 class=\"tab-title\">{{ name }} <span class=\"badge\">{{ collector.statistics[name].calls }}</span></h3>
 
+                    <div class=\"tab-content\">
+                        {% if calls|length == 0 %}
+                            <div class=\"empty\">
+                                <p>No calls were made for {{ name }} pool.</p>
+                            </div>
+                        {% else %}
+                            <h4>Metrics</h4>
+                            <div class=\"metrics\">
+                                {% for key, value in collector.statistics[name] %}
+                                    <div class=\"metric\">
+                                        <span class=\"value\">
+                                            {% if key == 'time' %}
+                                                {{ '%0.2f'|format(1000 * value) }} <span class=\"unit\">ms</span>
+                                            {% elseif key == 'hit_read_ratio' %}
+                                                {{ value ?? 0 }} <span class=\"unit\">%</span>
+                                            {% else %}
+                                                {{ value }}
+                                            {% endif %}
+                                        </span>
+                                        <span class=\"label\">{{ key == 'hit_read_ratio' ? 'Hits/reads' : key|capitalize }}</span>
+                                    </div>
+                                    {% if key == 'time' or key == 'deletes' %}
+                                        <div class=\"metric-divider\"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <h4>Calls</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Time</th>
+                                        <th>Call</th>
+                                        <th>Hit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for call in calls %}
+                                    <tr>
+                                        <td class=\"font-normal text-small text-muted nowrap\">{{ loop.index }}</td>
+                                        <td class=\"nowrap\">{{ '%0.2f'|format((call.end - call.start) * 1000) }} ms</td>
+                                        <td class=\"nowrap\">{{ call.name }}()</td>
+                                        <td>{{ profiler_dump(call.value.result, maxDepth=2) }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+", "@WebProfiler/Collector/cache.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/cache.html.twig");
     }
 }

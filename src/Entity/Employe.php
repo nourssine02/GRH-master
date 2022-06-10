@@ -269,8 +269,6 @@ class Employe
 
 
 
-
-
     public function __construct()
     {
         $this->prime = new ArrayCollection();
@@ -842,6 +840,8 @@ class Employe
 
         return $this;
     }
+
+
 
 
 

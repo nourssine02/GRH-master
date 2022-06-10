@@ -30,42 +30,6 @@ class __TwigTemplate_1fcbe320303bcb8dd780cc66a2b349aa438270f59390ff0d3cd218e18fb
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<div id=\"sfwdt{{ token }}\" class=\"sf-toolbar sf-display-none\" role=\"region\" aria-label=\"Symfony Web Debug Toolbar\">
-    {% include('@WebProfiler/Profiler/toolbar.html.twig') with {
-        templates: {
-            'request': '@WebProfiler/Profiler/cancel.html.twig'
-        },
-        profile: null,
-        profiler_url: url('_profiler', {token: token}),
-        profiler_markup_version: 2,
-    } %}
-</div>
-
-{{ include('@WebProfiler/Profiler/base_js.html.twig') }}
-
-<style{% if csp_style_nonce %} nonce=\"{{ csp_style_nonce }}\"{% endif %}>
-    {{ include('@WebProfiler/Profiler/toolbar.css.twig') }}
-</style>
-<script{% if csp_script_nonce %} nonce=\"{{ csp_script_nonce }}\"{% endif %}>/*<![CDATA[*/
-    (function () {
-        Sfjs.loadToolbar('{{ token }}');
-    })();
-/*]]>*/</script>
-", "@WebProfiler/Profiler/toolbar_js.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_js.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  82 => 19,  73 => 17,  68 => 15,  60 => 14,  55 => 12,  51 => 10,  49 => 7,  48 => 2,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -120,10 +84,10 @@ class __TwigTemplate_1fcbe320303bcb8dd780cc66a2b349aa438270f59390ff0d3cd218e18fb
     })();
 /*]]>*/</script>
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -131,5 +95,41 @@ class __TwigTemplate_1fcbe320303bcb8dd780cc66a2b349aa438270f59390ff0d3cd218e18fb
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/toolbar_js.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  82 => 19,  73 => 17,  68 => 15,  60 => 14,  55 => 12,  51 => 10,  49 => 7,  48 => 2,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<div id=\"sfwdt{{ token }}\" class=\"sf-toolbar sf-display-none\" role=\"region\" aria-label=\"Symfony Web Debug Toolbar\">
+    {% include('@WebProfiler/Profiler/toolbar.html.twig') with {
+        templates: {
+            'request': '@WebProfiler/Profiler/cancel.html.twig'
+        },
+        profile: null,
+        profiler_url: url('_profiler', {token: token}),
+        profiler_markup_version: 2,
+    } %}
+</div>
+
+{{ include('@WebProfiler/Profiler/base_js.html.twig') }}
+
+<style{% if csp_style_nonce %} nonce=\"{{ csp_style_nonce }}\"{% endif %}>
+    {{ include('@WebProfiler/Profiler/toolbar.css.twig') }}
+</style>
+<script{% if csp_script_nonce %} nonce=\"{{ csp_script_nonce }}\"{% endif %}>/*<![CDATA[*/
+    (function () {
+        Sfjs.loadToolbar('{{ token }}');
+    })();
+/*]]>*/</script>
+", "@WebProfiler/Profiler/toolbar_js.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_js.html.twig");
     }
 }

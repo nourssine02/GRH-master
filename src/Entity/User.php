@@ -8,10 +8,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cet email")
+ * @UniqueEntity(fields={"name"}, message="Il existe déjà un compte avec cet name")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -25,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      *  @Assert\Email( message = "'l'email '{{ value }}' n'est pas un email valide.")
-
+     * @Assert\NotBlank
      */
     private $email;
 
@@ -37,6 +39,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @SecurityAssert\UserPassword(
+     *     message = "mot de passe n'est pas correct"
+     * )
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre mot de passe doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Votre mot de passe ne peut pas dépasser {{ limit }} caractères"
+     * )
+     *
      */
     private $password;
 

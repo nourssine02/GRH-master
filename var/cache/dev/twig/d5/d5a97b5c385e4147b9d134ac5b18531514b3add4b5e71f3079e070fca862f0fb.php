@@ -32,482 +32,34 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends request.isXmlHttpRequest ? '@WebProfiler/Profiler/ajax_layout.html.twig' : '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% import _self as helper %}
-
-{% block toolbar %}
-    {% if collector.querycount > 0 or collector.invalidEntityCount > 0 %}
-
-        {% set icon %}
-            {% set status = collector.invalidEntityCount > 0 ? 'red' : collector.querycount > 50 ? 'yellow' %}
-
-            {{ include('@Doctrine/Collector/icon.svg') }}
-
-            {% if collector.querycount == 0 and collector.invalidEntityCount > 0 %}
-                <span class=\"sf-toolbar-value\">{{ collector.invalidEntityCount }}</span>
-                <span class=\"sf-toolbar-label\">errors</span>
-            {% else %}
-                <span class=\"sf-toolbar-value\">{{ collector.querycount }}</span>
-                <span class=\"sf-toolbar-info-piece-additional-detail\">
-                    <span class=\"sf-toolbar-label\">in</span>
-                    <span class=\"sf-toolbar-value\">{{ '%0.2f'|format(collector.time * 1000) }}</span>
-                    <span class=\"sf-toolbar-label\">ms</span>
-                </span>
-            {% endif %}
-        {% endset %}
-
-        {% set text %}
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Database Queries</b>
-                <span class=\"sf-toolbar-status {{ collector.querycount > 50 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.querycount }}</span>
-            </div>
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Different statements</b>
-                <span class=\"sf-toolbar-status\">{{ collector.groupedQueryCount }}</span>
-            </div>
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Query time</b>
-                <span>{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
-            </div>
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Invalid entities</b>
-                <span class=\"sf-toolbar-status {{ collector.invalidEntityCount > 0 ? 'sf-toolbar-status-red' : '' }}\">{{ collector.invalidEntityCount }}</span>
-            </div>
-            {% if collector.cacheEnabled %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Cache hits</b>
-                    <span class=\"sf-toolbar-status sf-toolbar-status-green\">{{ collector.cacheHitsCount }}</span>
-                </div>
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Cache misses</b>
-                    <span class=\"sf-toolbar-status {{ collector.cacheMissesCount > 0 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.cacheMissesCount }}</span>
-                </div>
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Cache puts</b>
-                    <span class=\"sf-toolbar-status {{ collector.cachePutsCount > 0 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.cachePutsCount }}</span>
-                </div>
-            {% else %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Second Level Cache</b>
-                    <span class=\"sf-toolbar-status\">disabled</span>
-                </div>
-            {% endif %}
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status|default('') }) }}
-
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label {{ collector.invalidEntityCount > 0 ? 'label-status-error' }} {{ collector.querycount == 0 ? 'disabled' }}\">
-        <span class=\"icon\">{{ include('@Doctrine/Collector/icon.svg') }}</span>
-        <strong>Doctrine</strong>
-        {% if collector.invalidEntityCount %}
-            <span class=\"count\">
-                <span>{{ collector.invalidEntityCount }}</span>
-            </span>
-        {% endif %}
-    </span>
-{% endblock %}
-
-{% block panel %}
-    {% if 'explain' == page %}
-        {{ render(controller('Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Controller\\\\ProfilerController::explainAction', {
-            token: token,
-            panel: 'db',
-            connectionName: request.query.get('connection'),
-            query: request.query.get('query')
-        })) }}
-    {% else %}
-        {{ block('queries') }}
-    {% endif %}
-{% endblock %}
-
-{% block queries %}
-    <style>
-        .time-container { position: relative; }
-        .time-container .nowrap { position: relative; z-index: 1; text-shadow: 0 0 2px #fff; }
-        .time-bar { display: block; position: absolute; top: 0; left: 0; bottom: 0; background: #e0e0e0; }
-        .sql-runnable.sf-toggle-content.sf-toggle-visible { display: flex; flex-direction: column; }
-        .sql-runnable button { align-self: end; }
-    </style>
-
-    <h2>Query Metrics</h2>
-
-    <div class=\"metrics\">
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.querycount }}</span>
-            <span class=\"label\">Database Queries</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.groupedQueryCount }}</span>
-            <span class=\"label\">Different statements</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
-            <span class=\"label\">Query time</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.invalidEntityCount }}</span>
-            <span class=\"label\">Invalid entities</span>
-        </div>
-
-        {% if collector.cacheEnabled %}
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.cacheHitsCount }}</span>
-                <span class=\"label\">Cache hits</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.cacheMissesCount }}</span>
-                <span class=\"label\">Cache misses</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.cachePutsCount }}</span>
-                <span class=\"label\">Cache puts</span>
-            </div>
-        {% endif %}
-    </div>
-
-    {% set group_queries = request.query.getBoolean('group') %}
-    {% if group_queries %}
-        <h2>Grouped Statements</h2>
-        <p><a href=\"{{ path('_profiler', { panel: 'db', token: token }) }}\">Show all queries</a></p>
-    {% else %}
-        <h2>Queries</h2>
-        <p><a href=\"{{ path('_profiler', { panel: 'db', token: token, group: true }) }}\">Group similar statements</a></p>
-    {% endif %}
-
-    {% for connection, queries in collector.queries %}
-        {% if collector.connections|length > 1 %}
-            <h3>{{ connection }} <small>connection</small></h3>
-        {% endif %}
-
-        {% if queries is empty %}
-            <div class=\"empty\">
-                <p>No database queries were performed.</p>
-            </div>
-        {% else %}
-            {% if group_queries %}
-                {% set queries = collector.groupedQueries[connection] %}
-            {% endif %}
-            <table class=\"alt queries-table\">
-                <thead>
-                <tr>
-                    {% if group_queries %}
-                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 0, 'queries-{{ loop.index }}')\" data-sort-direction=\"1\" style=\"cursor: pointer;\">Time<span class=\"text-muted\">&#9660;</span></th>
-                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 1, 'queries-{{ loop.index }}')\" style=\"cursor: pointer;\">Count<span></span></th>
-                    {% else %}
-                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 0, 'queries-{{ loop.index }}')\" data-sort-direction=\"-1\" style=\"cursor: pointer;\">#<span class=\"text-muted\">&#9650;</span></th>
-                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 1, 'queries-{{ loop.index }}')\" style=\"cursor: pointer;\">Time<span></span></th>
-                    {% endif %}
-                    <th style=\"width: 100%;\">Info</th>
-                </tr>
-                </thead>
-                <tbody id=\"queries-{{ loop.index }}\">
-                    {% for i, query in queries %}
-                        {% set i = group_queries ? query.index : i %}
-                        <tr id=\"queryNo-{{ i }}-{{ loop.parent.loop.index }}\">
-                            {% if group_queries %}
-                                <td class=\"time-container\">
-                                    <span class=\"time-bar\" style=\"width:{{ '%0.2f'|format(query.executionPercent) }}%\"></span>
-                                    <span class=\"nowrap\">{{ '%0.2f'|format(query.executionMS * 1000) }}&nbsp;ms<br />({{ '%0.2f'|format(query.executionPercent) }}%)</span>
-                                </td>
-                                <td class=\"nowrap\">{{ query.count }}</td>
-                            {% else %}
-                                <td class=\"nowrap\">{{ loop.index }}</td>
-                                <td class=\"nowrap\">{{ '%0.2f'|format(query.executionMS * 1000) }}&nbsp;ms</td>
-                            {% endif %}
-                            <td>
-                                {{ query.sql|doctrine_prettify_sql }}
-
-                                <div>
-                                    <strong class=\"font-normal text-small\">Parameters</strong>: {{ profiler_dump(query.params, 2) }}
-                                </div>
-
-                                <div class=\"text-small font-normal\">
-                                    <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#formatted-query-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide formatted query\">View formatted query</a>
-
-                                    {% if query.runnable %}
-                                        &nbsp;&nbsp;
-                                        <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#original-query-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide runnable query\">View runnable query</a>
-                                    {% endif %}
-
-                                    {% if query.explainable %}
-                                        &nbsp;&nbsp;
-                                        <a class=\"link-inverse\" href=\"{{ path('_profiler', { panel: 'db', token: token, page: 'explain', connection: connection, query: i }) }}\" onclick=\"return explain(this);\" data-target-id=\"explain-{{ i }}-{{ loop.parent.loop.index }}\">Explain query</a>
-                                    {% endif %}
-
-                                    {% if query.backtrace is defined %}
-                                        &nbsp;&nbsp;
-                                        <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#backtrace-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide query backtrace\">View query backtrace</a>
-                                    {% endif %}
-                                </div>
-
-                                <div id=\"formatted-query-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-runnable hidden\">
-                                    {{ query.sql|doctrine_format_sql(highlight = true) }}
-                                    <button class=\"btn btn-sm hidden\" data-clipboard-text=\"{{ query.sql|doctrine_format_sql(highlight = false)|e('html_attr') }}\">Copy</button>
-                                </div>
-
-                                {% if query.runnable %}
-                                    <div id=\"original-query-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-runnable hidden\">
-                                        {% set runnable_sql = (query.sql ~ ';')|doctrine_replace_query_parameters(query.params) %}
-                                        {{ runnable_sql|doctrine_prettify_sql }}
-                                        <button class=\"btn btn-sm hidden\" data-clipboard-text=\"{{ runnable_sql|e('html_attr') }}\">Copy</button>
-                                    </div>
-                                {% endif %}
-
-                                {% if query.explainable %}
-                                    <div id=\"explain-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-explain\"></div>
-                                {% endif %}
-
-                                {% if query.backtrace is defined %}
-                                    <div id=\"backtrace-{{ i }}-{{ loop.parent.loop.index }}\" class=\"hidden\">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th scope=\"col\">#</th>
-                                                    <th scope=\"col\">File/Call</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for trace in query.backtrace %}
-                                                    <tr>
-                                                        <td>{{ loop.index }}</td>
-                                                        <td>
-                                                            <span class=\"text-small\">
-                                                                {% set line_number = trace.line|default(1) %}
-                                                                {% if trace.file is defined %}
-                                                                    <a href=\"{{ trace.file|file_link(line_number) }}\">
-                                                                {% endif %}
-                                                                    {{- trace.class|default ~ (trace.class is defined ? trace.type|default('::')) -}}
-                                                                    <span class=\"status-warning\">{{ trace.function }}</span>
-                                                                {% if trace.file is defined %}
-                                                                    </a>
-                                                                {% endif %}
-                                                                (line {{ line_number }})
-                                                            </span>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    {% endfor %}
-
-    <h2>Database Connections</h2>
-
-    {% if not collector.connections %}
-        <div class=\"empty\">
-            <p>There are no configured database connections.</p>
-        </div>
-    {% else %}
-        {{ helper.render_simple_table('Name', 'Service', collector.connections) }}
-    {% endif %}
-
-    <h2>Entity Managers</h2>
-
-    {% if not collector.managers %}
-        <div class=\"empty\">
-            <p>There are no configured entity managers.</p>
-        </div>
-    {% else %}
-        {{ helper.render_simple_table('Name', 'Service', collector.managers) }}
-    {% endif %}
-
-    <h2>Second Level Cache</h2>
-
-    {% if not collector.cacheEnabled %}
-        <div class=\"empty\">
-            <p>Second Level Cache is not enabled.</p>
-        </div>
-    {% else %}
-        {% if not collector.cacheCounts %}
-            <div class=\"empty\">
-                <p>Second level cache information is not available.</p>
-            </div>
-        {% else %}
-            <div class=\"metrics\">
-                <div class=\"metric\">
-                    <span class=\"value\">{{ collector.cacheCounts.hits }}</span>
-                    <span class=\"label\">Hits</span>
-                </div>
-
-                <div class=\"metric\">
-                    <span class=\"value\">{{ collector.cacheCounts.misses }}</span>
-                    <span class=\"label\">Misses</span>
-                </div>
-
-                <div class=\"metric\">
-                    <span class=\"value\">{{ collector.cacheCounts.puts }}</span>
-                    <span class=\"label\">Puts</span>
-                </div>
-            </div>
-
-            {% if collector.cacheRegions.hits %}
-                <h3>Number of cache hits</h3>
-                {{ helper.render_simple_table('Region', 'Hits', collector.cacheRegions.hits) }}
-            {% endif %}
-
-            {% if collector.cacheRegions.misses %}
-                <h3>Number of cache misses</h3>
-                {{ helper.render_simple_table('Region', 'Misses', collector.cacheRegions.misses) }}
-            {% endif %}
-
-            {% if collector.cacheRegions.puts %}
-                <h3>Number of cache puts</h3>
-                {{ helper.render_simple_table('Region', 'Puts', collector.cacheRegions.puts) }}
-            {% endif %}
-        {% endif %}
-    {% endif %}
-
-    {% if collector.entities|length > 0 %}
-        <h2>Entities Mapping</h2>
-
-        {% for manager, classes in collector.entities %}
-            {% if collector.managers|length > 1 %}
-                <h3>{{ manager }} <small>entity manager</small></h3>
-            {% endif %}
-
-            {% if classes is empty %}
-                <div class=\"empty\">
-                    <p>No loaded entities.</p>
-                </div>
-            {% else %}
-                <table>
-                    <thead>
-                    <tr>
-                        <th scope=\"col\">Class</th>
-                        <th scope=\"col\">Mapping errors</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for class in classes %}
-                        {% set contains_errors = collector.mappingErrors[manager] is defined and collector.mappingErrors[manager][class] is defined %}
-                        <tr class=\"{{ contains_errors ? 'status-error' }}\">
-                            <td>{{ class }}</td>
-                            <td class=\"font-normal\">
-                                {% if contains_errors %}
-                                    <ul>
-                                        {% for error in collector.mappingErrors[manager][class] %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    No errors.
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
-    <script type=\"text/javascript\">//<![CDATA[
-        function explain(link) {
-            \"use strict\";
-
-            var targetId = link.getAttribute('data-target-id');
-            var targetElement = document.getElementById(targetId);
-
-            if (targetElement.style.display != 'block') {
-                Sfjs.load(targetId, link.href, null, function(xhr, el) {
-                    el.innerHTML = 'An error occurred while loading the query explanation.';
-                });
-
-                targetElement.style.display = 'block';
-                link.innerHTML = 'Hide query explanation';
-            } else {
-                targetElement.style.display = 'none';
-                link.innerHTML = 'Explain query';
-            }
-
-            return false;
-        }
-
-        function sortTable(header, column, targetId) {
-            \"use strict\";
-
-            var direction = parseInt(header.getAttribute('data-sort-direction')) || 1,
-                items = [],
-                target = document.getElementById(targetId),
-                rows = target.children,
-                headers = header.parentElement.children,
-                i;
-
-            for (i = 0; i < rows.length; ++i) {
-                items.push(rows[i]);
-            }
-
-            for (i = 0; i < headers.length; ++i) {
-                headers[i].removeAttribute('data-sort-direction');
-                if (headers[i].children.length > 0) {
-                    headers[i].children[0].innerHTML = '';
-                }
-            }
-
-            header.setAttribute('data-sort-direction', (-1*direction).toString());
-            header.children[0].innerHTML = direction > 0 ? '<span class=\"text-muted\">&#9650;</span>' : '<span class=\"text-muted\">&#9660;</span>';
-
-            items.sort(function(a, b) {
-                return direction * (parseFloat(a.children[column].innerHTML) - parseFloat(b.children[column].innerHTML));
-            });
-
-            for (i = 0; i < items.length; ++i) {
-                Sfjs.removeClass(items[i], i % 2 ? 'even' : 'odd');
-                Sfjs.addClass(items[i], i % 2 ? 'odd' : 'even');
-                target.appendChild(items[i]);
-            }
-        }
-
-        if (navigator.clipboard) {
-            document.querySelectorAll('[data-clipboard-text]').forEach(function(button) {
-                Sfjs.removeClass(button, 'hidden');
-                button.addEventListener('click', function() {
-                    navigator.clipboard.writeText(button.getAttribute('data-clipboard-text'));
-                })
-            });
-        }
-
-        //]]></script>
-{% endblock %}
-
-{% macro render_simple_table(label1, label2, data) %}
-    <table>
-        <thead>
-        <tr>
-            <th scope=\"col\" class=\"key\">{{ label1 }}</th>
-            <th scope=\"col\">{{ label2 }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for key, value in data %}
-            <tr>
-                <th scope=\"row\">{{ key }}</th>
-                <td>{{ value }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+        // line 1
+        return $this->loadTemplate(((twig_get_attribute($this->env, $this->source, (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 1, $this->source); })()), "isXmlHttpRequest", [], "any", false, false, false, 1)) ? ("@WebProfiler/Profiler/ajax_layout.html.twig") : ("@WebProfiler/Profiler/layout.html.twig")), "@Doctrine/Collector/db.html.twig", 1);
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Doctrine/Collector/db.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Doctrine/Collector/db.html.twig"));
+
+        // line 3
+        $macros["helper"] = $this->macros["helper"] = $this;
+        // line 1
+        $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 5
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -650,23 +202,15 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
 
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 5
-
-    public function getTemplateName()
-    {
-        return "@Doctrine/Collector/db.html.twig";
-    }
-
     // line 69
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -702,16 +246,15 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
         // line 78
         echo "    </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 81
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -740,16 +283,15 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 94
-
     public function block_queries($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -1559,16 +1101,15 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
 
         //]]></script>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 454
-
     public function macro_render_simple_table($__label1__ = null, $__label2__ = null, $__data__ = null, ...$__varargs__)
     {
         $macros = $this->macros;
@@ -1629,10 +1170,10 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
             echo "        </tbody>
     </table>
 ";
-
+            
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+            
             $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
 
@@ -1640,6 +1181,11 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
         } finally {
             ob_end_clean();
         }
+    }
+
+    public function getTemplateName()
+    {
+        return "@Doctrine/Collector/db.html.twig";
     }
 
     public function isTraitable()
@@ -1652,30 +1198,479 @@ class __TwigTemplate_b74f042783a81e1286086c347bbf50de0bd24f63cd45da381dec904cfea
         return array (  1170 => 469,  1161 => 466,  1157 => 465,  1154 => 464,  1150 => 463,  1143 => 459,  1139 => 458,  1134 => 455,  1113 => 454,  1035 => 384,  1032 => 383,  1026 => 382,  1021 => 379,  1013 => 376,  1009 => 374,  1005 => 372,  996 => 370,  992 => 369,  989 => 368,  987 => 367,  982 => 365,  977 => 364,  974 => 363,  970 => 362,  960 => 354,  954 => 350,  952 => 349,  949 => 348,  943 => 346,  940 => 345,  936 => 344,  932 => 342,  930 => 341,  927 => 340,  924 => 339,  921 => 338,  916 => 336,  913 => 335,  911 => 334,  908 => 333,  903 => 331,  900 => 330,  898 => 329,  895 => 328,  890 => 326,  887 => 325,  885 => 324,  877 => 319,  869 => 314,  861 => 309,  857 => 307,  851 => 303,  848 => 302,  842 => 298,  840 => 297,  835 => 294,  829 => 292,  823 => 288,  821 => 287,  816 => 284,  810 => 282,  804 => 278,  802 => 277,  797 => 274,  783 => 273,  778 => 270,  762 => 267,  756 => 263,  736 => 258,  732 => 256,  730 => 255,  725 => 254,  723 => 253,  717 => 251,  714 => 250,  712 => 249,  706 => 246,  703 => 245,  686 => 244,  671 => 235,  669 => 234,  666 => 233,  658 => 231,  656 => 230,  653 => 229,  647 => 226,  642 => 225,  640 => 224,  633 => 223,  631 => 222,  625 => 219,  621 => 218,  615 => 217,  611 => 215,  604 => 213,  601 => 212,  599 => 211,  596 => 210,  587 => 208,  584 => 207,  582 => 206,  579 => 205,  572 => 203,  569 => 202,  567 => 201,  560 => 199,  553 => 195,  547 => 192,  544 => 191,  539 => 189,  534 => 188,  529 => 186,  522 => 184,  518 => 183,  515 => 182,  513 => 181,  506 => 180,  503 => 179,  486 => 178,  482 => 177,  477 => 174,  472 => 172,  467 => 171,  462 => 169,  457 => 168,  455 => 167,  450 => 164,  447 => 163,  444 => 162,  441 => 161,  435 => 157,  433 => 156,  430 => 155,  424 => 153,  421 => 152,  404 => 151,  401 => 150,  396 => 148,  393 => 147,  388 => 145,  385 => 144,  382 => 143,  380 => 142,  376 => 140,  369 => 136,  362 => 132,  355 => 128,  352 => 127,  350 => 126,  343 => 122,  335 => 117,  327 => 112,  319 => 107,  305 => 95,  295 => 94,  281 => 90,  277 => 88,  275 => 87,  274 => 86,  273 => 84,  271 => 83,  268 => 82,  258 => 81,  247 => 78,  241 => 75,  238 => 74,  236 => 73,  231 => 71,  224 => 70,  214 => 69,  200 => 64,  197 => 63,  194 => 62,  187 => 57,  179 => 54,  170 => 50,  163 => 46,  159 => 44,  157 => 43,  150 => 41,  143 => 37,  136 => 33,  127 => 29,  123 => 27,  121 => 26,  118 => 25,  115 => 24,  108 => 20,  101 => 17,  94 => 14,  92 => 13,  87 => 11,  84 => 10,  81 => 9,  79 => 8,  76 => 7,  73 => 6,  63 => 5,  53 => 1,  51 => 3,  38 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return $this->loadTemplate(((twig_get_attribute($this->env, $this->source, (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 1, $this->source); })()), "isXmlHttpRequest", [], "any", false, false, false, 1)) ? ("@WebProfiler/Profiler/ajax_layout.html.twig") : ("@WebProfiler/Profiler/layout.html.twig")), "@Doctrine/Collector/db.html.twig", 1);
-    }
+        return new Source("{% extends request.isXmlHttpRequest ? '@WebProfiler/Profiler/ajax_layout.html.twig' : '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Doctrine/Collector/db.html.twig"));
+{% import _self as helper %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@Doctrine/Collector/db.html.twig"));
+{% block toolbar %}
+    {% if collector.querycount > 0 or collector.invalidEntityCount > 0 %}
 
-        // line 3
-        $macros["helper"] = $this->macros["helper"] = $this;
-        // line 1
-        $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
+        {% set icon %}
+            {% set status = collector.invalidEntityCount > 0 ? 'red' : collector.querycount > 50 ? 'yellow' %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+            {{ include('@Doctrine/Collector/icon.svg') }}
 
+            {% if collector.querycount == 0 and collector.invalidEntityCount > 0 %}
+                <span class=\"sf-toolbar-value\">{{ collector.invalidEntityCount }}</span>
+                <span class=\"sf-toolbar-label\">errors</span>
+            {% else %}
+                <span class=\"sf-toolbar-value\">{{ collector.querycount }}</span>
+                <span class=\"sf-toolbar-info-piece-additional-detail\">
+                    <span class=\"sf-toolbar-label\">in</span>
+                    <span class=\"sf-toolbar-value\">{{ '%0.2f'|format(collector.time * 1000) }}</span>
+                    <span class=\"sf-toolbar-label\">ms</span>
+                </span>
+            {% endif %}
+        {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        {% set text %}
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Database Queries</b>
+                <span class=\"sf-toolbar-status {{ collector.querycount > 50 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.querycount }}</span>
+            </div>
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Different statements</b>
+                <span class=\"sf-toolbar-status\">{{ collector.groupedQueryCount }}</span>
+            </div>
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Query time</b>
+                <span>{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+            </div>
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Invalid entities</b>
+                <span class=\"sf-toolbar-status {{ collector.invalidEntityCount > 0 ? 'sf-toolbar-status-red' : '' }}\">{{ collector.invalidEntityCount }}</span>
+            </div>
+            {% if collector.cacheEnabled %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Cache hits</b>
+                    <span class=\"sf-toolbar-status sf-toolbar-status-green\">{{ collector.cacheHitsCount }}</span>
+                </div>
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Cache misses</b>
+                    <span class=\"sf-toolbar-status {{ collector.cacheMissesCount > 0 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.cacheMissesCount }}</span>
+                </div>
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Cache puts</b>
+                    <span class=\"sf-toolbar-status {{ collector.cachePutsCount > 0 ? 'sf-toolbar-status-yellow' : '' }}\">{{ collector.cachePutsCount }}</span>
+                </div>
+            {% else %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Second Level Cache</b>
+                    <span class=\"sf-toolbar-status\">disabled</span>
+                </div>
+            {% endif %}
+        {% endset %}
 
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status|default('') }) }}
+
+    {% endif %}
+{% endblock %}
+
+{% block menu %}
+    <span class=\"label {{ collector.invalidEntityCount > 0 ? 'label-status-error' }} {{ collector.querycount == 0 ? 'disabled' }}\">
+        <span class=\"icon\">{{ include('@Doctrine/Collector/icon.svg') }}</span>
+        <strong>Doctrine</strong>
+        {% if collector.invalidEntityCount %}
+            <span class=\"count\">
+                <span>{{ collector.invalidEntityCount }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {% if 'explain' == page %}
+        {{ render(controller('Doctrine\\\\Bundle\\\\DoctrineBundle\\\\Controller\\\\ProfilerController::explainAction', {
+            token: token,
+            panel: 'db',
+            connectionName: request.query.get('connection'),
+            query: request.query.get('query')
+        })) }}
+    {% else %}
+        {{ block('queries') }}
+    {% endif %}
+{% endblock %}
+
+{% block queries %}
+    <style>
+        .time-container { position: relative; }
+        .time-container .nowrap { position: relative; z-index: 1; text-shadow: 0 0 2px #fff; }
+        .time-bar { display: block; position: absolute; top: 0; left: 0; bottom: 0; background: #e0e0e0; }
+        .sql-runnable.sf-toggle-content.sf-toggle-visible { display: flex; flex-direction: column; }
+        .sql-runnable button { align-self: end; }
+    </style>
+
+    <h2>Query Metrics</h2>
+
+    <div class=\"metrics\">
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.querycount }}</span>
+            <span class=\"label\">Database Queries</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.groupedQueryCount }}</span>
+            <span class=\"label\">Different statements</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+            <span class=\"label\">Query time</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.invalidEntityCount }}</span>
+            <span class=\"label\">Invalid entities</span>
+        </div>
+
+        {% if collector.cacheEnabled %}
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.cacheHitsCount }}</span>
+                <span class=\"label\">Cache hits</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.cacheMissesCount }}</span>
+                <span class=\"label\">Cache misses</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.cachePutsCount }}</span>
+                <span class=\"label\">Cache puts</span>
+            </div>
+        {% endif %}
+    </div>
+
+    {% set group_queries = request.query.getBoolean('group') %}
+    {% if group_queries %}
+        <h2>Grouped Statements</h2>
+        <p><a href=\"{{ path('_profiler', { panel: 'db', token: token }) }}\">Show all queries</a></p>
+    {% else %}
+        <h2>Queries</h2>
+        <p><a href=\"{{ path('_profiler', { panel: 'db', token: token, group: true }) }}\">Group similar statements</a></p>
+    {% endif %}
+
+    {% for connection, queries in collector.queries %}
+        {% if collector.connections|length > 1 %}
+            <h3>{{ connection }} <small>connection</small></h3>
+        {% endif %}
+
+        {% if queries is empty %}
+            <div class=\"empty\">
+                <p>No database queries were performed.</p>
+            </div>
+        {% else %}
+            {% if group_queries %}
+                {% set queries = collector.groupedQueries[connection] %}
+            {% endif %}
+            <table class=\"alt queries-table\">
+                <thead>
+                <tr>
+                    {% if group_queries %}
+                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 0, 'queries-{{ loop.index }}')\" data-sort-direction=\"1\" style=\"cursor: pointer;\">Time<span class=\"text-muted\">&#9660;</span></th>
+                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 1, 'queries-{{ loop.index }}')\" style=\"cursor: pointer;\">Count<span></span></th>
+                    {% else %}
+                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 0, 'queries-{{ loop.index }}')\" data-sort-direction=\"-1\" style=\"cursor: pointer;\">#<span class=\"text-muted\">&#9650;</span></th>
+                        <th class=\"nowrap\" onclick=\"javascript:sortTable(this, 1, 'queries-{{ loop.index }}')\" style=\"cursor: pointer;\">Time<span></span></th>
+                    {% endif %}
+                    <th style=\"width: 100%;\">Info</th>
+                </tr>
+                </thead>
+                <tbody id=\"queries-{{ loop.index }}\">
+                    {% for i, query in queries %}
+                        {% set i = group_queries ? query.index : i %}
+                        <tr id=\"queryNo-{{ i }}-{{ loop.parent.loop.index }}\">
+                            {% if group_queries %}
+                                <td class=\"time-container\">
+                                    <span class=\"time-bar\" style=\"width:{{ '%0.2f'|format(query.executionPercent) }}%\"></span>
+                                    <span class=\"nowrap\">{{ '%0.2f'|format(query.executionMS * 1000) }}&nbsp;ms<br />({{ '%0.2f'|format(query.executionPercent) }}%)</span>
+                                </td>
+                                <td class=\"nowrap\">{{ query.count }}</td>
+                            {% else %}
+                                <td class=\"nowrap\">{{ loop.index }}</td>
+                                <td class=\"nowrap\">{{ '%0.2f'|format(query.executionMS * 1000) }}&nbsp;ms</td>
+                            {% endif %}
+                            <td>
+                                {{ query.sql|doctrine_prettify_sql }}
+
+                                <div>
+                                    <strong class=\"font-normal text-small\">Parameters</strong>: {{ profiler_dump(query.params, 2) }}
+                                </div>
+
+                                <div class=\"text-small font-normal\">
+                                    <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#formatted-query-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide formatted query\">View formatted query</a>
+
+                                    {% if query.runnable %}
+                                        &nbsp;&nbsp;
+                                        <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#original-query-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide runnable query\">View runnable query</a>
+                                    {% endif %}
+
+                                    {% if query.explainable %}
+                                        &nbsp;&nbsp;
+                                        <a class=\"link-inverse\" href=\"{{ path('_profiler', { panel: 'db', token: token, page: 'explain', connection: connection, query: i }) }}\" onclick=\"return explain(this);\" data-target-id=\"explain-{{ i }}-{{ loop.parent.loop.index }}\">Explain query</a>
+                                    {% endif %}
+
+                                    {% if query.backtrace is defined %}
+                                        &nbsp;&nbsp;
+                                        <a href=\"#\" class=\"sf-toggle link-inverse\" data-toggle-selector=\"#backtrace-{{ i }}-{{ loop.parent.loop.index }}\" data-toggle-alt-content=\"Hide query backtrace\">View query backtrace</a>
+                                    {% endif %}
+                                </div>
+
+                                <div id=\"formatted-query-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-runnable hidden\">
+                                    {{ query.sql|doctrine_format_sql(highlight = true) }}
+                                    <button class=\"btn btn-sm hidden\" data-clipboard-text=\"{{ query.sql|doctrine_format_sql(highlight = false)|e('html_attr') }}\">Copy</button>
+                                </div>
+
+                                {% if query.runnable %}
+                                    <div id=\"original-query-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-runnable hidden\">
+                                        {% set runnable_sql = (query.sql ~ ';')|doctrine_replace_query_parameters(query.params) %}
+                                        {{ runnable_sql|doctrine_prettify_sql }}
+                                        <button class=\"btn btn-sm hidden\" data-clipboard-text=\"{{ runnable_sql|e('html_attr') }}\">Copy</button>
+                                    </div>
+                                {% endif %}
+
+                                {% if query.explainable %}
+                                    <div id=\"explain-{{ i }}-{{ loop.parent.loop.index }}\" class=\"sql-explain\"></div>
+                                {% endif %}
+
+                                {% if query.backtrace is defined %}
+                                    <div id=\"backtrace-{{ i }}-{{ loop.parent.loop.index }}\" class=\"hidden\">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope=\"col\">#</th>
+                                                    <th scope=\"col\">File/Call</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for trace in query.backtrace %}
+                                                    <tr>
+                                                        <td>{{ loop.index }}</td>
+                                                        <td>
+                                                            <span class=\"text-small\">
+                                                                {% set line_number = trace.line|default(1) %}
+                                                                {% if trace.file is defined %}
+                                                                    <a href=\"{{ trace.file|file_link(line_number) }}\">
+                                                                {% endif %}
+                                                                    {{- trace.class|default ~ (trace.class is defined ? trace.type|default('::')) -}}
+                                                                    <span class=\"status-warning\">{{ trace.function }}</span>
+                                                                {% if trace.file is defined %}
+                                                                    </a>
+                                                                {% endif %}
+                                                                (line {{ line_number }})
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endfor %}
+
+    <h2>Database Connections</h2>
+
+    {% if not collector.connections %}
+        <div class=\"empty\">
+            <p>There are no configured database connections.</p>
+        </div>
+    {% else %}
+        {{ helper.render_simple_table('Name', 'Service', collector.connections) }}
+    {% endif %}
+
+    <h2>Entity Managers</h2>
+
+    {% if not collector.managers %}
+        <div class=\"empty\">
+            <p>There are no configured entity managers.</p>
+        </div>
+    {% else %}
+        {{ helper.render_simple_table('Name', 'Service', collector.managers) }}
+    {% endif %}
+
+    <h2>Second Level Cache</h2>
+
+    {% if not collector.cacheEnabled %}
+        <div class=\"empty\">
+            <p>Second Level Cache is not enabled.</p>
+        </div>
+    {% else %}
+        {% if not collector.cacheCounts %}
+            <div class=\"empty\">
+                <p>Second level cache information is not available.</p>
+            </div>
+        {% else %}
+            <div class=\"metrics\">
+                <div class=\"metric\">
+                    <span class=\"value\">{{ collector.cacheCounts.hits }}</span>
+                    <span class=\"label\">Hits</span>
+                </div>
+
+                <div class=\"metric\">
+                    <span class=\"value\">{{ collector.cacheCounts.misses }}</span>
+                    <span class=\"label\">Misses</span>
+                </div>
+
+                <div class=\"metric\">
+                    <span class=\"value\">{{ collector.cacheCounts.puts }}</span>
+                    <span class=\"label\">Puts</span>
+                </div>
+            </div>
+
+            {% if collector.cacheRegions.hits %}
+                <h3>Number of cache hits</h3>
+                {{ helper.render_simple_table('Region', 'Hits', collector.cacheRegions.hits) }}
+            {% endif %}
+
+            {% if collector.cacheRegions.misses %}
+                <h3>Number of cache misses</h3>
+                {{ helper.render_simple_table('Region', 'Misses', collector.cacheRegions.misses) }}
+            {% endif %}
+
+            {% if collector.cacheRegions.puts %}
+                <h3>Number of cache puts</h3>
+                {{ helper.render_simple_table('Region', 'Puts', collector.cacheRegions.puts) }}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {% if collector.entities|length > 0 %}
+        <h2>Entities Mapping</h2>
+
+        {% for manager, classes in collector.entities %}
+            {% if collector.managers|length > 1 %}
+                <h3>{{ manager }} <small>entity manager</small></h3>
+            {% endif %}
+
+            {% if classes is empty %}
+                <div class=\"empty\">
+                    <p>No loaded entities.</p>
+                </div>
+            {% else %}
+                <table>
+                    <thead>
+                    <tr>
+                        <th scope=\"col\">Class</th>
+                        <th scope=\"col\">Mapping errors</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for class in classes %}
+                        {% set contains_errors = collector.mappingErrors[manager] is defined and collector.mappingErrors[manager][class] is defined %}
+                        <tr class=\"{{ contains_errors ? 'status-error' }}\">
+                            <td>{{ class }}</td>
+                            <td class=\"font-normal\">
+                                {% if contains_errors %}
+                                    <ul>
+                                        {% for error in collector.mappingErrors[manager][class] %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    No errors.
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <script type=\"text/javascript\">//<![CDATA[
+        function explain(link) {
+            \"use strict\";
+
+            var targetId = link.getAttribute('data-target-id');
+            var targetElement = document.getElementById(targetId);
+
+            if (targetElement.style.display != 'block') {
+                Sfjs.load(targetId, link.href, null, function(xhr, el) {
+                    el.innerHTML = 'An error occurred while loading the query explanation.';
+                });
+
+                targetElement.style.display = 'block';
+                link.innerHTML = 'Hide query explanation';
+            } else {
+                targetElement.style.display = 'none';
+                link.innerHTML = 'Explain query';
+            }
+
+            return false;
+        }
+
+        function sortTable(header, column, targetId) {
+            \"use strict\";
+
+            var direction = parseInt(header.getAttribute('data-sort-direction')) || 1,
+                items = [],
+                target = document.getElementById(targetId),
+                rows = target.children,
+                headers = header.parentElement.children,
+                i;
+
+            for (i = 0; i < rows.length; ++i) {
+                items.push(rows[i]);
+            }
+
+            for (i = 0; i < headers.length; ++i) {
+                headers[i].removeAttribute('data-sort-direction');
+                if (headers[i].children.length > 0) {
+                    headers[i].children[0].innerHTML = '';
+                }
+            }
+
+            header.setAttribute('data-sort-direction', (-1*direction).toString());
+            header.children[0].innerHTML = direction > 0 ? '<span class=\"text-muted\">&#9650;</span>' : '<span class=\"text-muted\">&#9660;</span>';
+
+            items.sort(function(a, b) {
+                return direction * (parseFloat(a.children[column].innerHTML) - parseFloat(b.children[column].innerHTML));
+            });
+
+            for (i = 0; i < items.length; ++i) {
+                Sfjs.removeClass(items[i], i % 2 ? 'even' : 'odd');
+                Sfjs.addClass(items[i], i % 2 ? 'odd' : 'even');
+                target.appendChild(items[i]);
+            }
+        }
+
+        if (navigator.clipboard) {
+            document.querySelectorAll('[data-clipboard-text]').forEach(function(button) {
+                Sfjs.removeClass(button, 'hidden');
+                button.addEventListener('click', function() {
+                    navigator.clipboard.writeText(button.getAttribute('data-clipboard-text'));
+                })
+            });
+        }
+
+        //]]></script>
+{% endblock %}
+
+{% macro render_simple_table(label1, label2, data) %}
+    <table>
+        <thead>
+        <tr>
+            <th scope=\"col\" class=\"key\">{{ label1 }}</th>
+            <th scope=\"col\">{{ label2 }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key, value in data %}
+            <tr>
+                <th scope=\"row\">{{ key }}</th>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}
+", "@Doctrine/Collector/db.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

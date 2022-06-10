@@ -31,164 +31,32 @@ class __TwigTemplate_19c2e91fdf3ea58965f9726153398dd99357ad8143615d571fcc1ecf650
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/base.html.twig' %}
-
-{% block body %}
-    {{ include('@WebProfiler/Profiler/header.html.twig', with_context = false) }}
-
-    <div id=\"summary\">
-        {% block summary %}
-            {% if profile is defined %}
-                {% set request_collector = profile.collectors.request|default(false) %}
-                {% set status_code = request_collector ? request_collector.statuscode|default(0) : 0 %}
-                {% set css_class = status_code > 399 ? 'status-error' : status_code > 299 ? 'status-warning' : 'status-success' %}
-
-                <div class=\"status {{ css_class }}\">
-                    <div class=\"container\">
-                        <h2 class=\"break-long-words\">
-                            {% if profile.method|upper in ['GET', 'HEAD'] %}
-                                <a href=\"{{ profile.url }}\">{{ profile.url }}</a>
-                            {% else %}
-                                {{ profile.url }}
-                                {% set referer = request_collector ? request_collector.requestheaders.get('referer') : null %}
-                                {% if referer %}
-                                    <a href=\"{{ referer }}\" class=\"referer\">Return to referer URL</a>
-                                {% endif %}
-                            {% endif %}
-                        </h2>
-
-                        {% if request_collector and request_collector.redirect -%}
-                            {%- set redirect = request_collector.redirect -%}
-                            {%- set controller = redirect.controller -%}
-                            {%- set redirect_route = '@' ~ redirect.route %}
-                            <dl class=\"metadata\">
-                                <dt>
-                                    <span class=\"label\">{{ redirect.status_code }}</span>
-                                    Redirect from
-                                </dt>
-                                <dd>
-                                    {{ 'GET' != redirect.method ? redirect.method }}
-                                    {% if redirect.controller.class is defined -%}
-                                        {%- set link = controller.file|file_link(controller.line) -%}
-                                        {% if link %}<a href=\"{{ link }}\" title=\"{{ controller.file }}\">{% endif -%}
-                                            {{ redirect_route }}
-                                        {%- if link %}</a>{% endif -%}
-                                    {%- else -%}
-                                            {{ redirect_route }}
-                                    {%- endif %}
-                                    (<a href=\"{{ path('_profiler', { token: redirect.token, panel: request.query.get('panel', 'request') }) }}\">{{ redirect.token }}</a>)
-                                </dd>
-                            </dl>
-                        {%- endif %}
-
-                        {% if request_collector and request_collector.forwardtoken -%}
-                            {% set forward_profile = profile.childByToken(request_collector.forwardtoken) %}
-                            {% set controller = forward_profile ? forward_profile.collector('request').controller : 'n/a' %}
-                            <dl class=\"metadata\">
-                                <dt>Forwarded to</dt>
-                                <dd>
-                                    {% set link = controller.file is defined ? controller.file|file_link(controller.line) : null -%}
-                                    {%- if link %}<a href=\"{{ link }}\" title=\"{{ controller.file }}\">{% endif -%}
-                                        {% if controller.class is defined %}
-                                            {{- controller.class|abbr_class|striptags -}}
-                                            {{- controller.method ? ' :: ' ~ controller.method -}}
-                                        {% else %}
-                                            {{- controller -}}
-                                        {% endif %}
-                                    {%- if link %}</a>{% endif %}
-                                    (<a href=\"{{ path('_profiler', { token: request_collector.forwardtoken }) }}\">{{ request_collector.forwardtoken }}</a>)
-                                </dd>
-                            </dl>
-                        {%- endif %}
-
-                        <dl class=\"metadata\">
-                            <dt>Method</dt>
-                            <dd>{{ profile.method|upper }}</dd>
-
-                            <dt>HTTP Status</dt>
-                            <dd>{{ status_code }}</dd>
-
-                            <dt>IP</dt>
-                            <dd>
-                                <a href=\"{{ path('_profiler_search_results', { token: token, limit: 10, ip: profile.ip }) }}\">{{ profile.ip }}</a>
-                            </dd>
-
-                            <dt>Profiled on</dt>
-                            <dd><time datetime=\"{{ profile.time|date('c') }}\">{{ profile.time|date('r') }}</time></dd>
-
-                            <dt>Token</dt>
-                            <dd>{{ profile.token }}</dd>
-                        </dl>
-                    </div>
-                </div>
-            {% endif %}
-        {% endblock %}
-    </div>
-
-    <div id=\"content\" class=\"container\">
-        <div id=\"main\">
-            <div id=\"sidebar\">
-                <div id=\"sidebar-shortcuts\">
-                    <div class=\"shortcuts\">
-                        <a href=\"#\" id=\"sidebarShortcutsMenu\" class=\"visible-small\">
-                            <span class=\"icon\">{{ include('@WebProfiler/Icon/menu.svg') }}</span>
-                        </a>
-
-                        <a class=\"btn btn-sm\" href=\"{{ path('_profiler_search', { limit: 10 }) }}\">Last 10</a>
-                        <a class=\"btn btn-sm\" href=\"{{ path('_profiler', { token: 'latest' }|merge(request.query.all)) }}\">Latest</a>
-
-                        <a class=\"sf-toggle btn btn-sm\" data-toggle-selector=\"#sidebar-search\" {% if tokens is defined or about is defined %}data-toggle-initial=\"display\"{% endif %}>
-                            {{ include('@WebProfiler/Icon/search.svg') }} <span class=\"hidden-small\">Search</span>
-                        </a>
-
-                        {{ render(controller('web_profiler.controller.profiler::searchBarAction', request.query.all)) }}
-                    </div>
-                </div>
-
-                {% if templates is defined %}
-                    <ul id=\"menu-profiler\">
-                        {% for name, template in templates %}
-                            {% set menu -%}
-                                {%- if block('menu', template) is defined -%}
-                                    {% with { collector: profile.getcollector(name), profiler_markup_version: profiler_markup_version } %}
-                                        {{- block('menu', template) -}}
-                                    {% endwith %}
-                                {%- endif -%}
-                            {%- endset %}
-                            {% if menu is not empty %}
-                                <li class=\"{{ name }} {{ name == panel ? 'selected' }}\">
-                                    <a href=\"{{ path('_profiler', { token: token, panel: name }) }}\">{{ menu|raw }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {{ include('@WebProfiler/Profiler/settings.html.twig') }}
-            </div>
-
-            <div id=\"collector-wrapper\">
-                <div id=\"collector-content\">
-                    {{ include('@WebProfiler/Profiler/base_js.html.twig') }}
-                    {% block panel '' %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        (function () {
-            Sfjs.addEventListener(document.getElementById('sidebarShortcutsMenu'), 'click', function (event) {
-                event.preventDefault();
-                Sfjs.toggleClass(document.getElementById('sidebar'), 'expanded');
-            })
-        }());
-    </script>
-{% endblock %}
-", "@WebProfiler/Profiler/layout.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/layout.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/base.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/layout.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/layout.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/base.html.twig", "@WebProfiler/Profiler/layout.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -358,23 +226,15 @@ class __TwigTemplate_19c2e91fdf3ea58965f9726153398dd99357ad8143615d571fcc1ecf650
         }());
     </script>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
-
     // line 7
-
     public function block_summary($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -585,16 +445,15 @@ class __TwigTemplate_19c2e91fdf3ea58965f9726153398dd99357ad8143615d571fcc1ecf650
         }
         // line 92
         echo "        ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 140
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -605,12 +464,17 @@ class __TwigTemplate_19c2e91fdf3ea58965f9726153398dd99357ad8143615d571fcc1ecf650
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "panel"));
 
         echo "";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
     public function isTraitable()
@@ -623,28 +487,161 @@ class __TwigTemplate_19c2e91fdf3ea58965f9726153398dd99357ad8143615d571fcc1ecf650
         return array (  457 => 140,  447 => 92,  439 => 87,  431 => 84,  422 => 80,  415 => 76,  409 => 73,  404 => 70,  395 => 66,  391 => 65,  388 => 63,  385 => 61,  383 => 60,  381 => 59,  373 => 58,  371 => 57,  366 => 54,  363 => 53,  361 => 52,  359 => 51,  356 => 50,  347 => 46,  344 => 44,  339 => 42,  337 => 41,  329 => 40,  327 => 39,  325 => 38,  321 => 37,  314 => 33,  310 => 31,  308 => 30,  306 => 29,  304 => 28,  302 => 27,  298 => 25,  295 => 24,  289 => 22,  286 => 21,  284 => 20,  279 => 19,  271 => 17,  269 => 16,  263 => 13,  260 => 12,  257 => 11,  254 => 10,  251 => 9,  248 => 8,  238 => 7,  216 => 141,  214 => 140,  210 => 139,  202 => 134,  199 => 133,  195 => 131,  181 => 130,  173 => 127,  166 => 126,  163 => 125,  158 => 121,  150 => 120,  148 => 119,  145 => 118,  128 => 117,  125 => 116,  123 => 115,  116 => 111,  110 => 108,  104 => 107,  99 => 105,  95 => 104,  89 => 101,  79 => 93,  77 => 7,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/base.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/base.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/layout.html.twig"));
+{% block body %}
+    {{ include('@WebProfiler/Profiler/header.html.twig', with_context = false) }}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/layout.html.twig"));
+    <div id=\"summary\">
+        {% block summary %}
+            {% if profile is defined %}
+                {% set request_collector = profile.collectors.request|default(false) %}
+                {% set status_code = request_collector ? request_collector.statuscode|default(0) : 0 %}
+                {% set css_class = status_code > 399 ? 'status-error' : status_code > 299 ? 'status-warning' : 'status-success' %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/base.html.twig", "@WebProfiler/Profiler/layout.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+                <div class=\"status {{ css_class }}\">
+                    <div class=\"container\">
+                        <h2 class=\"break-long-words\">
+                            {% if profile.method|upper in ['GET', 'HEAD'] %}
+                                <a href=\"{{ profile.url }}\">{{ profile.url }}</a>
+                            {% else %}
+                                {{ profile.url }}
+                                {% set referer = request_collector ? request_collector.requestheaders.get('referer') : null %}
+                                {% if referer %}
+                                    <a href=\"{{ referer }}\" class=\"referer\">Return to referer URL</a>
+                                {% endif %}
+                            {% endif %}
+                        </h2>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+                        {% if request_collector and request_collector.redirect -%}
+                            {%- set redirect = request_collector.redirect -%}
+                            {%- set controller = redirect.controller -%}
+                            {%- set redirect_route = '@' ~ redirect.route %}
+                            <dl class=\"metadata\">
+                                <dt>
+                                    <span class=\"label\">{{ redirect.status_code }}</span>
+                                    Redirect from
+                                </dt>
+                                <dd>
+                                    {{ 'GET' != redirect.method ? redirect.method }}
+                                    {% if redirect.controller.class is defined -%}
+                                        {%- set link = controller.file|file_link(controller.line) -%}
+                                        {% if link %}<a href=\"{{ link }}\" title=\"{{ controller.file }}\">{% endif -%}
+                                            {{ redirect_route }}
+                                        {%- if link %}</a>{% endif -%}
+                                    {%- else -%}
+                                            {{ redirect_route }}
+                                    {%- endif %}
+                                    (<a href=\"{{ path('_profiler', { token: redirect.token, panel: request.query.get('panel', 'request') }) }}\">{{ redirect.token }}</a>)
+                                </dd>
+                            </dl>
+                        {%- endif %}
 
+                        {% if request_collector and request_collector.forwardtoken -%}
+                            {% set forward_profile = profile.childByToken(request_collector.forwardtoken) %}
+                            {% set controller = forward_profile ? forward_profile.collector('request').controller : 'n/a' %}
+                            <dl class=\"metadata\">
+                                <dt>Forwarded to</dt>
+                                <dd>
+                                    {% set link = controller.file is defined ? controller.file|file_link(controller.line) : null -%}
+                                    {%- if link %}<a href=\"{{ link }}\" title=\"{{ controller.file }}\">{% endif -%}
+                                        {% if controller.class is defined %}
+                                            {{- controller.class|abbr_class|striptags -}}
+                                            {{- controller.method ? ' :: ' ~ controller.method -}}
+                                        {% else %}
+                                            {{- controller -}}
+                                        {% endif %}
+                                    {%- if link %}</a>{% endif %}
+                                    (<a href=\"{{ path('_profiler', { token: request_collector.forwardtoken }) }}\">{{ request_collector.forwardtoken }}</a>)
+                                </dd>
+                            </dl>
+                        {%- endif %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+                        <dl class=\"metadata\">
+                            <dt>Method</dt>
+                            <dd>{{ profile.method|upper }}</dd>
 
+                            <dt>HTTP Status</dt>
+                            <dd>{{ status_code }}</dd>
+
+                            <dt>IP</dt>
+                            <dd>
+                                <a href=\"{{ path('_profiler_search_results', { token: token, limit: 10, ip: profile.ip }) }}\">{{ profile.ip }}</a>
+                            </dd>
+
+                            <dt>Profiled on</dt>
+                            <dd><time datetime=\"{{ profile.time|date('c') }}\">{{ profile.time|date('r') }}</time></dd>
+
+                            <dt>Token</dt>
+                            <dd>{{ profile.token }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+
+    <div id=\"content\" class=\"container\">
+        <div id=\"main\">
+            <div id=\"sidebar\">
+                <div id=\"sidebar-shortcuts\">
+                    <div class=\"shortcuts\">
+                        <a href=\"#\" id=\"sidebarShortcutsMenu\" class=\"visible-small\">
+                            <span class=\"icon\">{{ include('@WebProfiler/Icon/menu.svg') }}</span>
+                        </a>
+
+                        <a class=\"btn btn-sm\" href=\"{{ path('_profiler_search', { limit: 10 }) }}\">Last 10</a>
+                        <a class=\"btn btn-sm\" href=\"{{ path('_profiler', { token: 'latest' }|merge(request.query.all)) }}\">Latest</a>
+
+                        <a class=\"sf-toggle btn btn-sm\" data-toggle-selector=\"#sidebar-search\" {% if tokens is defined or about is defined %}data-toggle-initial=\"display\"{% endif %}>
+                            {{ include('@WebProfiler/Icon/search.svg') }} <span class=\"hidden-small\">Search</span>
+                        </a>
+
+                        {{ render(controller('web_profiler.controller.profiler::searchBarAction', request.query.all)) }}
+                    </div>
+                </div>
+
+                {% if templates is defined %}
+                    <ul id=\"menu-profiler\">
+                        {% for name, template in templates %}
+                            {% set menu -%}
+                                {%- if block('menu', template) is defined -%}
+                                    {% with { collector: profile.getcollector(name), profiler_markup_version: profiler_markup_version } %}
+                                        {{- block('menu', template) -}}
+                                    {% endwith %}
+                                {%- endif -%}
+                            {%- endset %}
+                            {% if menu is not empty %}
+                                <li class=\"{{ name }} {{ name == panel ? 'selected' }}\">
+                                    <a href=\"{{ path('_profiler', { token: token, panel: name }) }}\">{{ menu|raw }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {{ include('@WebProfiler/Profiler/settings.html.twig') }}
+            </div>
+
+            <div id=\"collector-wrapper\">
+                <div id=\"collector-content\">
+                    {{ include('@WebProfiler/Profiler/base_js.html.twig') }}
+                    {% block panel '' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            Sfjs.addEventListener(document.getElementById('sidebarShortcutsMenu'), 'click', function (event) {
+                event.preventDefault();
+                Sfjs.toggleClass(document.getElementById('sidebar'), 'expanded');
+            })
+        }());
+    </script>
+{% endblock %}
+", "@WebProfiler/Profiler/layout.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/layout.html.twig");
     }
 }

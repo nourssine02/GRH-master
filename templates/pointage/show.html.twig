@@ -28,7 +28,7 @@
 					</thead>
 					{% for pointage in pointages %}
 
-
+						{% if pointage.mois  == mois %}
 
 					<form action="{{path( 'pointages_update' , { 'id' : pointage.employe.id})}} " method="post">
 
@@ -52,7 +52,7 @@
 									{% for jour in sommeJour %}
 										<input style="margin-left: 6px;" type="checkbox" class="jour" value="{{jour}}" name="{{pointage.employe.id}}[]"
 												{% if jour in pointage.listeJours %} checked {% endif %}
-{#												{% if aujourdhui==jour %} checked {% endif %}#}
+
 										>
 
 									{% endfor %}
@@ -68,12 +68,12 @@
 
 							</tbody>
 					</form>
+						{% endif %}
 					{% endfor %}
 
 				</table>
 			</div>
 		</div>
-
 	</div>
 
 {% endblock %}

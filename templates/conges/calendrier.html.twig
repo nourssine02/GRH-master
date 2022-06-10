@@ -28,8 +28,7 @@
 
 	<div id="calendrier"></div>
 <!--Modal -->
-
-	<div  class="modal shadow-1 white rounded-3" id="calendarModal" style="width: 40%; height: 35%;">
+	<div  class="modal shadow-1 white rounded-3" id="myModal"  style="width: 40%; height: 35%;">
 		<div class="modal-header" style="color: brown;">
 			congés Details
 		</div>
@@ -78,8 +77,8 @@ let start = new Date(dateStart).toISOString().slice(0, 10);
 
 let dateEnd = eventObj.end;
 let end = new Date(dateEnd).toISOString().slice(0, 10);
-	let modal = new Axentix.Modal('#calendarModal');
-	modal.open();
+let modal = new Axentix.Modal('#myModal');
+modal.open();
 
 $('#employe').html('Nom d\'employe  : ' + eventObj.extendedProps.employe);
 $('#dateD').html('Date de demande : ' + new Date(eventObj.extendedProps.dateDemande).toISOString().slice(0, 10));
@@ -89,7 +88,6 @@ $('#dateE').html('Date de retour : ' + end);
 $('#nbreJours').html('Nombre de jour : ' + eventObj.extendedProps.nbreJours);
 
 $('#myId').val(eventObj.id);
-
 
 }
 

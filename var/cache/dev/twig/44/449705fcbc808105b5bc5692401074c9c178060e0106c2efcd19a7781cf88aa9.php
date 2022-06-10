@@ -31,34 +31,23 @@ class __TwigTemplate_410ca65d556a7e08e5899d2b3027d111cbb2cf545cfde9f566e4ca812fc
         ];
     }
 
-    public function getSourceContext()
+    protected function doDisplay(array $context, array $blocks = [])
     {
-        return new Source("{% block toolbar %}
-    {% set icon %}
-        {{ include('@WebProfiler/Icon/symfony.svg') }}
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/cancel.html.twig"));
 
-        <span class=\"sf-toolbar-value sf-toolbar-ajax-request-counter\">
-            Loading&hellip;
-        </span>
-    {% endset %}
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/cancel.html.twig"));
 
-    {% set text %}
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Loading the web debug toolbar&hellip;</b>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            Attempt #<span id=\"sfLoadCounter-{{ token }}\"></span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>
-                <button class=\"sf-cancel-button\" type=\"button\" id=\"sfLoadCancel-{{ token }}\" title=\"Cancel loading\">Cancel</button>
-            </b>
-        </div>
-    {% endset %}
+        // line 1
+        $this->displayBlock('toolbar', $context, $blocks);
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
-{% endblock %}
-", "@WebProfiler/Profiler/cancel.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/cancel.html.twig");
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
     }
 
     public function block_toolbar($context, array $blocks = [])
@@ -133,22 +122,33 @@ class __TwigTemplate_410ca65d556a7e08e5899d2b3027d111cbb2cf545cfde9f566e4ca812fc
         return array (  104 => 24,  101 => 23,  94 => 19,  87 => 15,  81 => 11,  79 => 10,  76 => 9,  66 => 3,  63 => 2,  44 => 1,);
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
+    public function getSourceContext()
     {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/cancel.html.twig"));
+        return new Source("{% block toolbar %}
+    {% set icon %}
+        {{ include('@WebProfiler/Icon/symfony.svg') }}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/cancel.html.twig"));
+        <span class=\"sf-toolbar-value sf-toolbar-ajax-request-counter\">
+            Loading&hellip;
+        </span>
+    {% endset %}
 
-        // line 1
-        $this->displayBlock('toolbar', $context, $blocks);
+    {% set text %}
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Loading the web debug toolbar&hellip;</b>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            Attempt #<span id=\"sfLoadCounter-{{ token }}\"></span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>
+                <button class=\"sf-cancel-button\" type=\"button\" id=\"sfLoadCancel-{{ token }}\" title=\"Cancel loading\">Cancel</button>
+            </b>
+        </div>
+    {% endset %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
-
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
+{% endblock %}
+", "@WebProfiler/Profiler/cancel.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/cancel.html.twig");
     }
 }

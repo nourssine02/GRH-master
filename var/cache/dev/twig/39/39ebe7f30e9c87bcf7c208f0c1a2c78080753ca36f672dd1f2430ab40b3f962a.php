@@ -30,67 +30,6 @@ class __TwigTemplate_72eb5f5f39d6871aeb6a05774cbb344de46fc74d2e8830ebd475c1520ce
         ];
     }
 
-    public function getSourceContext()
-    {
-        return new Source("<!-- START of Symfony Web Debug Toolbar -->
-<div id=\"sfMiniToolbar-{{ token }}\" class=\"sf-minitoolbar\" data-no-turbolink>
-    <button type=\"button\" title=\"Show Symfony toolbar\" id=\"sfToolbarMiniToggler-{{ token }}\" accesskey=\"D\" aria-expanded=\"false\" aria-controls=\"sfToolbarMainContent-{{ token }}\">
-        {{ include('@WebProfiler/Icon/symfony.svg') }}
-    </button>
-</div>
-<div id=\"sfToolbarClearer-{{ token }}\" class=\"sf-toolbar-clearer\"></div>
-
-<div id=\"sfToolbarMainContent-{{ token }}\" class=\"sf-toolbarreset clear-fix\" data-no-turbolink>
-    {% for name, template in templates %}
-        {% if block('toolbar', template) is defined %}
-            {% with {
-                collector: profile ? profile.getcollector(name) : null,
-                profiler_url: profiler_url,
-                token: token ?? (profile ? profile.token : null),
-                name: name,
-                profiler_markup_version: profiler_markup_version,
-                csp_script_nonce: csp_script_nonce,
-                csp_style_nonce: csp_style_nonce
-              } %}
-                {{ block('toolbar', template) }}
-            {% endwith %}
-        {% endif %}
-    {% endfor %}
-    {% if full_stack %}
-        <div class=\"sf-full-stack sf-toolbar-block sf-toolbar-block-full-stack sf-toolbar-status-red sf-toolbar-block-right\">
-            <div class=\"sf-toolbar-icon\">
-                <span class=\"sf-toolbar-value\">Using symfony/symfony is NOT supported</span>
-            </div>
-            <div class=\"sf-toolbar-info sf-toolbar-status-red\">
-                <p>This project is using Symfony via the \"symfony/symfony\" package.</p>
-                <p>This is NOT supported anymore since Symfony 4.0.</p>
-                <p>Even if it seems to work well, it has some important limitations with no workarounds.</p>
-                <p>Using this package also makes your project slower.</p>
-
-                <strong>Please, stop using this package and replace it with individual packages instead.</strong>
-            </div>
-            <div></div>
-        </div>
-    {% endif %}
-
-    <button class=\"hide-button\" type=\"button\" id=\"sfToolbarHideButton-{{ token }}\" title=\"Close Toolbar\" accesskey=\"D\" aria-expanded=\"true\" aria-controls=\"sfToolbarMainContent-{{ token }}\">
-        {{ include('@WebProfiler/Icon/close.svg') }}
-    </button>
-</div>
-<!-- END of Symfony Web Debug Toolbar -->
-", "@WebProfiler/Profiler/toolbar.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar.html.twig");
-    }
-
-    public function isTraitable()
-    {
-        return false;
-    }
-
-    public function getDebugInfo()
-    {
-        return array (  159 => 43,  153 => 42,  150 => 41,  133 => 26,  130 => 25,  116 => 24,  113 => 23,  107 => 21,  100 => 19,  99 => 18,  98 => 17,  97 => 16,  96 => 15,  95 => 14,  94 => 13,  91 => 12,  88 => 11,  71 => 10,  67 => 9,  62 => 7,  56 => 4,  50 => 3,  46 => 2,  43 => 1,);
-    }
-
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -223,10 +162,10 @@ $context["name"], "profiler_markup_version" =>                 // line 17
 </div>
 <!-- END of Symfony Web Debug Toolbar -->
 ";
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
     }
@@ -234,5 +173,66 @@ $context["name"], "profiler_markup_version" =>                 // line 17
     public function getTemplateName()
     {
         return "@WebProfiler/Profiler/toolbar.html.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  159 => 43,  153 => 42,  150 => 41,  133 => 26,  130 => 25,  116 => 24,  113 => 23,  107 => 21,  100 => 19,  99 => 18,  98 => 17,  97 => 16,  96 => 15,  95 => 14,  94 => 13,  91 => 12,  88 => 11,  71 => 10,  67 => 9,  62 => 7,  56 => 4,  50 => 3,  46 => 2,  43 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("<!-- START of Symfony Web Debug Toolbar -->
+<div id=\"sfMiniToolbar-{{ token }}\" class=\"sf-minitoolbar\" data-no-turbolink>
+    <button type=\"button\" title=\"Show Symfony toolbar\" id=\"sfToolbarMiniToggler-{{ token }}\" accesskey=\"D\" aria-expanded=\"false\" aria-controls=\"sfToolbarMainContent-{{ token }}\">
+        {{ include('@WebProfiler/Icon/symfony.svg') }}
+    </button>
+</div>
+<div id=\"sfToolbarClearer-{{ token }}\" class=\"sf-toolbar-clearer\"></div>
+
+<div id=\"sfToolbarMainContent-{{ token }}\" class=\"sf-toolbarreset clear-fix\" data-no-turbolink>
+    {% for name, template in templates %}
+        {% if block('toolbar', template) is defined %}
+            {% with {
+                collector: profile ? profile.getcollector(name) : null,
+                profiler_url: profiler_url,
+                token: token ?? (profile ? profile.token : null),
+                name: name,
+                profiler_markup_version: profiler_markup_version,
+                csp_script_nonce: csp_script_nonce,
+                csp_style_nonce: csp_style_nonce
+              } %}
+                {{ block('toolbar', template) }}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+    {% if full_stack %}
+        <div class=\"sf-full-stack sf-toolbar-block sf-toolbar-block-full-stack sf-toolbar-status-red sf-toolbar-block-right\">
+            <div class=\"sf-toolbar-icon\">
+                <span class=\"sf-toolbar-value\">Using symfony/symfony is NOT supported</span>
+            </div>
+            <div class=\"sf-toolbar-info sf-toolbar-status-red\">
+                <p>This project is using Symfony via the \"symfony/symfony\" package.</p>
+                <p>This is NOT supported anymore since Symfony 4.0.</p>
+                <p>Even if it seems to work well, it has some important limitations with no workarounds.</p>
+                <p>Using this package also makes your project slower.</p>
+
+                <strong>Please, stop using this package and replace it with individual packages instead.</strong>
+            </div>
+            <div></div>
+        </div>
+    {% endif %}
+
+    <button class=\"hide-button\" type=\"button\" id=\"sfToolbarHideButton-{{ token }}\" title=\"Close Toolbar\" accesskey=\"D\" aria-expanded=\"true\" aria-controls=\"sfToolbarMainContent-{{ token }}\">
+        {{ include('@WebProfiler/Icon/close.svg') }}
+    </button>
+</div>
+<!-- END of Symfony Web Debug Toolbar -->
+", "@WebProfiler/Profiler/toolbar.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar.html.twig");
     }
 }

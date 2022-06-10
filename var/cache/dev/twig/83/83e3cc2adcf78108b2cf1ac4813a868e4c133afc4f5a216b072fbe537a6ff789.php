@@ -143,23 +143,29 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 <h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
     Fiche de Paie
 </h4>
-
+    ";
+        // line 51
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+            // line 52
+            echo "
 
     <a class=\"px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple\"
         style=\"margin-left: 901px; \"
          href=\"";
-        // line 55
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_paie_new");
-        echo "\" 
+            // line 56
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_paie_new");
+            echo "\" 
          >
         Ajouter
     </a>
-
-
+";
+        }
+        // line 61
+        echo "
     <br>
     <div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 50px\">
         <div class=\"w-full overflow-x-auto\">
-            <table class=\"w-full whitespace-no-wrap\" id=\"example\">
+            <table class=\"w-full whitespace-no-wrap\">
 
 
                 <thead>
@@ -176,54 +182,54 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
                 <tbody class=\"bg-white divide-y dark:divide-gray-700 dark:bg-gray-800\">
                     <tr class=\"text-gray-700 dark:text-gray-400\">
                     ";
-        // line 80
+        // line 81
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["fiches"]) || array_key_exists("fiches", $context) ? $context["fiches"] : (function () { throw new RuntimeError('Variable "fiches" does not exist.', 80, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["fiches"]) || array_key_exists("fiches", $context) ? $context["fiches"] : (function () { throw new RuntimeError('Variable "fiches" does not exist.', 81, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["fiche"]) {
-            // line 81
+            // line 82
             echo "                        ";
             if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-                // line 82
+                // line 83
                 echo "                    <tr class=\"text-gray-700 dark:text-gray-400\">
 
 
                         <td class=\"px-4 py-3 text-sm\">
                             ";
-                // line 86
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "datePaiement", [], "any", false, false, false, 86), "format", [0 => "m-Y"], "method", false, false, false, 86), "html", null, true);
+                // line 87
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "datePaiement", [], "any", false, false, false, 87), "format", [0 => "m-Y"], "method", false, false, false, 87), "html", null, true);
                 echo "
                         </td>
 
                         <td class=\"px-4 py-3 text-sm\">
                             ";
-                // line 90
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 90), "matricule", [], "any", false, false, false, 90), "html", null, true);
+                // line 91
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 91), "matricule", [], "any", false, false, false, 91), "html", null, true);
                 echo "
                         </td>
 
 
                         <td class=\"px-4 py-3 text-sm\">
                             ";
-                // line 95
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 95), "nom", [], "any", false, false, false, 95), "html", null, true);
+                // line 96
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 96), "nom", [], "any", false, false, false, 96), "html", null, true);
                 echo " ";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 95), "prenom", [], "any", false, false, false, 95), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 96), "prenom", [], "any", false, false, false, 96), "html", null, true);
                 echo "
 
                         </td>
 
                         <td class=\"px-4 py-3 text-sm\" style=\"color: brown; font-weight: bold;\">
                             ";
-                // line 100
-                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["fiche"], "netAPayer", [], "any", false, false, false, 100), 3), "html", null, true);
+                // line 101
+                echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["fiche"], "netAPayer", [], "any", false, false, false, 101), 3), "html", null, true);
                 echo " DT
 
                         </td>
 
                         <td class=\"px-4 py-3 text-sm\">
                             ";
-                // line 105
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 105), "moyenPaiement", [], "any", false, false, false, 105), "html", null, true);
+                // line 106
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 106), "moyenPaiement", [], "any", false, false, false, 106), "html", null, true);
                 echo "
                         </td>
 
@@ -234,8 +240,8 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 
                                 <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
                                    aria-label=\"Imprimer\" href=\"";
-                // line 114
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("imprime", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 114)]), "html", null, true);
+                // line 115
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("imprime", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 115)]), "html", null, true);
                 echo "\" >
 
                                     <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 22 22\">
@@ -247,8 +253,8 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
                                 </a>
                                 <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
                                    aria-label=\"Delete\"  href=\"";
-                // line 124
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 124)]), "html", null, true);
+                // line 125
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 125)]), "html", null, true);
                 echo "\" onclick=\"return confirm('es-tu sûr ?')\">
 
                                     <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 20 20\">
@@ -265,51 +271,51 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
                     </tr>
                         ";
             } elseif ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_USER")) {
-                // line 139
+                // line 140
                 echo "                            ";
-                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 139, $this->source); })()), "user", [], "any", false, false, false, 139), "name", [], "any", false, false, false, 139), "id", [], "any", false, false, false, 139), twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 139), "id", [], "any", false, false, false, 139)))) {
-                    // line 140
+                if ((0 === twig_compare(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 140, $this->source); })()), "user", [], "any", false, false, false, 140), "name", [], "any", false, false, false, 140), "id", [], "any", false, false, false, 140), twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 140), "id", [], "any", false, false, false, 140)))) {
+                    // line 141
                     echo "
                                 <tr class=\"text-gray-700 dark:text-gray-400\">
 
 
                                     <td class=\"px-4 py-3 text-sm\">
                                         ";
-                    // line 145
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "datePaiement", [], "any", false, false, false, 145), "format", [0 => "m-Y"], "method", false, false, false, 145), "html", null, true);
+                    // line 146
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "datePaiement", [], "any", false, false, false, 146), "format", [0 => "m-Y"], "method", false, false, false, 146), "html", null, true);
                     echo "
                                     </td>
 
                                     <td class=\"px-4 py-3 text-sm\">
                                         ";
-                    // line 149
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 149), "matricule", [], "any", false, false, false, 149), "html", null, true);
+                    // line 150
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 150), "matricule", [], "any", false, false, false, 150), "html", null, true);
                     echo "
                                     </td>
 
 
                                     <td class=\"px-4 py-3 text-sm\">
                                         ";
-                    // line 154
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 154), "nom", [], "any", false, false, false, 154), "html", null, true);
+                    // line 155
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 155), "nom", [], "any", false, false, false, 155), "html", null, true);
                     echo " ";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 154), "prenom", [], "any", false, false, false, 154), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 155), "prenom", [], "any", false, false, false, 155), "html", null, true);
                     echo "
 
                                     </td>
 
                                     <td class=\"px-4 py-3 text-sm\" style=\"color: brown; font-weight: bold;\">
                                         ";
-                    // line 159
-                    echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["fiche"], "netAPayer", [], "any", false, false, false, 159), 3), "html", null, true);
+                    // line 160
+                    echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["fiche"], "netAPayer", [], "any", false, false, false, 160), 3), "html", null, true);
                     echo " DT
 
                                     </td>
 
                                     <td class=\"px-4 py-3 text-sm\">
                                         ";
-                    // line 164
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 164), "moyenPaiement", [], "any", false, false, false, 164), "html", null, true);
+                    // line 165
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["fiche"], "employe", [], "any", false, false, false, 165), "moyenPaiement", [], "any", false, false, false, 165), "html", null, true);
                     echo "
                                     </td>
 
@@ -320,8 +326,8 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 
                                             <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
                                                aria-label=\"Imprimer\" href=\"";
-                    // line 173
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("imprime", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 173)]), "html", null, true);
+                    // line 174
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("imprime", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 174)]), "html", null, true);
                     echo "\" >
 
                                                 <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 22 22\">
@@ -333,8 +339,8 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
                                             </a>
                                             <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
                                                aria-label=\"Delete\"  href=\"";
-                    // line 183
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 183)]), "html", null, true);
+                    // line 184
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("fiche_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["fiche"], "id", [], "any", false, false, false, 184)]), "html", null, true);
                     echo "\" onclick=\"return confirm('es-tu sûr ?')\">
 
                                                 <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 20 20\">
@@ -352,10 +358,10 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 
                             ";
                 }
-                // line 199
+                // line 200
                 echo "                        ";
             }
-            // line 200
+            // line 201
             echo "
 
                     ";
@@ -363,7 +369,7 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['fiche'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 203
+        // line 204
         echo "
                     </tr>
 
@@ -374,30 +380,6 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
     </div>
 
 
-<script>
-    \$(document).ready(function() {
-        \$('#example').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5',
-                'print'
-            ]
-        } );
-    } );
-</script>
-
-    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css\">
-    <script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>
-    <script src=\"https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js\"></script>
-
-    <script src=\"https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
-    <script src=\"https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js\"></script>
-    <script src=\"https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js\"></script>
     ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -419,7 +401,7 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 
     public function getDebugInfo()
     {
-        return array (  367 => 203,  359 => 200,  356 => 199,  337 => 183,  324 => 173,  312 => 164,  304 => 159,  294 => 154,  286 => 149,  279 => 145,  272 => 140,  269 => 139,  251 => 124,  238 => 114,  226 => 105,  218 => 100,  208 => 95,  200 => 90,  193 => 86,  187 => 82,  184 => 81,  180 => 80,  152 => 55,  141 => 46,  129 => 41,  125 => 40,  89 => 6,  85 => 2,  36 => 1,);
+        return array (  373 => 204,  365 => 201,  362 => 200,  343 => 184,  330 => 174,  318 => 165,  310 => 160,  300 => 155,  292 => 150,  285 => 146,  278 => 141,  275 => 140,  257 => 125,  244 => 115,  232 => 106,  224 => 101,  214 => 96,  206 => 91,  199 => 87,  193 => 83,  190 => 82,  186 => 81,  164 => 61,  156 => 56,  150 => 52,  148 => 51,  141 => 46,  129 => 41,  125 => 40,  89 => 6,  85 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -474,6 +456,7 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
 <h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
     Fiche de Paie
 </h4>
+    {% if is_granted('ROLE_ADMIN') %}
 
 
     <a class=\"px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple\"
@@ -482,12 +465,12 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
          >
         Ajouter
     </a>
-
+{% endif %}
 
     <br>
     <div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 50px\">
         <div class=\"w-full overflow-x-auto\">
-            <table class=\"w-full whitespace-no-wrap\" id=\"example\">
+            <table class=\"w-full whitespace-no-wrap\">
 
 
                 <thead>
@@ -636,30 +619,6 @@ class __TwigTemplate_d6e974a6c96dec623d7e95e1ad8ba226683bfecd2e06e2fb2d92c7edce7
     </div>
 
 
-<script>
-    \$(document).ready(function() {
-        \$('#example').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5',
-                'print'
-            ]
-        } );
-    } );
-</script>
-
-    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css\">
-    <script src=\"https://code.jquery.com/jquery-3.3.1.js\"></script>
-    <script src=\"https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js\"></script>
-
-    <script src=\"https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js\"></script>
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
-    <script src=\"https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js\"></script>
-    <script src=\"https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js\"></script>
     {% endblock %}", "fiche_paie/list.html.twig", "/home/hp/Téléchargements/GRH-master/templates/fiche_paie/list.html.twig");
     }
 }

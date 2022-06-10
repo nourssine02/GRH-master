@@ -31,126 +31,32 @@ class __TwigTemplate_972210447ae9097e2bcee4b0e7bacff29e6b792643a6c65b772014a7aaf
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% set time = collector.templatecount ? '%0.0f'|format(collector.time) : 'n/a' %}
-    {% set icon %}
-        {{ include('@WebProfiler/Icon/twig.svg') }}
-        <span class=\"sf-toolbar-value\">{{ time }}</span>
-        <span class=\"sf-toolbar-label\">ms</span>
-    {% endset %}
-
-    {% set text %}
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Render Time</b>
-            <span>{{ time }} ms</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Template Calls</b>
-            <span class=\"sf-toolbar-status\">{{ collector.templatecount }}</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Block Calls</b>
-            <span class=\"sf-toolbar-status\">{{ collector.blockcount }}</span>
-        </div>
-        <div class=\"sf-toolbar-info-piece\">
-            <b>Macro Calls</b>
-            <span class=\"sf-toolbar-status\">{{ collector.macrocount }}</span>
-        </div>
-    {% endset %}
-
-    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label {{ 0 == collector.templateCount ? 'disabled' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/twig.svg') }}</span>
-        <strong>Twig</strong>
-    </span>
-{% endblock %}
-
-{% block panel %}
-    {% if collector.templatecount == 0 %}
-        <h2>Twig</h2>
-
-        <div class=\"empty\">
-            <p>No Twig templates were rendered for this request.</p>
-        </div>
-    {% else %}
-        <h2>Twig Metrics</h2>
-
-        <div class=\"metrics\">
-            <div class=\"metric\">
-                <span class=\"value\">{{ '%0.0f'|format(collector.time) }} <span class=\"unit\">ms</span></span>
-                <span class=\"label\">Render time</span>
-            </div>
-
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.templatecount }}</span>
-                <span class=\"label\">Template calls</span>
-            </div>
-
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.blockcount }}</span>
-                <span class=\"label\">Block calls</span>
-            </div>
-
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.macrocount }}</span>
-                <span class=\"label\">Macro calls</span>
-            </div>
-        </div>
-
-        <p class=\"help\">
-            Render time includes sub-requests rendering time (if any).
-        </p>
-
-        <h2>Rendered Templates</h2>
-
-        <table id=\"twig-table\">
-            <thead>
-            <tr>
-                <th scope=\"col\">Template Name &amp; Path</th>
-                <th class=\"num-col\" scope=\"col\">Render Count</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for template, count in collector.templates %}
-                <tr>
-                    {%- set file = collector.templatePaths[template]|default(false) -%}
-                    {%- set link = file ? file|file_link(1) : false -%}
-                    <td>
-                        <span class=\"sf-icon icon-twig\">{{ include('@WebProfiler/Icon/twig.svg') }}</span>
-                        {% if link %}
-                            <a href=\"{{ link }}\" title=\"{{ file }}\">{{ template }}</a>
-                            <div>
-                                <a class=\"text-muted\" href=\"{{ link }}\" title=\"{{ file }}\">
-                                    {{ file|file_relative|default(file) }}
-                                </a>
-                            </div>
-                        {% else %}
-                            {{ template }}
-                        {% endif %}
-                    </td>
-                    <td class=\"font-normal num-col\">{{ count }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <h2>Rendering Call Graph</h2>
-
-        <div id=\"twig-dump\">
-            {{ collector.htmlcallgraph }}
-        </div>
-    {% endif %}
-{% endblock %}
-", "@WebProfiler/Collector/twig.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/twig.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/twig.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/twig.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/twig.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -220,23 +126,15 @@ class __TwigTemplate_972210447ae9097e2bcee4b0e7bacff29e6b792643a6c65b772014a7aaf
         echo twig_include($this->env, $context, "@WebProfiler/Profiler/toolbar_item.html.twig", ["link" => (isset($context["profiler_url"]) || array_key_exists("profiler_url", $context) ? $context["profiler_url"] : (function () { throw new RuntimeError('Variable "profiler_url" does not exist.', 30, $this->source); })())]);
         echo "
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/twig.html.twig";
-    }
-
     // line 33
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -257,16 +155,15 @@ class __TwigTemplate_972210447ae9097e2bcee4b0e7bacff29e6b792643a6c65b772014a7aaf
         <strong>Twig</strong>
     </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 40
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -434,12 +331,17 @@ class __TwigTemplate_972210447ae9097e2bcee4b0e7bacff29e6b792643a6c65b772014a7aaf
         </div>
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/twig.html.twig";
     }
 
     public function isTraitable()
@@ -452,28 +354,123 @@ class __TwigTemplate_972210447ae9097e2bcee4b0e7bacff29e6b792643a6c65b772014a7aaf
         return array (  329 => 112,  321 => 106,  304 => 103,  301 => 102,  295 => 100,  288 => 96,  282 => 95,  272 => 93,  270 => 92,  266 => 91,  263 => 90,  261 => 89,  259 => 88,  257 => 87,  240 => 86,  218 => 67,  210 => 62,  202 => 57,  194 => 52,  188 => 48,  180 => 42,  177 => 41,  167 => 40,  153 => 35,  148 => 34,  138 => 33,  126 => 30,  123 => 29,  117 => 26,  110 => 22,  103 => 18,  96 => 14,  92 => 12,  90 => 11,  87 => 10,  81 => 7,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/twig.html.twig"));
+{% block toolbar %}
+    {% set time = collector.templatecount ? '%0.0f'|format(collector.time) : 'n/a' %}
+    {% set icon %}
+        {{ include('@WebProfiler/Icon/twig.svg') }}
+        <span class=\"sf-toolbar-value\">{{ time }}</span>
+        <span class=\"sf-toolbar-label\">ms</span>
+    {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/twig.html.twig"));
+    {% set text %}
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Render Time</b>
+            <span>{{ time }} ms</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Template Calls</b>
+            <span class=\"sf-toolbar-status\">{{ collector.templatecount }}</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Block Calls</b>
+            <span class=\"sf-toolbar-status\">{{ collector.blockcount }}</span>
+        </div>
+        <div class=\"sf-toolbar-info-piece\">
+            <b>Macro Calls</b>
+            <span class=\"sf-toolbar-status\">{{ collector.macrocount }}</span>
+        </div>
+    {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/twig.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
+{% endblock %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+{% block menu %}
+    <span class=\"label {{ 0 == collector.templateCount ? 'disabled' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/twig.svg') }}</span>
+        <strong>Twig</strong>
+    </span>
+{% endblock %}
 
+{% block panel %}
+    {% if collector.templatecount == 0 %}
+        <h2>Twig</h2>
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        <div class=\"empty\">
+            <p>No Twig templates were rendered for this request.</p>
+        </div>
+    {% else %}
+        <h2>Twig Metrics</h2>
 
+        <div class=\"metrics\">
+            <div class=\"metric\">
+                <span class=\"value\">{{ '%0.0f'|format(collector.time) }} <span class=\"unit\">ms</span></span>
+                <span class=\"label\">Render time</span>
+            </div>
+
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.templatecount }}</span>
+                <span class=\"label\">Template calls</span>
+            </div>
+
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.blockcount }}</span>
+                <span class=\"label\">Block calls</span>
+            </div>
+
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.macrocount }}</span>
+                <span class=\"label\">Macro calls</span>
+            </div>
+        </div>
+
+        <p class=\"help\">
+            Render time includes sub-requests rendering time (if any).
+        </p>
+
+        <h2>Rendered Templates</h2>
+
+        <table id=\"twig-table\">
+            <thead>
+            <tr>
+                <th scope=\"col\">Template Name &amp; Path</th>
+                <th class=\"num-col\" scope=\"col\">Render Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for template, count in collector.templates %}
+                <tr>
+                    {%- set file = collector.templatePaths[template]|default(false) -%}
+                    {%- set link = file ? file|file_link(1) : false -%}
+                    <td>
+                        <span class=\"sf-icon icon-twig\">{{ include('@WebProfiler/Icon/twig.svg') }}</span>
+                        {% if link %}
+                            <a href=\"{{ link }}\" title=\"{{ file }}\">{{ template }}</a>
+                            <div>
+                                <a class=\"text-muted\" href=\"{{ link }}\" title=\"{{ file }}\">
+                                    {{ file|file_relative|default(file) }}
+                                </a>
+                            </div>
+                        {% else %}
+                            {{ template }}
+                        {% endif %}
+                    </td>
+                    <td class=\"font-normal num-col\">{{ count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Rendering Call Graph</h2>
+
+        <div id=\"twig-dump\">
+            {{ collector.htmlcallgraph }}
+        </div>
+    {% endif %}
+{% endblock %}
+", "@WebProfiler/Collector/twig.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/twig.html.twig");
     }
 }

@@ -32,228 +32,32 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% set events = collector.events %}
-
-    {% if events.messages|length %}
-        {% set icon %}
-            {% include('@WebProfiler/Icon/mailer.svg') %}
-            <span class=\"sf-toolbar-value\">{{ events.messages|length }}</span>
-        {% endset %}
-
-        {% set text %}
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Queued messages</b>
-                <span class=\"sf-toolbar-status\">{{ events.events|filter(e => e.isQueued())|length }}</span>
-            </div>
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Sent messages</b>
-                <span class=\"sf-toolbar-status\">{{ events.events|filter(e => not e.isQueued())|length }}</span>
-            </div>
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': profiler_url }) }}
-    {% endif %}
-{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-    <style type=\"text/css\">
-        /* utility classes */
-        .m-t-0 { margin-top: 0 !important; }
-        .m-t-10 { margin-top: 10px !important; }
-
-        /* basic grid */
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-        .col {
-            flex-basis: 0;
-            flex-grow: 1;
-            max-width: 100%;
-            position: relative;
-            width: 100%;
-            min-height: 1px;
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        .col-4 {
-            flex: 0 0 33.333333%;
-            max-width: 33.333333%;
-        }
-
-        /* small tabs */
-        .sf-tabs-sm .tab-navigation li {
-            font-size: 14px;
-            padding: .3em .5em;
-        }
-    </style>
-{% endblock %}
-
-{% block menu %}
-    {% set events = collector.events %}
-
-    <span class=\"label {{ events.messages is empty ? 'disabled' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/mailer.svg') }}</span>
-
-        <strong>E-mails</strong>
-        {% if events.messages|length > 0 %}
-            <span class=\"count\">
-                <span>{{ events.messages|length }}</span>
-            </span>
-        {% endif %}
-    </span>
-{% endblock %}
-
-{% block panel %}
-    {% set events = collector.events %}
-
-    <h2>Emails</h2>
-
-    {% if not events.messages|length %}
-        <div class=\"empty\">
-            <p>No emails were sent.</p>
-        </div>
-    {% endif %}
-
-    <div class=\"metrics\">
-        <div class=\"metric\">
-            <span class=\"value\">{{ events.events|filter(e => e.isQueued())|length }}</span>
-            <span class=\"label\">Queued</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ events.events|filter(e => not e.isQueued())|length }}</span>
-            <span class=\"label\">Sent</span>
-        </div>
-    </div>
-
-    {% for transport in events.transports %}
-        <div class=\"card-block\">
-            <div class=\"sf-tabs sf-tabs-sm\">
-                {% for event in events.events(transport) %}
-                    {% set message = event.message %}
-                    <div class=\"tab\">
-                        <h3 class=\"tab-title\">Email {{ event.isQueued() ? 'queued' : 'sent via ' ~ transport }}</h3>
-                        <div class=\"tab-content\">
-                            <div class=\"card\">
-                                {% if message.headers is not defined %}
-                                    {# RawMessage instance #}
-                                    <div class=\"card-block\">
-                                        <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.toString() }}</pre>
-                                    </div>
-                                {% else %}
-                                    {# Message instance #}
-                                    <div class=\"card-block\">
-                                        <div class=\"sf-tabs sf-tabs-sm\">
-                                            <div class=\"tab\">
-                                                <h3 class=\"tab-title\">Headers</h3>
-                                                <div class=\"tab-content\">
-                                                    <span class=\"label\">Subject</span>
-                                                    <h2 class=\"m-t-10\">{{ message.headers.get('subject').bodyAsString() ?? '(empty)' }}</h2>
-                                                    <div class=\"row\">
-                                                        <div class=\"col col-4\">
-                                                            <span class=\"label\">From</span>
-                                                            <pre class=\"prewrap\">{{ (message.headers.get('from').bodyAsString() ?? '(empty)')|replace({'From:': ''}) }}</pre>
-
-                                                            <span class=\"label\">To</span>
-                                                            <pre class=\"prewrap\">{{ (message.headers.get('to').bodyAsString() ?? '(empty)')|replace({'To:': ''}) }}</pre>
-                                                        </div>
-                                                        <div class=\"col\">
-                                                            <span class=\"label\">Headers</span>
-                                                            <pre class=\"prewrap\">{% for header in message.headers.all|filter(header => (header.name ?? '') not in ['Subject', 'From', 'To']) %}
-                                                                {{- header.toString }}
-                                                            {%~ endfor %}</pre>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% if message.htmlBody is defined %}
-                                                {# Email instance #}
-                                                {% set htmlBody = message.htmlBody() %}
-                                                {% if htmlBody is not null %}
-                                                    <div class=\"tab\">
-                                                        <h3 class=\"tab-title\">HTML Preview</h3>
-                                                        <div class=\"tab-content\">
-                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
-                                                                <iframe
-                                                                    src=\"data:text/html;charset=utf-8;base64,{{ collector.base64Encode(htmlBody) }}\"
-                                                                    style=\"height: 80vh;width: 100%;\"
-                                                                >
-                                                                </iframe>
-                                                            </pre>
-                                                        </div>
-                                                    </div>
-                                                    <div class=\"tab\">
-                                                        <h3 class=\"tab-title\">HTML Content</h3>
-                                                        <div class=\"tab-content\">
-                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
-                                                                {%- if message.htmlCharset() %}
-                                                                    {{- htmlBody|convert_encoding('UTF-8', message.htmlCharset()) }}
-                                                                {%- else %}
-                                                                    {{- htmlBody }}
-                                                                {%- endif -%}
-                                                            </pre>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-                                                {% set textBody = message.textBody() %}
-                                                {% if textBody is not null %}
-                                                    <div class=\"tab\">
-                                                        <h3 class=\"tab-title\">Text Content</h3>
-                                                        <div class=\"tab-content\">
-                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
-                                                                {%- if message.textCharset() %}
-                                                                    {{- textBody|convert_encoding('UTF-8', message.textCharset()) }}
-                                                                {%- else %}
-                                                                    {{- textBody }}
-                                                                {%- endif -%}
-                                                            </pre>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-                                                {% for attachment in message.attachments %}
-                                                    <div class=\"tab\">
-                                                        <h3 class=\"tab-title\">Attachment #{{ loop.index }}</h3>
-                                                        <div class=\"tab-content\">
-                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">{{ attachment.toString() }}</pre>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            {% endif %}
-                                            <div class=\"tab\">
-                                                <h3 class=\"tab-title\">Parts Hierarchy</h3>
-                                                <div class=\"tab-content\">
-                                                    <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.body().asDebugString() }}</pre>
-                                                </div>
-                                            </div>
-                                            <div class=\"tab\">
-                                                <h3 class=\"tab-title\">Raw</h3>
-                                                <div class=\"tab-content\">
-                                                    <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.toString() }}</pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endfor %}
-{% endblock %}
-", "@WebProfiler/Collector/mailer.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/mailer.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/mailer.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/mailer.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/mailer.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -313,23 +117,15 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/mailer.html.twig";
-    }
-
     // line 27
-
     public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -377,16 +173,15 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
         }
     </style>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 64
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -426,16 +221,15 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
         // line 76
         echo "    </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 79
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -724,12 +518,17 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['transport'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/mailer.html.twig";
     }
 
     public function isTraitable()
@@ -742,28 +541,225 @@ class __TwigTemplate_1248b206b685a74c54950612349f773525831bba7740abe9f0599ae84c8
         return array (  514 => 214,  505 => 210,  496 => 204,  487 => 198,  482 => 195,  479 => 194,  461 => 190,  456 => 188,  453 => 187,  435 => 186,  429 => 182,  426 => 180,  423 => 178,  421 => 177,  416 => 173,  413 => 172,  410 => 171,  404 => 167,  401 => 165,  398 => 163,  396 => 162,  383 => 151,  376 => 146,  373 => 145,  370 => 144,  368 => 143,  366 => 142,  359 => 137,  351 => 136,  347 => 135,  340 => 131,  334 => 128,  327 => 124,  319 => 118,  317 => 117,  311 => 114,  308 => 113,  306 => 112,  304 => 111,  298 => 108,  295 => 107,  292 => 106,  288 => 105,  284 => 103,  280 => 102,  272 => 97,  264 => 92,  259 => 89,  253 => 85,  251 => 84,  246 => 81,  243 => 80,  233 => 79,  222 => 76,  216 => 73,  213 => 72,  211 => 71,  205 => 68,  201 => 67,  198 => 66,  195 => 65,  185 => 64,  139 => 28,  129 => 27,  116 => 23,  113 => 22,  107 => 19,  100 => 15,  96 => 13,  94 => 12,  91 => 11,  85 => 9,  82 => 8,  79 => 7,  77 => 6,  74 => 5,  71 => 4,  61 => 3,  38 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/mailer.html.twig"));
+{% block toolbar %}
+    {% set events = collector.events %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/mailer.html.twig"));
+    {% if events.messages|length %}
+        {% set icon %}
+            {% include('@WebProfiler/Icon/mailer.svg') %}
+            <span class=\"sf-toolbar-value\">{{ events.messages|length }}</span>
+        {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/mailer.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        {% set text %}
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Queued messages</b>
+                <span class=\"sf-toolbar-status\">{{ events.events|filter(e => e.isQueued())|length }}</span>
+            </div>
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Sent messages</b>
+                <span class=\"sf-toolbar-status\">{{ events.events|filter(e => not e.isQueued())|length }}</span>
+            </div>
+        {% endset %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': profiler_url }) }}
+    {% endif %}
+{% endblock %}
 
+{% block head %}
+    {{ parent() }}
+    <style type=\"text/css\">
+        /* utility classes */
+        .m-t-0 { margin-top: 0 !important; }
+        .m-t-10 { margin-top: 10px !important; }
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        /* basic grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .col {
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .col-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
 
+        /* small tabs */
+        .sf-tabs-sm .tab-navigation li {
+            font-size: 14px;
+            padding: .3em .5em;
+        }
+    </style>
+{% endblock %}
+
+{% block menu %}
+    {% set events = collector.events %}
+
+    <span class=\"label {{ events.messages is empty ? 'disabled' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/mailer.svg') }}</span>
+
+        <strong>E-mails</strong>
+        {% if events.messages|length > 0 %}
+            <span class=\"count\">
+                <span>{{ events.messages|length }}</span>
+            </span>
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {% set events = collector.events %}
+
+    <h2>Emails</h2>
+
+    {% if not events.messages|length %}
+        <div class=\"empty\">
+            <p>No emails were sent.</p>
+        </div>
+    {% endif %}
+
+    <div class=\"metrics\">
+        <div class=\"metric\">
+            <span class=\"value\">{{ events.events|filter(e => e.isQueued())|length }}</span>
+            <span class=\"label\">Queued</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ events.events|filter(e => not e.isQueued())|length }}</span>
+            <span class=\"label\">Sent</span>
+        </div>
+    </div>
+
+    {% for transport in events.transports %}
+        <div class=\"card-block\">
+            <div class=\"sf-tabs sf-tabs-sm\">
+                {% for event in events.events(transport) %}
+                    {% set message = event.message %}
+                    <div class=\"tab\">
+                        <h3 class=\"tab-title\">Email {{ event.isQueued() ? 'queued' : 'sent via ' ~ transport }}</h3>
+                        <div class=\"tab-content\">
+                            <div class=\"card\">
+                                {% if message.headers is not defined %}
+                                    {# RawMessage instance #}
+                                    <div class=\"card-block\">
+                                        <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.toString() }}</pre>
+                                    </div>
+                                {% else %}
+                                    {# Message instance #}
+                                    <div class=\"card-block\">
+                                        <div class=\"sf-tabs sf-tabs-sm\">
+                                            <div class=\"tab\">
+                                                <h3 class=\"tab-title\">Headers</h3>
+                                                <div class=\"tab-content\">
+                                                    <span class=\"label\">Subject</span>
+                                                    <h2 class=\"m-t-10\">{{ message.headers.get('subject').bodyAsString() ?? '(empty)' }}</h2>
+                                                    <div class=\"row\">
+                                                        <div class=\"col col-4\">
+                                                            <span class=\"label\">From</span>
+                                                            <pre class=\"prewrap\">{{ (message.headers.get('from').bodyAsString() ?? '(empty)')|replace({'From:': ''}) }}</pre>
+
+                                                            <span class=\"label\">To</span>
+                                                            <pre class=\"prewrap\">{{ (message.headers.get('to').bodyAsString() ?? '(empty)')|replace({'To:': ''}) }}</pre>
+                                                        </div>
+                                                        <div class=\"col\">
+                                                            <span class=\"label\">Headers</span>
+                                                            <pre class=\"prewrap\">{% for header in message.headers.all|filter(header => (header.name ?? '') not in ['Subject', 'From', 'To']) %}
+                                                                {{- header.toString }}
+                                                            {%~ endfor %}</pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if message.htmlBody is defined %}
+                                                {# Email instance #}
+                                                {% set htmlBody = message.htmlBody() %}
+                                                {% if htmlBody is not null %}
+                                                    <div class=\"tab\">
+                                                        <h3 class=\"tab-title\">HTML Preview</h3>
+                                                        <div class=\"tab-content\">
+                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
+                                                                <iframe
+                                                                    src=\"data:text/html;charset=utf-8;base64,{{ collector.base64Encode(htmlBody) }}\"
+                                                                    style=\"height: 80vh;width: 100%;\"
+                                                                >
+                                                                </iframe>
+                                                            </pre>
+                                                        </div>
+                                                    </div>
+                                                    <div class=\"tab\">
+                                                        <h3 class=\"tab-title\">HTML Content</h3>
+                                                        <div class=\"tab-content\">
+                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
+                                                                {%- if message.htmlCharset() %}
+                                                                    {{- htmlBody|convert_encoding('UTF-8', message.htmlCharset()) }}
+                                                                {%- else %}
+                                                                    {{- htmlBody }}
+                                                                {%- endif -%}
+                                                            </pre>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% set textBody = message.textBody() %}
+                                                {% if textBody is not null %}
+                                                    <div class=\"tab\">
+                                                        <h3 class=\"tab-title\">Text Content</h3>
+                                                        <div class=\"tab-content\">
+                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">
+                                                                {%- if message.textCharset() %}
+                                                                    {{- textBody|convert_encoding('UTF-8', message.textCharset()) }}
+                                                                {%- else %}
+                                                                    {{- textBody }}
+                                                                {%- endif -%}
+                                                            </pre>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% for attachment in message.attachments %}
+                                                    <div class=\"tab\">
+                                                        <h3 class=\"tab-title\">Attachment #{{ loop.index }}</h3>
+                                                        <div class=\"tab-content\">
+                                                            <pre class=\"prewrap\" style=\"max-height: 600px\">{{ attachment.toString() }}</pre>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <div class=\"tab\">
+                                                <h3 class=\"tab-title\">Parts Hierarchy</h3>
+                                                <div class=\"tab-content\">
+                                                    <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.body().asDebugString() }}</pre>
+                                                </div>
+                                            </div>
+                                            <div class=\"tab\">
+                                                <h3 class=\"tab-title\">Raw</h3>
+                                                <div class=\"tab-content\">
+                                                    <pre class=\"prewrap\" style=\"max-height: 600px\">{{ message.toString() }}</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+", "@WebProfiler/Collector/mailer.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/mailer.html.twig");
     }
 }

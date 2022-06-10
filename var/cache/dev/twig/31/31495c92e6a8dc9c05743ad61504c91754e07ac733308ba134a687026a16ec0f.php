@@ -31,142 +31,32 @@ class __TwigTemplate_d4f90aca6d32ece29a9dcaba7c6d1039eaeffb34ebb6262005ad6f8ad3c
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% if collector.requestCount %}
-        {% set icon %}
-            {{ include('@WebProfiler/Icon/http-client.svg') }}
-            {% set status_color = '' %}
-            <span class=\"sf-toolbar-value\">{{ collector.requestCount }}</span>
-        {% endset %}
-
-        {% set text %}
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Total requests</b>
-                <span>{{ collector.requestCount }}</span>
-            </div>
-            <div class=\"sf-toolbar-info-piece\">
-                <b>HTTP errors</b>
-                <span class=\"sf-toolbar-status {{ collector.errorCount > 0 ? 'sf-toolbar-status-red' }}\">{{ collector.errorCount }}</span>
-            </div>
-        {% endset %}
-
-        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status_color }) }}
-    {% endif %}
-{% endblock %}
-
-{% block menu %}
-<span class=\"label {{ collector.requestCount == 0 ? 'disabled' }}\">
-    <span class=\"icon\">{{ include('@WebProfiler/Icon/http-client.svg') }}</span>
-    <strong>HTTP Client</strong>
-    {% if collector.requestCount %}
-        <span class=\"count\">
-            {{ collector.requestCount }}
-        </span>
-    {% endif %}
-</span>
-{% endblock %}
-
-{% block panel %}
-    <h2>HTTP Client</h2>
-    {% if collector.requestCount == 0 %}
-        <div class=\"empty\">
-            <p>No HTTP requests were made.</p>
-        </div>
-    {% else %}
-        <div class=\"metrics\">
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.requestCount }}</span>
-                <span class=\"label\">Total requests</span>
-            </div>
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.errorCount }}</span>
-                <span class=\"label\">HTTP errors</span>
-            </div>
-        </div>
-        <h2>Clients</h2>
-        <div class=\"sf-tabs\">
-            {% for name, client in collector.clients %}
-                <div class=\"tab {{ client.traces|length == 0 ? 'disabled' }}\">
-                    <h3 class=\"tab-title\">{{ name }} <span class=\"badge\">{{ client.traces|length }}</span></h3>
-                    <div class=\"tab-content\">
-                        {% if client.traces|length == 0 %}
-                            <div class=\"empty\">
-                                <p>No requests were made with the \"{{ name }}\" service.</p>
-                            </div>
-                        {% else %}
-                            <h4>Requests</h4>
-                            {% for trace in client.traces %}
-                                {% set profiler_token = '' %}
-                                {% set profiler_link = '' %}
-                                {% if trace.info.response_headers is defined %}
-                                    {% for header in trace.info.response_headers %}
-                                        {% if header matches '/^x-debug-token: .*\$/i' %}
-                                            {% set profiler_token = (header.getValue | slice('x-debug-token: ' | length)) %}
-                                        {% endif %}
-                                        {% if header matches '/^x-debug-token-link: .*\$/i' %}
-                                            {% set profiler_link = (header.getValue | slice('x-debug-token-link: ' | length)) %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <span class=\"label\">{{ trace.method }}</span>
-                                        </th>
-                                        <th class=\"full-width\">
-                                            {{ trace.url }}
-                                            {% if trace.options is not empty %}
-                                                {{ profiler_dump(trace.options, maxDepth=1) }}
-                                            {% endif %}
-                                        </th>
-                                        {% if profiler_token and profiler_link %}
-                                            <th>
-                                                Profile
-                                            </th>
-                                        {% endif %}
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>
-                                            {% if trace.http_code >= 500 %}
-                                                {% set responseStatus = 'error' %}
-                                            {% elseif trace.http_code >= 400 %}
-                                                {% set responseStatus = 'warning' %}
-                                            {% else %}
-                                                {% set responseStatus = 'success' %}
-                                            {% endif %}
-                                            <span class=\"label status-{{ responseStatus }}\">
-                                                {{ trace.http_code }}
-                                            </span>
-                                        </th>
-                                        <td>
-                                            {{ profiler_dump(trace.info, maxDepth=1) }}
-                                        </td>
-                                        {% if profiler_token and profiler_link %}
-                                            <td>
-                                                <span><a href=\"{{ profiler_link }}\" target=\"_blank\">{{ profiler_token }}</a></span>
-                                            </td>
-                                        {% endif %}
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endblock %}
-", "@WebProfiler/Collector/http_client.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/http_client.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/http_client.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/http_client.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/http_client.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -227,23 +117,15 @@ class __TwigTemplate_d4f90aca6d32ece29a9dcaba7c6d1039eaeffb34ebb6262005ad6f8ad3c
             echo "
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/http_client.html.twig";
-    }
-
     // line 26
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -277,16 +159,15 @@ class __TwigTemplate_d4f90aca6d32ece29a9dcaba7c6d1039eaeffb34ebb6262005ad6f8ad3c
         // line 35
         echo "</span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 38
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -520,12 +401,17 @@ class __TwigTemplate_d4f90aca6d32ece29a9dcaba7c6d1039eaeffb34ebb6262005ad6f8ad3c
         // line 130
         echo "    </div>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/http_client.html.twig";
     }
 
     public function isTraitable()
@@ -538,28 +424,139 @@ class __TwigTemplate_d4f90aca6d32ece29a9dcaba7c6d1039eaeffb34ebb6262005ad6f8ad3c
         return array (  402 => 130,  399 => 129,  391 => 126,  388 => 125,  379 => 121,  371 => 118,  368 => 117,  366 => 116,  361 => 114,  354 => 110,  349 => 109,  346 => 108,  343 => 107,  340 => 106,  337 => 105,  334 => 104,  331 => 103,  329 => 102,  322 => 97,  316 => 93,  314 => 92,  311 => 91,  305 => 89,  303 => 88,  299 => 87,  293 => 84,  287 => 80,  284 => 79,  278 => 78,  275 => 77,  272 => 76,  269 => 75,  266 => 74,  263 => 73,  260 => 72,  255 => 71,  252 => 70,  249 => 69,  246 => 68,  242 => 67,  239 => 66,  233 => 63,  230 => 62,  228 => 61,  221 => 59,  216 => 58,  212 => 57,  203 => 51,  196 => 47,  192 => 45,  186 => 41,  184 => 40,  181 => 39,  171 => 38,  160 => 35,  154 => 32,  151 => 31,  149 => 30,  144 => 28,  139 => 27,  129 => 26,  116 => 22,  113 => 21,  105 => 18,  98 => 14,  94 => 12,  92 => 11,  89 => 10,  83 => 8,  81 => 7,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/http_client.html.twig"));
+{% block toolbar %}
+    {% if collector.requestCount %}
+        {% set icon %}
+            {{ include('@WebProfiler/Icon/http-client.svg') }}
+            {% set status_color = '' %}
+            <span class=\"sf-toolbar-value\">{{ collector.requestCount }}</span>
+        {% endset %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/http_client.html.twig"));
+        {% set text %}
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Total requests</b>
+                <span>{{ collector.requestCount }}</span>
+            </div>
+            <div class=\"sf-toolbar-info-piece\">
+                <b>HTTP errors</b>
+                <span class=\"sf-toolbar-status {{ collector.errorCount > 0 ? 'sf-toolbar-status-red' }}\">{{ collector.errorCount }}</span>
+            </div>
+        {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/http_client.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url, status: status_color }) }}
+    {% endif %}
+{% endblock %}
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+{% block menu %}
+<span class=\"label {{ collector.requestCount == 0 ? 'disabled' }}\">
+    <span class=\"icon\">{{ include('@WebProfiler/Icon/http-client.svg') }}</span>
+    <strong>HTTP Client</strong>
+    {% if collector.requestCount %}
+        <span class=\"count\">
+            {{ collector.requestCount }}
+        </span>
+    {% endif %}
+</span>
+{% endblock %}
 
-
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
-
+{% block panel %}
+    <h2>HTTP Client</h2>
+    {% if collector.requestCount == 0 %}
+        <div class=\"empty\">
+            <p>No HTTP requests were made.</p>
+        </div>
+    {% else %}
+        <div class=\"metrics\">
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.requestCount }}</span>
+                <span class=\"label\">Total requests</span>
+            </div>
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.errorCount }}</span>
+                <span class=\"label\">HTTP errors</span>
+            </div>
+        </div>
+        <h2>Clients</h2>
+        <div class=\"sf-tabs\">
+            {% for name, client in collector.clients %}
+                <div class=\"tab {{ client.traces|length == 0 ? 'disabled' }}\">
+                    <h3 class=\"tab-title\">{{ name }} <span class=\"badge\">{{ client.traces|length }}</span></h3>
+                    <div class=\"tab-content\">
+                        {% if client.traces|length == 0 %}
+                            <div class=\"empty\">
+                                <p>No requests were made with the \"{{ name }}\" service.</p>
+                            </div>
+                        {% else %}
+                            <h4>Requests</h4>
+                            {% for trace in client.traces %}
+                                {% set profiler_token = '' %}
+                                {% set profiler_link = '' %}
+                                {% if trace.info.response_headers is defined %}
+                                    {% for header in trace.info.response_headers %}
+                                        {% if header matches '/^x-debug-token: .*\$/i' %}
+                                            {% set profiler_token = (header.getValue | slice('x-debug-token: ' | length)) %}
+                                        {% endif %}
+                                        {% if header matches '/^x-debug-token-link: .*\$/i' %}
+                                            {% set profiler_link = (header.getValue | slice('x-debug-token-link: ' | length)) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <span class=\"label\">{{ trace.method }}</span>
+                                        </th>
+                                        <th class=\"full-width\">
+                                            {{ trace.url }}
+                                            {% if trace.options is not empty %}
+                                                {{ profiler_dump(trace.options, maxDepth=1) }}
+                                            {% endif %}
+                                        </th>
+                                        {% if profiler_token and profiler_link %}
+                                            <th>
+                                                Profile
+                                            </th>
+                                        {% endif %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th>
+                                            {% if trace.http_code >= 500 %}
+                                                {% set responseStatus = 'error' %}
+                                            {% elseif trace.http_code >= 400 %}
+                                                {% set responseStatus = 'warning' %}
+                                            {% else %}
+                                                {% set responseStatus = 'success' %}
+                                            {% endif %}
+                                            <span class=\"label status-{{ responseStatus }}\">
+                                                {{ trace.http_code }}
+                                            </span>
+                                        </th>
+                                        <td>
+                                            {{ profiler_dump(trace.info, maxDepth=1) }}
+                                        </td>
+                                        {% if profiler_token and profiler_link %}
+                                            <td>
+                                                <span><a href=\"{{ profiler_link }}\" target=\"_blank\">{{ profiler_token }}</a></span>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+", "@WebProfiler/Collector/http_client.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/http_client.html.twig");
     }
 }

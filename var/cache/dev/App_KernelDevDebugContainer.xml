@@ -1914,6 +1914,7 @@
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/validator/Resources/translations/validators.ro.xlf</argument>
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/form/Resources/translations/validators.ro.xlf</argument>
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/security-core/Resources/translations/security.ro.xlf</argument>
+            <argument>/home/hp/Téléchargements/GRH-master/vendor/symfonycasts/verify-email-bundle/src/Resources/translations/VerifyEmailBundle.ro.xlf</argument>
           </argument>
           <argument key="ru" type="collection">
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/validator/Resources/translations/validators.ru.xlf</argument>
@@ -1926,6 +1927,7 @@
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/validator/Resources/translations/validators.sk.xlf</argument>
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/form/Resources/translations/validators.sk.xlf</argument>
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/security-core/Resources/translations/security.sk.xlf</argument>
+            <argument>/home/hp/Téléchargements/GRH-master/vendor/symfonycasts/verify-email-bundle/src/Resources/translations/VerifyEmailBundle.sk.xlf</argument>
           </argument>
           <argument key="sl" type="collection">
             <argument>/home/hp/Téléchargements/GRH-master/vendor/symfony/validator/Resources/translations/validators.sl.xlf</argument>

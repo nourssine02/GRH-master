@@ -10,6 +10,7 @@ use App\Form\PointageType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Integer;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,12 +28,15 @@ class PointageController extends AbstractController
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $pointages =$doctrine->getRepository(Pointage::class)->findAll();
         $total=0;
+        $liste =[];
         $dat_j=date("Y-m",time())."-01";
+        $mois=date("Y-m",time())."-01";// mois courant
+
+      // $moisCourant = date("m");
 
         $nbj_m=date("t",strtotime($dat_j));
         $aujourdhui=date("d",time());
-
-
+        $jour =(int)$aujourdhui;
         for ($i=1; $i < $nbj_m+1; $i++) {
             if (strlen($i) == 1) {
                 $i = '0'.$i;
@@ -40,12 +44,28 @@ class PointageController extends AbstractController
             $sommeJour [] = $i;
         }
 
+
+        for ($i=1; $i <= $jour;$i++){
+            $liste[] = (String)$i;
+            $total = count($liste);
+        }
+
+
+        foreach ($pointages as $pointage){
+            $id = $pointage->getId();
+
+        }
+
+
         return $this->render('pointage/show.html.twig', [
             'employes' => $employes,
             'pointages' => $pointages,
             'sommeJour' => $sommeJour,
             'aujourdhui' => $aujourdhui,
             'total' => $total,
+            'liste' => $liste,
+            'mois' => $mois,
+
 
 
 
@@ -105,8 +125,6 @@ class PointageController extends AbstractController
                 $em->flush();
 
 
-
-
             }
 
 
@@ -122,6 +140,8 @@ class PointageController extends AbstractController
      */
     public function add(Request $request,ManagerRegistry $doctrine)
     {
+        $pointages = $doctrine->getRepository(Pointage::class)->findAll();
+
         $em = $doctrine->getManager();
 
         $pointage = new Pointage();
@@ -136,7 +156,6 @@ class PointageController extends AbstractController
             $this->addFlash('info', 'Ajoutée avec Succées ');
             return $this->redirectToRoute('pointages_list');
         }
-
         return $this->render('pointage/new.html.twig', [
             "pointage" => $pointage,
             'formP' => $formP->createView()
@@ -145,4 +164,3 @@ class PointageController extends AbstractController
 }
 
 
-       

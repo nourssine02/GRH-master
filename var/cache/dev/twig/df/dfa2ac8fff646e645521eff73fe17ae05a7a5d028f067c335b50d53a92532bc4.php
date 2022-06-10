@@ -93,8 +93,7 @@ class __TwigTemplate_e050dfa65a81ff0845fc5559e77fddb2a259090ef8de70022de44724b48
 
 \t<div id=\"calendrier\"></div>
 <!--Modal -->
-
-\t<div  class=\"modal shadow-1 white rounded-3\" id=\"calendarModal\" style=\"width: 40%; height: 35%;\">
+\t<div  class=\"modal shadow-1 white rounded-3\" id=\"myModal\"  style=\"width: 40%; height: 35%;\">
 \t\t<div class=\"modal-header\" style=\"color: brown;\">
 \t\t\tcongés Details
 \t\t</div>
@@ -133,8 +132,8 @@ week: 'Semaine',
 day: 'Jour'
 },
 events: ";
-        // line 70
-        echo (isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 70, $this->source); })());
+        // line 69
+        echo (isset($context["data"]) || array_key_exists("data", $context) ? $context["data"] : (function () { throw new RuntimeError('Variable "data" does not exist.', 69, $this->source); })());
         echo ",
 editable: true,
 eventResizableFromStart: true,
@@ -146,8 +145,8 @@ let start = new Date(dateStart).toISOString().slice(0, 10);
 
 let dateEnd = eventObj.end;
 let end = new Date(dateEnd).toISOString().slice(0, 10);
-\tlet modal = new Axentix.Modal('#calendarModal');
-\tmodal.open();
+let modal = new Axentix.Modal('#myModal');
+modal.open();
 
 \$('#employe').html('Nom d\\'employe  : ' + eventObj.extendedProps.employe);
 \$('#dateD').html('Date de demande : ' + new Date(eventObj.extendedProps.dateDemande).toISOString().slice(0, 10));
@@ -157,7 +156,6 @@ let end = new Date(dateEnd).toISOString().slice(0, 10);
 \$('#nbreJours').html('Nombre de jour : ' + eventObj.extendedProps.nbreJours);
 
 \$('#myId').val(eventObj.id);
-
 
 }
 
@@ -213,7 +211,7 @@ calendar.render()
 
     public function getDebugInfo()
     {
-        return array (  137 => 70,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  136 => 69,  68 => 3,  58 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -248,8 +246,7 @@ calendar.render()
 
 \t<div id=\"calendrier\"></div>
 <!--Modal -->
-
-\t<div  class=\"modal shadow-1 white rounded-3\" id=\"calendarModal\" style=\"width: 40%; height: 35%;\">
+\t<div  class=\"modal shadow-1 white rounded-3\" id=\"myModal\"  style=\"width: 40%; height: 35%;\">
 \t\t<div class=\"modal-header\" style=\"color: brown;\">
 \t\t\tcongés Details
 \t\t</div>
@@ -298,8 +295,8 @@ let start = new Date(dateStart).toISOString().slice(0, 10);
 
 let dateEnd = eventObj.end;
 let end = new Date(dateEnd).toISOString().slice(0, 10);
-\tlet modal = new Axentix.Modal('#calendarModal');
-\tmodal.open();
+let modal = new Axentix.Modal('#myModal');
+modal.open();
 
 \$('#employe').html('Nom d\\'employe  : ' + eventObj.extendedProps.employe);
 \$('#dateD').html('Date de demande : ' + new Date(eventObj.extendedProps.dateDemande).toISOString().slice(0, 10));
@@ -309,7 +306,6 @@ let end = new Date(dateEnd).toISOString().slice(0, 10);
 \$('#nbreJours').html('Nombre de jour : ' + eventObj.extendedProps.nbreJours);
 
 \$('#myId').val(eventObj.id);
-
 
 }
 

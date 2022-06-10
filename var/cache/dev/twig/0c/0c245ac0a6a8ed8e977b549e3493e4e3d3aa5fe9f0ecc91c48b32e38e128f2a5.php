@@ -31,237 +31,32 @@ class __TwigTemplate_ac307ce3210b1b16ed055031535018e8c23ee7bd5d11b5cd50928690b92
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
-
-{% block toolbar %}
-    {% if 'unknown' == collector.symfonyState %}
-        {% set block_status = '' %}
-        {% set symfony_version_status = 'Unable to retrieve information about the Symfony version.' %}
-    {% elseif 'eol' == collector.symfonyState %}
-        {% set block_status = 'red' %}
-        {% set symfony_version_status = 'This Symfony version will no longer receive security fixes.' %}
-    {% elseif 'eom' == collector.symfonyState %}
-        {% set block_status = 'yellow' %}
-        {% set symfony_version_status = 'This Symfony version will only receive security fixes.' %}
-    {% elseif 'dev' == collector.symfonyState %}
-        {% set block_status = 'yellow' %}
-        {% set symfony_version_status = 'This Symfony version is still in the development phase.' %}
-    {% else %}
-        {% set block_status = '' %}
-        {% set symfony_version_status = '' %}
-    {% endif %}
-
-    {% set icon %}
-        <span class=\"sf-toolbar-label\">
-            {{ include('@WebProfiler/Icon/symfony.svg') }}
-        </span>
-        <span class=\"sf-toolbar-value\">{{ collector.symfonyState is defined ? collector.symfonyversion : 'n/a' }}</span>
-    {% endset %}
-
-    {% set text %}
-        <div class=\"sf-toolbar-info-group\">
-            <div class=\"sf-toolbar-info-piece\">
-                <b>Profiler token</b>
-                <span>
-                    {% if profiler_url %}
-                        <a href=\"{{ profiler_url }}\">{{ collector.token }}</a>
-                    {% else %}
-                        {{ collector.token }}
-                    {% endif %}
-                </span>
-            </div>
-
-            {% if 'n/a' is not same as(collector.env) %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Environment</b>
-                    <span>{{ collector.env }}</span>
-                </div>
-            {% endif %}
-
-            {% if 'n/a' is not same as(collector.debug) %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Debug</b>
-                    <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.debug ? 'green' : 'red' }}\">{{ collector.debug ? 'enabled' : 'disabled' }}</span>
-                </div>
-            {% endif %}
-        </div>
-
-        <div class=\"sf-toolbar-info-group\">
-            <div class=\"sf-toolbar-info-piece sf-toolbar-info-php\">
-                <b>PHP version</b>
-                <span{% if collector.phpversionextra %} title=\"{{ collector.phpversion ~ collector.phpversionextra }}\"{% endif %}>
-                    {{ collector.phpversion }}
-                    &nbsp; <a href=\"{{ path('_profiler_phpinfo') }}\">View phpinfo()</a>
-                </span>
-            </div>
-
-            <div class=\"sf-toolbar-info-piece sf-toolbar-info-php-ext\">
-                <b>PHP Extensions</b>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.hasxdebug ? 'green' : 'gray' }}\">xdebug {{ collector.hasxdebug ? '✓' : '✗' }}</span>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.hasapcu ? 'green' : 'gray' }}\">APCu {{ collector.hasapcu ? '✓' : '✗' }}</span>
-                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.haszendopcache ? 'green' : 'red' }}\">OPcache {{ collector.haszendopcache ? '✓' : '✗' }}</span>
-            </div>
-
-            <div class=\"sf-toolbar-info-piece\">
-                <b>PHP SAPI</b>
-                <span>{{ collector.sapiName }}</span>
-            </div>
-        </div>
-
-        <div class=\"sf-toolbar-info-group\">
-            {% if collector.symfonyversion is defined %}
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Resources</b>
-                    <span>
-                        <a href=\"https://symfony.com/doc/{{ collector.symfonyversion }}/index.html\" rel=\"help\">
-                            Read Symfony {{ collector.symfonyversion }} Docs
-                        </a>
-                    </span>
-                </div>
-                <div class=\"sf-toolbar-info-piece\">
-                    <b>Help</b>
-                    <span>
-                        <a href=\"https://symfony.com/support\">
-                            Symfony Support Channels
-                        </a>
-                    </span>
-                </div>
-            {% endif %}
-        </div>
-    {% endset %}
-
-    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true, name: 'config', status: block_status, additional_classes: 'sf-toolbar-block-right', block_attrs: 'title=\"' ~ symfony_version_status ~ '\"' }) }}
-{% endblock %}
-
-{% block menu %}
-    <span class=\"label label-status-{{ collector.symfonyState == 'eol' ? 'red' : collector.symfonyState in ['eom', 'dev'] ? 'yellow' }}\">
-        <span class=\"icon\">{{ include('@WebProfiler/Icon/config.svg') }}</span>
-        <strong>Configuration</strong>
-    </span>
-{% endblock %}
-
-{% block panel %}
-    <h2>Symfony Configuration</h2>
-
-    <div class=\"metrics\">
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.symfonyversion }}</span>
-            <span class=\"label\">Symfony version</span>
-        </div>
-
-        {% if 'n/a' is not same as(collector.env) %}
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.env }}</span>
-                <span class=\"label\">Environment</span>
-            </div>
-        {% endif %}
-
-        {% if 'n/a' is not same as(collector.debug) %}
-            <div class=\"metric\">
-                <span class=\"value\">{{ collector.debug ? 'enabled' : 'disabled' }}</span>
-                <span class=\"label\">Debug</span>
-            </div>
-        {% endif %}
-    </div>
-
-    {% set symfony_status = { dev: 'Unstable Version', stable: 'Stable Version', eom: 'Maintenance Ended', eol: 'Version Expired' } %}
-    {% set symfony_status_class = { dev: 'warning', stable: 'success', eom: 'warning', eol: 'error' } %}
-    <table>
-        <thead class=\"small\">
-            <tr>
-                <th>Symfony Status</th>
-                <th>Bugs {{ collector.symfonystate in ['eom', 'eol'] ? 'were' : 'are' }} fixed until</th>
-                <th>Security issues {{ collector.symfonystate == 'eol' ? 'were' : 'are' }} fixed until</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class=\"font-normal\">
-                    <span class=\"label status-{{ symfony_status_class[collector.symfonystate] }}\">{{ symfony_status[collector.symfonystate]|upper }}</span>
-                    {% if collector.symfonylts %}
-                        &nbsp; <span class=\"label status-success\">Long-Term Support</span>
-                    {% endif %}
-                </td>
-                <td class=\"font-normal\">{{ collector.symfonyeom }}</td>
-                <td class=\"font-normal\">{{ collector.symfonyeol }}</td>
-                <td class=\"font-normal\">
-                    <a href=\"https://symfony.com/releases/{{ collector.symfonyminorversion }}#release-checker\">View roadmap</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>PHP Configuration</h2>
-
-    <div class=\"metrics\">
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.phpversion }}{% if collector.phpversionextra %} <span class=\"unit\">{{ collector.phpversionextra }}</span>{% endif %}</span>
-            <span class=\"label\">PHP version</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.phparchitecture }} <span class=\"unit\">bits</span></span>
-            <span class=\"label\">Architecture</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.phpintllocale }}</span>
-            <span class=\"label\">Intl locale</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ collector.phptimezone }}</span>
-            <span class=\"label\">Timezone</span>
-        </div>
-    </div>
-
-    <div class=\"metrics\">
-        <div class=\"metric\">
-            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.haszendopcache ? 'yes' : 'no') ~ '.svg') }}</span>
-            <span class=\"label\">OPcache</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.hasapcu ? 'yes' : 'no-gray') ~ '.svg') }}</span>
-            <span class=\"label\">APCu</span>
-        </div>
-
-        <div class=\"metric\">
-            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.hasxdebug ? 'yes' : 'no-gray') ~ '.svg') }}</span>
-            <span class=\"label\">Xdebug</span>
-        </div>
-    </div>
-
-    <p>
-        <a href=\"{{ path('_profiler_phpinfo') }}\">View full PHP configuration</a>
-    </p>
-
-    {% if collector.bundles %}
-        <h2>Enabled Bundles <small>({{ collector.bundles|length }})</small></h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class=\"key\">Name</th>
-                    <th>Class</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for name in collector.bundles|keys|sort %}
-                <tr>
-                    <th scope=\"row\" class=\"font-normal\">{{ name }}</th>
-                    <td class=\"font-normal\">{{ profiler_dump(collector.bundles[name]) }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-{% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
+        // line 1
+        return "@WebProfiler/Profiler/layout.html.twig";
     }
 
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/config.html.twig"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/config.html.twig"));
+
+        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/config.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+    }
+
+    // line 3
     public function block_toolbar($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -494,23 +289,15 @@ class __TwigTemplate_ac307ce3210b1b16ed055031535018e8c23ee7bd5d11b5cd50928690b92
         echo twig_include($this->env, $context, "@WebProfiler/Profiler/toolbar_item.html.twig", ["link" => true, "name" => "config", "status" => (isset($context["block_status"]) || array_key_exists("block_status", $context) ? $context["block_status"] : (function () { throw new RuntimeError('Variable "block_status" does not exist.', 100, $this->source); })()), "additional_classes" => "sf-toolbar-block-right", "block_attrs" => (("title=\"" . (isset($context["symfony_version_status"]) || array_key_exists("symfony_version_status", $context) ? $context["symfony_version_status"] : (function () { throw new RuntimeError('Variable "symfony_version_status" does not exist.', 100, $this->source); })())) . "\"")]);
         echo "
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
-    // line 3
-
-    public function getTemplateName()
-    {
-        return "@WebProfiler/Collector/config.html.twig";
-    }
-
     // line 103
-
     public function block_menu($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -531,16 +318,15 @@ class __TwigTemplate_ac307ce3210b1b16ed055031535018e8c23ee7bd5d11b5cd50928690b92
         <strong>Configuration</strong>
     </span>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
     }
 
     // line 110
-
     public function block_panel($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -766,12 +552,17 @@ class __TwigTemplate_ac307ce3210b1b16ed055031535018e8c23ee7bd5d11b5cd50928690b92
         </table>
     ";
         }
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "@WebProfiler/Collector/config.html.twig";
     }
 
     public function isTraitable()
@@ -784,28 +575,234 @@ class __TwigTemplate_ac307ce3210b1b16ed055031535018e8c23ee7bd5d11b5cd50928690b92
         return array (  551 => 223,  542 => 220,  538 => 219,  535 => 218,  531 => 217,  518 => 208,  516 => 207,  510 => 204,  501 => 198,  493 => 193,  485 => 188,  475 => 181,  467 => 176,  459 => 171,  446 => 166,  433 => 156,  428 => 154,  424 => 153,  421 => 152,  417 => 150,  415 => 149,  409 => 148,  399 => 141,  395 => 140,  389 => 136,  386 => 135,  384 => 134,  380 => 132,  373 => 128,  370 => 127,  368 => 126,  365 => 125,  358 => 121,  355 => 120,  353 => 119,  346 => 115,  340 => 111,  330 => 110,  316 => 105,  311 => 104,  301 => 103,  289 => 100,  286 => 99,  282 => 97,  266 => 84,  262 => 83,  257 => 80,  255 => 79,  247 => 74,  237 => 69,  231 => 68,  225 => 67,  216 => 61,  212 => 60,  204 => 59,  197 => 54,  189 => 51,  185 => 49,  183 => 48,  180 => 47,  174 => 44,  170 => 42,  168 => 41,  163 => 38,  157 => 36,  149 => 34,  147 => 33,  141 => 29,  139 => 28,  136 => 27,  131 => 25,  126 => 23,  123 => 22,  121 => 21,  118 => 20,  115 => 19,  112 => 18,  109 => 17,  106 => 16,  103 => 15,  100 => 14,  97 => 13,  94 => 12,  91 => 11,  88 => 10,  85 => 9,  82 => 8,  79 => 7,  76 => 6,  73 => 5,  70 => 4,  60 => 3,  37 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "@WebProfiler/Profiler/layout.html.twig";
-    }
+        return new Source("{% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/config.html.twig"));
+{% block toolbar %}
+    {% if 'unknown' == collector.symfonyState %}
+        {% set block_status = '' %}
+        {% set symfony_version_status = 'Unable to retrieve information about the Symfony version.' %}
+    {% elseif 'eol' == collector.symfonyState %}
+        {% set block_status = 'red' %}
+        {% set symfony_version_status = 'This Symfony version will no longer receive security fixes.' %}
+    {% elseif 'eom' == collector.symfonyState %}
+        {% set block_status = 'yellow' %}
+        {% set symfony_version_status = 'This Symfony version will only receive security fixes.' %}
+    {% elseif 'dev' == collector.symfonyState %}
+        {% set block_status = 'yellow' %}
+        {% set symfony_version_status = 'This Symfony version is still in the development phase.' %}
+    {% else %}
+        {% set block_status = '' %}
+        {% set symfony_version_status = '' %}
+    {% endif %}
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Collector/config.html.twig"));
+    {% set icon %}
+        <span class=\"sf-toolbar-label\">
+            {{ include('@WebProfiler/Icon/symfony.svg') }}
+        </span>
+        <span class=\"sf-toolbar-value\">{{ collector.symfonyState is defined ? collector.symfonyversion : 'n/a' }}</span>
+    {% endset %}
 
-        $this->parent = $this->loadTemplate("@WebProfiler/Profiler/layout.html.twig", "@WebProfiler/Collector/config.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    {% set text %}
+        <div class=\"sf-toolbar-info-group\">
+            <div class=\"sf-toolbar-info-piece\">
+                <b>Profiler token</b>
+                <span>
+                    {% if profiler_url %}
+                        <a href=\"{{ profiler_url }}\">{{ collector.token }}</a>
+                    {% else %}
+                        {{ collector.token }}
+                    {% endif %}
+                </span>
+            </div>
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+            {% if 'n/a' is not same as(collector.env) %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Environment</b>
+                    <span>{{ collector.env }}</span>
+                </div>
+            {% endif %}
 
+            {% if 'n/a' is not same as(collector.debug) %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Debug</b>
+                    <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.debug ? 'green' : 'red' }}\">{{ collector.debug ? 'enabled' : 'disabled' }}</span>
+                </div>
+            {% endif %}
+        </div>
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+        <div class=\"sf-toolbar-info-group\">
+            <div class=\"sf-toolbar-info-piece sf-toolbar-info-php\">
+                <b>PHP version</b>
+                <span{% if collector.phpversionextra %} title=\"{{ collector.phpversion ~ collector.phpversionextra }}\"{% endif %}>
+                    {{ collector.phpversion }}
+                    &nbsp; <a href=\"{{ path('_profiler_phpinfo') }}\">View phpinfo()</a>
+                </span>
+            </div>
 
+            <div class=\"sf-toolbar-info-piece sf-toolbar-info-php-ext\">
+                <b>PHP Extensions</b>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.hasxdebug ? 'green' : 'gray' }}\">xdebug {{ collector.hasxdebug ? '✓' : '✗' }}</span>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.hasapcu ? 'green' : 'gray' }}\">APCu {{ collector.hasapcu ? '✓' : '✗' }}</span>
+                <span class=\"sf-toolbar-status sf-toolbar-status-{{ collector.haszendopcache ? 'green' : 'red' }}\">OPcache {{ collector.haszendopcache ? '✓' : '✗' }}</span>
+            </div>
+
+            <div class=\"sf-toolbar-info-piece\">
+                <b>PHP SAPI</b>
+                <span>{{ collector.sapiName }}</span>
+            </div>
+        </div>
+
+        <div class=\"sf-toolbar-info-group\">
+            {% if collector.symfonyversion is defined %}
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Resources</b>
+                    <span>
+                        <a href=\"https://symfony.com/doc/{{ collector.symfonyversion }}/index.html\" rel=\"help\">
+                            Read Symfony {{ collector.symfonyversion }} Docs
+                        </a>
+                    </span>
+                </div>
+                <div class=\"sf-toolbar-info-piece\">
+                    <b>Help</b>
+                    <span>
+                        <a href=\"https://symfony.com/support\">
+                            Symfony Support Channels
+                        </a>
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true, name: 'config', status: block_status, additional_classes: 'sf-toolbar-block-right', block_attrs: 'title=\"' ~ symfony_version_status ~ '\"' }) }}
+{% endblock %}
+
+{% block menu %}
+    <span class=\"label label-status-{{ collector.symfonyState == 'eol' ? 'red' : collector.symfonyState in ['eom', 'dev'] ? 'yellow' }}\">
+        <span class=\"icon\">{{ include('@WebProfiler/Icon/config.svg') }}</span>
+        <strong>Configuration</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Symfony Configuration</h2>
+
+    <div class=\"metrics\">
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.symfonyversion }}</span>
+            <span class=\"label\">Symfony version</span>
+        </div>
+
+        {% if 'n/a' is not same as(collector.env) %}
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.env }}</span>
+                <span class=\"label\">Environment</span>
+            </div>
+        {% endif %}
+
+        {% if 'n/a' is not same as(collector.debug) %}
+            <div class=\"metric\">
+                <span class=\"value\">{{ collector.debug ? 'enabled' : 'disabled' }}</span>
+                <span class=\"label\">Debug</span>
+            </div>
+        {% endif %}
+    </div>
+
+    {% set symfony_status = { dev: 'Unstable Version', stable: 'Stable Version', eom: 'Maintenance Ended', eol: 'Version Expired' } %}
+    {% set symfony_status_class = { dev: 'warning', stable: 'success', eom: 'warning', eol: 'error' } %}
+    <table>
+        <thead class=\"small\">
+            <tr>
+                <th>Symfony Status</th>
+                <th>Bugs {{ collector.symfonystate in ['eom', 'eol'] ? 'were' : 'are' }} fixed until</th>
+                <th>Security issues {{ collector.symfonystate == 'eol' ? 'were' : 'are' }} fixed until</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class=\"font-normal\">
+                    <span class=\"label status-{{ symfony_status_class[collector.symfonystate] }}\">{{ symfony_status[collector.symfonystate]|upper }}</span>
+                    {% if collector.symfonylts %}
+                        &nbsp; <span class=\"label status-success\">Long-Term Support</span>
+                    {% endif %}
+                </td>
+                <td class=\"font-normal\">{{ collector.symfonyeom }}</td>
+                <td class=\"font-normal\">{{ collector.symfonyeol }}</td>
+                <td class=\"font-normal\">
+                    <a href=\"https://symfony.com/releases/{{ collector.symfonyminorversion }}#release-checker\">View roadmap</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>PHP Configuration</h2>
+
+    <div class=\"metrics\">
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.phpversion }}{% if collector.phpversionextra %} <span class=\"unit\">{{ collector.phpversionextra }}</span>{% endif %}</span>
+            <span class=\"label\">PHP version</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.phparchitecture }} <span class=\"unit\">bits</span></span>
+            <span class=\"label\">Architecture</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.phpintllocale }}</span>
+            <span class=\"label\">Intl locale</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ collector.phptimezone }}</span>
+            <span class=\"label\">Timezone</span>
+        </div>
+    </div>
+
+    <div class=\"metrics\">
+        <div class=\"metric\">
+            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.haszendopcache ? 'yes' : 'no') ~ '.svg') }}</span>
+            <span class=\"label\">OPcache</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.hasapcu ? 'yes' : 'no-gray') ~ '.svg') }}</span>
+            <span class=\"label\">APCu</span>
+        </div>
+
+        <div class=\"metric\">
+            <span class=\"value\">{{ include('@WebProfiler/Icon/' ~ (collector.hasxdebug ? 'yes' : 'no-gray') ~ '.svg') }}</span>
+            <span class=\"label\">Xdebug</span>
+        </div>
+    </div>
+
+    <p>
+        <a href=\"{{ path('_profiler_phpinfo') }}\">View full PHP configuration</a>
+    </p>
+
+    {% if collector.bundles %}
+        <h2>Enabled Bundles <small>({{ collector.bundles|length }})</small></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class=\"key\">Name</th>
+                    <th>Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name in collector.bundles|keys|sort %}
+                <tr>
+                    <th scope=\"row\" class=\"font-normal\">{{ name }}</th>
+                    <td class=\"font-normal\">{{ profiler_dump(collector.bundles[name]) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+", "@WebProfiler/Collector/config.html.twig", "/home/hp/Téléchargements/GRH-master/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
     }
 }

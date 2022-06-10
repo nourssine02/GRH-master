@@ -30,99 +30,29 @@ class __TwigTemplate_7df3f0f558fd73210ca87cfd8d761e6dda0d4c05123720ad1157d229eda
         ];
     }
 
-    public function getSourceContext()
+    protected function doGetParent(array $context)
     {
-        return new Source("{% extends \"base.html.twig\" %} {% block title %}{% endblock %} {% block body %}
-
-<!-- Font Awesome -->
-{#
-<link href=\"vendors/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\"> #}
-
-<style>
-    body {
-        background-color: #f9fafb;
-        height: 100%;
-        width: 100%;
-        /* overflow-y: hidden; */
+        // line 1
+        return "base.html.twig";
     }
 
-    strong {
-        color: #9c6644;
-    }
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "dashboard/departement/list.html.twig"));
 
-    .datefin {
-        font-weight: bold;
-        color: green;
-    }
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "dashboard/departement/list.html.twig"));
 
-    .motif {
-        font-weight: bold;
-    }
+        $this->parent = $this->loadTemplate("base.html.twig", "dashboard/departement/list.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-    font .modal-lg {
-        max-width: 50% !important;
-    }
-</style>
-<!--  affiche alert -->
-{% for message in app.flashes('info') %}
-<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"> {{ message }}
-    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-</div>
-{% endfor %}
-<!-- With actions -->
-<h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
-    Liste des Departement
-</h4>
-
-{{ render(path('departement_new')) }}
-
-<div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 20px; width: 50%; margin-left: 150px\">
-    <div class=\"w-full overflow-hidden\">
-        <table class=\"w-full whitespace-no-wrap\">
-            <thead>
-                <tr
-                    class=\"text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
-                    <th class=\"px-4 py-3\">Nom du Departement</th>
-
-                    <th class=\"px-4 py-3\">Actions</th>
-                </tr>
-            </thead>
-            <tbody class=\"bg-white divide-y dark:divide-gray-700 dark:bg-gray-800\">
-                {% for departement in departements %}
-                <tr class=\"text-gray-700 dark:text-gray-400\">
-
-                    <td class=\"px-4 py-3 text-sm\">
-                        {{departement.nom}}
-                    </td>
-
-                    <td class=\"px-4 py-3 \">
-                        <div class=\"flex items-center space-x-4 text-sm \">
-                            {{ render(path('departement_update' ,{'id': departement.id })) }}
-                            <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
-                                aria-label=\"Delete\" href=\"{{ path('departement_delete', {'id': departement.id})}}\" onclick=\"return confirm('es-tu sûr ?')\">
-
-                                <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 20 20\">
-                                    <path fill-rule=\"evenodd\"
-                                        d=\"M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z\"
-                                        clip-rule=\"evenodd\"></path>
-                                </svg>
-                            </a>
-
-                        </div>
-                    </td>
-
-
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-</div>
-{% endblock %}
-
-", "dashboard/departement/list.html.twig", "/home/hp/Téléchargements/GRH-master/templates/dashboard/departement/list.html.twig");
     }
 
     public function block_title($context, array $blocks = [])
@@ -134,17 +64,12 @@ class __TwigTemplate_7df3f0f558fd73210ca87cfd8d761e6dda0d4c05123720ad1157d229eda
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
-    }
-
-    public function getTemplateName()
-    {
-        return "dashboard/departement/list.html.twig";
     }
 
     public function block_body($context, array $blocks = [])
@@ -279,12 +204,17 @@ class __TwigTemplate_7df3f0f558fd73210ca87cfd8d761e6dda0d4c05123720ad1157d229eda
     </div>
 </div>
 ";
-
+        
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
-
+        
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
 
+    }
+
+    public function getTemplateName()
+    {
+        return "dashboard/departement/list.html.twig";
     }
 
     public function isTraitable()
@@ -297,28 +227,98 @@ class __TwigTemplate_7df3f0f558fd73210ca87cfd8d761e6dda0d4c05123720ad1157d229eda
         return array (  201 => 84,  180 => 69,  175 => 67,  167 => 62,  162 => 59,  158 => 58,  141 => 44,  134 => 39,  122 => 34,  118 => 33,  89 => 6,  85 => 2,  36 => 1,);
     }
 
-    protected function doGetParent(array $context)
+    public function getSourceContext()
     {
-        // line 1
-        return "base.html.twig";
+        return new Source("{% extends \"base.html.twig\" %} {% block title %}{% endblock %} {% block body %}
+
+<!-- Font Awesome -->
+{#
+<link href=\"vendors/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\"> #}
+
+<style>
+    body {
+        background-color: #f9fafb;
+        height: 100%;
+        width: 100%;
+        /* overflow-y: hidden; */
     }
 
-    protected function doDisplay(array $context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "dashboard/departement/list.html.twig"));
+    strong {
+        color: #9c6644;
+    }
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "dashboard/departement/list.html.twig"));
+    .datefin {
+        font-weight: bold;
+        color: green;
+    }
 
-        $this->parent = $this->loadTemplate("base.html.twig", "dashboard/departement/list.html.twig", 1);
-        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    .motif {
+        font-weight: bold;
+    }
 
-        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+    font .modal-lg {
+        max-width: 50% !important;
+    }
+</style>
+<!--  affiche alert -->
+{% for message in app.flashes('info') %}
+<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"> {{ message }}
+    <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
+
+</div>
+{% endfor %}
+<!-- With actions -->
+<h4 class=\"mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300\">
+    Liste des Departement
+</h4>
+
+{{ render(path('departement_new')) }}
+
+<div class=\"w-full overflow-hidden rounded-lg shadow-xs\" style=\"margin-top: 20px; width: 50%; margin-left: 150px\">
+    <div class=\"w-full overflow-hidden\">
+        <table class=\"w-full whitespace-no-wrap\">
+            <thead>
+                <tr
+                    class=\"text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
+                    <th class=\"px-4 py-3\">Nom du Departement</th>
+
+                    <th class=\"px-4 py-3\">Actions</th>
+                </tr>
+            </thead>
+            <tbody class=\"bg-white divide-y dark:divide-gray-700 dark:bg-gray-800\">
+                {% for departement in departements %}
+                <tr class=\"text-gray-700 dark:text-gray-400\">
+
+                    <td class=\"px-4 py-3 text-sm\">
+                        {{departement.nom}}
+                    </td>
+
+                    <td class=\"px-4 py-3 \">
+                        <div class=\"flex items-center space-x-4 text-sm \">
+                            {{ render(path('departement_update' ,{'id': departement.id })) }}
+                            <a class=\"flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray\"
+                                aria-label=\"Delete\" href=\"{{ path('departement_delete', {'id': departement.id})}}\" onclick=\"return confirm('es-tu sûr ?')\">
+
+                                <svg class=\"w-5 h-5\" aria-hidden=\"true\" fill=\"currentColor\" viewbox=\"0 0 20 20\">
+                                    <path fill-rule=\"evenodd\"
+                                        d=\"M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z\"
+                                        clip-rule=\"evenodd\"></path>
+                                </svg>
+                            </a>
+
+                        </div>
+                    </td>
 
 
-        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+                </tr>
+                {% endfor %}
 
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+", "dashboard/departement/list.html.twig", "/home/hp/Téléchargements/GRH-master/templates/dashboard/departement/list.html.twig");
     }
 }
