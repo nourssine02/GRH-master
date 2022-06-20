@@ -865,7 +865,7 @@ class __TwigTemplate_36256f43bb61937044029868f62fcf4ad141abbc3058e9c4aed366090b7
             ";
         } else {
             // line 630
-            echo "                <h1>Mois de Paiement n'existe pas</h1>
+            echo "                <h1 style=\"color: red\">Mois de Paiement n'existe pas</h1>
             ";
         }
         // line 632
@@ -1575,7 +1575,7 @@ class __TwigTemplate_36256f43bb61937044029868f62fcf4ad141abbc3058e9c4aed366090b7
                 {% endfor %}
 
             {% else %}
-                <h1>Mois de Paiement n'existe pas</h1>
+                <h1 style=\"color: red\">Mois de Paiement n'existe pas</h1>
             {% endif %}
 
 

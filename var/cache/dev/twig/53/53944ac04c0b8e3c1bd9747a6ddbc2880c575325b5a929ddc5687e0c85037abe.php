@@ -100,7 +100,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t<table class=\"w-full\">
 \t\t\t\t\t<thead>
 \t\t\t\t\t<tr
-\t\t\t\t\t\t\tclass=\"text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
+\t\t\t\t\t\t\tclass=\"text-xs font-semibold  text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
 \t\t\t\t\t\t<th class=\"px-4 py-3\">Employe</th>
 \t\t\t\t\t\t<th class=\"px-4 py-3\">Total</th>
 \t\t\t\t\t\t<th>
@@ -261,7 +261,7 @@ class __TwigTemplate_3d93db5bfe1aa457ba9db1c2faddee5841fef4be6e9e414d3d54e3464f4
 \t\t\t\t<table class=\"w-full\">
 \t\t\t\t\t<thead>
 \t\t\t\t\t<tr
-\t\t\t\t\t\t\tclass=\"text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
+\t\t\t\t\t\t\tclass=\"text-xs font-semibold  text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800\">
 \t\t\t\t\t\t<th class=\"px-4 py-3\">Employe</th>
 \t\t\t\t\t\t<th class=\"px-4 py-3\">Total</th>
 \t\t\t\t\t\t<th>

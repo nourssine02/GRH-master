@@ -23,7 +23,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/dashboard", name="dashboard_page")
      */
-    public function index(ManagerRegistry $doctrine ,DatesCongesRepository  $datesCongesRepository): Response
+    public function index(ManagerRegistry $doctrine ,CongesRepository $congesRepository ): Response
     {
         $employes = $doctrine->getRepository(Employe::class)->findAll();
         $nbrEmp = count($employes);
@@ -41,21 +41,16 @@ class DashboardController extends AbstractController
 
         /******************************************************/
         // on cherche tous les dates qui imposent par les employes
-        $conges = $datesCongesRepository->findAll();
-        $employeCount =[];
-        $mois = [];
+        $conges = $congesRepository->findAll();
+
         $employe = [];
+        $jours =[];
 
         foreach ($conges as $conge){
-            $emp = $conge->getEmploye()->getNom();
-            $employe [] = $emp;
-            $m= $conge->getStart()->format('F');
-            $employeCount[]= count(array($emp));
-            if (!in_array($m , $mois)){
-                $mois[] = $m;
-
+            if ($conge->getStatut() == 'acceptée') {
+                $employe [] = $conge->getEmploye()->getNom();
+                $jours[] = $conge->getNbreJours();
             }
-
 
         }
 
@@ -65,8 +60,7 @@ class DashboardController extends AbstractController
             'nbrDepart' => $nbrDepart,
             'nbrServ' => $nbrServ,
             'employe' => json_encode($employe),
-            'employeCount' => json_encode($employeCount),
-            'mois' => json_encode($mois),
+              'jours' => json_encode($jours),
 
         ]);
 
@@ -293,27 +287,9 @@ class DashboardController extends AbstractController
 
 
     }
-    /**********************************************/
-
-    /**
-     * @Route("/stats", name="statistiques"  )
-     */
-    public function statistiques(DatesCongesRepository $datesCongesRepository){
-        // on cherche tous les dates qui imposent par les employes
-        $dates = $datesCongesRepository->findAll();
-        $employe =[];
-        $employeCount =[];
-        foreach ($dates as $date){
-            $employe[] = $date->getEmploye()->getNom();
-            $employeCount[] = count($date->getEmploye());
-
-        }
-        return $this->render('dashboard/index.html.twig',[
-            'employe' => json_encode($employe),
-            'employeCount' => json_encode($employeCount),
-
-        ]);
-    }
 
 
-    }
+
+
+
+}

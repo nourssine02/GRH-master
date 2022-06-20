@@ -119,7 +119,7 @@ class PointageController extends AbstractController
                 $pointage->setListeJours($liste);
                 $total = count($liste);
                 $pointage->setTotal($total);
-                $pointage->setMois($dat_j);
+             //   $pointage->setMois($dat_j);
                 // dd($pointage);
                 $em->persist($pointage);
                 $em->flush();

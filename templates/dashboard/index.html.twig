@@ -91,7 +91,6 @@
         </div>
     </div>
 </div>
-
     <div class="container">
         <h1>Statistiques</h1>
         <br>
@@ -103,11 +102,11 @@
         let graph = new Chart(chart ,{
             type:"line",
             data:{
-                labels: {{ mois|raw }},
+                labels: {{ employe|raw }},
                 datasets:[{
-                    label: "Les Congés annuel des employés",
-                    data:[1,2,3,4,5,6],
-                    {# {{ employeCount|raw }}#}
+                    label: "Les jours de Congés de chaque employés",
+                    data: {{ jours|raw }},
+
                     backgroundColor: 'rgb(75, 192, 192)',
 
                 }]

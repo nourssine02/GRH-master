@@ -196,7 +196,6 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         </div>
     </div>
 </div>
-
     <div class=\"container\">
         <h1>Statistiques</h1>
         <br>
@@ -209,15 +208,17 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
             type:\"line\",
             data:{
                 labels: ";
-        // line 106
-        echo (isset($context["mois"]) || array_key_exists("mois", $context) ? $context["mois"] : (function () { throw new RuntimeError('Variable "mois" does not exist.', 106, $this->source); })());
+        // line 105
+        echo (isset($context["employe"]) || array_key_exists("employe", $context) ? $context["employe"] : (function () { throw new RuntimeError('Variable "employe" does not exist.', 105, $this->source); })());
         echo ",
                 datasets:[{
-                    label: \"Les Congés annuel des employés\",
-                    data:[1,2,3,4,5,6],
-                    ";
-        // line 111
-        echo "                    backgroundColor: 'rgb(75, 192, 192)',
+                    label: \"Les jours de Congés de chaque employés\",
+                    data: ";
+        // line 108
+        echo (isset($context["jours"]) || array_key_exists("jours", $context) ? $context["jours"] : (function () { throw new RuntimeError('Variable "jours" does not exist.', 108, $this->source); })());
+        echo ",
+
+                    backgroundColor: 'rgb(75, 192, 192)',
 
                 }]
             },
@@ -255,7 +256,7 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
 
     public function getDebugInfo()
     {
-        return array (  220 => 111,  213 => 106,  193 => 89,  160 => 63,  141 => 47,  128 => 41,  109 => 25,  90 => 8,  87 => 6,  77 => 4,  59 => 2,  36 => 1,);
+        return array (  218 => 108,  212 => 105,  193 => 89,  160 => 63,  141 => 47,  128 => 41,  109 => 25,  90 => 8,  87 => 6,  77 => 4,  59 => 2,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -353,7 +354,6 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         </div>
     </div>
 </div>
-
     <div class=\"container\">
         <h1>Statistiques</h1>
         <br>
@@ -365,11 +365,11 @@ class __TwigTemplate_125ab863072dbf297483a328b8bff2bf01adc06ca9f514b5e0d247b3f15
         let graph = new Chart(chart ,{
             type:\"line\",
             data:{
-                labels: {{ mois|raw }},
+                labels: {{ employe|raw }},
                 datasets:[{
-                    label: \"Les Congés annuel des employés\",
-                    data:[1,2,3,4,5,6],
-                    {# {{ employeCount|raw }}#}
+                    label: \"Les jours de Congés de chaque employés\",
+                    data: {{ jours|raw }},
+
                     backgroundColor: 'rgb(75, 192, 192)',
 
                 }]

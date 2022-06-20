@@ -6844,10 +6844,10 @@
         <argument key="congesCalendar" type="service_closure" id="App\Repository\DatesCongesRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.hI5OIOo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.I4V7aCh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="datesCongesRepository" type="service_closure" id="App\Repository\DatesCongesRepository"/>
+        <argument key="congesRepository" type="service_closure" id="App\Repository\CongesRepository"/>
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
@@ -6889,7 +6889,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.WheM8KM" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CQb9ILZ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AnnonceController::add" type="service_closure" id=".service_locator.T7xmfzk"/>
@@ -6912,12 +6912,11 @@
         <argument key="App\Controller\CongesController::view" type="service_closure" id=".service_locator.xwyqe4g"/>
         <argument key="App\Controller\DashboardController::deleteD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::deleteS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.hI5OIOo"/>
+        <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.I4V7aCh"/>
         <argument key="App\Controller\DashboardController::newD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::newS" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::showD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController::showS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController::statistiques" type="service_closure" id=".service_locator.md6dco."/>
         <argument key="App\Controller\DashboardController::updateD" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DashboardController::updateS" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DatesCongesController::delete" type="service_closure" id=".service_locator.56qQGH5"/>
@@ -6974,12 +6973,11 @@
         <argument key="App\Controller\CongesController:view" type="service_closure" id=".service_locator.xwyqe4g"/>
         <argument key="App\Controller\DashboardController:deleteD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:deleteS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.hI5OIOo"/>
+        <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.I4V7aCh"/>
         <argument key="App\Controller\DashboardController:newD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:newS" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:showD" type="service_closure" id=".service_locator.T7xmfzk"/>
         <argument key="App\Controller\DashboardController:showS" type="service_closure" id=".service_locator.T7xmfzk"/>
-        <argument key="App\Controller\DashboardController:statistiques" type="service_closure" id=".service_locator.md6dco."/>
         <argument key="App\Controller\DashboardController:updateD" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DashboardController:updateS" type="service_closure" id=".service_locator.rDrmLqx"/>
         <argument key="App\Controller\DatesCongesController:delete" type="service_closure" id=".service_locator.56qQGH5"/>
@@ -7627,12 +7625,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.WheM8KM"/>
+      <argument type="service" id=".service_locator.CQb9ILZ"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.WheM8KM"/>
+      <argument type="service" id=".service_locator.CQb9ILZ"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection"/>
@@ -8539,7 +8537,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.WheM8KM"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.CQb9ILZ"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8560,9 +8558,9 @@
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.zwmK7NU" alias=".service_locator.rDrmLqx"/>
-    <service id=".service_locator.z4kojI2" alias=".service_locator.hI5OIOo"/>
+    <service id=".service_locator.jL1.lHI" alias=".service_locator.I4V7aCh"/>
     <service id=".service_locator.Dby0_1s" alias=".service_locator.4u5os03"/>
-    <service id=".service_locator.D61_mjr" alias=".service_locator.WheM8KM"/>
+    <service id=".service_locator.h.KxzNI" alias=".service_locator.CQb9ILZ"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.KXUyqbr" alias=".service_locator.j8xyxtH"/>
     <service id=".service_locator.fwWJgj4" alias=".service_locator.OXlDuH9"/>
@@ -8595,7 +8593,7 @@
     <service id=".service_locator.MmYuCkR" alias=".service_locator.xwyqe4g"/>
     <service id=".service_locator..KNepph" alias=".service_locator.nPIWXp3"/>
     <service id=".service_locator.XV9Nda4" alias=".service_locator.V9SNWIg"/>
-    <service id=".service_locator.hc7WT_a" alias=".service_locator.hI5OIOo"/>
+    <service id=".service_locator.8ou0ANx" alias=".service_locator.I4V7aCh"/>
     <service id=".service_locator.3mDjbED" alias=".service_locator.md6dco."/>
     <service id=".service_locator.Er0_7SX" alias=".service_locator.l2QwsaZ"/>
     <service id=".service_locator.0x_SiYN" alias=".service_locator.XZjT7jH"/>

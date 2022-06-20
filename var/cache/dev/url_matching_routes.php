@@ -27,7 +27,6 @@ return [
         '/departement/new' => [[['_route' => 'departement_new', '_controller' => 'App\\Controller\\DashboardController::newD'], null, null, null, false, false, null]],
         '/service' => [[['_route' => 'services_list', '_controller' => 'App\\Controller\\DashboardController::showS'], null, null, null, false, false, null]],
         '/service/new' => [[['_route' => 'service_new', '_controller' => 'App\\Controller\\DashboardController::newS'], null, null, null, false, false, null]],
-        '/stats' => [[['_route' => 'statistiques', '_controller' => 'App\\Controller\\DashboardController::statistiques'], null, null, null, false, false, null]],
         '/dates/conges' => [[['_route' => 'dates_conges_index', '_controller' => 'App\\Controller\\DatesCongesController::index'], null, ['GET' => 0], null, true, false, null]],
         '/dates/conges/new' => [[['_route' => 'dates_conges_new', '_controller' => 'App\\Controller\\DatesCongesController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/documents' => [[['_route' => 'documents', '_controller' => 'App\\Controller\\DocumentsController::index'], null, null, null, false, false, null]],

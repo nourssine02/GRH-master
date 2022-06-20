@@ -41,7 +41,6 @@ return [
     'service_new' => [[], ['_controller' => 'App\\Controller\\DashboardController::newS'], [], [['text', '/service/new']], [], [], []],
     'service_update' => [['id'], ['_controller' => 'App\\Controller\\DashboardController::updateS'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/service/update']], [], [], []],
     'service_delete' => [['id'], ['_controller' => 'App\\Controller\\DashboardController::deleteS'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/service/delete']], [], [], []],
-    'statistiques' => [[], ['_controller' => 'App\\Controller\\DashboardController::statistiques'], [], [['text', '/stats']], [], [], []],
     'dates_conges_index' => [[], ['_controller' => 'App\\Controller\\DatesCongesController::index'], [], [['text', '/dates/conges/']], [], [], []],
     'dates_conges_new' => [[], ['_controller' => 'App\\Controller\\DatesCongesController::new'], [], [['text', '/dates/conges/new']], [], [], []],
     'dates_conges_show' => [['id'], ['_controller' => 'App\\Controller\\DatesCongesController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/dates/conges']], [], [], []],
